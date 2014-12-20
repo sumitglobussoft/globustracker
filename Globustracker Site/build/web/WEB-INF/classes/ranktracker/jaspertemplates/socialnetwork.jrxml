@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="socialnetwork" pageWidth="842" pageHeight="841" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="52755be4-1802-499a-b586-2b399b8d619f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from campaigns a join socialsignalurls b on a.CampaignID = b.CampaignID where a.CampaignID = 575 and b.Visibility = 1]]>
+	</queryString>
+	<field name="CampaignID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CustomerID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Campaign" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CampaignType" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ResellerId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Visibility" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ViewKey" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ReportEmailID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ReportFrequency" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MailSentOn" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RankRefresher" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RankRefresherStatus" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompanyName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompanyURLLink" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompanyLogoLink" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SocialSignalUrlID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SocialSignalUrl" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FacebookLike" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FacebookShare" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TweetCount" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PinterestPins" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GooglePlusLikes" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LinkedInShares" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RedittVotes" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="StumbleUponLikes" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="222" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="14" y="198" width="122" height="22" uuid="61308887-3a81-4416-b6fb-11e19b77ce02"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CampaignName  :]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement positionType="FixRelativeToBottom" x="298" y="160" width="200" height="32" backcolor="#3399FF" uuid="b4f78856-a3d3-4c05-ab77-13814ef88a36"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="306" y="160" width="186" height="32" forecolor="#FFFFFF" uuid="0f5cc211-162d-44ef-874f-01ef7d13d837"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Social Website Report
+                ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="138" y="198" width="315" height="22" uuid="77093ae4-e72c-4c71-b888-419222456f4c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Campaign}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="15" y="133" width="315" height="22" isRemoveLineWhenBlank="true" uuid="9d8dfa27-a105-470e-b2e4-086a92bee75c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CompanyURLLink}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="2" y="2" width="798" height="54" backcolor="#000000" uuid="b9e3a544-8fb8-4c91-94c2-8bc03b00ce31"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="15" y="108" width="315" height="22" isRemoveLineWhenBlank="true" uuid="c50082ef-519e-4b9d-88c0-4ac6055d0296"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CompanyName}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RealSize">
+				<reportElement x="11" y="5" width="350" height="49" forecolor="#000000" uuid="863d4ca3-a705-486b-b6c9-b0357e6c325c"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/Globustracker-logo-present.png"]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape" onErrorType="Blank">
+				<reportElement x="15" y="62" width="180" height="42" isRemoveLineWhenBlank="true" uuid="8476740e-744f-40c6-b090-b1415c50a2fc"/>
+				<imageExpression><![CDATA[$F{CompanyLogoLink}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="55" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="3" width="797" height="1" uuid="25b646ca-b174-4a70-a258-b97497d5d76e"/>
+			</line>
+			<line>
+				<reportElement x="306" y="4" width="1" height="50" uuid="6e9b8f6e-37ae-4618-b7d0-a87b0861838e"/>
+			</line>
+			<line>
+				<reportElement x="2" y="4" width="1" height="50" uuid="ec25bdbc-b333-4bd0-a586-6ac70121a9e2"/>
+			</line>
+			<line>
+				<reportElement x="464" y="4" width="1" height="50" uuid="54c047f2-5d80-41db-bce1-7b7b6e10e5c8"/>
+			</line>
+			<line>
+				<reportElement x="2" y="54" width="797" height="1" uuid="27dd9098-430f-4f85-84bd-bf787ed17404"/>
+			</line>
+			<line>
+				<reportElement x="519" y="4" width="1" height="50" uuid="41e3f538-5a01-458a-97cc-0433b9d86a19"/>
+			</line>
+			<line>
+				<reportElement x="799" y="4" width="1" height="50" uuid="70fd9c53-658a-4ad3-9c94-b807516f0378"/>
+			</line>
+			<line>
+				<reportElement x="576" y="4" width="1" height="50" uuid="555a91ac-f644-4b74-9fef-d69faaf3a2ff"/>
+			</line>
+			<line>
+				<reportElement x="631" y="4" width="1" height="50" uuid="f64ee938-8bdf-4e75-b0f8-3135b6d50dd7"/>
+			</line>
+			<line>
+				<reportElement x="743" y="4" width="1" height="50" uuid="46af3e17-82f9-421a-9c8f-2b0100777d8a"/>
+			</line>
+			<line>
+				<reportElement x="686" y="4" width="1" height="50" uuid="0d8dacae-d57a-4e19-97ba-0f9f6d422dda"/>
+			</line>
+			<line>
+				<reportElement x="366" y="4" width="1" height="50" uuid="90cd61ad-106c-473a-a4fa-c297eaaa4b5b"/>
+			</line>
+			<staticText>
+				<reportElement x="4" y="5" width="301" height="47" uuid="e63399ff-a89f-4046-b37b-86af05b9d4bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Url]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle">
+				<reportElement mode="Transparent" x="324" y="16" width="25" height="25" uuid="0241f7ed-865f-44b0-9836-1aa626d4738d"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/fb_likes.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle">
+				<reportElement mode="Transparent" x="374" y="16" width="80" height="25" uuid="d71a346c-f846-4f1c-bc88-e67b3256c131"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/fb_share.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle">
+				<reportElement mode="Transparent" x="479" y="16" width="25" height="25" uuid="8b4e174b-1bd9-421b-a133-ce9d90acf62b"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/twt_count.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle">
+				<reportElement mode="Transparent" x="536" y="16" width="25" height="25" uuid="e7b60021-8cbb-427a-890c-ebf2212d30c9"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/pintrest.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle">
+				<reportElement mode="Transparent" x="647" y="16" width="25" height="25" uuid="e6a41661-9a30-4ad4-bdbb-49039c27a6c4"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/linkedin.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle">
+				<reportElement mode="Transparent" x="592" y="16" width="25" height="25" uuid="7059c312-ab66-45ad-acdb-cdc2efc87faa"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/google_plus.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle">
+				<reportElement mode="Transparent" x="759" y="16" width="25" height="25" uuid="e1e86678-aaeb-458f-ac07-f8d0d4df9e9e"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/stumbleupon.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle">
+				<reportElement mode="Transparent" x="702" y="16" width="25" height="25" uuid="8fc556d1-2c99-4bd0-9c60-86548cd6f32e"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/reddit.png"]]></imageExpression>
+			</image>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53">
+			<line>
+				<reportElement x="2" y="52" width="797" height="1" uuid="2aa74e42-4dc9-4054-9502-a10a5e48027b"/>
+			</line>
+			<line>
+				<reportElement x="519" y="0" width="1" height="52" uuid="320c0192-50e2-464b-ad61-4f165c528c52"/>
+			</line>
+			<line>
+				<reportElement x="799" y="0" width="1" height="52" uuid="f04c0866-aaa1-4d98-9907-152c044609f6"/>
+			</line>
+			<line>
+				<reportElement x="576" y="0" width="1" height="52" uuid="f1412cfb-8ec9-48b8-ac53-d766f0a540ec"/>
+			</line>
+			<line>
+				<reportElement x="631" y="0" width="1" height="52" uuid="8054470a-a1a2-46e8-9541-96f9916c42c4"/>
+			</line>
+			<line>
+				<reportElement x="743" y="0" width="1" height="52" uuid="2b1e3fbd-cd6d-4a93-a679-ac627b19badc"/>
+			</line>
+			<line>
+				<reportElement x="686" y="0" width="1" height="52" uuid="2f86a105-a9f4-4c9c-8fb5-744c3e7dd6e6"/>
+			</line>
+			<line>
+				<reportElement x="366" y="0" width="1" height="52" uuid="76bdcc4c-5da7-44d3-a819-382d021d0ca1"/>
+			</line>
+			<line>
+				<reportElement x="2" y="0" width="1" height="52" uuid="439c00e5-f14b-40f3-9019-d891c69c79f4"/>
+			</line>
+			<line>
+				<reportElement x="306" y="0" width="1" height="52" uuid="c08c0ff8-f4fb-4c1e-b68d-4a296aa4415c"/>
+			</line>
+			<line>
+				<reportElement x="464" y="0" width="1" height="52" uuid="b0382781-5941-412a-b9f9-bde30bf34567"/>
+			</line>
+			<textField>
+				<reportElement x="4" y="2" width="301" height="49" uuid="423a5293-1003-41e2-942f-ebead2b3930d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SocialSignalUrl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="2" width="56" height="49" uuid="478d7e16-4f77-4154-ad36-4b9f12ed2926"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FacebookLike}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="2" width="95" height="49" uuid="3c60a84b-1da2-4d68-851d-7748fa54dac9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FacebookShare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="466" y="2" width="52" height="49" uuid="a56ad9d9-6378-4bd1-a6af-a54e9e6c24a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TweetCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="521" y="2" width="54" height="49" uuid="7f64acb0-5cbc-4478-ad23-0948f29c3a5f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PinterestPins}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="578" y="2" width="52" height="49" uuid="5f37a079-981b-47a1-a8ee-929933bd5264"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{GooglePlusLikes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="633" y="2" width="52" height="49" uuid="9f3ed522-8985-498f-a560-58f427d11453"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{LinkedInShares}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="688" y="2" width="54" height="49" uuid="2e4b13a4-3211-42a3-89fd-89f9f9a764de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{RedittVotes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="745" y="2" width="53" height="49" uuid="94aee018-bc02-43a2-a601-9ff2a6487d4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{StumbleUponLikes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="35" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="7" y="12" width="100" height="20" uuid="dd235fac-f18a-4454-a027-fa0aa6b2691b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="698" y="12" width="100" height="20" uuid="28d90ef7-e886-4bb2-918f-bc44bc660ddf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

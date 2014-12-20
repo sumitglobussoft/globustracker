@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Use xsd instead of DTD -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+       default-autowire="byName"> <!-- Set default autowiring to byName so that beans are injected based on Name not by TYPE -->
+
+    <!-- JDBC connection properties are loaded to use in hibernate sessionfactory configuration -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        
+        <!--providing the location of jdbc.properties -->
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+
+    <!--configuring  c3p0DataSource bean-->
+    <bean id="c3p0DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+          destroy-method="close">
+        
+        <!--reading jdbc.properties file for driverclassname,url,username and password -->
+        <property name="driverClass" value="${jdbc.driverClassName}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        
+    </bean>
+
+    <!-- Hibernate SessionFactory configuration. sessionFactory is used to create database connection by Hibernate.
+   This bean will be injected into HibernateDaoSupport, which is extended by our DB access layer UserRepositoryImpl.
+   sessionFactory will be automatically injected by spring as there is a setSessionFactory method in HibernateDaoSupport.
+    -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        
+        <!-- list of annotated class(entity class) -->
+        <property name="annotatedClasses">
+            <list>
+                <value>ranktracker.entity.Alertsdata</value>
+                <value>ranktracker.entity.Campaigns</value>
+                <value>ranktracker.entity.Customers</value>
+                <value>ranktracker.entity.Serpkeywords</value>
+                <value>ranktracker.entity.Mailhistory</value>
+                <value>ranktracker.entity.Payments</value>
+                <value>ranktracker.entity.Plans</value>
+                <value>ranktracker.entity.Trackhistory</value>
+                <value>ranktracker.entity.Users</value>
+                <value>ranktracker.entity.Reportfrequency</value>
+                <value>ranktracker.entity.Site</value>
+                <value>ranktracker.entity.Campaignkeywords</value>
+                <value>ranktracker.entity.CampaignkeywordsPK</value>
+                <value>ranktracker.entity.Serpstrackhistory</value>
+                <value>ranktracker.entity.Videotrackhistory</value>
+                <value>ranktracker.entity.Videokeywords</value>
+                <value>ranktracker.entity.Displaysettings</value>
+                <value>ranktracker.entity.Seokeyworddetails</value>
+                <value>ranktracker.entity.Serpkeywordgoal</value>
+                <value>ranktracker.entity.Globustrackerevents</value>
+                <value>ranktracker.entity.Socialtrackhistory</value>
+                <value>ranktracker.entity.Socialsignalurls</value>
+                <value>ranktracker.entity.Reviewsite</value>
+                <value>ranktracker.entity.Socialreview</value>
+                <value>ranktracker.entity.Commonseo</value>
+                <value>ranktracker.entity.Headingcount</value>
+                <value>ranktracker.entity.Headingelements</value>
+                <value>ranktracker.entity.Image</value>
+                <value>ranktracker.entity.Pagelinks</value>
+                <value>ranktracker.entity.Relatedwebsite</value>
+                <value>ranktracker.entity.Technology</value>
+                <value>ranktracker.entity.Visitorarray</value>
+                <value>ranktracker.entity.Xmldata</value>
+            </list>
+        </property>
+
+
+        <!-- configuring hibernate properties file-->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.c3p0.min_size">3</prop>
+                <prop key="hibernate.c3p0.max_size">50</prop>
+                <prop key="hibernate.c3p0.timeout">800</prop>
+                <prop key="hibernate.c3p0.max_statements">50</prop>
+                <prop key="hibernate.c3p0.idle_test_period">28680</prop> 
+                <prop key="connection.provider_class">net.sf.hibernate.connection.C3P0ConnectionProvider</prop>
+                <prop key="hibernate.connection.CharSet">utf8</prop>
+                <prop key="hibernate.connection.characterEncoding">utf8</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+            </props>
+        </property>
+        
+        <!--configuring dataSource property for c3p0DataSource-->
+        <property name="dataSource">
+            <ref local="c3p0DataSource" />
+        </property>
+    </bean>
+
+    <!-- Wrap database data manipulation methods with transactions -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/globustracker</property>
+    <property name="hibernate.connection.username">brandzter</property>
+    <property name="hibernate.connection.password">B#45dZT3Rmysql</property>
+    <mapping class="ranktracker.entity.Commonseo" />
+    <mapping class="ranktracker.entity.Relatedwebsite" />
+    <mapping class="ranktracker.entity.Headingcount" />
+    <mapping class="ranktracker.entity.Headingelements" />
+    <mapping class="ranktracker.entity.Image" />
+    <mapping class="ranktracker.entity.Xmldata" />
+    <mapping class="ranktracker.entity.Technology" />
+    <mapping class="ranktracker.entity.Visitorarray" />
+    <mapping class="ranktracker.entity.Pagelinks" />
+  </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="moz" pageWidth="973" pageHeight="841" orientation="Landscape" columnWidth="933" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="29bcd21a-7158-4ec6-8daa-4e2387f5e09a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select a.CampaignID, a.Campaign, a.CompanyName, a.CompanyURLLink, a.CompanyLogoLink, b.Url, b.Keyword, b.SearchVolume, b.GoogleCPC, b.KeywordCompetition, b.NumberofResult, b.SiteIndexing, b.RankAlexa, b.CountBackLinks, b.CountMonthlySearches, b.GooglePA, b.GoogleDA from campaigns a join seokeyworddetails b on a.CampaignID = b.CampaignID where a.CampaignID = 575 and b.Visibility = 1]]>
+	</queryString>
+	<field name="CampaignID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Campaign" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompanyName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompanyURLLink" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompanyLogoLink" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Url" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Keyword" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SearchVolume" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GoogleCPC" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="KeywordCompetition" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NumberofResult" class="java.math.BigInteger">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SiteIndexing" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RankAlexa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CountBackLinks" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CountMonthlySearches" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GooglePA" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GoogleDA" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="224" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement positionType="FixRelativeToBottom" x="375" y="163" width="189" height="32" backcolor="#3399FF" uuid="480a3dd6-d015-4645-b308-531d0960296c"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="385" y="164" width="170" height="32" forecolor="#FFFFFF" uuid="2bd43f85-14bc-4182-80eb-0dd993bc84d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Moz Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="14" y="201" width="125" height="22" uuid="2cb04fcf-ae56-4747-8354-baa29f9f478c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CampaignName  :]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="140" y="201" width="315" height="22" uuid="3455a702-8e18-4cec-a9b3-400800010227"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Campaign}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="3" y="3" width="928" height="54" backcolor="#000000" uuid="cf90815a-3092-430e-9336-c11a1200e485"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="15" y="132" width="315" height="22" isRemoveLineWhenBlank="true" uuid="2706e1ab-909b-4467-bc64-7ce044543e7a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CompanyURLLink}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RealSize">
+				<reportElement x="12" y="6" width="350" height="49" forecolor="#000000" uuid="b49fd9ca-ac63-4eba-9e0d-e0ad9960f165"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/Globustracker-logo-present.png"]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="15" y="107" width="315" height="22" isRemoveLineWhenBlank="true" uuid="dd3f1c93-3188-47bf-ae72-fe712162d8f0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CompanyName}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" onErrorType="Blank">
+				<reportElement x="15" y="63" width="180" height="42" isRemoveLineWhenBlank="true" uuid="f04136a4-df79-4bae-83d4-0893584b224f"/>
+				<imageExpression><![CDATA[$F{CompanyLogoLink}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="54" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="2" width="928" height="1" uuid="9701288e-ebcc-47ba-a5e5-6a24fc010188"/>
+			</line>
+			<line>
+				<reportElement x="844" y="3" width="1" height="50" uuid="574f6030-14fc-44b8-93da-919f810fe8d5"/>
+			</line>
+			<line>
+				<reportElement x="2" y="53" width="928" height="1" uuid="e28ca7d0-6f34-4607-a8e6-c1c0aa02c5a5"/>
+			</line>
+			<line>
+				<reportElement x="2" y="3" width="1" height="50" uuid="36aa9c74-8df5-4715-85f5-acf167e5cc51"/>
+			</line>
+			<line>
+				<reportElement x="268" y="3" width="1" height="50" uuid="92aebf17-ee02-43ea-9dac-8e286204ab43"/>
+			</line>
+			<line>
+				<reportElement x="930" y="3" width="1" height="50" uuid="eab44eef-7e11-4e7f-8e45-6947b9e85e57"/>
+			</line>
+			<line>
+				<reportElement x="887" y="3" width="1" height="50" uuid="82b19367-209c-4ef2-ba3d-1201a0215ec3"/>
+			</line>
+			<staticText>
+				<reportElement x="270" y="4" width="159" height="48" uuid="9ebd2ff8-d44c-4484-a786-6e89e122f41d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Keyword]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="4" width="263" height="48" uuid="702b7117-f6b1-4b17-8912-197053b0ab7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Url]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="889" y="4" width="40" height="48" uuid="c4be0e09-8a9b-4183-9b3d-3074007af3a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="846" y="4" width="40" height="48" uuid="e02cb052-f8da-4ecc-bf7d-563440e7fbb8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="796" y="3" width="1" height="50" uuid="a4db494c-6cbc-47e1-bd99-db93b162206e"/>
+			</line>
+			<staticText>
+				<reportElement x="798" y="4" width="45" height="48" uuid="498e5899-8388-4b90-a082-d5fd13ead752"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="740" y="3" width="1" height="50" uuid="29216396-c681-4cb4-812b-6d6d07539f5b"/>
+			</line>
+			<staticText>
+				<reportElement x="742" y="4" width="53" height="48" uuid="02ebf819-9f2e-451a-add0-608b677bf40f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alexa]]></text>
+			</staticText>
+			<line>
+				<reportElement x="702" y="3" width="1" height="50" uuid="27ed7656-4d2d-41b8-8aff-ad3989fe1c06"/>
+			</line>
+			<staticText>
+				<reportElement x="704" y="4" width="35" height="48" uuid="368d5c54-2652-4029-aaa6-5fee69dbb823"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SI ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="537" y="3" width="1" height="50" uuid="726bf8dd-9779-4312-a213-84d641b49f35"/>
+			</line>
+			<line>
+				<reportElement x="486" y="3" width="1" height="50" uuid="d14b0481-68f1-46b5-877e-aee4fa3b115c"/>
+			</line>
+			<line>
+				<reportElement x="615" y="3" width="1" height="50" uuid="d59ad3a5-67b2-4ce3-95a9-7c6575cb996c"/>
+			</line>
+			<line>
+				<reportElement x="430" y="3" width="1" height="50" uuid="3e7517e3-36c0-45a3-8c8e-cca384430efd"/>
+			</line>
+			<staticText>
+				<reportElement x="617" y="4" width="84" height="48" uuid="3196b0f1-80a7-4080-8b9b-d2fede7c643e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. of Results]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="539" y="4" width="75" height="48" uuid="3d1fa829-cebd-4965-8fd4-116db1694164"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Competition]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="488" y="4" width="48" height="48" uuid="79969bad-998d-433f-b35e-1a216451a7a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="4" width="53" height="48" uuid="1134f53a-6e22-4953-9677-9b751a4d1da4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Search Volume]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="52" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="51" width="928" height="1" uuid="fc5f67f6-6d27-4b33-a726-cd4e14315f31"/>
+			</line>
+			<line>
+				<reportElement x="844" y="0" width="1" height="51" uuid="76ddae13-dddc-479c-8460-e03477ef6f98"/>
+			</line>
+			<line>
+				<reportElement x="2" y="0" width="1" height="51" uuid="71c14095-1583-4863-81d9-6320a32e4d95"/>
+			</line>
+			<line>
+				<reportElement x="268" y="0" width="1" height="51" uuid="5a1199bd-ed10-4c40-97c0-993d9be51f9c"/>
+			</line>
+			<line>
+				<reportElement x="930" y="0" width="1" height="51" uuid="32e08b3c-075e-4feb-b7bc-fb2fc3930b86"/>
+			</line>
+			<line>
+				<reportElement x="887" y="0" width="1" height="51" uuid="9f231d42-c5e0-4778-98ec-bbc7d4c35267"/>
+			</line>
+			<line>
+				<reportElement x="796" y="0" width="1" height="51" uuid="952ca434-d054-4958-b549-a37947003e90"/>
+			</line>
+			<line>
+				<reportElement x="740" y="0" width="1" height="51" uuid="109db703-3d73-4cfa-a774-c1a2e6e95f3a"/>
+			</line>
+			<line>
+				<reportElement x="702" y="0" width="1" height="51" uuid="30ddd716-fc4c-4453-b442-adcf33428b87"/>
+			</line>
+			<line>
+				<reportElement x="537" y="0" width="1" height="51" uuid="07526788-9ed1-4426-a231-c023e7a8f345"/>
+			</line>
+			<line>
+				<reportElement x="486" y="0" width="1" height="51" uuid="745dc25b-a640-4da0-a56a-a17f6e0e7ca5"/>
+			</line>
+			<line>
+				<reportElement x="615" y="0" width="1" height="51" uuid="87ad1231-6d8b-4d7e-bfc1-b57365b77602"/>
+			</line>
+			<line>
+				<reportElement x="430" y="0" width="1" height="51" uuid="cfad2caa-842e-49d5-84f4-2f491b5a6ffc"/>
+			</line>
+			<textField>
+				<reportElement x="4" y="2" width="263" height="49" uuid="4c50c94f-1952-4a90-b469-0992d06c2c76"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Url}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="2" width="159" height="49" uuid="fd274155-c121-4791-9cd3-ba86975277ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Keyword}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="2" width="53" height="49" uuid="8c16993c-24b0-4c8b-8471-626e51603fa5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SearchVolume}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="488" y="2" width="48" height="49" uuid="fea70b20-ba91-446e-a284-a54e6e5215d8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{GoogleCPC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="539" y="2" width="75" height="49" uuid="c6be5c38-5227-45f8-af9e-59c646eb85f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{KeywordCompetition}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="617" y="2" width="84" height="49" uuid="d975677e-562f-43c2-b81f-0e43f36bd30e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NumberofResult}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="704" y="2" width="35" height="49" uuid="a543a816-9b81-42d6-8a12-d7b9a42a8110"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SiteIndexing}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="742" y="2" width="53" height="49" uuid="f41575c8-61c8-4dae-b81f-bd48d91a7290"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{RankAlexa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="798" y="2" width="45" height="49" uuid="9ba3ae11-2ff4-4242-8317-96ee42aa0e9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{CountBackLinks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="846" y="2" width="40" height="49" uuid="ed29820e-b5a2-45c4-8d39-405537d312d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{GooglePA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="889" y="2" width="40" height="49" uuid="6d48c6a5-c53c-4846-9c1d-b275f49cfd07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{GoogleDA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="822" y="13" width="100" height="20" uuid="dfb64a3e-2f0b-4c89-a98f-dbf3722d70ff"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="7" y="13" width="100" height="20" uuid="f2d5feb6-0dbc-4c26-905c-48e630593bec"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

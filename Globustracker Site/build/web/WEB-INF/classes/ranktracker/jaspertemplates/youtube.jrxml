@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dailymotion" pageWidth="644" pageHeight="841" orientation="Landscape" columnWidth="604" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c4cd5e5c-cf10-41a5-af08-1ab6d917702a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from videokeywords A join campaigns B on A.CampaignID = B.CampaignID
+where A.CampaignID = 663 and A.Visibility = 1]]>
+	</queryString>
+	<field name="VideokeywordID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CampaignID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VideoKeyword" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="YoutubeURL" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RankYoutube" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VimeoURL" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RankVimeo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DailymotionURL" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RankDailyMotion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MetacafeURL" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RankMetacafe" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Youtubeviewcoint" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="YoutubeLikeCount" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="YoutubeDislikeCount" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="YoutubeCommentCount" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="YoutubeDailyViewcount" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Visibility" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CustomerID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Campaign" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CampaignType" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ResellerId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ViewKey" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ReportEmailID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ReportFrequency" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MailSentOn" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RankRefresher" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RankRefresherStatus" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompanyName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompanyURLLink" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CompanyLogoLink" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="217" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="4" width="600" height="45" backcolor="#000000" uuid="d62a6ff4-2b8f-495c-90b5-85a0ca132c94"/>
+			</rectangle>
+			<image scaleImage="RealSize">
+				<reportElement x="5" y="7" width="285" height="40" forecolor="#000000" uuid="a2f0b891-72ae-4c11-9cf9-9e94df4929db"/>
+				<imageExpression><![CDATA["https://s3.amazonaws.com/images_ranktracker/Globustracker-logo-present.png"]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="12" y="103" width="315" height="22" isRemoveLineWhenBlank="true" uuid="94bb9eca-6347-4650-af47-51bb72bda923"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CompanyName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="14" y="192" width="125" height="22" uuid="247aa076-1e1a-44bf-85bf-563d58eed87f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CampaignName   :
+
+
+                ]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement positionType="FixRelativeToBottom" x="210" y="153" width="210" height="33" backcolor="#3399FF" uuid="1f1d8eb2-ed89-43e3-bc7a-abe46b507b05"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="12" y="128" width="315" height="22" isRemoveLineWhenBlank="true" uuid="62506ed8-4d0b-47dd-b386-70524a419a0d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CompanyURLLink}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" onErrorType="Blank">
+				<reportElement x="12" y="58" width="180" height="42" isRemoveLineWhenBlank="true" uuid="c9110366-9e32-48eb-aaec-24987a958ed4"/>
+				<imageExpression><![CDATA[$F{CompanyLogoLink}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="142" y="192" width="315" height="22" uuid="e01b30ff-2e69-405f-98bf-ac8a6a02029d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Campaign}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="226" y="154" width="180" height="33" forecolor="#FFFFFF" uuid="cf2c1a42-7656-4cb2-90c8-187a0999e10a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Youtube Report
+
+
+                ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="4" y="4" width="325" height="48" backcolor="#CCFFFF" uuid="401f07b3-1a41-4f0c-b676-2ac30bd25905"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Url]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="4" width="212" height="48" uuid="47f05f31-3a6f-49d8-8e84-cdff85840495"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Keyword ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="2" width="600" height="1" uuid="7a5719f1-2f10-4f00-bd6a-2261023659c4"/>
+			</line>
+			<line>
+				<reportElement x="330" y="3" width="1" height="50" uuid="30002566-12e4-42c6-b780-aac64ba04fac"/>
+			</line>
+			<line>
+				<reportElement x="2" y="3" width="1" height="50" uuid="d613bb88-75f7-44ec-a37d-1aa41551aa90"/>
+			</line>
+			<line>
+				<reportElement x="545" y="3" width="1" height="50" uuid="9683710c-aa43-445f-8e66-f98d867d4542"/>
+			</line>
+			<line>
+				<reportElement x="3" y="53" width="600" height="1" uuid="6f565599-1ea6-46d2-8e20-53bedab8133f"/>
+			</line>
+			<staticText>
+				<reportElement x="547" y="4" width="54" height="48" uuid="d31fa009-070e-4252-9ced-1735fa5ea0d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rank]]></text>
+			</staticText>
+			<line>
+				<reportElement x="602" y="3" width="1" height="50" uuid="8b91960c-a5c1-4ad6-aa6a-28fee1aa1083"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="-1" width="1" height="53" uuid="a12749fd-6fa4-4ffd-a35b-e737d72b4f18"/>
+			</line>
+			<line>
+				<reportElement x="330" y="-1" width="1" height="53" uuid="61408a46-14e8-4f28-9997-5513fcd5dc52"/>
+			</line>
+			<line>
+				<reportElement x="545" y="-1" width="1" height="53" uuid="6626664d-9023-4bb0-8cda-02346e7f9831"/>
+			</line>
+			<line>
+				<reportElement x="602" y="-1" width="1" height="53" uuid="af33b7ba-6e3d-46c3-a6ba-05c6c6276242"/>
+			</line>
+			<line>
+				<reportElement x="2" y="52" width="600" height="1" uuid="82dc998e-d051-40c9-9f6c-5eea6112f9c5"/>
+			</line>
+			<textField>
+				<reportElement x="4" y="2" width="325" height="49" uuid="b27d28f4-caae-4d56-b866-aaacddbad3ec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{YoutubeURL}.equals("")?("-"):($F{YoutubeURL})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="2" width="212" height="49" uuid="7991854c-48f1-4581-937a-0b6abf5ef942"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{VideoKeyword}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="547" y="2" width="54" height="49" uuid="16951566-c1ae-4445-af3c-afd75eb1c019"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{RankYoutube}.equals(501)?"N/A":$F{RankYoutube}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="36" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="6" y="14" width="100" height="20" uuid="c587804a-1b4c-43b0-9388-0ea85af8aabb"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="499" y="14" width="100" height="20" uuid="8c59017d-f148-4361-ae90-0f6864407485"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

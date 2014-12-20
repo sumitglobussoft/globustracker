@@ -1,0 +1,97 @@
+/* 
+    Document   : rankup
+    Created on : Dec 16, 2013, 11:19:19 AM
+    Author     : Raj
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.rankbg
+{
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(#fbfafa,0),color-stop(#efefef,1));
+    background:-webkit-linear-gradient(top, #fbfafa 0%, #efefef 100%);
+    background:-moz-linear-gradient(top, #fbfafa 0%, #efefef 100%);
+    background:-o-linear-gradient(top, #fbfafa 0%, #efefef 100%);
+    background:linear-gradient(top, #fbfafa 0%, #efefef 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfafa', endColorstr='#efefef',GradientType=0 );
+	width:744px;
+	height:153px;
+	border:1px solid #afafaf;
+	border-radius:5px;
+	margin:10px 0 20px 125px;
+        float:left;
+}
+
+.box1
+{
+	width:124px;
+	 height:153px;
+	 float:left;
+	 margin-top: 16px;
+}
+
+.box1 .toptitle
+{
+	width:124px;
+	height:20px;
+	text-align:center;
+	font-size:12px;
+	color:#353535;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.box1 .circlebg
+{
+	width:68px;
+	height:68px;
+	border:1px solid #696868;
+	border-radius:50px;
+	margin:5px auto;
+}
+
+.box1 .circlebg .countbg
+{
+	font-size:30px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#353535;
+	font-weight:bold;
+	width:68px;
+	padding-top: 17px;
+	text-align:center;
+}
+
+.box1 .circlebg .countbgcolor
+{
+	font-size:30px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#73e476;
+	font-weight:bold;
+	width:68px;
+	padding-top: 17px;
+	text-align:center;
+}
+
+.box1 .circlebg .countbgcolor span
+{
+	 font-size: 15px;
+    height: 20px;
+    margin: 0 0 0 -9px;
+    padding: 0;
+    width: 20px;
+}
+
+.box1 .bottomtxt
+{
+	width:124px;
+	height:20px;
+	text-align:center;
+	font-size:12px;
+	color:#353535;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.box1 .bottomtxt span
+{
+	color:#1ea921;
+}
+

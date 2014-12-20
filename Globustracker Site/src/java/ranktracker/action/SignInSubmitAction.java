@@ -1,0 +1,213 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ranktracker.action;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.apache.struts2.ServletActionContext;
+import ranktracker.entity.Customers;
+import ranktracker.entity.Users;
+import ranktracker.form.SignInForm;
+import ranktracker.service.CustomerService;
+
+/**
+ * Action layer class for actions initiated for signin module
+ *
+ * @author Sushant Gupta <sushant@globussoft.com>
+ */
+public class SignInSubmitAction extends ActionSupport implements ModelDriven<SignInForm> {
+
+    /**
+     * objSignInForm The SignInForm object containing user's sign in credentials
+     */
+    private SignInForm objSignInForm;
+    /**
+     * objCustomerService The service layer object variable for CustomerService
+     * object
+     */
+    private CustomerService objCustomerService;
+    /**
+     * objHttpSession The HttpSession object
+     */
+    private HttpSession objSession;
+    /**
+     * objCustomer The Customers entity object
+     */
+    private Customers objCustomer;
+    /**
+     * objRequest The HttpSession object
+     */
+    private HttpServletRequest objRequest;
+    /**
+     * objUser The Users entity object
+     */
+    private Users objUser;
+
+    /**
+     * The method validates login credentials
+     *
+     * @return struts return value
+     * @throws Exception
+     */
+    @Override
+    public String execute() throws Exception {
+
+        //initializing http request object
+        objRequest = ServletActionContext.getRequest();
+
+        //initializing http session object
+        objSession = objRequest.getSession();
+
+        //now invoking the isValidLogin method of CustomerServiceimpl class to validate the username and password
+        objUser = objCustomerService.isValidLogin(objSignInForm.getUserName(), objSignInForm.getPassword());
+        System.out.println("Username : " + objSignInForm.getUserName());
+        System.out.println("Password : " + objSignInForm.getPassword());
+        if (objUser != null) {
+            int usertype = objUser.getUserType();
+            if (usertype != 10) {
+                objCustomer = objUser.getCustomerID();
+                objSession.setAttribute("customerID", objCustomer.getCustomerID());
+                objSession.setAttribute("customerName", objCustomer.getFirstName() + " " + objCustomer.getLastName());
+                objSession.setAttribute("userID", objUser.getUserID());
+                objRequest.setAttribute("highlight", "Sites");
+                objSession.setAttribute("allowedKeywordCount", objCustomer.getAllowedKeywordCount());
+                objSession.setAttribute("allowedCampaignCount", objCustomer.getAllowedCampaignsCount());
+                objSession.setAttribute("objCustomer", objCustomer);
+                objSession.setAttribute("userType", objUser.getUserType());
+                System.out.println("UserType : " + objSession.getAttribute("userType"));
+                return SUCCESS;
+            } else {
+                addActionError("Admin User should login through Admin panel");
+            }
+        } else {
+            addActionError("Either EmailID or Password is Incorrect");
+        }
+        return INPUT;
+    }
+
+    public String executeLogin() throws Exception {
+
+        //initializing http request object
+        objRequest = ServletActionContext.getRequest();
+
+        //initializing http session object
+        objSession = objRequest.getSession();
+
+        //now invoking the isValidLogin method of CustomerServiceimpl class to validate the username and password
+        objUser = objCustomerService.isValidLogin(objSignInForm.getUserName(), objSignInForm.getPassword());
+        System.out.println("Username : " + objSignInForm.getUserName());
+        System.out.println("Password : " + objSignInForm.getPassword());
+        if (objUser != null) {
+            int usertype = objUser.getUserType();
+            if (usertype != 10) {
+                objCustomer = objUser.getCustomerID();
+                objSession.setAttribute("customerID", objCustomer.getCustomerID());
+                objSession.setAttribute("customerName", objCustomer.getFirstName() + " " + objCustomer.getLastName());
+                objSession.setAttribute("userID", objUser.getUserID());
+                objRequest.setAttribute("highlight", "Sites");
+                objSession.setAttribute("allowedKeywordCount", objCustomer.getAllowedKeywordCount());
+                objSession.setAttribute("allowedCampaignCount", objCustomer.getAllowedCampaignsCount());
+                objSession.setAttribute("objCustomer", objCustomer);
+                objSession.setAttribute("userType", objUser.getUserType());
+                System.out.println("UserType : " + objSession.getAttribute("userType"));
+                return SUCCESS;
+            } else {
+                addActionError("Admin User should login through Admin panel");
+            }
+        } else {
+            addActionError("Either EmailID or Password is Incorrect");
+        }
+        return INPUT;
+    }
+
+    public String adminLoginIn() throws Exception {
+
+        //initializing http request object
+        objRequest = ServletActionContext.getRequest();
+
+        //initializing http session object
+        objSession = objRequest.getSession();
+
+        //now invoking the isValidLogin method of CustomerServiceimpl class to validate the username and password
+        objUser = objCustomerService.isValidLogin(objSignInForm.getUserName(), objSignInForm.getPassword());
+        if (objUser != null) {
+            int usertype = objUser.getUserType();
+            if (usertype == 5) {
+                //if objUser is not null then add <customerID>,<customerName>,<userID> in session
+                objCustomer = objUser.getCustomerID();
+                objSession.setAttribute("AdminID", objCustomer.getCustomerID());
+                objSession.setAttribute("customerName", objCustomer.getFirstName() + " " + objCustomer.getLastName());
+                objSession.setAttribute("userID", objUser.getUserID());
+                objRequest.setAttribute("highlight", "Sites");
+                objSession.setAttribute("allowedKeywordCount", objCustomer.getAllowedKeywordCount());
+                objSession.setAttribute("allowedCampaignCount", objCustomer.getAllowedCampaignsCount());
+                objSession.setAttribute("objCustomer", objCustomer);
+                objSession.setAttribute("userType", objUser.getUserType());
+                return SUCCESS;
+            } else {
+                addActionError("Either EmailID or Password is Incorrect");
+            }
+        } else {
+            addActionError("Either EmailID or Password is Incorrect");
+        }
+        return INPUT;
+    }
+
+    /**
+     *
+     * @return objSignInForm
+     */
+    public SignInForm getObjSignInForm() {
+        return objSignInForm;
+    }
+
+    /**
+     *
+     * @param objSignInForm
+     */
+    public void setObjSignInForm(SignInForm objSignInForm) {
+        this.objSignInForm = objSignInForm;
+    }
+
+    /**
+     * The method validates the form inputs
+     */
+    @Override
+    public void validate() {
+        if (objSignInForm.getUserName() == null || objSignInForm.getUserName().isEmpty() || objSignInForm.getUserName().equals("Email")) {
+            addActionError("EmailID is Required");
+        }
+        if (objSignInForm.getUserName() == null || objSignInForm.getPassword().isEmpty() || objSignInForm.getPassword().equals("Password")) {
+            addActionError("Password is Required");
+        }
+    }
+
+    /**
+     *
+     * @return objSignInForm
+     */
+    @Override
+    public SignInForm getModel() {
+        return objSignInForm;
+    }
+
+    /**
+     *
+     * @return objCustomerService
+     */
+    public CustomerService getObjCustomerService() {
+        return objCustomerService;
+    }
+
+    /**
+     *
+     * @param objCustomerService
+     */
+    public void setObjCustomerService(CustomerService objCustomerService) {
+        this.objCustomerService = objCustomerService;
+    }
+}

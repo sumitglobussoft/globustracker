@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    
+    <!--declaring package for core actions -->
+    <!--Note : name of the packages are user define not pre define 
+        actions are categorizing 
+    -->
+    <!--     <include file="example.xml"/>-->
+    <!--    <package name="default" extends="struts-default">
+    </package>-->
+    
+    <!--    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.patternMatcher" value="namedVariable"/>-->
+    
+    <package name="coreActions" extends="struts-default">
+        
+        <!-- configuring result type for tiles
+       if result-type is tiles for any particular result then search that action in tiles.xml
+       for e.g line no. 33 result name 'error' will search in tiles.xml and the corresponding jsp page will display
+        -->
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+        
+        <interceptors>
+            <interceptor-stack name="appDefault">
+                <interceptor-ref name="defaultStack">
+                    <param name="exception.logEnabled">true</param>
+                    <param name="exception.logLevel">ERROR</param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+  
+        <default-interceptor-ref name="appDefault" />
+        
+        <!-- configuring global results for error and signin -->
+        <global-results>
+            <result name="error">/WEB-INF/jsp_ranktracker_view/failure.jsp</result>
+            <result name="login">/WEB-INF/jsp_ranktracker_view/signIn.jsp</result>
+        </global-results>
+
+        <!-- configuring global exception mapping-->
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error" />
+        </global-exception-mappings>
+        
+        
+        <!-- configuring signUpSubmit action 
+        when signUpSubmit.action invoke,container will load the ranktracker.action.SignUpSubmitAction class and invoke the execute method
+        this method may return result as 
+        'success' : search for definition name as <success> in tiles.xml,and load the configure jsp page
+        'input' : search for definition name as <signUp> in tiles.xml,and load the configure jsp page
+        'CONTINUE' : search for definition name as <payment> in tiles.xml,and load the configure jsp page
+        -->
+        <action name="signUpSubmit" class="ranktracker.action.SignUpSubmitAction" method="execute">            
+            <result name="success" type="redirect">/paymentPaypal.action</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/newSignUp.jsp</result>
+            <result name="CONTINUE" type="redirect">/paymentCoupon.action</result>
+            <result name="done">/WEB-INF/jsp_ranktracker_view/success.jsp</result>
+        </action>
+        
+        
+        <!-- 
+        configuring paymentCoupon action
+        when paymentCoupon.action will invoke,container will load the ranktracker.action.PaymentCouponAction class and invoke the execute method
+        this method may return result as
+        'success' : for success result name,result type is redirect i.e 
+        search the <signUpSubmit> action in struts.xml itself
+        -->
+        <action name="paymentCoupon" class="ranktracker.action.PaymentCouponAction" method="execute">            
+            <result name="success" type="redirect">/signUpSubmit.action</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/payment.jsp</result>
+        </action>
+        
+        <action name="privacy" class="ranktracker.action.PageLinkAction" method="privacy">            
+            <result name="success" type="tiles">privacy</result>
+        </action>
+		
+        <action name="paymentPaypal" class="ranktracker.action.PaymentInfoAction" method="execute">
+            <result name="success" type="httpheader">
+                <param name="status">301</param>
+                <param name="headers.Location">${redirecturl}</param>
+            </result>
+        </action>
+        
+        <action name="paymentPaypalUpgrade" class="ranktracker.action.PaymentInfoAction" method="upgrade">
+            <result name="success" type="httpheader">
+                <param name="status">301</param>
+                <param name="headers.Location">${redirecturl}</param>
+            </result>
+        </action>
+        
+        <action name="sessionSaver" class="ranktracker.action.SessionSaverAction" method="execute">
+            <result name="success">/WEB-INF/jsp_ranktracker_view/newSignUp.jsp</result>
+        </action>
+        
+        <action name="accountCreated" class="ranktracker.action.AccountCreatedAction" method="execute">
+            <result name="success">/WEB-INF/jsp_ranktracker_view/success.jsp</result>
+        </action>
+        
+        <action name="forgotPasswordSubmit" class="ranktracker.action.ForgotPasswordAction" method="execute">    
+            <result name="success">/WEB-INF/jsp_ranktracker_view/forgotPassword.jsp</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/forgotPassword.jsp</result>
+        </action>
+        
+        <action name="adminsigninform" class="ranktracker.action.SignInSubmitAction" method="adminLoginIn">            
+            <result name="success" type="redirect">/admin.action</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/adminlog.jsp</result>
+        </action>
+        
+        <action name="signInSubmit" class="ranktracker.action.SignInSubmitAction" method="execute">            
+            <result name="success" type="redirect">/campaigns.action</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+        </action>
+        
+        <action name="logInSubmit" class="ranktracker.action.SignInSubmitAction" method="executeLogin">            
+            <result name="success" type="redirect">/campaigns.action</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/signIn.jsp</result>
+        </action>
+        
+        <action name="campaigns" class="ranktracker.action.CampaignsAction" method="execute">            
+            <result name="success" type="tiles">campaigns</result>
+        </action>
+                
+        <action name="admin" class="ranktracker.action.Adminaction" method="execute">            
+            <result name="success" type="tiles">admin</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/adminlog.jsp</result>
+        </action>
+        
+        <action name="ecomtracker" class="ranktracker.action.EcomtrackerAction" method="execute">            
+            <result name="success" type="tiles">ecomtracker</result>
+        </action>
+
+        <action name="editUser" class="ranktracker.action.Adminaction" method="editUserData">            
+            <result name="success" type="redirect">/admin.action</result>
+        </action>             
+        
+        <action name="adminLogout" class="ranktracker.action.Adminaction" method="logOut">            
+            <result name="success">/WEB-INF/jsp_ranktracker_view/adminlog.jsp</result>
+        </action>
+        
+        <action name="serps" class="ranktracker.action.SerpsTrackAction" method="execute">  
+            <result name="success" type="tiles">serps</result>    
+            <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>        
+        </action>
+       
+        <action name="video" class="ranktracker.action.VideoTrackAction" method="execute">            
+            <result name="success" type="tiles">video</result>          
+            <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+        </action>
+      
+        <action name="settings" class="ranktracker.action.SettingsAction" method="execute">            
+            <result name="success" type="tiles">settings</result>
+        </action>
+      
+        <action name="tabSettings" class="ranktracker.action.SettingsAction" method="tabSettings">            
+            <result name="success" type="redirect">/settings.action</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/profile.jsp</result>  
+        </action>
+                
+        <action name="updateEmailSettings" class="ranktracker.action.SettingsAction" method="updateEmailSettings">            
+            <result name="success" type="redirect">/settings.action</result>
+        </action>
+        
+        <action name="serpskeywords" class="ranktracker.action.SerpsKeywordsAction" method="execute">            
+            <result name="success" type="tiles">serpskeywords</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+        </action>
+        
+        <action name="videokeywords" class="ranktracker.action.VideoKeywordsAction" method="execute">            
+            <result name="success" type="tiles">videokeywords</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+        </action>
+        
+        <action name="alerts" class="ranktracker.action.AlertsAction" method="execute">
+            <result name="success" type="tiles">alerts</result>
+        </action>
+     
+        <action name="viewKey" class="ranktracker.action.ViewKeyAction" method="execute">
+            <result name="success" type="tiles">viewKey</result>
+        </action>
+        
+        <action name="viewKeyVideo" class="ranktracker.action.ViewKeyAction" method="executeVideo">
+            <result name="success" type="tiles">viewKeyVideo</result>
+        </action> 
+         
+        <action name="submitContact" class="ranktracker.action.ContactUsAction" method="execute">            
+            <result name="success">/WEB-INF/jsp_ranktracker_view/contact.jsp</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/contact.jsp</result>
+        </action>
+
+        <action name="sendReportSetting" class= "ranktracker.action.ReportAction" method="sendReportSetting">
+            <result name="success" type="redirect">/report.action</result>
+        </action>
+        
+        <action name="changePassword" class="ranktracker.action.SettingsAction" method="changePassword">            
+            <result  name="success" type="redirect">/campaigns.action</result>
+        </action>
+        
+        <action name="changeAdminPassword" class="ranktracker.action.SettingsAction" method="changeAdminPassword">            
+            <result  name="success" type="redirect">/admin.action</result>
+        </action>
+          
+        <action name="adminPanel" class="ranktracker.action.SettingsAction" method="execute">            
+            <result  name="success" type="tiles">adminpanel</result>
+        </action>
+        
+        <action name="addUser" class="ranktracker.action.SettingsAction" method="addUser">
+            <result  name="success" type="tiles">settings</result>
+        </action>
+        
+        <action name="searchSerpsCampaign" class= "ranktracker.action.SerpsTrackAction" method="searchSerpsCampaign">
+            <result name="success" type="tiles">serps</result>
+            <result name="input" type="redirect">/serps.action</result>
+        </action>
+        
+        <action name="searchVideoCampaign" class= "ranktracker.action.VideoTrackAction" method="searchVideoCampaign">
+            <result name="success" type="tiles">video</result>
+            <result name="input" type="redirect">/video.action</result>
+        </action>
+        
+        <action name="searchCampaignDate" class= "ranktracker.action.AlertsAction" method="searchCampaign">
+            <result name="success" type="tiles">alerts</result>
+        </action>
+        
+        <action name="searchalert" class= "ranktracker.action.AlertsAction" method="searchAlert">
+            <result name="success" type="tiles">alerts</result>
+        </action>
+        
+        <action name="myAccount" class= "ranktracker.action.SettingsAction" method="getAccountDetails">
+            <result name="success" type="tiles">myAccount</result>
+            <result name="login">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+        </action>
+        
+        <action name="userAccount" class= "ranktracker.action.SettingsAction" method="getAdminUserDetails">
+            <result name="success" type="tiles">adminAccount</result>
+            <result name="login">/WEB-INF/jsp_ranktracker_view/adminlog.jsp</result>
+        </action>      
+        
+        <action name="updateUserPlan" class="ranktracker.action.Adminaction" method="updateUserPlan">            
+            <result name="success" type="redirect">/admin.action</result>
+        </action>         
+        
+        <action name="showkeywords" class= "ranktracker.action.AlertsAction" method="getKeywords">
+            <result name="success" type="tiles">keywords</result>
+            <result name="login">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+        </action>   
+             
+    </package>
+   
+    <!-- declaring reportActions package name-->
+    <package name="reportActions" extends="struts-default">
+        <result-types>
+            <result-type name="jsp" class="org.apache.struts2.views.jsp"/>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+            <result-type name="stream" class="org.apache.struts2.dispatcher.StreamResult"/>
+        </result-types>
+        <action name="generateExcelReport" class="ranktracker.action.ExcelReportAction" method="execute">    
+            <result type="stream">
+                <param name="contentType">"application/vnd.ms-excel"</param>
+                <param name="inputName">excelStream</param>
+                <param name="contentDisposition">contentDisposition</param>
+                <param name="bufferSize">1024</param>
+            </result>        
+        </action>
+        
+        <action name="generatePDFReport" class="ranktracker.action.PDFReportAction" method="execute">            
+        </action>
+                      
+        <action name="generateVideoExcelReport" class="ranktracker.action.ExcelReportAction" method="getExcelReportsForVideo">            
+        </action>
+        
+        <action name="generateVideoPDFReport" class="ranktracker.action.PDFReportAction" method="getPDFReportsForVideo">            
+        </action>
+        
+        <action name="generateCrawledHistory" class="ranktracker.action.PDFReportAction" method="getCrawledHistory">            
+        </action>
+        
+        <action name="mailListener" class="ranktracker.mail.SendMail" method="sendReport">
+        </action>
+        
+    </package>
+    
+    <!-- declaring pageRedirects package name-->
+    <package name="pageRedirects" extends="struts-default">
+        
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+        
+        <action name="adminsigninform" class="ranktracker.action.SignInSubmitAction" method="adminLoginIn">            
+            <result name="success" type="redirect">/admin.action</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/adminlog.jsp</result>
+        </action>
+        
+        <action name="signInSubmit" class="ranktracker.action.SignInSubmitAction" method="execute">            
+            <result name="success" type="redirect">/campaigns.action</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+        </action>
+          
+        <action name="home" class="ranktracker.action.PageLinkAction" method="home">            
+            <result name="login">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+            <result name="success" type="redirect">campaigns.action</result>            
+        </action>
+        
+        <action name="upgradeOption" class="ranktracker.action.UpgradeAction" method="upgradeLinkOption">            
+            <result name="success" type="tiles">upgrade</result>
+        </action>
+        
+        <action name="upgradeOptiondashboard" class="ranktracker.action.UpgradeAction" method="upgradeLinkOption">            
+            <result name="success">/WEB-INF/jsp_ranktracker_view/upgrade.jsp</result>
+        </action>
+        
+        <action name="upgrade" class="ranktracker.action.UpgradeAction" method="execute">            
+            <result name="success" type="redirect">/paymentPaypalUpgrade.action</result>
+        </action>
+        
+        <action name="signIn" class="ranktracker.action.PageLinkAction" method="signIn">    
+            <result name="login" type="redirect">/campaigns.action</result>        
+            <result name="success">/WEB-INF/jsp_ranktracker_view/signIn.jsp</result>
+        </action>
+        
+        <action name="signUp" class="ranktracker.action.PageLinkAction" method="signUp">            
+            <result name="success">/WEB-INF/jsp_ranktracker_view/newSignUp.jsp</result>
+        </action>
+        
+        <action name="report" class="ranktracker.action.ReportAction" method="execute">            
+            <result name="success" type="tiles">report</result>
+        </action>
+        
+        <action name="reportdashboard" class="ranktracker.action.ReportAction" method="execute">            
+            <result name="success">/WEB-INF/jsp_ranktracker_view/report.jsp</result>
+        </action>
+        
+        <action name="signOut" class="ranktracker.action.PageLinkAction" method="signOut">    
+            <result name="success" type="redirect">/home.action</result>
+        </action>
+        
+        <action name="forgotPassword" class="ranktracker.action.PageLinkAction" method="forgotPassword">    
+            <result name="success">/WEB-INF/jsp_ranktracker_view/forgotPassword.jsp</result>
+        </action>
+                
+        <action name="cancelPayment" class="ranktracker.action.PageLinkAction" method="paymentInfoSubmit">                   
+            <result name="success">/WEB-INF/jsp_ranktracker_view/payment.jsp</result>            
+        </action>
+                
+        <action name="about" class="ranktracker.action.PageLinkAction" method="about">            
+            <result name="success" type="tiles">about</result>
+        </action>
+                       
+        <action name="features" class="ranktracker.action.PageLinkAction" method="features">            
+            <result name="success" type="tiles">features</result>
+        </action>
+        
+        <action name="pricing" class="ranktracker.action.PageLinkAction" method="pricing">            
+            <result name="success" type="tiles">pricing</result>
+        </action>
+        
+        <action name="payment" class="ranktracker.action.PageLinkAction" method="payment">            
+            <result name="success">/WEB-INF/jsp_ranktracker_view/payment.jsp</result>
+        </action>
+                           
+        <action name="tour" class="ranktracker.action.PageLinkAction" method="tour">            
+            <result name="success" type="tiles">tour</result>
+        </action>
+        
+        <action name="faq" class="ranktracker.action.PageLinkAction" method="faq">            
+            <result name="success" type="tiles">faq</result>
+        </action>
+                
+        <action name="contact" class="ranktracker.action.PageLinkAction" method="contact">            
+            <result name="success">/WEB-INF/jsp_ranktracker_view/contact.jsp</result>
+        </action>   
+        
+        <action name="adminlogin" class="ranktracker.action.PageLinkAction" method="adminlogin">            
+            <result name="login">/WEB-INF/jsp_ranktracker_view/adminlog.jsp</result>
+            <result name="success" type="redirect">admin.action</result>     
+        </action>            
+        
+    </package>
+    
+    
+    <package name="jsonResults" extends="json-default">
+                     
+        <action name="editSerpsKeyword" class="ranktracker.action.SerpsKeywordsAction" method="editSerpsKeyword">
+            <result type="json">
+                <param name="includeProperties">    
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="addSerpsKeywordGoal" class="ranktracker.action.SerpsKeywordsAction" method="addSerpsKeywordGoal">
+            <result type="json">
+                <param name="includeProperties">    
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="getData" class="ranktracker.action.ChartAction" method="execute">            
+            <result type="json" >
+                <param name="excludeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="getCampaignChartData" class="ranktracker.action.ChartAction" method="executeCampaignChart">            
+            <result type="json" >
+                <param name="excludeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="getVideoChartData" class="ranktracker.action.ChartAction" method="executeVideoChart">            
+            <result type="json" >
+                <param name="excludeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>      
+           
+        <action name="getSocialData" class="ranktracker.action.ChartAction" method="executeSocial">            
+            <result type="json" >
+                <param name="excludeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="addserCampaign" class="ranktracker.action.SerpsTrackAction" method="addSerpsCampaign">
+            <result type="json" >
+                <param name="excludeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="addvioCampaign" class="ranktracker.action.VideoTrackAction" method="addVideoCampaign">
+            <result type="json" >
+                <param name="excludeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="addSerpsCampaign" class="ranktracker.action.SerpsTrackAction" method="addSerpsCampaign">
+            <result type="json" >
+                <param name="excludeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="addVideoCampaign" class="ranktracker.action.VideoTrackAction" method="addVideoCampaign">
+            <result type="json" >
+                <param name="excludeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="editSerpsCampaign" class="ranktracker.action.SerpsTrackAction" method="editSerpsCampaign">
+            <result type="json" >
+                <param name="includeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="editCampaign" class="ranktracker.action.CampaignsAction" method="editCampaign">
+            <result type="json" >
+                <param name="includeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="editVideoCampaign" class="ranktracker.action.VideoTrackAction" method="editVideoCampaign">
+            <result type="json" >
+                <param name="includeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="deleteSerpsCampaign" class="ranktracker.action.SerpsTrackAction" method="deleteSerpsCampaign">
+            <result type="json" >
+                <param name="excludeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        
+        <action name="deleteVideoCampaign" class="ranktracker.action.VideoTrackAction" method="deleteVideoCampaign">
+            <result type="json" >
+                <param name="excludeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="addSerpsKeyword" class="ranktracker.action.SerpsKeywordsAction" method="addSerpsKeyword">
+            <result type="json" >
+                <param name="includeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="addSocialSignalUrl" class="ranktracker.action.SocialSignalUrlAction" method="addSocialSignalUrl">
+            <result type="json" >
+                <param name="includeProperties">
+                    objCampaignsService,objKeywordsService,objKeywordsDao
+                </param>
+            </result>
+        </action>
+        
+        <action name="addVideoKeyword" class="ranktracker.action.VideoKeywordsAction" method="addVideoKeyword">
+            <result type="json" >
+                <param name="includeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+
+        <action name="editVideoKeyword" class="ranktracker.action.VideoKeywordsAction" method="editVideoKeyword">
+            <result type="json">
+                <param name="includeProperties">    
+                    objKeywordsService            
+                </param>
+            </result>
+        </action>
+        
+        <action name="deleteSerpsKeyword" class="ranktracker.action.SerpsKeywordsAction" method="deleteSerpsKeyword">
+            <result type="json" >
+                <param name="includeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="deleteVideoKeyword" class="ranktracker.action.VideoKeywordsAction" method="deleteVideoKeyword">
+            <result type="json" >
+                <param name="includeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="sendserpCampaignReport" class="ranktracker.mail.SendMail" method="sendSerpCampaignReport">
+            <result type="json" >
+                <param name="excludeProperties">
+                    objCustomerService,objCampaignsService,objKeywordsService,objExcelReportAction,objKeywordsDao,objSettingsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="sendvideoCampaignReport" class="ranktracker.mail.SendMail" method="sendVideoCampaignReport">
+            <result type="json" >
+                <param name="excludeProperties">
+                    objCustomerService,objCampaignsService,objKeywordsService,objExcelReportAction,objKeywordsDao,objSettingsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="refreshSerpsCampaign" class="ranktracker.action.SerpsTrackAction" method="refreshSerpsCampaign">
+            <result type="json" >
+                <param name="excludeProperties">
+                    objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="updatePdfOptions" class="ranktracker.action.ReportAction" method="updatePdfOptions">
+            <result type="json" >
+                <param name="includeProperties">
+                    objCampaigns
+                </param>
+            </result>
+        </action>
+        
+        <action name="editSocialSignalUrl" class="ranktracker.action.SocialSignalUrlAction" method="editSocialSignalUrl">
+            <result type="json">
+                <param name="includeProperties">    
+                    objKeywordsDao
+                </param>
+            </result>
+        </action>
+        
+        <action name="deleteSocialSignalUrl" class="ranktracker.action.SocialSignalUrlAction" method="deleteSocialSignalUrl">
+            <result type="json" >
+                <param name="includeProperties">
+                    objKeywordsDao
+                </param>
+            </result>
+        </action>
+        
+        <action name="updateUserDetails" class="ranktracker.action.SettingsAction" method="updateUserDetails">
+            <result type="json" >
+                <param name="includeProperties">
+                    objUtilityDataDao,objSettingsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="deleteUser" class="ranktracker.action.SettingsAction" method="deleteUser">
+            <result type="json" >
+                <param name="includeProperties">
+                    objUtilityDataDao,objSettingsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="activateUser" class= "ranktracker.action.Adminaction" method="activateUser">
+            <result type="json" >
+                <param name="includeProperties">
+                    objCustomerDao
+                </param>
+            </result>
+        </action>
+        
+        <action name="deactivateUser" class= "ranktracker.action.Adminaction" method="deactivateUser">
+            <result type="json" >
+                <param name="includeProperties">
+                    objCustomerDao
+                </param>
+            </result>
+        </action>
+        
+    </package>
+    
+    
+    <package name="jsonResponses" extends="json-default">
+        <action name="commonslocaldata" class="ranktracker.action.ReviewAction" method="execute">
+            <result name="success" type="json">/WEB-INF/jsp_ranktracker_view/review.jsp
+            </result>
+        </action>
+        
+        <!--        <action name="visitorsdata" class="ranktracker.action.ReviewAction" method="getVisitorLocalization">
+            <result name="success" type="json">/WEB-INF/jsp_ranktracker_view/review.jsp
+            </result>
+        </action>-->
+    </package>
+</struts>

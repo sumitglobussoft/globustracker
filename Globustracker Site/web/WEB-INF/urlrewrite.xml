@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
+ 
+<urlrewrite>      
+     
+<!--    <rule>
+        <note>for news with parameters</note>
+        <from>^/serpskeywords/([0-9]+)/(.*)</from>
+        <to>/serpskeywords.action?campaignId$575</to>
+    </rule>
+     
+    <rule>
+        <note>display all news</note>
+        <from>^/serpskeywords$</from>
+        <to type="redirect">%{context-path}/serpskeywords.action</to>
+    </rule>-->
+    <rule>
+       <note>
+           The rule will rewrite /getreviewhome/[websearchurl] into our structs action format.
+       </note>
+       <from>^/getreviewhome/([a-z0-9]+)$</from>
+       <to type="redirect">%{context-path}/getreviewhome.action?websearchurl=$</to>
+    </rule>
+</urlrewrite>

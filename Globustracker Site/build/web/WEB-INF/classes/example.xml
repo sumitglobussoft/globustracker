@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="login" namespace="/login" extends="struts-default">
+        <action name="login" class="ranktracker.wooclone.LoginAction">
+            <result name="success">/jsp_ranktracker_view/review.jsp</result>
+            <result name="input">/jsp_ranktracker_view/campaigns.jsp</result>
+        </action>
+    </package>
+</struts>
+
