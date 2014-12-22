@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="BrandzterRankTrackerCrawlerPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>ranktracker.entity.Socialtrackhistory</class>
+    <class>ranktracker.entity.Serpstrackhistory</class>
+    <class>ranktracker.entity.Customers</class>
+    <class>ranktracker.entity.Campaigns</class>
+    <class>ranktracker.entity.Campaigns_1</class>
+    <class>ranktracker.entity.Customers_1</class>
+    <class>ranktracker.entity.Displaysettings</class>
+    <class>ranktracker.entity.Seokeyworddetails</class>
+    <class>ranktracker.entity.Seokeyworddetails_1</class>
+    <class>ranktracker.entity.Serpkeywords</class>
+    <class>ranktracker.entity.Serpkeywordgoal</class>
+    <class>ranktracker.entity.Globustrackerevents</class>
+    <class>ranktracker.entity.Alertsdata_1</class>
+    <class>ranktracker.entity.Socialsignalurls</class>
+    <class>ranktracker.entity.Reportfrequency</class>
+    <class>ranktracker.entity.Videokeywords</class>
+    <class>ranktracker.entity.Monitor</class>
+    <class>ranktracker.entity.Headingelements</class>
+    <class>ranktracker.entity.Socialreview</class>
+    <class>ranktracker.entity.Reseller</class>
+    <class>ranktracker.entity.Reviewsite</class>
+    <class>ranktracker.entity.Users</class>
+    <class>ranktracker.entity.Headingcount</class>
+    <class>ranktracker.entity.Alertsdata</class>
+    <class>ranktracker.entity.Xmldata</class>
+    <class>ranktracker.entity.Technology</class>
+    <class>ranktracker.entity.Image</class>
+    <class>ranktracker.entity.Site</class>
+    <class>ranktracker.entity.Payments</class>
+    <class>ranktracker.entity.Videotrackhistory</class>
+    <class>ranktracker.entity.Relatedwebsite</class>
+    <class>ranktracker.entity.Campaignkeywords</class>
+    <class>ranktracker.entity.Pagelinks</class>
+    <class>ranktracker.entity.Visitorarray</class>
+    <class>ranktracker.entity.Commonseo</class>
+    <class>ranktracker.entity.Mailhistory</class>
+    <class>ranktracker.entity.Proxydata</class>
+    <class>ranktracker.entity.Trackhistory</class>
+    <class>ranktracker.entity.Plans</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ranktracker"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>

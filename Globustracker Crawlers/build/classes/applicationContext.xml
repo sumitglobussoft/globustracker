@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Use xsd instead of DTD -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://www.springframework.org/schema/task  http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+       default-autowire="byName">
+   
+    <!-- creating bean datasource by providing db properties -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://50.116.31.63:3306/globustracker" /> 
+        <property name="username" value="brandzter" />
+        <property name="password" value="B#45dZT3Rmysql" />         
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/globustracker"/>
+        <property name="username" value="root" />
+        <property name="password" value="" /> -->
+    </bean>
+ 
+ 
+    <!-- initializing the sessionfactory , declaring the session properties, declaring the annotated classes -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="c3p0.minPoolSize">15</prop>
+                <prop key="c3p0.maxPoolSize">1000</prop>
+                <prop key="c3p0.timeout">5000</prop>
+                <prop key="c3p0.max_statement">500</prop>
+                <prop key="c3p0.testConnectionOnCheckout">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+            </props>
+        </property>
+    	
+        <property name="annotatedClasses">
+            <list>
+                <value>ranktracker.entity.Alertsdata</value>
+                <value>ranktracker.entity.Campaignkeywords</value>
+                <value>ranktracker.entity.CampaignkeywordsPK</value>
+                <value>ranktracker.entity.Campaigns</value>
+                <value>ranktracker.entity.Commonseo</value>
+                <value>ranktracker.entity.Customers</value>
+                <value>ranktracker.entity.Displaysettings</value>
+                <value>ranktracker.entity.Globustrackerevents</value>
+                <value>ranktracker.entity.Headingcount</value>
+                <value>ranktracker.entity.Headingelements</value>
+                <value>ranktracker.entity.Image</value>
+                <value>ranktracker.entity.Mailhistory</value>
+                <value>ranktracker.entity.Monitor</value>
+                <value>ranktracker.entity.Pagelinks</value>
+                <value>ranktracker.entity.Payments</value>
+                <value>ranktracker.entity.Plans</value>
+                <value>ranktracker.entity.ProxyData</value>
+                <value>ranktracker.entity.Relatedwebsite</value>
+                <value>ranktracker.entity.Reportfrequency</value>
+                <value>ranktracker.entity.Reseller</value>
+                <value>ranktracker.entity.Reviewsite</value>
+                <value>ranktracker.entity.Search</value>
+                <value>ranktracker.entity.Seokeyworddetails</value>
+                <value>ranktracker.entity.Serpkeywordgoal</value>
+                <value>ranktracker.entity.Serpkeywords</value>
+                <value>ranktracker.entity.Serpstrackhistory</value>
+                <value>ranktracker.entity.Site</value>
+                <value>ranktracker.entity.Socialreview</value>
+                <value>ranktracker.entity.Socialsignalurls</value>
+                <value>ranktracker.entity.Socialtrackhistory</value>
+                <value>ranktracker.entity.Trackhistory</value>
+                <value>ranktracker.entity.Technology</value>
+                <value>ranktracker.entity.Users</value>
+                <value>ranktracker.entity.Videokeywords</value>
+                <value>ranktracker.entity.Videotrackhistory</value>     
+                <value>ranktracker.entity.Visitorarray</value>     
+                <value>ranktracker.entity.Xmldata</value>     
+            </list>
+        </property>
+    </bean>
+    
+    <!-- scan the ranktracker.dao package to create instance for each class of the package.-->
+    <context:component-scan 
+        base-package="ranktracker.dao" />
+    
+    <!-- scan the ranktracker.utility package to create instance for each class of the package.-->
+    <context:component-scan 
+        base-package="ranktracker.utility" />
+    
+   
+    <!--  Scheduler define start -->
+    <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+
+    <task:executor id="myExecutor" pool-size="5"/>
+
+    <task:scheduler id="myScheduler" pool-size="10"/>
+    <bean id="objRankRefresher" class="ranktracker.site.settings.RankRefresher"/>
+    <!--  Scheduler define End -->
+</beans>
+

@@ -1,0 +1,12 @@
+[Thread-27] ERROR org.hibernate.util.JDBCExceptionReporter 10/08/2013 18:38:37 - Table 'ranktracker_local.campaignkeywords' doesn't exist
+[Thread-14] ERROR ranktracker.utility.ProxyPageSource 10/08/2013 18:56:26 - java.net.SocketTimeoutException: Read timed out  Read timed out url http://www.stumbleupon.com/content/9bGzKg
+[Thread-17] ERROR org.hibernate.util.JDBCExceptionReporter 10/08/2013 18:57:46 - Table 'ranktracker_local.campaignkeywords' doesn't exist
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 22/12/2014 19:45:42 - Communications link failure
+
+Last packet sent to the server was 10 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 22/12/2014 19:46:04 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 22/12/2014 19:46:04 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
