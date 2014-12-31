@@ -1,4 +1,4 @@
-Globustracker
+GlobusTracker
 =============
 
 GlobusTracker is world’s first open source tracking solution for your website or social media platforms. Using this you can track the rank of your website in search engines results like Google, Yahoo and Bing.
