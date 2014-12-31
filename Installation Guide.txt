@@ -1,0 +1,14 @@
+Installation Guide
+==================
+
+1 Download the zip and extract it. 
+2 Open in Netbeans the GlobusTracker site project.
+3 If you got any errors, then include library files by following step 4,5 & 6.
+4 Select the properties of GlobusTracker site project in Netbeans by a right click.
+5 Click libraries -> add jar/folder and \globustracker\Globustracker Site\lib go to this path and select all jar files and click OK.
+6 Now clean and build the project
+7 Go to folder \globustracker\Database and add this database in mysql server.
+8 Go to folder \globustracker\Globustracker Site\src\java and open jdbc properties.
+9 Replace the database, username & password with the names you defined for database.
+10 Again clean and build and run the project.
+11 Now globustracker web application will run in local host.
