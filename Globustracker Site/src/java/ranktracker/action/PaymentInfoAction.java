@@ -79,8 +79,8 @@ public class PaymentInfoAction extends ActionSupport {
         ////////////////////////////////////////////////////////////////////
         //     public String PayWithPayPal(String amount, String itemInfo, String name, String phone, String email, String currency, String paypalemail, String successUrl, String failUrl, String callBackUrl, String cancelurl,String notifyurl,String custom)
         //Mention URL to redirect content to paypal site
-        redirecturl = redirecturl + "http://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&business=" + getText("paypal.account");
-    //        redirecturl =redirecturl + "https://api.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&business=" +getText("paypal.apiusername")+getText("paypal.apipassword")+getText("paypal.signature");                       
+        redirecturl = redirecturl + "http://www.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&business=" + getText("paypal.account");
+        //redirecturl = redirecturl + "https://api.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&business=" + getText("paypal.apiusername") + getText("paypal.apipassword") + getText("paypal.signature");
 
         //First name i assign static based on login details assign this value
         String firstname = (String) objSession.getAttribute("firstname");
@@ -138,6 +138,7 @@ public class PaymentInfoAction extends ActionSupport {
 
         //Success return page url
         redirecturl = redirecturl + "&return=" + "http://globustracker.com/accountCreated.action";//http://ranktracker.globustracker.com/returnAfterPayment.action";
+        //redirecturl = redirecturl + "&return=" + "http://localhost:8084/accountCreated.action";//http://ranktracker.globustracker.com/returnAfterPayment.action";
 
         //Failed return page url
         redirecturl = redirecturl + "&cancel_return=" + "http://globustracker.com/home.action";
@@ -148,7 +149,7 @@ public class PaymentInfoAction extends ActionSupport {
 
         System.out.println("************" + redirecturl + "************");
 
-        objSession.removeAttribute("customerID");
+        //objSession.removeAttribute("customerID");
 //            objSession.invalidate();
 //            objResponse.sendRedirect(redirecturl);
 //            objSession.setAttribute("redirect",redirecturl);
@@ -172,15 +173,14 @@ public class PaymentInfoAction extends ActionSupport {
         //     public String PayWithPayPal(String amount, String itemInfo, String name, String phone, String email, String currency, String paypalemail, String successUrl, String failUrl, String callBackUrl, String cancelurl,String notifyurl,String custom)
         //Mention URL to redirect content to paypal site
         redirecturl = redirecturl + "http://www.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&business=" + getText("paypal.account");
-    //        redirecturl =redirecturl + "https://api.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&business=" +getText("paypal.apiusername")+getText("paypal.apipassword")+getText("paypal.signature");                       
+        //        redirecturl =redirecturl + "https://api.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&business=" +getText("paypal.apiusername")+getText("paypal.apipassword")+getText("paypal.signature");                       
 
-        
         System.out.println("=======================");
-        System.out.println( objSession.getAttribute("customerName"));
+        System.out.println(objSession.getAttribute("customerName"));
         System.out.println("=======================");
         String customerName = (String) objSession.getAttribute("customerName");
         String[] name = customerName.split(" ");
-        
+
         String firstname = name[0];
         String lastname = name[1];
 
@@ -234,7 +234,8 @@ public class PaymentInfoAction extends ActionSupport {
         redirecturl = redirecturl + "&currency=" + "USD";
 
         //Success return page url
-        redirecturl = redirecturl + "&return=" + "http://globustracker.com/accountCreated.action";//http://ranktracker.globustracker.com/returnAfterPayment.action";
+        redirecturl = redirecturl + "&return=" + "http://globustracker.com/accountUpgraded.action";//http://ranktracker.globustracker.com/returnAfterPayment.action";
+        //redirecturl = redirecturl + "&return=" + "http://localhost:8084/accountUpgraded.action";//http://ranktracker.globustracker.com/returnAfterPayment.action";
 
         //Failed return page url
         redirecturl = redirecturl + "&cancel_return=" + "http://globustracker.com/home.action";

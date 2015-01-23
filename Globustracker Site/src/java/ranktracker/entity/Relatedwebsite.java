@@ -23,8 +23,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "relatedwebsite")
-@NamedQueries({
-    @NamedQuery(name = "Relatedwebsite.findAll", query = "SELECT r FROM Relatedwebsite r")})
 public class Relatedwebsite implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -6,9 +6,13 @@ package ranktracker.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
+import ranktracker.dao.PaymentDAO;
+import ranktracker.dao.PaymentDAOImpl;
 import ranktracker.entity.Customers;
 import ranktracker.entity.Users;
 import ranktracker.form.SignInForm;
@@ -47,6 +51,8 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
      */
     private Users objUser;
 
+    private PaymentDAO objPaymentDAO;
+
     /**
      * The method validates login credentials
      *
@@ -56,6 +62,7 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
     @Override
     public String execute() throws Exception {
 
+        int activationPeriod = 1;
         //initializing http request object
         objRequest = ServletActionContext.getRequest();
 
@@ -69,7 +76,40 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
         if (objUser != null) {
             int usertype = objUser.getUserType();
             if (usertype != 10) {
+
                 objCustomer = objUser.getCustomerID();
+
+                String paymentMessage = "welcome";
+
+                try {
+
+                    Date enddate = objPaymentDAO.getPaymentEndingDate(objCustomer.getCustomerID());
+
+//              
+                    Date currentDate = new Date();
+                    //System.out.println("==== end date : " + enddate);
+
+                    long diff = enddate.getTime() - currentDate.getTime();
+                    diff = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                    //System.out.println("Difference is : " + diff);
+                    if (diff > 0L) {
+
+                        paymentMessage = "Only " + diff + " days left in activation period. Your Activation will end on " + enddate;
+                    } else {
+                        paymentMessage = "Your activation period has been expired on";
+                        activationPeriod = 0;
+                    }
+
+                } catch (Exception es) {
+                    System.out.println("EXCEPTION IS : " + es);
+                    // objSession.setAttribute("paymentMessage","EXCEPTION IS : "+es);
+
+                }
+
+                objSession.setAttribute("notification", 0);
+                objSession.setAttribute("paymentMessage", paymentMessage);
+                objSession.setAttribute("activationPeriod", activationPeriod);
+
                 objSession.setAttribute("customerID", objCustomer.getCustomerID());
                 objSession.setAttribute("customerName", objCustomer.getFirstName() + " " + objCustomer.getLastName());
                 objSession.setAttribute("userID", objUser.getUserID());
@@ -79,6 +119,9 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
                 objSession.setAttribute("objCustomer", objCustomer);
                 objSession.setAttribute("userType", objUser.getUserType());
                 System.out.println("UserType : " + objSession.getAttribute("userType"));
+                if (activationPeriod == 0) {
+                    return "renewal";
+                }
                 return SUCCESS;
             } else {
                 addActionError("Admin User should login through Admin panel");
@@ -91,6 +134,7 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
 
     public String executeLogin() throws Exception {
 
+        int activationPeriod = 1;
         //initializing http request object
         objRequest = ServletActionContext.getRequest();
 
@@ -104,7 +148,40 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
         if (objUser != null) {
             int usertype = objUser.getUserType();
             if (usertype != 10) {
+
                 objCustomer = objUser.getCustomerID();
+
+                String paymentMessage = "welcome";
+
+                try {
+
+                    Date enddate = objPaymentDAO.getPaymentEndingDate(objCustomer.getCustomerID());
+
+//              
+                    Date currentDate = new Date();
+                    //System.out.println("==== end date : " + enddate);
+
+                    long diff = enddate.getTime() - currentDate.getTime();
+                    diff = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                    //System.out.println("Difference is : " + diff);
+                    if (diff > 0L) {
+
+                        paymentMessage = "Only " + diff + " days left in activation period. Your Activation will end on " + enddate;
+                    } else {
+                        paymentMessage = "Your activation period has been expired on";
+                        activationPeriod = 0;
+                    }
+
+                } catch (Exception es) {
+                    System.out.println("EXCEPTION IS : " + es);
+                    // objSession.setAttribute("paymentMessage","EXCEPTION IS : "+es);
+
+                }
+
+                objSession.setAttribute("notification", 0);
+                objSession.setAttribute("paymentMessage", paymentMessage);
+                objSession.setAttribute("activationPeriod", activationPeriod);
+
                 objSession.setAttribute("customerID", objCustomer.getCustomerID());
                 objSession.setAttribute("customerName", objCustomer.getFirstName() + " " + objCustomer.getLastName());
                 objSession.setAttribute("userID", objUser.getUserID());
@@ -114,6 +191,11 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
                 objSession.setAttribute("objCustomer", objCustomer);
                 objSession.setAttribute("userType", objUser.getUserType());
                 System.out.println("UserType : " + objSession.getAttribute("userType"));
+
+                if (activationPeriod == 0) {
+                    return "renewal";
+                }
+
                 return SUCCESS;
             } else {
                 addActionError("Admin User should login through Admin panel");
@@ -122,6 +204,10 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
             addActionError("Either EmailID or Password is Incorrect");
         }
         return INPUT;
+    }
+
+    public String executeRenewal() throws Exception {
+        return SUCCESS;
     }
 
     public String adminLoginIn() throws Exception {
@@ -209,5 +295,13 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
      */
     public void setObjCustomerService(CustomerService objCustomerService) {
         this.objCustomerService = objCustomerService;
+    }
+
+    public PaymentDAO getObjPaymentDAO() {
+        return objPaymentDAO;
+    }
+
+    public void setObjPaymentDAO(PaymentDAO objPaymentDAO) {
+        this.objPaymentDAO = objPaymentDAO;
     }
 }

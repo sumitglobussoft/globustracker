@@ -134,6 +134,9 @@ public class SettingsAction extends ActionSupport {
         //checking for 'customerID' attribute in session
         if (objHttpSession.getAttribute("customerID") != null) {
 
+            if (objHttpSession.getAttribute("activationPeriod").toString().equals("0")) {
+                return "renewal";
+            }
             //reading the 'userID' from session and type casting it to integer
             userId = (Integer) objHttpSession.getAttribute("userID");
             Object[] dataObject = objSettingsService.getPageData(userId);
@@ -230,7 +233,7 @@ public class SettingsAction extends ActionSupport {
                 } else {
 
                     //sending mail on password change
-                    objSendMail.execute(3, objUser);
+                    objSendMail.execute(3, objUser,"");
                     message = "Successfully Updated your Password";
                     objHttpSession.setAttribute("message", message);
 
@@ -278,7 +281,7 @@ public class SettingsAction extends ActionSupport {
                 } else {
 
                     //sending mail on password change
-                    objSendMail.execute(3, objUser);
+                    objSendMail.execute(3, objUser,"");
                     message = "Successfully Updated your Password";
                     objHttpSession.setAttribute("message", message);
                 }
@@ -508,6 +511,9 @@ public class SettingsAction extends ActionSupport {
         //checking for 'customerID' attribute in session
         if (objHttpSession.getAttribute("customerID") != null) {
 
+            if (objHttpSession.getAttribute("activationPeriod").toString().equals("0")) {
+                return "renewal";
+            }
             //reading the 'customerID' from session and type casting it to integer
             customerId = (Integer) objHttpSession.getAttribute("customerID");
 
@@ -532,7 +538,6 @@ public class SettingsAction extends ActionSupport {
         objRequest = ServletActionContext.getRequest();
 
         //reading the 'customerID' from session and type casting it to integer
-
         customerId = Integer.valueOf(objRequest.getParameter("customerID"));
 
         objHttpSession.setAttribute("custID", customerId);

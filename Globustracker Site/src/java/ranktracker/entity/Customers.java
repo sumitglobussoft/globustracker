@@ -15,8 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,8 +24,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "customers")
-@NamedQueries({
-    @NamedQuery(name = "Customers.findAll", query = "SELECT c FROM Customers c")})
 public class Customers implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -417,5 +413,5 @@ public class Customers implements Serializable {
     public String toString() {
         return "ranktracker.entity.Customers[ customerID=" + customerID + " ]";
     }
-    
+
 }

@@ -54,7 +54,7 @@ public class KeywordsServiceImpl implements KeywordsService {
 
         //calling the getKeywords and getCampaign method of KeywordsDaoImpl class
         return new Object[]{objKeywordsDao.getKeywords(campaignID),
-                    objCampaignsDao.getCampaign(campaignID, customerId)};
+            objCampaignsDao.getCampaign(campaignID, customerId)};
     }
 
     /**
@@ -68,7 +68,14 @@ public class KeywordsServiceImpl implements KeywordsService {
 
         //calling the getKeywords and getCampaign method of KeywordsDaoImpl class
         return new Object[]{objKeywordsDao.getSerpKeywords(campaignID, customerId), objKeywordsDao.getSocialSignalData(campaignID),
-                    objCampaignsDao.getCampaign(campaignID, customerId), objKeywordsDao.getSeoDetails(campaignID, customerId)};
+            objCampaignsDao.getCampaign(campaignID, customerId), objKeywordsDao.getSeoDetails(campaignID, customerId)};
+    }
+
+    @Override
+    public Object[] getSerpDataLimited(Integer campaignID, Integer customerId, int initial) {
+        //calling the getKeywords and getCampaign method of KeywordsDaoImpl class
+        return new Object[]{objKeywordsDao.getSerpKeywords(campaignID, customerId),
+            objKeywordsDao.getSeoDetails(campaignID, customerId)};
     }
 
     /**
@@ -80,7 +87,7 @@ public class KeywordsServiceImpl implements KeywordsService {
     public Object[] getVideoData(Integer campaignID, Integer customerId) {
 
         return new Object[]{objKeywordsDao.getVideoKeywords(campaignID, customerId),
-                    objCampaignsDao.getCampaign(campaignID, customerId)};
+            objCampaignsDao.getCampaign(campaignID, customerId)};
     }
 
     /**
@@ -328,6 +335,7 @@ public class KeywordsServiceImpl implements KeywordsService {
         return objKeywordsDao.getKeywords(siteID);
     }
 
+    @Override
     public List<Serpkeywordgoal> getChartGoalData(Integer keywordId) {
         return objKeywordsDao.getChartGoalData(keywordId);
     }
@@ -338,11 +346,13 @@ public class KeywordsServiceImpl implements KeywordsService {
         return objKeywordsDao.setSerpsKeywordGoal(keywordId, goalRank, dategoal);
     }
 
+    @Override
     public List<Globustrackerevents> getChartEventData() {
 
         return objKeywordsDao.getChartEventData();
     }
 
+    @Override
     public String getKeywordName(Integer keywordID) {
 
         return objKeywordsDao.getKeywordName(keywordID);

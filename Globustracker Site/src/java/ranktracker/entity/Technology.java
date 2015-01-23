@@ -23,8 +23,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "technology")
-@NamedQueries({
-    @NamedQuery(name = "Technology.findAll", query = "SELECT t FROM Technology t")})
 public class Technology implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

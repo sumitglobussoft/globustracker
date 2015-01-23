@@ -29,6 +29,7 @@
     <class>ranktracker.entity.Visitorarray</class>
     <class>ranktracker.wooclone.Commonseo</class>
     <class>ranktracker.entity.Commonseo</class>
+    <class>ranktracker.entity.Paymenthistory</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ranktracker"/>

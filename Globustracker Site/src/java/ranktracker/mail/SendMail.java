@@ -26,6 +26,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.scheduling.annotation.Scheduled;
 import ranktracker.action.ExcelReportAction;
 import ranktracker.dao.KeywordsDao;
@@ -117,11 +119,11 @@ public class SendMail extends ActionSupport {
      * @param objUser
      * @return
      */
-    public String execute(int mailType, Users objUser) {
+    public String execute(int mailType, Users objUser,String itemName) {
         this.emailType = mailType;
 
         if (emailType > 0) {
-            setMailContaint(objUser, emailType);
+            setMailContaint(objUser, emailType,itemName);
         }
         return SUCCESS;
     }
@@ -135,10 +137,10 @@ public class SendMail extends ActionSupport {
      */
     public void setMailContaint(ContactUsForm objContactUsForm) {
         String complete_Email_Tags = "";
-        complete_Email_Tags = emailBeginTags();
-        complete_Email_Tags = complete_Email_Tags + MailContent.getContactUsContent(objContactUsForm);
+       // complete_Email_Tags = emailBeginTags();
+        complete_Email_Tags = MailContent.getContactUsContent(objContactUsForm);
         try {
-            complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
+            //complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
             try {
                 sendMail("support@globustracker.com", "Customer's FeedBack", complete_Email_Tags);
             } catch (Exception ex) {
@@ -156,21 +158,21 @@ public class SendMail extends ActionSupport {
      * @param objUser
      * @param mailType
      */
-    public void setMailContaint(Users objUser, int mailType) {
+    public void setMailContaint(Users objUser, int mailType,String itemName) {
         String emailId = objUser.getLoginID();
         String complete_Email_Tags = "";
         if (mailType == 1) {
-            complete_Email_Tags = emailBeginTags();
-            complete_Email_Tags = complete_Email_Tags + MailContent.getSignUpMailContent(objUser);
+            //complete_Email_Tags = emailBeginTags();
+            complete_Email_Tags = MailContent.getSignUpMailContent(objUser,itemName);
         } else if (mailType == 2) {
-            complete_Email_Tags = emailBeginTags();
-            complete_Email_Tags = complete_Email_Tags + MailContent.getForgotPassContent(objUser);
+            //complete_Email_Tags = emailBeginTags();
+            complete_Email_Tags = MailContent.getForgotPassContent(objUser);
         } else if (mailType == 3) {
-            complete_Email_Tags = emailBeginTags();
-            complete_Email_Tags = complete_Email_Tags + MailContent.getChangePassContent(objUser);
+           // complete_Email_Tags = emailBeginTags();
+            complete_Email_Tags = MailContent.getChangePassContent(objUser);
         }
         try {
-            complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
+            //complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
             try {
                 if (mailType == 1) {
                     sendMail(emailId, "Globustracker Registration", complete_Email_Tags);
@@ -325,19 +327,38 @@ public class SendMail extends ActionSupport {
     public String showEmailForReport() {
         StringBuilder signup_html = new StringBuilder();
         try {
-            signup_html.append("   ");
-            signup_html.append("   ");
-            signup_html.append("       <!--content starts-->");
-            signup_html.append("       ");
-            signup_html.append("         <div style=\"width:600px; height:auto; background:url(http://i47.tinypic.com/359bg8z.png); padding-bottom:1px;\">");
-            signup_html.append("             ");
-            signup_html.append("             <div style=\"width:545px; height:auto; font-family:Arial; font-size:14px; font-weight:bold; margin:0 auto; padding:20px 0; color:#fff;\">");
-            signup_html.append("             ");
-            signup_html.append("                Please find requested report as attachment. <br />");
-            signup_html.append("             ");
-            signup_html.append("             </div>");
-            signup_html.append("             ");
-            signup_html.append("       <!--content ends-->");
+//            signup_html.append("   ");
+//            signup_html.append("   ");
+//            signup_html.append("       <!--content starts-->");
+//            signup_html.append("       ");
+//            signup_html.append("         <div style=\"width:600px; height:auto; background:url(http://i47.tinypic.com/359bg8z.png); padding-bottom:1px;\">");
+//            signup_html.append("             ");
+//            signup_html.append("             <div style=\"width:545px; height:auto; font-family:Arial; font-size:14px; font-weight:bold; margin:0 auto; padding:20px 0; color:#fff;\">");
+//            signup_html.append("             ");
+//            signup_html.append("                Please find requested report as attachment. <br />");
+//            signup_html.append("             ");
+//            signup_html.append("             </div>");
+//            signup_html.append("             ");
+//            signup_html.append("       <!--content ends-->");
+            
+            
+//             signup_html.append("<html lang=3D\"en\">\n"
+//                    + "<head>\n"
+//                    + "</head>\n"
+//                    + "\n"
+//                    + "<body>\n"
+//                    + "\n"
+//                    + "<div> \n"
+//                    + "    <iframe src=\"http://"+getText("email.domain")+"/ReportContent.action\" width=\"800px\" height=\"800px\" style=\"overflow:auto;border:0px ridge blue;border-radius:10px\">\n"
+//                    + "    </iframe></div>\n"
+//                    + "</body>\n"
+//                    + "\n"
+//                    + "</html>");
+
+             Document doc =Jsoup.connect("http://"+getText("email.domain")+"/ReportContent.action").get();
+             signup_html.append(doc.toString());
+           
+            
         } catch (Exception ex) {
             l.error(ex + "  " + ex.getMessage());
         }
@@ -481,9 +502,9 @@ public class SendMail extends ActionSupport {
             props.setProperty("mail.smtp.host", host);
             props.put("mail.smtp.auth", auth);
             String complete_Email_Tags = "";
-            complete_Email_Tags = emailBeginTags();
-            complete_Email_Tags = complete_Email_Tags + showEmailForReport();
-            complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
+ //           complete_Email_Tags = emailBeginTags();
+            complete_Email_Tags =  showEmailForReport();
+//            complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
             try {
                 Session mailSession = Session.getInstance(props,
                         new javax.mail.Authenticator() {
@@ -584,9 +605,9 @@ public class SendMail extends ActionSupport {
         }
 
         String complete_Email_Tags = "";
-        complete_Email_Tags = emailBeginTags();
-        complete_Email_Tags = complete_Email_Tags + showEmailForReport();
-        complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
+      //  complete_Email_Tags = emailBeginTags();
+        complete_Email_Tags =  showEmailForReport();
+       // complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
         final String protocol = getText("email.protocol");
         final String host = getText("email.host"); //Reading from application.peorperties file
         final String user = getText("email.user");
@@ -677,9 +698,9 @@ public class SendMail extends ActionSupport {
         }
 
         String complete_Email_Tags = "";
-        complete_Email_Tags = emailBeginTags();
-        complete_Email_Tags = complete_Email_Tags + showEmailForReport();
-        complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
+     //   complete_Email_Tags = emailBeginTags();
+        complete_Email_Tags =  showEmailForReport();
+       // complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
         final String protocol = getText("email.protocol");
         final String host = getText("email.host"); //Reading from application.peorperties file
         final String user = getText("email.user");

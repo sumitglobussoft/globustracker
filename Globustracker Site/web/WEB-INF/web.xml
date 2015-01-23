@@ -50,7 +50,7 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
     </servlet-mapping>
-    
+
     <!-- specifying the location of applicationContext.xml file-->
     <context-param>
         <param-name>contextConfigLocation</param-name>

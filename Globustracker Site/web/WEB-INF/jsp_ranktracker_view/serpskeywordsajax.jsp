@@ -8,6 +8,7 @@
         response.sendRedirect("home.action");
     }
 %> 
+<link rel="stylesheet" type="text/css" href="http://www.highcharts.com/highslide/highslide.css" />
 <style>
     ul.dropdownlist
     { 
@@ -34,6 +35,7 @@
         background: none repeat scroll 0 0 #ccc;
     }
 </style>
+
 <div class="row">
     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
         <h1 class="page-title txt-color-blueDark">
@@ -49,7 +51,6 @@
 <div id="fade_away" style="color:#FF0000;">
     <s:actionmessage />
 </div>
-
 <!-- widget grid -->
 <section id="widget-grid" class="">
 
@@ -228,280 +229,173 @@
                     </div>
                 </header>
 
-                <s:if test="%{getLstDisplaysettings().isEmpty()}"> 
+                <!-- starting div -->               
+                <!-- widget div-->
+                <div>
 
-                    <!-- widget div-->
-                    <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
 
-                        <!-- widget edit box -->
-                        <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
 
-                        </div>
-                        <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body">
 
-                        <!-- widget content -->
-                        <div class="widget-body">
-
-                            <div class="tab-content">
+                        <div class="tab-content">
+                            <s:iterator value="lstDisplaysettings" status="temp">
                                 <div class="tab-pane active" id="hr1">
                                     <ul class="nav nav-tabs">
-                                        <li class="active">
-                                            <a data-toggle="tab" href="#AA">GOOGLE</a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tab" href="#BB">YAHOO</a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tab" href="#CC">BING</a>
-                                        </li>
+                                        <s:if test="%{googletab == 1}">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#AA">GOOGLE</a>
+                                            </li>
+                                        </s:if>
+                                        <s:else> 
+                                        </s:else>
+                                        <s:if test="%{yahootab == 1}">
+                                            <li>
+                                                <a data-toggle="tab" href="#BB">YAHOO</a>
+                                            </li>
+                                        </s:if>
+                                        <s:else>
+                                        </s:else>
+                                        <s:if test="%{bingtab == 1}">
+                                            <li>
+                                                <a data-toggle="tab" href="#CC">BING</a>
+                                            </li>
+                                        </s:if>
+                                        <s:else>
+                                        </s:else>
                                     </ul>
 
                                     <div class="tabbable tabs-below">
                                         <div class="tab-content padding-10">
-                                            <div class="tab-pane active" id="AA">
-                                                <table class="table table-bordered table-condensed">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="text-align: center;">URL</th>
-                                                            <th style="text-align: center;">Keyword</th>
-                                                            <th style="text-align: center;">Page Rank</th>
-                                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/google_icon.png" width="20" height="20" alt="" /></th>
-                                                            <th style="text-align: center;">Best Match Rank</th>
-                                                            <th style="text-align: center;">Day</th>
-                                                            <th style="text-align: center;">Week</th>
-                                                            <th style="text-align: center;">Month</th>
-                                                            <th style="text-align: center;">Last Updated</th>
-                                                            <th style="text-align: center;">Chart</th>
-                                                            <th style="text-align: center;">Edit</th>
-                                                            <th style="text-align: center;">Delete</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <s:iterator value="lstUpdatedKeywords">
-                                                            <tr>
-                                                                <td title="<s:property value="url" />"><a href="generateCrawledHistory.action?keywordId=<s:property value="keywordID"/>" title="Google crawl history"><img src="https://s3.amazonaws.com/images_ranktracker/history.png" width="20" height="22" alt="" style="cursor:pointer;" /></a><s:property value="url" /></td>
-                                                                <td><s:property value="keyword" /></td>
-                                                                <td style="text-align: center;"><s:property value="googlePageRank" /></td>
-                                                                <s:if test="%{rankGoogle!=501 }">
-                                                                    <td style="text-align: center;"><s:property value="rankGoogle" /></td>
-                                                                </s:if>
-                                                                <s:else >
-                                                                    <td style="text-align: center;">N/A</td>
-                                                                </s:else>
-                                                                <s:if test="%{bestMatchRankGoogle!=501 }">
-                                                                    <td style="text-align: center;"><s:property value="bestMatchRankGoogle" /></td>
-                                                                </s:if>
-                                                                <s:else >
-                                                                    <td style="text-align: center;">N/A</td>
-                                                                </s:else>
-                                                                <td><s:property value="rankGoogleDayChange" />
-                                                                    <s:if test="%{rankGoogleDayChange < 0}">
-                                                                        <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                    </s:if>
-                                                                    <s:elseif test="%{rankGoogleDayChange > 0}">
-                                                                        <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                    </s:elseif>
 
-                                                                </td>
-                                                                <td><s:property value="rankGoogleWeekChange" />
-                                                                    <s:if test="%{rankGoogleWeekChange<0}">
-                                                                        <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                    </s:if>
-                                                                    <s:elseif test="%{rankGoogleWeekChange>0}">
-                                                                        <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                    </s:elseif>
-                                                                </td>
-                                                                <td><s:property value="rankGoogleMonthChange" />
-                                                                    <s:if test="%{rankGoogleMonthChange<0}">
-                                                                        <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                    </s:if>
-                                                                    <s:elseif test="%{rankGoogleMonthChange>0}">
-                                                                        <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                    </s:elseif>
-                                                                </td>
-                                                                <td style="text-align: center;"><s:property value="googleUpdatedDate" /></td>
-                                                                <td style="text-align: center;"><a href="javascript:drawChart('<s:property value="keywordID"/>','30');" id="google_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#chartmodal"></i></a></td>
-                                                                <td style="text-align: center;"><a  href="#" id="edit" onclick="editKeyword(<s:property value="keywordID" />, '<s:property value="url" />', '<s:property value="linkGoogle" />', '<s:property value="keyword" />');" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editmodal"></i></a></td>
-                                                                <td style="text-align: center;"><a href="#" id="delete" title="Delete" onclick="deleteKeyword(<s:property value="keywordID"/>);" ><i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#deletemodal"></i></a></td>
-                                                            </tr>
-                                                        </s:iterator>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="tab-pane" id="BB">
-                                                <table class="table table-bordered table-condensed">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="text-align: center;">URL</th>
-                                                            <th style="text-align: center;">Keyword</th>
-                                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/yahooicon.png" width="20" height="20" alt="" /></th>
-                                                            <th style="text-align: center;">Best Match Rank</th>
-                                                            <th style="text-align: center;">Day</th>
-                                                            <th style="text-align: center;">Week</th>
-                                                            <th style="text-align: center;">Month</th>
-                                                            <th style="text-align: center;">Last Updated</th>
-                                                            <th style="text-align: center;">Chart</th>
-                                                            <th style="text-align: center;">Edit</th>
-                                                            <th style="text-align: center;">Delete</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <s:iterator value="lstUpdatedKeywords">
+                                            <s:if test="%{googletab == 1}">                                           
+                                                <div class="tab-pane active" id="AA">
+                                                    <table class="table table-bordered table-condensed">
+                                                        <thead>
                                                             <tr>
-                                                                <td style="text-align: left;" title="<s:property value="url" />"><s:property value="url" /></td>
-                                                                <td style="text-align: left;"><s:property value="keyword" /></td>
-                                                                <s:if test="%{rankYahoo!=501 }">
-                                                                    <td style="text-align: center;"><s:property value="rankYahoo" /></td>
+                                                                <th style="text-align: center;">Url <a href="javascript:drawComparisionChart('<s:property value="campaignID"/>','30','google');" id="google_comparision_chart"></a></th>
+                                                                <th style="text-align: center;">Keyword</th>
+                                                                <th style="text-align: center;">Page Rank</th>
+                                                                <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/google_icon.png" style="border:none;" width="20" height="20" alt="" /></th>
+                                                                <th style="text-align: center;">Best Match Rank</th>
+                                                                <s:if test="%{daychangetab == 1}">
+                                                                    <th style="text-align: center;">Day</th>
                                                                 </s:if>
-                                                                <s:else >
-                                                                    <td style="text-align: center;">N/A</td>
-                                                                </s:else>
-                                                                <s:if test="%{bestMatchRankYahoo!=501 }">
-                                                                    <td style="text-align: center;"><s:property value="bestMatchRankYahoo" /></td>
+                                                                <s:if test="%{weekchangetab == 1}">
+                                                                    <th style="text-align: center;">Week</th>
+                                                                </s:if>       
+                                                                <s:if test="%{monthchangetab == 1}">
+                                                                    <th style="text-align: center;">Month</th>
                                                                 </s:if>
-                                                                <s:else >
-                                                                    <td style="text-align: center;">N/A</td>
-                                                                </s:else>
-                                                                <td style="text-align: center; width: 40px;"><s:property value="rankYahooDayChange" />
-                                                                    <s:if test="%{rankYahooDayChange<0}">
-                                                                        <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                    </s:if>
-                                                                    <s:elseif test="%{rankYahooDayChange>0}">
-                                                                        <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                    </s:elseif>
-                                                                </td>
-                                                                <td style="text-align: center;"><s:property value="rankYahooWeekChange" />
-                                                                    <s:if test="%{rankYahooWeekChange<0}">
-                                                                        <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                    </s:if>
-                                                                    <s:elseif test="%{rankYahooWeekChange>0}">
-                                                                        <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                    </s:elseif>
-                                                                </td>
-                                                                <td style="text-align: center;"><s:property value="rankYahooMonthChange" />
-                                                                    <s:if test="%{rankYahooMonthChange<0}">
-                                                                        <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                    </s:if>
-                                                                    <s:elseif test="%{rankYahooMonthChange>0}">
-                                                                        <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                    </s:elseif>
-                                                                </td>
-                                                                <td style="text-align: center; width: 40px"><s:property value="yahooUpdateDate" /></td>
-                                                                <td style="text-align: center;"><a href="javascript:drawChart('<s:property value="keywordID"/>','30');" id="yahoo_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#chartmodal"></i></a></td>
-                                                                <td style="text-align: center;"><a href="javascript:editKeyword(<s:property value="keywordID" />, '<s:property value="url" />', '<s:property value="linkGoogle" />','<s:property value="keyword" />');" id="edit" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editmodal"></i></a></td>
-                                                                <td style="text-align: center;"><a href="#" id="delete" title="Delete" onclick="deleteKeyword(<s:property value="keywordID"/>);" ><i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#deletemodal"></i></a></td>
+                                                                <th style="text-align: center;">Last Updated</th>
+                                                                <th style="text-align: center;">Chart</th>
+                                                                <th style="text-align: center;">Edit</th>                                                
+                                                                <th style="text-align: center;">Delete</th>   
                                                             </tr>
-                                                        </s:iterator>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                        </thead>
+                                                        <tbody id="googleSerpsBody">
 
-                                            <div class="tab-pane" id="CC">
-                                                <table class="table table-bordered table-condensed">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="text-align: center;">URL</th>
-                                                            <th style="text-align: center;">Keyword</th>
-                                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/bingicon.png" width="20" height="20" alt="" /></th>
-                                                            <th style="text-align: center;">Best Match Rank</th>
-                                                            <th style="text-align: center;">Day</th>
-                                                            <th style="text-align: center;">Week</th>
-                                                            <th style="text-align: center;">Month</th>
-                                                            <th style="text-align: center;">Last Updated</th>
-                                                            <th style="text-align: center;">Chart</th>
-                                                            <th style="text-align: center;">Edit</th>
-                                                            <th style="text-align: center;">Delete</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <s:iterator value="lstUpdatedKeywords">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </s:if>
+
+                                            <s:if test="%{yahootab == 1}">
+                                                <div class="tab-pane" id="BB">
+                                                    <table class="table table-bordered table-condensed">
+                                                        <thead>
                                                             <tr>
-                                                                <td style="text-align: left;" title="<s:property value="url" />"><s:property value="url" /></td>
-                                                                <td style="text-align: left;"><s:property value="keyword" /></td>
-                                                                <s:if test="%{rankBing!=501 }">
-                                                                    <td style="text-align: center;"><s:property value="rankBing" /></td>
+                                                                <th style="text-align: center;">Url <a href="javascript:drawComparisionChart('<s:property value="campaignID"/>','30','yahoo');" id="google_comparision_chart"></a></th>
+                                                                <th style="text-align: center;">Keyword</th>
+                                                                <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/yahooicon.png" width="20" height="20" alt="" /></th>
+                                                                <th style="text-align: center;">Best Match Rank</th>
+                                                                <s:if test="%{daychangetab == 1}">
+                                                                    <th style="text-align: center;">Day</th>
                                                                 </s:if>
-                                                                <s:else >
-                                                                    <td style="text-align: center;">N/A</td>
-                                                                </s:else>
-                                                                <s:if test="%{bestMatchRankBing!=501 }">
-                                                                    <td style="text-align: center;"><s:property value="bestMatchRankBing" /></td>
+                                                                <s:if test="%{weekchangetab == 1}">
+                                                                    <th style="text-align: center;">Week</th>
+                                                                </s:if>       
+                                                                <s:if test="%{monthchangetab == 1}">
+                                                                    <th style="text-align: center;">Month</th>
                                                                 </s:if>
-                                                                <s:else >
-                                                                    <td style="text-align: center;">N/A</td>
-                                                                </s:else>
-                                                                <td style="text-align: center; width: 40px"><s:property value="rankBingDayChange" />
-                                                                    <s:if test="%{rankBingDayChange<0}">
-                                                                        <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                    </s:if>
-                                                                    <s:elseif test="%{rankBingDayChange>0}">
-                                                                        <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                    </s:elseif>
-                                                                </td>
-                                                                <td style="text-align: center;"><s:property value="rankBingWeekChange" />
-                                                                    <s:if test="%{rankBingWeekChange<0}">
-                                                                        <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                    </s:if>
-                                                                    <s:elseif test="%{rankBingWeekChange>0}">
-                                                                        <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                    </s:elseif>
-                                                                </td>
-                                                                <td style="text-align: center;"><s:property value="rankBingMonthChange" />
-                                                                    <s:if test="%{rankBingMonthChange<0}">
-                                                                        <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                    </s:if>
-                                                                    <s:elseif test="%{rankBingMonthChange>0}">
-                                                                        <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                    </s:elseif>
-                                                                </td>
-                                                                <td style="text-align: center; width: 40px"><s:property value="bingUpdateDate" /></td>
-                                                                <td style="text-align: center;"><a href="javascript:drawChart('<s:property value="keywordID"/>','30');" id="bing_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#chartmodal"></i></a></td>
-                                                                <td style="text-align: center;"><a href="javascript:editKeyword(<s:property value="keywordID" />, '<s:property value="url" />', '<s:property value="linkGoogle" />','<s:property value="keyword" />');" id="edit" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editmodal"></i></a></td>
-                                                                <td style="text-align: center;"><a href="#" id="delete" title="Delete" onclick="deleteKeyword(<s:property value="keywordID"/>);" ><i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#deletemodal"></i></a></td>
+                                                                <th style="text-align: center;">Last Updated</th>
+                                                                <th style="text-align: center;">Chart</th>
+                                                                <th style="text-align: center;">Edit</th>                                                
+                                                                <th style="text-align: center;">Delete</th>       
                                                             </tr>
-                                                        </s:iterator>     
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                        </thead>
+                                                        <tbody id="yahooSerpsBody">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </s:if>
+
+                                            <s:if test="%{bingtab == 1}">
+                                                <div class="tab-pane" id="CC">
+                                                    <table class="table table-bordered table-condensed">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="text-align: center;">Url <a href="javascript:drawComparisionChart('<s:property value="campaignID"/>','30','bing');" id="google_comparision_chart"></a></th>
+                                                                <th style="text-align: center;">Keyword</th>
+                                                                <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/bingicon.png" width="20" height="20" alt="" /></th>
+                                                                <th style="text-align: center;">Best Match Rank</th>
+                                                                <s:if test="%{daychangetab == 1}">
+                                                                    <th style="text-align: center;">Day</th>
+                                                                </s:if>
+                                                                <s:if test="%{weekchangetab == 1}">
+                                                                    <th style="text-align: center;">Week</th>
+                                                                </s:if>       
+                                                                <s:if test="%{monthchangetab == 1}">
+                                                                    <th style="text-align: center;">Month</th>
+                                                                </s:if>
+                                                                <th style="text-align: center;">Last Updated</th>
+                                                                <th style="text-align: center;">Chart</th>
+                                                                <th style="text-align: center;">Edit</th>                                                
+                                                                <th style="text-align: center;">Delete</th>    
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="bingSerpsBody">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </s:if>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div>                                                                                  
+                                </div>                                
 
                                 <div class="tab-pane" id="hr2">
                                     <table class="table table-bordered table-condensed">
                                         <thead>
                                             <tr>
-                                                <th style="text-align: center;">URL <a href=""><i class="fa fa-bar-chart-o"></i></a></th>
+                                                <th style="text-align: center;">Url</th>
                                                 <th style="text-align: center;">Keyword</th>
                                                 <th style="text-align: center;">Search Volume</th>
                                                 <th style="text-align: center;">CPC</th>
                                                 <th style="text-align: center;">Competition</th>
                                                 <th style="text-align: center;">Number of Results</th>
                                                 <th style="text-align: center;" title="Site Indexing">SI</th>
-                                                <th style="text-align: center;" title="Alexa Ranking">Alexa</th>
-                                                <th style="text-align: center;" title="Backlinks">BL</th>
+                                                <s:if test="%{alexatab == 1}">
+                                                    <th style="text-align: center;" title="Alexa Ranking">Alexa</th>
+                                                </s:if>
+                                                <s:if test="%{backlinkstab == 1}">
+                                                    <th style="text-align: center;" title="Backlinks">BL</th>
+                                                </s:if>
+                                                <s:if test="%{monthlysearchstab == 1}">
+                                                    <th style="text-align: center;" title="Monthly Searches">MS</th>
+                                                </s:if>
                                                 <th style="text-align: center;" title="Page Authority">PA</th>
                                                 <th style="text-align: center;" title="Domain Authority">DA</th>
                                             </tr>
                                         </thead>
-                                        <tbody>                                     
-                                            <s:iterator value="lstSeoDetails">
-                                                <tr>
-                                                    <td title="<s:property value="url" />"><s:property value="url" /></td>
-                                                    <td><s:property value="keyword" /></td>
-                                                    <td style="text-align: center;"><s:property value="searchVolume" /></td>
-                                                    <td style="text-align: center;"><s:property value="googleCPC" /></td>
-                                                    <td style="text-align: center;"><s:property value="keywordCompetition" /></td>
-                                                    <td style="text-align: center;"><s:property value="numberofResult" /></td>
-                                                    <td style="text-align: center;"><s:property value="siteIndexing" /></td>
-                                                    <td style="text-align: center"><s:property value="rankAlexa" /></td>
-                                                    <td style="text-align: center;"><s:property value="countBackLinks" /></td>
-                                                    <td style="text-align: center;"><s:property value="googlePA" /></td>
-                                                    <td style="text-align: center;"><s:property value="googleDA" /></td>
-                                                </tr>
-                                            </s:iterator>   
+                                        <tbody id="seoKeywordsBody">
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -537,419 +431,19 @@
                                                     <td style="text-align: center;"><s:property value="redittVotes" /></td>
                                                     <td style="text-align: center;"><s:property value="stumbleUponLikes" /></td>
                                                     <td style="text-align: center;"><a href="javascript:drawSocialChart('<s:property value="SocialSignalUrlID"/>','30');" id="social_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#socialchartmodal"></i></a></td>
-                                                    <td style="text-align: center;"><a href="javascript:editUrl(<s:property value="SocialSignalUrlID" />, '<s:property value="SocialSignalUrl" />');" id="editssurl" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editssurlmodal"></i></a></td>
+                                                    <td style="text-align: center;"><a href="javascript:editUrl('<s:property value="SocialSignalUrlID" />', '<s:property value="SocialSignalUrl" />');" id="editssurl" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editssurlmodal"></i></a></td>
                                                     <td style="text-align: center;"><a href="javascript:deleteUrl(<s:property value="SocialSignalUrlID"/>);" title="Delete"><i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#deletessurlmodal"></i></a></td>
                                                 </tr>
                                             </s:iterator>   
+
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- end widget content -->
-                    </div>
-                </s:if>
-                <s:else>
-                    <!-- widget div-->
-                    <div>
 
-                        <!-- widget edit box -->
-                        <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
-
-                        </div>
-                        <!-- end widget edit box -->
-
-                        <!-- widget content -->
-                        <div class="widget-body">
-
-                            <div class="tab-content">
-
-                                <s:iterator value="lstDisplaysettings" status="temp">
-                                    <div class="tab-pane active" id="hr1">
-                                        <ul class="nav nav-tabs">
-                                            <s:if test="%{googletab == 1}">
-                                                <li class="active">
-                                                    <a data-toggle="tab" href="#AA">GOOGLE</a>
-                                                </li>
-                                            </s:if>
-                                            <s:else> 
-                                            </s:else>
-                                            <s:if test="%{yahootab == 1}">
-                                                <li>
-                                                    <a data-toggle="tab" href="#BB">YAHOO</a>
-                                                </li>
-                                            </s:if>
-                                            <s:else>
-                                            </s:else>
-                                            <s:if test="%{bingtab == 1}">
-                                                <li>
-                                                    <a data-toggle="tab" href="#CC">BING</a>
-                                                </li>
-                                            </s:if>
-                                            <s:else>
-                                            </s:else>
-                                        </ul>
-
-                                        <div class="tabbable tabs-below">
-                                            <div class="tab-content padding-10">
-
-                                                <s:if test="%{googletab == 1}">
-                                                    <div class="tab-pane active" id="AA">
-                                                        <table class="table table-bordered table-condensed">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th style="text-align: center;">Url <a href="javascript:drawComparisionChart('<s:property value="campaignID"/>','30','google');" id="google_comparision_chart"></a></th>
-                                                                    <th style="text-align: center;">Keyword</th>
-                                                                    <th style="text-align: center;">Page Rank</th>
-                                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/google_icon.png" style="border:none;" width="20" height="20" alt="" /></th>
-                                                                    <th style="text-align: center;">Best Match Rank</th>
-                                                                    <s:if test="%{daychangetab == 1}">
-                                                                        <th style="text-align: center;">Day</th>
-                                                                    </s:if>
-                                                                    <s:if test="%{weekchangetab == 1}">
-                                                                        <th style="text-align: center;">Week</th>
-                                                                    </s:if>       
-                                                                    <s:if test="%{monthchangetab == 1}">
-                                                                        <th style="text-align: center;">Month</th>
-                                                                    </s:if>
-                                                                    <th style="text-align: center;">Last Updated</th>
-                                                                    <th style="text-align: center;">Chart</th>
-                                                                    <th style="text-align: center;">Edit</th>                                                
-                                                                    <th style="text-align: center;">Delete</th>   
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <s:iterator value="lstUpdatedKeywords">
-                                                                    <tr>
-                                                                        <td title="<s:property value="url" />"><a href="generateCrawledHistory.action?keywordId=<s:property value="keywordID"/>" title="Google crawl history"><img src="https://s3.amazonaws.com/images_ranktracker/history.png" width="20" height="22" alt="" style="cursor:pointer;"  /></a><s:property value="url" /></td>
-                                                                        <td><s:property value="keyword" /></td>
-                                                                        <td style="text-align: center;"><s:property value="googlePageRank" /></td>
-                                                                        <s:if test="%{rankGoogle!=501 }">
-                                                                            <td style="text-align: center;"><s:property value="rankGoogle" /></td>
-                                                                        </s:if>
-                                                                        <s:else >
-                                                                            <td style="text-align: center;">N/A</td>
-                                                                        </s:else>
-                                                                        <s:if test="%{bestMatchRankGoogle!=501 }">
-                                                                            <td style="text-align: center;"><s:property value="bestMatchRankGoogle" /></td>
-                                                                        </s:if>
-                                                                        <s:else >
-                                                                            <td style="text-align: center;">N/A</td>
-                                                                        </s:else>
-                                                                        <s:if test="%{daychangetab == 1}">
-                                                                            <td style="text-align: center;"><s:property value="rankGoogleDayChange" />
-                                                                                <s:if test="%{rankGoogleDayChange < 0}">
-                                                                                    <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                                </s:if>
-                                                                                <s:elseif test="%{rankGoogleDayChange > 0}">
-                                                                                    <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                                </s:elseif>
-                                                                            </td>
-                                                                        </s:if>
-                                                                        <s:else>
-                                                                        </s:else>
-                                                                        <s:if test="%{weekchangetab == 1}">
-                                                                            <td style="text-align: center;"><s:property value="rankGoogleWeekChange" />
-                                                                                <s:if test="%{rankGoogleWeekChange<0}">
-                                                                                    <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                                </s:if>
-                                                                                <s:elseif test="%{rankGoogleWeekChange>0}">
-                                                                                    <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                                </s:elseif>
-                                                                            </td>
-                                                                        </s:if>
-                                                                        <s:else></s:else>
-                                                                        <s:if test="%{monthchangetab == 1}">
-                                                                            <td style="text-align: center;"><s:property value="rankGoogleMonthChange" />
-                                                                                <s:if test="%{rankGoogleMonthChange<0}">
-                                                                                    <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                                </s:if>
-                                                                                <s:elseif test="%{rankGoogleMonthChange>0}">
-                                                                                    <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                                </s:elseif>
-                                                                            </td>
-                                                                        </s:if>
-                                                                        <s:else></s:else>
-                                                                        <td style="text-align: center;"> <s:property value="googleUpdatedDate" /> </td>
-                                                                        <td style="text-align: center;"><a href="javascript:drawChart('<s:property value="keywordID"/>','30');" id="google_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#chartmodal"></i></a></td>
-                                                                        <td style="text-align: center;"><a  href="#" id="edit" onclick="editKeyword(<s:property value="keywordID" />, '<s:property value="url" />', '<s:property value="linkGoogle" />', '<s:property value="keyword" />');" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editmodal"></i></a></td>
-                                                                        <td style="text-align: center;"><a href="#" id="delete" title="Delete" onclick="deleteKeyword(<s:property value="keywordID"/>);" ><i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#deletemodal"></i></a></td>
-                                                                    </tr>
-                                                                </s:iterator>  
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </s:if>
-
-                                                <s:if test="%{yahootab == 1}">
-                                                    <div class="tab-pane" id="BB">
-                                                        <table class="table table-bordered table-condensed">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th style="text-align: center;">Url <a href="javascript:drawComparisionChart('<s:property value="campaignID"/>','30','yahoo');" id="google_comparision_chart"></a></th>
-                                                                    <th style="text-align: center;">Keyword</th>
-                                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/yahooicon.png" width="20" height="20" alt="" /></th>
-                                                                    <th style="text-align: center;">Best Match Rank</th>
-                                                                    <s:if test="%{daychangetab == 1}">
-                                                                        <th style="text-align: center;">Day</th>
-                                                                    </s:if>
-                                                                    <s:if test="%{weekchangetab == 1}">
-                                                                        <th style="text-align: center;">Week</th>
-                                                                    </s:if>       
-                                                                    <s:if test="%{monthchangetab == 1}">
-                                                                        <th style="text-align: center;">Month</th>
-                                                                    </s:if>
-                                                                    <th style="text-align: center;">Last Updated</th>
-                                                                    <th style="text-align: center;">Chart</th>
-                                                                    <th style="text-align: center;">Edit</th>                                                
-                                                                    <th style="text-align: center;">Delete</th>       
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <s:iterator value="lstUpdatedKeywords">
-                                                                    <tr>
-                                                                        <td title="<s:property value="url" />"><s:property value="url" /></td>
-                                                                        <td><s:property value="keyword" /></td>
-                                                                        <s:if test="%{rankYahoo!=501 }">
-                                                                            <td style="text-align: center;"><s:property value="rankYahoo" /></td>
-                                                                        </s:if>
-                                                                        <s:else >
-                                                                            <td style="text-align: center;">N/A</td>
-                                                                        </s:else>
-                                                                        <s:if test="%{bestMatchRankYahoo!=501 }">
-                                                                            <td style="text-align: center;"><s:property value="bestMatchRankYahoo" /></td>
-                                                                        </s:if>
-                                                                        <s:else >
-                                                                            <td style="text-align: center;">N/A</td>
-                                                                        </s:else>
-                                                                        <s:if test="%{daychangetab == 1}">
-                                                                            <td style="text-align: center;"><s:property value="rankYahooDayChange" />
-                                                                                <s:if test="%{rankYahooDayChange<0}">
-                                                                                    <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                                </s:if>
-                                                                                <s:elseif test="%{rankYahooDayChange>0}">
-                                                                                    <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                                </s:elseif>
-                                                                            </td>
-                                                                        </s:if>
-                                                                        <s:else></s:else>
-                                                                        <s:if test="%{weekchangetab == 1}">
-                                                                            <td style="text-align: center;"><s:property value="rankYahooWeekChange" />
-                                                                                <s:if test="%{rankYahooWeekChange<0}">
-                                                                                    <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                                </s:if>
-                                                                                <s:elseif test="%{rankYahooWeekChange>0}">
-                                                                                    <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                                </s:elseif>
-                                                                            </td>
-                                                                        </s:if>
-                                                                        <s:else></s:else>
-                                                                        <s:if test="%{monthchangetab == 1}">
-                                                                            <td style="text-align: center;"><s:property value="rankYahooMonthChange" />
-                                                                                <s:if test="%{rankYahooMonthChange<0}">
-                                                                                    <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                                </s:if>
-                                                                                <s:elseif test="%{rankYahooMonthChange>0}">
-                                                                                    <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                                </s:elseif>
-                                                                            </td>
-                                                                        </s:if>
-                                                                        <s:else></s:else>
-                                                                        <td style="text-align: center;"><s:property value="yahooUpdateDate" /></td>
-                                                                        <td style="text-align: center;"><a href="javascript:drawChart('<s:property value="keywordID"/>','30');" id="yahoo_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#chartmodal"></i></a></td>
-                                                                        <td style="text-align: center;"><a href="javascript:editKeyword(<s:property value="keywordID" />, '<s:property value="url" />', '<s:property value="linkGoogle" />','<s:property value="keyword" />');" id="edit" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editmodal"></i></a></td>
-                                                                        <td style="text-align: center;"><a href="#" id="delete" title="Delete" onclick="deleteKeyword(<s:property value="keywordID"/>);" ><i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#deletemodal"></i></a></td>
-                                                                    </tr>
-                                                                </s:iterator>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </s:if>
-
-                                                <s:if test="%{bingtab == 1}">
-                                                    <div class="tab-pane" id="CC">
-                                                        <table class="table table-bordered table-condensed">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th style="text-align: center;">Url <a href="javascript:drawComparisionChart('<s:property value="campaignID"/>','30','bing');" id="google_comparision_chart"></a></th>
-                                                                    <th style="text-align: center;">Keyword</th>
-                                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/bingicon.png" width="20" height="20" alt="" /></th>
-                                                                    <th style="text-align: center;">Best Match Rank</th>
-                                                                    <s:if test="%{daychangetab == 1}">
-                                                                        <th style="text-align: center;">Day</th>
-                                                                    </s:if>
-                                                                    <s:if test="%{weekchangetab == 1}">
-                                                                        <th style="text-align: center;">Week</th>
-                                                                    </s:if>       
-                                                                    <s:if test="%{monthchangetab == 1}">
-                                                                        <th style="text-align: center;">Month</th>
-                                                                    </s:if>
-                                                                    <th style="text-align: center;">Last Updated</th>
-                                                                    <th style="text-align: center;">Chart</th>
-                                                                    <th style="text-align: center;">Edit</th>                                                
-                                                                    <th style="text-align: center;">Delete</th>    
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <s:iterator value="lstUpdatedKeywords">
-                                                                    <tr>
-                                                                        <td title="<s:property value="url" />"><s:property value="url" /></td>
-                                                                        <td><s:property value="keyword" /></td>
-                                                                        <s:if test="%{rankBing!=501 }">
-                                                                            <td style="text-align: center;"><s:property value="rankBing" /></td>
-                                                                        </s:if>
-                                                                        <s:else >
-                                                                            <td style="text-align: center; ">N/A</td>
-                                                                        </s:else>
-                                                                        <s:if test="%{bestMatchRankBing!=501 }">
-                                                                            <td style="text-align: center;"><s:property value="bestMatchRankBing" /></td>
-                                                                        </s:if>
-                                                                        <s:else >
-                                                                            <td style="text-align: center;">N/A</td>
-                                                                        </s:else>
-                                                                        <s:if test="%{daychangetab == 1}">
-                                                                            <td style="text-align: center;"><s:property value="rankBingDayChange" />
-                                                                                <s:if test="%{rankBingDayChange<0}">
-                                                                                    <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                                </s:if>
-                                                                                <s:elseif test="%{rankBingDayChange>0}">
-                                                                                    <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                                </s:elseif>
-                                                                            </td>
-                                                                        </s:if>
-                                                                        <s:else></s:else>
-                                                                        <s:if test="%{weekchangetab == 1}">
-                                                                            <td style="text-align: center;"><s:property value="rankBingWeekChange" />
-                                                                                <s:if test="%{rankBingWeekChange<0}">
-                                                                                    <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                                </s:if>
-                                                                                <s:elseif test="%{rankBingWeekChange>0}">
-                                                                                    <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                                </s:elseif>
-                                                                            </td>
-                                                                        </s:if>
-                                                                        <s:else></s:else>
-                                                                        <s:if test="%{monthchangetab == 1}">
-                                                                            <td style="text-align: center;"><s:property value="rankBingMonthChange" />
-                                                                                <s:if test="%{rankBingMonthChange<0}">
-                                                                                    <i class="fa fa-arrow-down fa-1x fa-fw txt-color-red"></i>
-                                                                                </s:if>
-                                                                                <s:elseif test="%{rankBingMonthChange>0}">
-                                                                                    <i class="fa fa-arrow-up fa-1x fa-fw txt-color-green"></i>
-                                                                                </s:elseif>
-                                                                            </td>
-                                                                        </s:if>
-                                                                        <s:else></s:else>
-                                                                        <td style="text-align: center;"><s:property value="bingUpdateDate" /></td>
-                                                                        <td style="text-align: center;"><a href="javascript:drawChart('<s:property value="keywordID"/>','30');" id="bing_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#chartmodal"></i></a></td>
-                                                                        <td style="text-align: center;"><a href="javascript:editKeyword(<s:property value="keywordID" />, '<s:property value="url" />', '<s:property value="linkGoogle" />','<s:property value="keyword" />');" id="edit" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editmodal"></i></a></td>
-                                                                        <td style="text-align: center;"><a href="#" id="delete" title="Delete" onclick="deleteKeyword(<s:property value="keywordID"/>);" ><i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#deletemodal"></i></a></td>
-                                                                    </tr>
-                                                                </s:iterator>                                      
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </s:if>
-                                            </div>
-                                        </div>                                                                                  
-                                    </div>                                
-
-                                    <div class="tab-pane" id="hr2">
-                                        <table class="table table-bordered table-condensed">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center;">Url</th>
-                                                    <th style="text-align: center;">Keyword</th>
-                                                    <th style="text-align: center;">Search Volume</th>
-                                                    <th style="text-align: center;">CPC</th>
-                                                    <th style="text-align: center;">Competition</th>
-                                                    <th style="text-align: center;">Number of Results</th>
-                                                    <th style="text-align: center;" title="Site Indexing">SI</th>
-                                                    <s:if test="%{alexatab == 1}">
-                                                        <th style="text-align: center;" title="Alexa Ranking">Alexa</th>
-                                                    </s:if>
-                                                    <s:if test="%{backlinkstab == 1}">
-                                                        <th style="text-align: center;" title="Backlinks">BL</th>
-                                                    </s:if>
-                                                    <s:if test="%{monthlysearchstab == 1}">
-                                                        <th style="text-align: center;" title="Monthly Searches">MS</th>
-                                                    </s:if>
-                                                    <th style="text-align: center;" title="Page Authority">PA</th>
-                                                    <th style="text-align: center;" title="Domain Authority">DA</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <s:iterator value="lstSeoDetails">
-                                                    <tr>
-                                                        <td title="<s:property value="url" />"><s:property value="url" /></td>
-                                                        <td><s:property value="keyword" /></td>
-                                                        <td style="text-align: center;"><s:property value="searchVolume" /></td>
-                                                        <td style="text-align: center;"><s:property value="googleCPC" /></td>
-                                                        <td style="text-align: center;"><s:property value="keywordCompetition" /></td>
-                                                        <td style="text-align: center;"><s:property value="numberofResult" /></td>
-                                                        <td style="text-align: center;"><s:property value="siteIndexing" /></td>
-                                                        <s:if test="%{alexatab == 1}"> 
-                                                            <td style="text-align: center"><s:property value="rankAlexa" /></td>
-                                                        </s:if>
-                                                        <s:if test="%{backlinkstab == 1}"> 
-                                                            <td style="text-align: center;"><s:property value="countBackLinks" /></td>
-                                                        </s:if>
-                                                        <s:if test="%{monthlysearchstab == 1}"> 
-                                                            <td style="text-align: center;"><s:property value="countMonthlySearches" /></td>
-                                                        </s:if>
-                                                        <td style="text-align: center;"><s:property value="googlePA" /></td>
-                                                        <td style="text-align: center;"><s:property value="googleDA" /></td>
-                                                    </tr>
-                                                </s:iterator>   
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div class="tab-pane" id="hr3">
-                                        <table class="table table-bordered table-condensed">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center;">Url</th>
-                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/fb_likes.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/fb_share.png" style="border:none;" width="70" height="24" alt="" /></th>
-                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/twt_count.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/pintrest.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/google_plus.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/linkedin.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/reddit.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                                    <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/stumbleupon.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                                    <th style="text-align: center;">Chart</th>
-                                                    <th style="text-align: center;">Edit</th>                                                
-                                                    <th style="text-align: center;">Delete</th>   
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <s:iterator value="lstsocialsignalupdate">
-                                                    <tr>
-                                                        <td title="<s:property value="socialSignalUrl" />"><s:property value="socialSignalUrl" /></td>
-                                                        <td style="text-align: center;"><s:property value="facebookLike" /></td>
-                                                        <td style="text-align: center;"><s:property value="facebookShare" /></td>
-                                                        <td style="text-align: center;"><s:property value="tweetCount" /></td>
-                                                        <td style="text-align: center;"><s:property value="pinterestPins" /></td>
-                                                        <td style="text-align: center;"><s:property value="googlePlusLikes" /></td>
-                                                        <td style="text-align: center;"><s:property value="linkedInShares" /></td>
-                                                        <td style="text-align: center;"><s:property value="redittVotes" /></td>
-                                                        <td style="text-align: center;"><s:property value="stumbleUponLikes" /></td>
-                                                        <td style="text-align: center;"><a href="javascript:drawSocialChart('<s:property value="SocialSignalUrlID"/>','30');" id="social_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#socialchartmodal"></i></a></td>
-                                                        <td style="text-align: center;"><a href="javascript:editUrl(<s:property value="SocialSignalUrlID" />, '<s:property value="SocialSignalUrl" />');" id="editssurl" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editssurlmodal"></i></a></td>
-                                                        <td style="text-align: center;"><a href="javascript:deleteUrl(<s:property value="SocialSignalUrlID"/>);" title="Delete"><i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#deletessurlmodal"></i></a></td>
-                                                    </tr>
-                                                </s:iterator>   
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </s:iterator>
-                            </div>
+                            </s:iterator>
                         </div>
                     </div>
-                </s:else>
+                </div>
 
             </div>
             <!-- end widget -->
@@ -988,7 +482,7 @@
                                             <label class="label">Google_Link</label>
                                             <label class="select">
                                                 <select id="linkGoogleedit" name="linkGoogle">
-                                                    <option value="google.com" selected="true">google.com</option>
+                                                    <option value="google.com" selected>google.com</option>
                                                     <option value="google.co.uk">google.co.uk</option>
                                                     <option value="google.com.au">google.com.au</option>
                                                     <option value="google.ca">google.ca</option>
@@ -1188,7 +682,7 @@
                                             <label class="input">
                                                 <i class="icon-append fa fa-comment"></i>
                                                 <input type="text" name="keyword" id="editkeyword" onkeyup="editfilterChanged();">
-                                                <ul class="dropdownlist" style=" display: block;"  >
+                                                <ul class="dropdownlist" style="display: block;">
                                                     <table id="keypopup">
                                                         <tbody id="editpeoplebody" >
                                                         </tbody>
@@ -1241,7 +735,7 @@
                                             <label class="label">Google_Link</label>
                                             <label class="select">
                                                 <select id="linkGoogle" name="linkGoogle">
-                                                    <option value="google.com" selected="true">google.com</option>
+                                                    <option value="google.com" selected>google.com</option>
                                                     <option value="google.co.uk">google.co.uk</option>
                                                     <option value="google.com.au">google.com.au</option>
                                                     <option value="google.ca">google.ca</option>
@@ -1442,7 +936,7 @@
                                             <label class="input">
                                                 <i class="icon-append fa fa-comment"></i>
                                                 <input type="text" name="keywords" id="addkeyword" onkeyup="filterChanged();"/>
-                                                <ul class="dropdownlist"  style=" display: block;" >
+                                                <ul class="dropdownlist" style="display: block;">
                                                     <table id="keypopup">
                                                         <tbody id="peoplebody" >
                                                         </tbody>
@@ -1493,7 +987,7 @@
                                             <label class="label">Google_Link</label>
                                             <label class="select">
                                                 <select id="linkGoogles" name="linkGoogle">
-                                                    <option value="google.com" selected="true">google.com</option>
+                                                    <option value="google.com" selected>google.com</option>
                                                     <option value="google.co.uk">google.co.uk</option>
                                                     <option value="google.com.au">google.com.au</option>
                                                     <option value="google.ca">google.ca</option>
@@ -1692,7 +1186,7 @@
                                             </span>
                                             <label class="textarea">
                                                 <textarea rows="4" cols="5" name="keywords" id="addkeywords" onkeyup="filterChangeds();"></textarea>
-                                                <ul class="dropdownlist"  style=" display: block;"  >
+                                                <ul class="dropdownlist"  style="display: block;">
                                                     <table id="keypopup">
                                                         <tbody id="peoplebodys" >
                                                         </tbody>
@@ -2030,7 +1524,7 @@
 <script src="https://s3.amazonaws.com/js_ranktracker/exporting.js"></script>
 <script type="text/javascript" src="http://www.highcharts.com/highslide/highslide-full.min.js"></script>
 <script type="text/javascript" src="http://www.highcharts.com/highslide/highslide.config.js" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="http://www.highcharts.com/highslide/highslide.css" />
+
 <script type="text/javascript">
     var opened = "0";
     var alertMes = "";
@@ -2502,5 +1996,326 @@
         },
         'json');
     }
+</script>
 
+<script type="text/javascript">
+
+    var initial = 0;
+
+    var campaignsID =<%=session.getAttribute("campaignId")%>;
+    // alert(campaignsID);
+
+    ajaxFunction();
+
+    function ajaxFunction() {
+        var ajaxRequest;  // The variable that makes Ajax possible!
+
+        try {
+            // Opera 8.0+, Firefox, Safari
+            ajaxRequest = new XMLHttpRequest();
+
+        } catch (e) {
+            //                                    // Internet Explorer Browsers
+            try {
+                ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) {
+                    // Something went wrong
+                    alert('Your browser broke!');
+
+                }
+            }
+        }
+
+        // Create a function that will receive data 
+        // sent from the server and will update
+        // div section in the same page.
+        ajaxRequest.onreadystatechange = function() {
+            if (ajaxRequest.readyState == 4) {
+                //var ajaxDisplay = document.getElementById('ajaxDiv');
+                //alert("hiii"+ajaxRequest.responseText)
+                //ajaxDisplay.innerHTML = ajaxRequest.responseText;
+                var result = ajaxRequest.responseText.toString();
+                updategoogleSerpsBody(result);
+                updateyahooSerpsBody(result);
+                updatebingSerpsBody(result);
+                updateseoKeywordsBody(result);
+                initial += 50;
+
+            }
+        }
+        // Now get the value from user and pass it to
+        // server script.
+
+        ajaxRequest.open("GET", "limitedserpskeywords.action?initial=" + initial + "&campaignId=" + campaignsID, false);
+        ajaxRequest.send(null);
+
+    }
+
+    $(window).scroll(function() {
+
+        if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+            ajaxFunction();
+        }
+    });
+
+    //GoogleSerpsBody
+    function updategoogleSerpsBody(result) {
+
+        var output = JSON.parse(result);
+        var htmlResult = "";
+        var i = 0;
+
+        for (i = 0; i < output.serpskeywords.length; i++) {
+
+            htmlResult = htmlResult + "<tr>";
+            htmlResult = htmlResult + "<td title='" + output.serpskeywords[i].Url + "'><a href='generateCrawledHistory.action?keywordId=" + output.serpskeywords[i].KeywordID + "' title='Google crawl history'><img src='https://s3.amazonaws.com/images_ranktracker/history.png' width='20' height='22' alt='' style='cursor:pointer;'  /></a>" + output.serpskeywords[i].Url + "</td>";
+            htmlResult = htmlResult + "<td>" + output.serpskeywords[i].Keyword + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].GooglePageRank + "</td>";
+
+            if ((output.serpskeywords[i].RankGoogle !== 0) || (output.serpskeywords[i].GoogleUpdatedDate == '-')) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankGoogle + "</td>";
+            }
+            else {
+                htmlResult = htmlResult + "<td style='text-align: center;'>N/A</td>";
+            }
+
+            if ((output.serpskeywords[i].BestMatchRankGoogle !== 0) || (output.serpskeywords[i].GoogleUpdatedDate == '-')) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].BestMatchRankGoogle + "</td>";
+            }
+            else {
+                htmlResult = htmlResult + "<td style='text-align: center;'>N/A</td>";
+            }
+
+            if (output.displaySettings.Daychangetab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankGoogleDayChange + "";
+
+                if (output.serpskeywords[i].RankGoogleDayChange < 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+                }
+                else if (output.serpskeywords[i].RankGoogleDayChange > 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+                }
+                htmlResult = htmlResult + "</td>";
+            }
+
+            if (output.displaySettings.Weekchangetab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankGoogleWeekChange + "";
+
+                if (output.serpskeywords[i].RankGoogleWeekChange < 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+                }
+                else if (output.serpskeywords[i].RankGoogleWeekChange > 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+                }
+                htmlResult = htmlResult + "</td>";
+            }
+
+            if (output.displaySettings.Monthchangetab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankGoogleMonthChange + "";
+
+                if (output.serpskeywords[i].RankGoogleMonthChange < 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+                }
+                else if (output.serpskeywords[i].RankGoogleMonthChange > 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+                }
+                htmlResult = htmlResult + "</td>";
+            }
+
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].GoogleUpdatedDate + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'><a href=\"javascript:drawChart(" + output.serpskeywords[i].KeywordID + ",30);\" id='google_chart' title='Chart'><i class='fa fa-2x fa-bar-chart-o' data-toggle='modal' data-target='#chartmodal'></i></a></td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'><a  href='#' id='edit' onclick=\"editKeyword(" + output.serpskeywords[i].KeywordID + ", '" + output.serpskeywords[i].Url + "', '" + output.serpskeywords[i].LinkGoogle + "', '" + output.serpskeywords[i].Keyword + "');\" title='Edit'><i class='fa fa-pencil fa-2x txt-color-yellow' data-toggle='modal' data-target='#editmodal'></i></a></td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'><a href='#' id='delete' title='Delete' onclick='deleteKeyword(" + output.serpskeywords[i].KeywordID + ");' ><i class='fa fa-trash-o fa-2x' data-toggle='modal' data-target='#deletemodal'></i></a></td>";
+            htmlResult = htmlResult + "<tr>";
+        }
+
+        document.getElementById('googleSerpsBody').innerHTML = document.getElementById('googleSerpsBody').innerHTML + htmlResult;
+    }
+
+    //YahooSerpsBody
+    function updateyahooSerpsBody(result) {
+
+        var output = JSON.parse(result);
+        var htmlResult = "";
+        var i = 0;
+
+        for (i = 0; i < output.serpskeywords.length; i++) {
+
+            htmlResult = htmlResult + "<tr>";
+            htmlResult = htmlResult + "<td title='" + output.serpskeywords[i].Url + "'>" + output.serpskeywords[i].Url + "</td>";
+            htmlResult = htmlResult + "<td>" + output.serpskeywords[i].Keyword + "</td>";
+
+            if ((output.serpskeywords[i].RankYahoo !== 0) || (output.serpskeywords[i].YahooUpdateDate == '-')) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankYahoo + "</td>";
+            }
+            else {
+                htmlResult = htmlResult + "<td style='text-align: center;'>N/A</td>";
+            }
+
+            if ((output.serpskeywords[i].BestMatchRankYahoo !== 0) || (output.serpskeywords[i].YahooUpdateDate == '-')) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].BestMatchRankYahoo + "</td>";
+            }
+            else {
+                htmlResult = htmlResult + "<td style='text-align: center;'>N/A</td>";
+            }
+
+            if (output.displaySettings.Daychangetab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankYahooDayChange + "";
+
+                if (output.serpskeywords[i].RankYahooDayChange < 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+                }
+                else if (output.serpskeywords[i].RankYahooDayChange > 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+                }
+                htmlResult = htmlResult + "</td>";
+            }
+
+            if (output.displaySettings.Weekchangetab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankYahooWeekChange + "";
+
+                if (output.serpskeywords[i].RankYahooWeekChange < 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+                }
+                else if (output.serpskeywords[i].RankYahooWeekChange > 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+                }
+                htmlResult = htmlResult + "</td>";
+            }
+
+            if (output.displaySettings.Monthchangetab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankYahooMonthChange + "";
+
+                if (output.serpskeywords[i].RankYahooMonthChange < 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+                }
+                else if (output.serpskeywords[i].RankYahooMonthChange > 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+                }
+                htmlResult = htmlResult + "</td>";
+            }
+
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].YahooUpdateDate + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'><a href=\"javascript:drawChart(" + output.serpskeywords[i].KeywordID + ",30);\" id='yahoo_chart' title='Chart'><i class='fa fa-2x fa-bar-chart-o' data-toggle='modal' data-target='#chartmodal'></i></a></td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'><a href=\"javascript:editKeyword(" + output.serpskeywords[i].KeywordID + ", '" + output.serpskeywords[i].Url + "', '" + output.serpskeywords[i].LinkGoogle + "','" + output.serpskeywords[i].Keyword + "');\" id='edit' title='Edit'><i class='fa fa-pencil fa-2x txt-color-yellow' data-toggle='modal' data-target='#editmodal'></i></a></td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'><a href='#' id='delete' title='Delete' onclick='deleteKeyword(" + output.serpskeywords[i].KeywordID + ");' ><i class='fa fa-trash-o fa-2x' data-toggle='modal' data-target='#deletemodal'></i></a></td>";
+            htmlResult = htmlResult + "<tr>";
+        }
+
+        document.getElementById('yahooSerpsBody').innerHTML = document.getElementById('yahooSerpsBody').innerHTML + htmlResult;
+    }
+
+    //BingSerpsBody
+    function updatebingSerpsBody(result) {
+
+        var output = JSON.parse(result);
+        var htmlResult = "";
+        var i = 0;
+
+        for (i = 0; i < output.serpskeywords.length; i++) {
+
+            htmlResult = htmlResult + "<tr>";
+            htmlResult = htmlResult + "<td title='" + output.serpskeywords[i].Url + "'>" + output.serpskeywords[i].Url + "</td>";
+            htmlResult = htmlResult + "<td>" + output.serpskeywords[i].Keyword + "</td>";
+
+            if ((output.serpskeywords[i].RankBing !== 0) || (output.serpskeywords[i].BingUpdateDate == '-')) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankBing + "</td>";
+            }
+            else {
+                htmlResult = htmlResult + "<td style='text-align: center;'>N/A</td>";
+            }
+
+            if ((output.serpskeywords[i].BestMatchRankBing !== 0) || (output.serpskeywords[i].BingUpdateDate == '-')) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].BestMatchRankBing + "</td>";
+            }
+            else {
+                htmlResult = htmlResult + "<td style='text-align: center;'>N/A</td>";
+            }
+
+            if (output.displaySettings.Daychangetab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankYahooDayChange + "";
+
+                if (output.serpskeywords[i].RankYahooDayChange < 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+                }
+                else if (output.serpskeywords[i].RankYahooDayChange > 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+                }
+                htmlResult = htmlResult + "</td>";
+            }
+
+            if (output.displaySettings.Weekchangetab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankYahooWeekChange + "";
+
+                if (output.serpskeywords[i].RankYahooWeekChange < 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+                }
+                else if (output.serpskeywords[i].RankYahooWeekChange > 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+                }
+                htmlResult = htmlResult + "</td>";
+            }
+
+            if (output.displaySettings.Monthchangetab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankYahooMonthChange + "";
+
+                if (output.serpskeywords[i].RankYahooMonthChange < 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+                }
+                else if (output.serpskeywords[i].RankYahooMonthChange > 0) {
+                    htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+                }
+                htmlResult = htmlResult + "</td>";
+            }
+
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].BingUpdateDate + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'><a href=\"javascript:drawChart(" + output.serpskeywords[i].KeywordID + ",30);\" id='bing_chart' title='Chart'><i class='fa fa-2x fa-bar-chart-o' data-toggle='modal' data-target='#chartmodal'></i></a></td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'><a href=\"javascript:editKeyword(" + output.serpskeywords[i].KeywordID + ", '" + output.serpskeywords[i].Url + "', '" + output.serpskeywords[i].LinkGoogle + "','" + output.serpskeywords[i].Keyword + "');\" id='edit' title='Edit'><i class='fa fa-pencil fa-2x txt-color-yellow' data-toggle='modal' data-target='#editmodal'></i></a></td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'><a href='#' id='delete' title='Delete' onclick='deleteKeyword(" + output.serpskeywords[i].KeywordID + ");' ><i class='fa fa-trash-o fa-2x' data-toggle='modal' data-target='#deletemodal'></i></a></td>";
+            htmlResult = htmlResult + "<tr>";
+        }
+
+        document.getElementById('bingSerpsBody').innerHTML = document.getElementById('bingSerpsBody').innerHTML + htmlResult;
+    }
+
+    //SEOKeywordsBody
+    function updateseoKeywordsBody(result) {
+
+        var output = JSON.parse(result);
+        var htmlResult = "";
+        var i = 0;
+
+        for (i = 0; i < output.seokeywords.length; i++) {
+
+            htmlResult = htmlResult + "<tr>";
+            htmlResult = htmlResult + "<td title='" + output.seokeywords[i].Url + "'>" + output.seokeywords[i].Url + "</td>";
+            htmlResult = htmlResult + "<td>" + output.seokeywords[i].Keyword + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].SearchVolume + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].GoogleCPC + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].KeywordCompetition + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].NumberofResult + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].SiteIndexing + "</td>";
+
+            if (output.displaySettings.Alexatab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].RankAlexa + "</td>";
+            }
+
+            if (output.displaySettings.Backlinkstab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].CountBackLinks + "</td>";
+            }
+
+            if (output.displaySettings.Monthlysearchstab === 1) {
+                htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].CountMonthlySearches + "</td>";
+            }
+
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].GooglePA + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.seokeywords[i].GoogleDA + "</td>";
+            htmlResult = htmlResult + "<tr>";
+        }
+        
+        document.getElementById('seoKeywordsBody').innerHTML = document.getElementById('seoKeywordsBody').innerHTML + htmlResult;
+    }
 </script>

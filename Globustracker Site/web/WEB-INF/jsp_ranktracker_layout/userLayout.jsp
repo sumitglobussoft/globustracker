@@ -165,6 +165,9 @@
                     <li>
                         <a href="myAccount.action"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">My Account</span></a>
                     </li>
+                    <!--                    <li>
+                                            <a href="seoIntelligence.action"><i class="fa fa-lg fa-fw fa-magic"></i> <span class="menu-item-parent">SEO Intelligence</span></a>
+                                        </li>-->
                     <li>
                         <a href="upgradeOption.action"><i class="fa fa-lg fa-fw fa-rocket"></i> <span class="menu-item-parent">Upgrade</span></a>
                     </li>

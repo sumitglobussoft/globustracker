@@ -24,8 +24,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "image")
-@NamedQueries({
-    @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i")})
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

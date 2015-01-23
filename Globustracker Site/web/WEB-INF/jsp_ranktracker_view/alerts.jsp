@@ -33,19 +33,19 @@
 
         <!-- NEW WIDGET START -->
         <article class="col-sm-12 col-md-12 col-lg-12 text-center">
-                  <form action="searchCampaignDate.action" name="searchForm" method="post">
+            <form action="searchCampaignDate.action" name="searchForm" method="post">
 
-                            <ul class="pagination pagination-lg">
-                                <s:iterator value="lstDate" status="temp" >
-                                    <s:hidden name="dateValue" value='<s:property />' />
+                <ul class="pagination pagination-lg">
+                    <s:iterator value="lstDate" status="temp" >
+                        <s:hidden name="dateValue" value='<s:property />' />
 
-                                    <li>
-                                        <a class="active" href="searchCampaignDate.action?date=<s:property />"><s:property /></a>
-                                    </li>
-                                </s:iterator>
-                            </ul>
+                        <li>
+                            <a class="active" href="searchCampaignDate.action?date=<s:property />"><s:property /></a>
+                        </li>
+                    </s:iterator>
+                </ul>
 
-                        </form>
+            </form>
         </article>
         <!-- WIDGET END -->
     </div>
@@ -145,22 +145,3 @@
     <!-- END ROW -->
 </section>
 <!-- end widget grid -->
-
-<script type="text/javascript" >
-    function addCampaign() {
-        var jString = document.searchForm.dateValue.value;
-
-        $.post(
-                'ajax/searchCampaignDate.action',
-                {
-                    jString: jString
-                },
-        function(jMessage) {
-            alertMes = jMessage.message;
-            alert(jMessage.message);
-
-        },
-                'json');
-    }
-
-</script>

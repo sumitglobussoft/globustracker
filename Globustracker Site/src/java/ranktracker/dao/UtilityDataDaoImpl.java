@@ -41,36 +41,40 @@ public class UtilityDataDaoImpl extends HibernateDaoSupport implements UtilityDa
     @Override
     public void addUser(String email, String password, Integer userType, Integer customerID) {
 
-        //creating the Criteria object for Customers class 
-        Criteria objCriteria = getSession().createCriteria(Customers.class);
+        try {
+            //creating the Criteria object for Customers class 
+            Criteria objCriteria = getSession().createCriteria(Customers.class);
 
-        //adding the Restrictions  for customerId
-        //Restrictions are where clauses
-        objCriteria.add(Restrictions.eq("customerID", customerID));
+            //adding the Restrictions  for customerId
+            //Restrictions are where clauses
+            objCriteria.add(Restrictions.eq("customerID", customerID));
 
-        //retrieving the customer object from Criteria list
-        Customers objCustomers = (Customers) objCriteria.list().get(0);
+            //retrieving the customer object from Criteria list
+            Customers objCustomers = (Customers) objCriteria.list().get(0);
 
-        //instantiating the user object
-        Users objUsers = new Users();
+            //instantiating the user object
+            Users objUsers = new Users();
 
-        //invoking the setters methods to set <email>,<password>,<userType> and customer object
-        objUsers.setLoginID(email);
-        objUsers.setPassword(password);
-        objUsers.setUserType(userType);
-        objUsers.setCustomerID(objCustomers);
-        objUsers.setActive(1);
-        objUsers.setAddeddate(new Date());
-        
-        //invoking getSession() method to save <objUsers> object
-        getSession().save(objUsers);
+            //invoking the setters methods to set <email>,<password>,<userType> and customer object
+            objUsers.setLoginID(email);
+            objUsers.setPassword(password);
+            objUsers.setUserType(userType);
+            objUsers.setCustomerID(objCustomers);
+            objUsers.setActive(1);
+            objUsers.setAddeddate(new Date());
 
-        //UPDATE ACTIVE USER COUNT in customer object
-        int updateActiveCount = objCustomers.getActiveUserCount() + 1;
-        objCustomers.setActiveUserCount(updateActiveCount);
+            //invoking getSession() method to save <objUsers> object
+            getSession().save(objUsers);
 
-        //invoking getSession() method to save <objCustomers> object
-        getSession().update(objCustomers);
+            //UPDATE ACTIVE USER COUNT in customer object
+            int updateActiveCount = objCustomers.getActiveUserCount() + 1;
+            objCustomers.setActiveUserCount(updateActiveCount);
+
+            //invoking getSession() method to save <objCustomers> object
+            getSession().update(objCustomers);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 //    @Override
 //    public List<Alertsettings> getAlertSettings() {

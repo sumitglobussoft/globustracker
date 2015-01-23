@@ -30,33 +30,34 @@ import org.springframework.stereotype.Repository;
  *
  * @author User
  */
-//@Repository("keywordsuggestion")
+@Repository("keywordsuggestion")
 public class Keywordsuggestion {
+
     public List<String> getMatchingforKeywords(String filter) throws URISyntaxException {
-    List<String> reply = new ArrayList<>();
-         System.out.println("------------------"+filter);
-         if (filter.contains("\n"))
-         {  System.out.println("------9999--------");
+        List<String> reply = new ArrayList<>();
+        System.out.println("------------------" + filter);
+        if (filter.contains("\n")) {
+            System.out.println("------9999--------");
             String[] m = filter.split("\n");
             int l = m.length;
-             System.out.println(m);
-            String n = m[(l-1)];
+            System.out.println(m);
+            String n = m[(l - 1)];
             System.out.println(n);
             filter = n;
-         }
+        }
         String response = null;
         try {
             URI googlesearch = new URIBuilder()
                     .setScheme("http")
                     .setHost("clients1.google.com")
                     .setPath("/complete/search")
-                    .setParameter("hl","en")
+                    .setParameter("hl", "en")
                     .setParameter("output", "toolbar")
                     .setParameter("q", filter)
                     .build();
             reply = fetchXMLContent(googlesearch);
-            
-        } catch (IOException ex) {         
+
+        } catch (IOException ex) {
             Logger.getLogger(Keywordsuggestion.class.getName()).log(Level.SEVERE, null, ex);
             return reply;
         }
@@ -64,12 +65,12 @@ public class Keywordsuggestion {
         return reply;
     }
 
-     public List fetchXMLContent(URI newurl) throws IOException {
+    public List fetchXMLContent(URI newurl) throws IOException {
         System.out.println("---------------Without Proxy-----------------");
         List<String> reply = new ArrayList<>();
         String responsebody = null;
-        CloseableHttpClient httpclient = HttpClients.createDefault();                        
-        try  {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
             HttpGet httpget = new HttpGet(newurl);
             System.out.println("executing request " + httpget.getURI());
             ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
@@ -86,18 +87,18 @@ public class Keywordsuggestion {
                 }
             };
             responsebody = httpclient.execute(httpget, responseHandler);
-           // System.out.println(responsebody);
-        }catch(IOException e){
+            // System.out.println(responsebody);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        
-         Document doc = Jsoup.parse(responsebody);
-            Elements ele = doc.getElementsByAttribute("data");
-            for(Element  element: ele){
-              //  System.out.println(element.attr("data"));
-                reply.add(element.attr("data"));
-            }
-            
+
+        Document doc = Jsoup.parse(responsebody);
+        Elements ele = doc.getElementsByAttribute("data");
+        for (Element element : ele) {
+            //  System.out.println(element.attr("data"));
+            reply.add(element.attr("data"));
+        }
+
         return reply;
     }
 }

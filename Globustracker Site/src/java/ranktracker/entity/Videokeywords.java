@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package ranktracker.entity;
 
 import java.io.Serializable;
@@ -14,20 +15,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
  *
- * @author GLB-008
+ * @author GLB-130
  */
 @Entity
 @Table(name = "videokeywords")
-@NamedQueries({
-    @NamedQuery(name = "Videokeywords.findAll", query = "SELECT v FROM Videokeywords v")})
 public class Videokeywords implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,35 +36,49 @@ public class Videokeywords implements Serializable {
     @Basic(optional = false)
     @Column(name = "YoutubeURL")
     private String youtubeURL;
+    @Basic(optional = false)
     @Column(name = "RankYoutube")
-    private Short rankYoutube;
+    private short rankYoutube;
     @Column(name = "VimeoURL")
     private String vimeoURL;
+    @Basic(optional = false)
     @Column(name = "RankVimeo")
-    private Short rankVimeo;
+    private short rankVimeo;
     @Column(name = "DailymotionURL")
     private String dailymotionURL;
+    @Basic(optional = false)
     @Column(name = "RankDailyMotion")
-    private Short rankDailyMotion;
+    private short rankDailyMotion;
     @Column(name = "MetacafeURL")
     private String metacafeURL;
+    @Basic(optional = false)
     @Column(name = "RankMetacafe")
-    private Short rankMetacafe;
+    private short rankMetacafe;
     @Basic(optional = false)
-    @Column(name = "Youtubeviewcoint")
-    private int youtubeviewcoint;
+    @Column(name = "YoutubeViewCount")
+    private int youtubeViewCount;
     @Basic(optional = false)
-    @Column(name = "YoutubeLikeCount")
-    private int youtubeLikeCount;
+    @Column(name = "VimeoViewCount")
+    private int vimeoViewCount;
     @Basic(optional = false)
-    @Column(name = "YoutubeDislikeCount")
-    private int youtubeDislikeCount;
+    @Column(name = "MetacafeViewCount")
+    private int metacafeViewCount;
     @Basic(optional = false)
-    @Column(name = "YoutubeCommentCount")
-    private int youtubeCommentCount;
+    @Column(name = "DailymotionViewCount")
+    private int dailymotionViewCount;
     @Basic(optional = false)
     @Column(name = "YoutubeDailyViewcount")
     private short youtubeDailyViewcount;
+    @Column(name = "YoutubeUpdatedDate")
+    private String youtubeUpdatedDate;
+    @Column(name = "VimeoUpdatedDate")
+    private String vimeoUpdatedDate;
+    @Column(name = "DailymotionUpdatedDate")
+    private String dailymotionUpdatedDate;
+    @Column(name = "MetaCafeUpdatedDate")
+    private String metaCafeUpdatedDate;
+    @Column(name = "ViewStatisticsUpdatedDate")
+    private String viewStatisticsUpdatedDate;
     @Column(name = "Visibility")
     private Short visibility;
     @JoinColumn(name = "CampaignID", referencedColumnName = "CampaignID")
@@ -82,14 +92,18 @@ public class Videokeywords implements Serializable {
         this.videokeywordID = videokeywordID;
     }
 
-    public Videokeywords(Integer videokeywordID, String videoKeyword, String youtubeURL, int youtubeviewcoint, int youtubeLikeCount, int youtubeDislikeCount, int youtubeCommentCount, short youtubeDailyViewcount) {
+    public Videokeywords(Integer videokeywordID, String videoKeyword, String youtubeURL, short rankYoutube, short rankVimeo, short rankDailyMotion, short rankMetacafe, int youtubeViewCount, int vimeoViewCount, int metacafeViewCount, int dailymotionViewCount, short youtubeDailyViewcount) {
         this.videokeywordID = videokeywordID;
         this.videoKeyword = videoKeyword;
         this.youtubeURL = youtubeURL;
-        this.youtubeviewcoint = youtubeviewcoint;
-        this.youtubeLikeCount = youtubeLikeCount;
-        this.youtubeDislikeCount = youtubeDislikeCount;
-        this.youtubeCommentCount = youtubeCommentCount;
+        this.rankYoutube = rankYoutube;
+        this.rankVimeo = rankVimeo;
+        this.rankDailyMotion = rankDailyMotion;
+        this.rankMetacafe = rankMetacafe;
+        this.youtubeViewCount = youtubeViewCount;
+        this.vimeoViewCount = vimeoViewCount;
+        this.metacafeViewCount = metacafeViewCount;
+        this.dailymotionViewCount = dailymotionViewCount;
         this.youtubeDailyViewcount = youtubeDailyViewcount;
     }
 
@@ -117,11 +131,11 @@ public class Videokeywords implements Serializable {
         this.youtubeURL = youtubeURL;
     }
 
-    public Short getRankYoutube() {
+    public short getRankYoutube() {
         return rankYoutube;
     }
 
-    public void setRankYoutube(Short rankYoutube) {
+    public void setRankYoutube(short rankYoutube) {
         this.rankYoutube = rankYoutube;
     }
 
@@ -133,11 +147,11 @@ public class Videokeywords implements Serializable {
         this.vimeoURL = vimeoURL;
     }
 
-    public Short getRankVimeo() {
+    public short getRankVimeo() {
         return rankVimeo;
     }
 
-    public void setRankVimeo(Short rankVimeo) {
+    public void setRankVimeo(short rankVimeo) {
         this.rankVimeo = rankVimeo;
     }
 
@@ -149,11 +163,11 @@ public class Videokeywords implements Serializable {
         this.dailymotionURL = dailymotionURL;
     }
 
-    public Short getRankDailyMotion() {
+    public short getRankDailyMotion() {
         return rankDailyMotion;
     }
 
-    public void setRankDailyMotion(Short rankDailyMotion) {
+    public void setRankDailyMotion(short rankDailyMotion) {
         this.rankDailyMotion = rankDailyMotion;
     }
 
@@ -165,44 +179,44 @@ public class Videokeywords implements Serializable {
         this.metacafeURL = metacafeURL;
     }
 
-    public Short getRankMetacafe() {
+    public short getRankMetacafe() {
         return rankMetacafe;
     }
 
-    public void setRankMetacafe(Short rankMetacafe) {
+    public void setRankMetacafe(short rankMetacafe) {
         this.rankMetacafe = rankMetacafe;
     }
 
-    public int getYoutubeviewcoint() {
-        return youtubeviewcoint;
+    public int getYoutubeViewCount() {
+        return youtubeViewCount;
     }
 
-    public void setYoutubeviewcoint(int youtubeviewcoint) {
-        this.youtubeviewcoint = youtubeviewcoint;
+    public void setYoutubeViewCount(int youtubeViewCount) {
+        this.youtubeViewCount = youtubeViewCount;
     }
 
-    public int getYoutubeLikeCount() {
-        return youtubeLikeCount;
+    public int getVimeoViewCount() {
+        return vimeoViewCount;
     }
 
-    public void setYoutubeLikeCount(int youtubeLikeCount) {
-        this.youtubeLikeCount = youtubeLikeCount;
+    public void setVimeoViewCount(int vimeoViewCount) {
+        this.vimeoViewCount = vimeoViewCount;
     }
 
-    public int getYoutubeDislikeCount() {
-        return youtubeDislikeCount;
+    public int getMetacafeViewCount() {
+        return metacafeViewCount;
     }
 
-    public void setYoutubeDislikeCount(int youtubeDislikeCount) {
-        this.youtubeDislikeCount = youtubeDislikeCount;
+    public void setMetacafeViewCount(int metacafeViewCount) {
+        this.metacafeViewCount = metacafeViewCount;
     }
 
-    public int getYoutubeCommentCount() {
-        return youtubeCommentCount;
+    public int getDailymotionViewCount() {
+        return dailymotionViewCount;
     }
 
-    public void setYoutubeCommentCount(int youtubeCommentCount) {
-        this.youtubeCommentCount = youtubeCommentCount;
+    public void setDailymotionViewCount(int dailymotionViewCount) {
+        this.dailymotionViewCount = dailymotionViewCount;
     }
 
     public short getYoutubeDailyViewcount() {
@@ -211,6 +225,46 @@ public class Videokeywords implements Serializable {
 
     public void setYoutubeDailyViewcount(short youtubeDailyViewcount) {
         this.youtubeDailyViewcount = youtubeDailyViewcount;
+    }
+
+    public String getYoutubeUpdatedDate() {
+        return youtubeUpdatedDate;
+    }
+
+    public void setYoutubeUpdatedDate(String youtubeUpdatedDate) {
+        this.youtubeUpdatedDate = youtubeUpdatedDate;
+    }
+
+    public String getVimeoUpdatedDate() {
+        return vimeoUpdatedDate;
+    }
+
+    public void setVimeoUpdatedDate(String vimeoUpdatedDate) {
+        this.vimeoUpdatedDate = vimeoUpdatedDate;
+    }
+
+    public String getDailymotionUpdatedDate() {
+        return dailymotionUpdatedDate;
+    }
+
+    public void setDailymotionUpdatedDate(String dailymotionUpdatedDate) {
+        this.dailymotionUpdatedDate = dailymotionUpdatedDate;
+    }
+
+    public String getMetaCafeUpdatedDate() {
+        return metaCafeUpdatedDate;
+    }
+
+    public void setMetaCafeUpdatedDate(String metaCafeUpdatedDate) {
+        this.metaCafeUpdatedDate = metaCafeUpdatedDate;
+    }
+
+    public String getViewStatisticsUpdatedDate() {
+        return viewStatisticsUpdatedDate;
+    }
+
+    public void setViewStatisticsUpdatedDate(String viewStatisticsUpdatedDate) {
+        this.viewStatisticsUpdatedDate = viewStatisticsUpdatedDate;
     }
 
     public Short getVisibility() {
@@ -253,4 +307,5 @@ public class Videokeywords implements Serializable {
     public String toString() {
         return "ranktracker.entity.Videokeywords[ videokeywordID=" + videokeywordID + " ]";
     }
+    
 }

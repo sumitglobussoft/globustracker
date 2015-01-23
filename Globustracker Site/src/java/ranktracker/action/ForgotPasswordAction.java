@@ -84,7 +84,7 @@ public class ForgotPasswordAction extends ActionSupport {
                     addActionMessage("Please Check Your Mail for Your Password.");
                     
                     //invoking the execute() method of SendMail class to send password details for <emailId>
-                    objSendMail.execute(2, objUser);
+                    objSendMail.execute(2, objUser,"");
                 } else {
                     addActionError("This Email-Id does not Exist in our Records. Please Check if the Email Id You Entered is Correct.");
                 }

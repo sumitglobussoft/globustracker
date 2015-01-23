@@ -98,6 +98,9 @@ public class SerpsTrackAction extends ActionSupport {
         //checking for 'customerID' attribute in session
         if (objSession.getAttribute("customerID") != null) {
 
+            if (objSession.getAttribute("activationPeriod").toString().equals("0")) {                
+                return "renewal";
+            }
             //reading the 'customerID' from session and type casting it to integer
             String sCustomerID = objSession.getAttribute("customerID").toString();
             Integer customerID = Integer.parseInt(sCustomerID);

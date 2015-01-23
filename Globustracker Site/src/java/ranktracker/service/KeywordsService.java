@@ -240,4 +240,7 @@ public interface KeywordsService {
      * @return 
      */
     public String getKeywordName(Integer keywordID);
+
+    public Object[] getSerpDataLimited(Integer campaignId, Integer customerId, int initial);
+    
 }

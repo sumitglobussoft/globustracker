@@ -23,8 +23,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "visitorarray")
-@NamedQueries({
-    @NamedQuery(name = "Visitorarray.findAll", query = "SELECT v FROM Visitorarray v")})
 public class Visitorarray implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

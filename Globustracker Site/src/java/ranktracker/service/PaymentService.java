@@ -27,7 +27,7 @@ public interface PaymentService {
     @Transactional(propagation = Propagation.REQUIRED)
     public int savePayment(Payments payments);
 
-     /**
+    /**
      * The method gets a plan object by given plan name
      *
      * @param planName

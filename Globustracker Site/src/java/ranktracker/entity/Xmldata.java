@@ -23,8 +23,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "xmldata")
-@NamedQueries({
-    @NamedQuery(name = "Xmldata.findAll", query = "SELECT x FROM Xmldata x")})
 public class Xmldata implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

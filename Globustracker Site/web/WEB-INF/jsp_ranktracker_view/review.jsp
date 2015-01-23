@@ -1,2174 +1,3165 @@
-
-<!DOCTYPE html">
-<%@page import="java.util.Date" %>
-<%@ taglib uri="/struts-tags" prefix="s" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
     <head>
-        <title>Best Rank Tracker | SERP Tracker | Youtube Rank Tracker | Social Signals Tracker</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+        <title>Globustracker | review</title>
+        <meta name="author" content="Globussoft">
         <link rel="shortcut icon" href="https://s3.amazonaws.com/images_ranktracker/GlobustrackerIcon.png" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content=""/>
-        <meta property="description" content="" />
-        <meta property="og:title" content="" />
-        <meta property="og:type" content="" />
-        <meta property="og:url" content="http://globustracker.com/" />
-        <meta property="og:image" content="https://s3.amazonaws.com/images_ranktracker/GlobustrackerIcon.png" />   
-        <!--        <script src="https://s3.amazonaws.com/js_ranktracker/jquery-1.9.1.js" ></script>-->
-        <link rel="stylesheet" href="https://s3.amazonaws.com/css_ranktracker/reviewstyle.css" type="text/css" media="screen" charset="utf-8">
-        <style type="text/css">
-            <%@ include file="../css_ranktracker/style.css" %>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- stylesheets -->
+        <link href="https://s3.amazonaws.com/css-globustracker/review/review.css" rel="stylesheet" type="text/css"  />
+        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+
+        <style>
+            /*           .test {
+                            display: none;
+                        }*/
         </style>
-        <!--        <script src="https://s3.amazonaws.com/js_ranktracker/jquery.min.js"></script>-->
-        <!--        <script src="https://s3.amazonaws.com/js_ranktracker/ddaccordion.js"></script>-->
-        <script src="https://s3.amazonaws.com/js_ranktracker/jq-btsp.min0e16.js"></script>
-        <!--        <script src="https://s3.amazonaws.com/js_ranktracker/review.min33f1.js"></script>-->
-        <script src="https://s3.amazonaws.com/js_ranktracker/commons.min95e2.js"></script>
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-12074781-1']);
-            _gaq.push(['_setAllowAnchor', true]);
-            _gaq.push(['_trackPageview']);
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
 
-        </script>
-        <style type="text/css">
-            #slidy-container {
-                margin: 0 auto;
-                overflow: hidden;
-                width: 100%;
-            }
-            #slidy img {
-                float: left;
-                width: 20%;
-            }
-            .ipad-thumb {
-                margin-top: -2px;
-            }
-        </style>
-        <style type="text/css">
-            /* ----------------- header -------------------- */
-            #header1 
-            {
-                background:url(https://s3.amazonaws.com/images_ranktracker/header_bg.png);
-                height:124px;
-                clear:left;
-            }
-            .header1_wrapper
-            {
-                width:1000px;
-                height:124px;
-                margin:0 auto;
-                background:url(https://s3.amazonaws.com/images_ranktracker/header_bg.png);
-            }
+        <!-- javascript -->
+        <script src="https://s3.amazonaws.com/js-globustracker/jquery-1.11.1.min.js"></script>
 
-            .header1_logo
-            {
-                width:291px;
-                height:47px;
-                float:left;
-                margin-top: 0px;
-            }
-            .header1_logo a img
-            {
-                border:none;
-                padding:14px;
-            }
+        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
 
-            .btn_for_all
-            {
-                float: right;
-                height: 33px;
-                margin-left: 20px;
-                margin-top: 25px;
-                width: 139px;
-            }
-            .btn_for_all a
-            {
-                background: url("https://s3.amazonaws.com/images_ranktracker/btn_img.png") repeat scroll 0 0 transparent;
-                color: #FFFFFF;
-                float: left;
-                font-family: Arial,Helvetica,sans-serif;
-                font-size: 14px;
-                height: 20px;
-                padding: 8px 5px 5px;
-                text-align: center;
-                text-decoration: none;
-                width: 129px;
-            }
-            .btn_for_all a:hover
-            {
-                width:129px;
-                height:20px;
-                background:url(https://s3.amazonaws.com/images_ranktracker/hover_btn.png);
-                padding:8px 5px 5px;
-                font-family:Arial, Helvetica, sans-serif;
-                font-size:14px;
-                color:#fff;
-            }
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
-            .btn_for_all a.active
-            {
-                width:129px;
-                height:20px;
-                background:url(https://s3.amazonaws.com/images_ranktracker/hover_btn.png);
-                padding:8px 5px 5px;
-                font-family:Arial, Helvetica, sans-serif;
-                font-size:14px;
-                color:#fff;
-            }	
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 
-            /* ----------------- menu -------------------- */
-            #menu li ul{
-                display:none;
-                position:absolute;
-                z-index: 90000;
-            }
-            #menu li:hover ul{
-                display:block;
-                background:#198eca;
-                height:auto; width:120px; 
-                margin: 0;
-                padding: 0 0 0 10px;
-            }
-            #menu li ul li{
-                clear:both;
-                border-style:none;
-            }
-            #menu li ul li a{
-                clear:both;
-                border-style:none;
-                text-decoration: none;
-            }
-            #menu li ul li a{
-                clear:both;
-                border-style:none;
-                text-decoration: none;
-                color: #fff;
-            }
-            #menu li ul li a:hover{
-                clear:both;
-                border-style:none;
-                text-decoration: none;
-                color: #B7FF00 !important;
-            }
-            .header_logo {
-                float: left;
-                height: 68px !important;
-                margin-top: 0;
-                width: 291px;
-            }
-            #menu li a span span {
-                color: #FFFFFF;
-                font-family: Arial,Helvetica,sans-serif;
-                font-size: 15px;
-                font-weight: bold;
-                height: auto;
-                padding: 0 45px;
-                text-shadow: 0 0 3px #333333;
-                margin-top: 22px;
-            }
-            #menu li a {
-                color: #FFFFFF;
-                cursor: pointer;
-                font-family: Arial,Helvetica,sans-serif;
-                font-size: 15px;
-                font-weight: bold;
-                line-height: 38px;
-                text-shadow: 0 0 3px #333333;
-            }
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-            /* ----------------- footer -------------------- */
-            #dashboard_footer {
-                bottom:0;
-                width:100%;
-                height:60px;
-                margin-top:10px;
-                float:left;	/* Height of the footer */
-                background:url(https://s3.amazonaws.com/images_ranktracker/footer_bg.png);
-            }
-            .dashboard_footer_wrapper
-            {
-                width:1000px;
-                height:52px;
-                margin:0 auto;
-                background:url(https://s3.amazonaws.com/images_ranktracker/footer_bg.png);
-            }
-            .dashboard_footer_bottom {
-                clear: left;
-                color: #FFFFFF;
-                float: left;
-                font-family: Arial,Helvetica,sans-serif;
-                font-size: 12px;
-                margin-top: 23px;
-                text-align: center;
-                width: 970px;
-            }
-            table tbody td{font-size: 12px;
-                           padding: 5px 0 5px 10px;
-                           text-overflow: ellipsis;
-                           white-space: nowrap;}
+        <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body class="review lang-en"  id="home2">
 
-            .comment {
-                width: 400px;
-                background-color: #f0f0f0;
-                margin: 10px;
-            }
-            a.morelink {
-                text-decoration:none;
-                outline: none;
-            }
-            .morecontent span {
-                display: none;
-
-            }
-            table tbody td:first-child {
-                border-left: 0 none;
-                overflow-x: hidden;
-            }
-            .h2_tab{ max-width: 520px;
-                     white-space: normal;}
-            </style>
-        </head>
-        <body>
-
-            <div id="header1">		
-            <div class="header1_wrapper">
-                <div class="header1_logo"><a href="home.action"><img src="https://s3.amazonaws.com/images_ranktracker/Globustracker-logo-present.png" alt="" /></a></div>
-                <div class="btn_for_all"><a href="payment.action">Try it for FREE!</a></div>
-
-                <!--menu-->
-                <div id="menu">
-                    <ul class="menu">
-
-                        <c:choose>
-                            <c:when test="${requestScope.highlight == 'HOME'}">
-                                <li id="menu_active"><a href="home.action"><span><span>HOME</span></span></a></li>
-                                            </c:when>
-                                            <c:otherwise>
-                                <li><a href="home.action"><span><span>HOME</span></span></a></li>
-                                            </c:otherwise>
-                                        </c:choose>
-
-                        <c:choose>
-                            <c:when test="${requestScope.highlight == 'FEATURES'}">
-                                <li id="menu_active"><a href="features.action"><span><span>FEATURES</span></span></a></li>
-                                            </c:when>
-                                            <c:otherwise>
-                                <li><a href="features.action"><span><span>FEATURES</span></span></a></li>
-                                            </c:otherwise>
-                                        </c:choose>
-
-                        <c:choose>
-                            <c:when test="${requestScope.highlight == 'PRICING'}">
-                                <li id="menu_active"><a href="tour.action"><span><span>PRICING</span></span></a></li>
-                                            </c:when>
-                                            <c:otherwise>
-                                <li ><a href="pricing.action"><span><span>PRICING</span></span></a></li>
-                                            </c:otherwise>
-                                        </c:choose>
-
-
-                        <c:choose>
-                            <c:when test="${requestScope.highlight == 'TOUR'}">
-                                <li id="menu_active"><a href="tour.action"><span><span>TAKE A TOUR</span></span></a></li>
-                                            </c:when>
-                                            <c:otherwise>
-                                <li><a href="tour.action"><span><span>TAKE A TOUR</span></span></a></li>
-                                            </c:otherwise>
-                                        </c:choose>
-
-
-                        <!--li><a href="http://blog.globustracker.com" target="_blank"><span><span>BLOG</span></span></a></li-->
-
-                        <c:choose>
-                            <c:when test="${requestScope.highlight == 'CONTACT'}">
-                                <li id="menu_active"><a href="contact.action"><span><span>CONTACT</span></span></a></li>
-                                            </c:when>
-                                            <c:otherwise>
-                                <li><a href="contact.action"><span><span>CONTACT</span></span></a></li>
-                                            </c:otherwise>
-                                        </c:choose>
-
-                        <c:choose>
-                            <c:when test="${requestScope.highlight == 'FAQ'}">
-                                <li id="menu_active"><a href="faq.action"><span><span>FAQ</span></span></a></li>
-                                            </c:when>
-                                            <c:otherwise>
-                                <li><a href="faq.action"><span><span>FAQ</span></span></a></li>
-                                            </c:otherwise>
-                                        </c:choose>
-
-                    </ul>
+        <header class="navbar navbar-inverse white" role="banner">
+            <div class="container-fluid" style="padding: 0 8%;">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="home.action" class="navbar-brand"><img src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" class="img-responsive" style="width: 200px;"></a>
                 </div>
-                <!--end menu-->
-            </div>	
-        </div>
-        <!-- Header end -->
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="home.action" >
+                                Home
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="home.action#tabs">
+                                Features 
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Versions <span class="caret"></span></a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a target="_blank" href="http://globustracker.org/">Community</a></li>
+                                <li><a target="_blank" href="http://globustracker.org/agency/">Agency</a></li>
+                                <li><a target="_blank" href="http://globustracker.org/enterprise/">Enterprise</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="home.action#pricing" >
+                                Pricing 
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="home.action#second-option" >
+                                Faq
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="home.action#clients" >
+                                Clients
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.action">
+                                Contact us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="payment.action" class="signup visible-md visible-lg">Sign up free</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div id="content" itemprop="mainContentOfPage">
+            <div id="grid">
 
-        <div id="wrapper">
-            <div id="accordion-container">
-                <h2 class="accordion-header">Visitors</h2>
-                <div class="accordion-content" style="display: block">
-                    <div class="module" id="module-visitors">
-                        <input type="hidden" id="websearchurl" value="${website}<%--= session.getAttribute("websearchurl")--%>"/>
+                <div id="left-nav">
+                    <div id="flying">
+                        <div class="nav-section">
+                            <nav>
+                                <a class="current inpage-link" href="#dashboard">
+                                    <span class="fa fa-chevron-up"></span><!--
+                                    --><span>Return to top</span>
+                                </a>
+                            </nav>
+                        </div>
+                        <div class="nav-section">
+                            <nav>
+                                <a class="section-title inpage-link" href="#module-section-title-optimize" >Optimize</a>
+                                <a class="seo inpage-link" href="#module-seo">
+                                    <span class="fa fa-search"></span>
+                                    <span>SEO</span>
+                                    <span class="fa fa-chevron-right"></span>
+                                </a>
+                                <a class="mobile inpage-link" href="#module-mobile">
+                                    <span class="fa fa-phone"></span>
+                                    <span>Mobile</span>
+                                    <span class="fa fa-chevron-right"></span>
+                                </a>
+                                <a class="usability inpage-link" href="#module-usability">
+                                    <span class="fa fa-hand-o-up"></span>
+                                    <span>Usability</span>
+                                    <span class="fa fa-chevron-right"></span>
+                                </a>
+                                <a class="technologies inpage-link" href="#module-technologies">
+                                    <span class="fa fa-cogs"></span>
+                                    <span>Technologies</span>
+                                    <span class="fa fa-chevron-right"></span>
+                                </a>
+                            </nav>
+                        </div>
+                        <div class="nav-section">
+                            <nav>
+                                <a class="section-title inpage-link" href="#module-section-title-promote" >Promote</a>
+                                <a class="social inpage-link" href="#module-social">
+                                    <span class="fa fa-thumbs-up"></span>
+                                    <span>Social</span>
+                                    <span class="fa fa-chevron-right"></span>
+                                </a>
+                                <a class="local_visibility inpage-link" href="#module-local_visibility">
+                                    <span class="fa fa-map-marker"></span>
+                                    <span>Local</span>
+                                    <span class="fa fa-chevron-right"></span>
+                                </a>
+                            </nav>
+                        </div>
+                        <div class="nav-section">
+                            <nav>
+                                <a class="section-title inpage-link" href="#module-section-title-measure" >Measure</a>
+                                <a class="visitors inpage-link" href="#module-visitors">
+                                    <span class="fa fa-group"></span>
+                                    <span>Visitors</span>
+                                    <span class="fa fa-chevron-right"></span>
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="right-panel" class="tbody_font_size free-rev" itemscope itemtype="" >
+                    <!--<img src="https://s3.amazonaws.com/images-globustracker/review/sharing-sprite.png" class="img-responsive" />-->
+                    <link itemprop="additionalType" content="" />
+                    <!--                    <div id="young-message" class="message ">
+                                            <span class="fa fa-conversation">  </span>
+                                           
+                                        </div>-->
+
+                    <meta itemprop="thumbnailUrl" content="https://s3.amazonaws.com/images-globustracker/review/socioboard.com.png" />
+                    <meta itemprop="url" content="socioboard.com" />
+                    <div id="dashboard" class="hreview">
+                        <link href="" rel="template" name="parts" class="mustache-to-load" id="parts-mustache-tpl"/>
+                        <link href="" rel="partial" name="setDataField" class="mustache-to-load"/>
                         <div class="module-content">
-                            <h2>Review of <span style="font-weight: 700; color: #3dbe2c">${website}
-                                    <%--= session.getAttribute("websearchurl")--%></span></h2><span>on &nbsp;<%= new Date()%> </span>
-                        </div>                        
-                        <div class="module-content">
-                            <h2>Visitors</h2>
-                            <div id="criterium-url" class="criterium result-0 ">
-                                <div class="criterium-head">
-                                    <h3>Get Visitors</h3>
-                                    <div class="icons"></div>
+                            <div id="dashboard-content" class="" itemprop="review" itemscope >
+
+                                <div id="dashboard-state">
+                                    <!--                                    <div id="holder"></div>
+                                                                        <div id="score-regular" class="dashboard-score rating" itemprop="reviewRating" itemscope>
+                                                                            <div class="score-c generic-tooltip value simple-tooltip" data-placement="left" rel="tooltip" data-original-title="<p>The GlobusTracker is a dynamic grade on a 100-point scale that represents your Internet Marketing Effectiveness at a given time.</p><p>Improve your score by working on the red and orange criteria in your Review. <br />
+                                                                                 <br />
+                                                                                 Check the green criteria to find out how your score is being positively affected. Gray criteria are notable, but do not affect your score.</p>">
+                                                                                <span id="scoreValue"><span class="decimal"></span></span>
+                                                                            </div>
+                                                                            <span class="best hidden"><span class="value-title" title="5"/></span>
+                                                                        </div>            -->
+                                </div>
+
+                                <div id="dashboard-screenshot">
+                                    <div id="set51Loader">
+                                        <div style="text-align:center; display: block" ><img width="10" height="10" style="height: 7%; width: 20%; margin-top: 19%;" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                    </div>
+                                    <img src="" class="test" itemprop="image" alt="" width="202" height="114" id="dashboardImage"/>
+                                    <div class="screen"></div>
+                                </div>
+
+                                <div id="dashboard-site">
+                                    <h1 class="item" itemprop="name" >
+                                        <input type="hidden" id="websearchurl" value="${website}"/>
+                                        <span class="reviewer ">Globustracker</span>
+                                        <a class="fn js-ext-link fit-text" href="ext://${website}" itemprop="itemReviewed" rel="nofollow" target="_blank"
+                                           title="${website}" data-url="${website}">
+                                            <span class="domain">${website}</span>
+                                        </a>
+                                    </h1>
+                                    <meta itemprop="author" content="Chanchal Santra" />
+                                    <meta itemprop="dateCreated" content="2014-10-08" />
+                                    <div class="generated-time dtreviewed">
+                                        <span class="moment"><%=new java.util.Date().toString()%></span>
+                                        <span class="value-title hidden" title="2014-10-08"></span>
+                                    </div>
+                                    <div id="dashboard-bars" class="dashboard-bars">
+                                        <div id="green-bar-counter" class="section">
+                                            <span class="fa fa-bullet-result-plain"></span>
+                                            <span class="fa fa-bullet-result-check"></span>
+                                            <h3>Passed</h3>
+                                            <span class="bar">
+                                                <span class="percent" id="passedPercent"></span>
+                                            </span>
+                                        </div>
+                                        <div id="orange-bar-counter" class="section">
+                                            <span class="fa fa-bullet-result-plain"></span>
+                                            <span class="fa fa-bullet-result-warning"></span>
+                                            <h3>To Improve</h3>
+                                            <span class="bar">
+                                                <span class="percent" id="errorPercent"></span>
+                                            </span>
+                                        </div>
+                                        <div id="red-bar-counter" class="section">
+                                            <span class="fa fa-bullet-result-plain"></span>
+                                            <span class="fa fa-bullet-result-cross"></span>
+                                            <h3>Errors</h3>
+                                            <span class="bar">
+                                                <span class="percent" id="improvePercent"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--                        <div id="dashboard-footer">
+                        
+                                                    <div class="item">
+                                                        <a href="#" class="inline-modal-opener grey" >Embed </a>
+                                                        <div class="inline-modal">
+                                                            <div class="inner">
+                                                                <h3>Take a plan to unlock this feature</h3>
+                                                                <a href="" value="" data-type="optimize" data-plan="choise" class="start-trial button orange">
+                                                                    Start Your 7-Day Free Trial  </a>
+                                                            </div>
+                                                        </div>
+                                                        <span class="inline-modal-pointer-bg"></span>
+                                                        <span class="inline-modal-pointer"></span>    
+                                                    </div>
+                        
+                                                    <div class="item">
+                                                        <a href="#" class="inline-modal-opener grey" >
+                                                            Download as PDF      
+                                                        </a>
+                                                        <div class="inline-modal">
+                                                            <div class="inner">
+                                                                <h3>Take a plan to unlock this feature</h3>
+                                                                <a href="" value="" data-type="optimize" data-plan="choise" class="start-trial button orange">
+                                                                    Start Your 7-Day Free Trial          
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <span class="inline-modal-pointer-bg"></span>
+                                                        <span class="inline-modal-pointer"></span>    
+                                                    </div>
+                        
+                                                    <div class="item">
+                                                        <a href="#" class="inline-modal-opener grey" >
+                                                            Download as Slides      
+                                                        </a>
+                                                        <div class="inline-modal">
+                                                            <div class="inner">
+                                                                <h3>Take a plan to unlock this feature</h3>
+                                                                <a href="" value="" data-type="optimize" data-plan="choise" class="start-trial button orange">
+                                                                    Start Your 7-Day Free Trial          
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <span class="inline-modal-pointer-bg"></span>
+                                                        <span class="inline-modal-pointer"></span>    
+                                                    </div>
+                        
+                                                    <div class="item item-right item-link">
+                                                        <a href="#" class="inline-modal-opener" >
+                                                            Share<span class="fa fa-chevron-down"></span>
+                                                        </a>
+                                                        <div class="inline-modal">
+                                                            <div class="inner">
+                                                                <ul>
+                                                                    <li id="short-url">
+                                                                        <a href="#" id="short-label" >
+                                                                            <span class="fa fa-link fa-fw"></span>Get short URL
+                                                                        </a>
+                                                                        <pre id="short-val" class="hidden simple-tooltip" title="Copy the URL to share this review"></pre>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="facebook" href="" rel="nofollow" target="_blank">
+                                                                            <span class="fa fa-facebook fa-fw"></span>Share on Facebook
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="twitter" href="" rel="nofollow" target="_blank">
+                                                                            <span class="fa fa-twitter fa-fw"></span>Share on Twitter
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="googleplus" href="" rel="nofollow" target="_blank">
+                                                                            <span class="fa fa-google-plus fa-fw"></span>Share on Google+
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="linkedin" href="" rel="nofollow" target="_blank">
+                                                                            <span class="fa fa-linkedin fa-fw"></span>Share on LinkedIn
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <span class="inline-modal-pointer-bg"></span>
+                                                        <span class="inline-modal-pointer"></span>    
+                                                    </div>
+                                                </div>-->
+
+                    </div>
+                    <!--                    <div id="report-priorities" class="module-lookalike">
+                                            <div class="module-content">
+                                                <h2>Top priorities for ${website} :</h2>
+                                                <div class="prio-list">
+                                                    <ol></ol>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                    <div id="report-content">
+                        <div class="module-section" id="module-section-title-optimize">Optimize</div>
+                        <div class="module" id="module-seo">
+                            <div class="module-content">
+                                <h2>SEO</h2>
+                                <div id="seo">
+                                    <div id="criterium-related_websites" class="criterium result-0 ">
+
+                                        <div class="criterium-head">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>Related Websites
+                                            </h3>
+                                        </div>
+
+                                        <div id="set1Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="RelatedWebsite">
+                                            <div class="criterium-content more-less">
+                                                <div class="part table more-block" style="height: 125px; overflow: hidden;">
+                                                    <table class="tbody_font_size" id="relatedtable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>URL</th>
+                                                                <!--                                                        <th>Pages</th>
+                                                                                                                        <th>Backlinks</th>
+                                                                                                                        <th>PR</th>
+                                                                                                                        <th>Score</th>-->
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody  class="tbody_font_size" >
+                                                            <tr class="">
+                                                                <td itemprop="isRelatedTo"><a href="" target="_blank" id="relatedtable"></a></td>
+                                                                <!--                                                        <td>76k</td>
+                                                                                                                        <td>23k</td>
+                                                                                                                        <td>PR3</td>
+                                                                                                                        <td>70.0</td>-->
+                                                            </tr>
+
+                                                            <!--                                                    <tr class="">
+                                                                                                                    <td><span data-shorturl="">http://restauranteossigi.com</span></td>
+                                                                                                                    <td>94k</td>
+                                                                                                                    <td>84</td>
+                                                                                                                    <td>-</td>
+                                                                                                                    <td>-</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="">
+                                                                                                                    <td><span data-shorturl="">http://vehicle-history.org</span></td>
+                                                                                                                    <td>141k</td>
+                                                                                                                    <td>23k</td>
+                                                                                                                    <td>-</td>
+                                                                                                                    <td>-</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="">
+                                                                                                                    <td><span data-shorturl="">http://restauranteossigi.es</span></td>
+                                                                                                                    <td>71k</td>
+                                                                                                                    <td>1k</td>
+                                                                                                                    <td>-</td>
+                                                                                                                    <td>-</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span data-shorturl="">http://reiff-beaufort.lu</span></td>
+                                                                                                                    <td>58k</td>
+                                                                                                                    <td>5</td>
+                                                                                                                    <td>-</td>
+                                                                                                                    <td>-</td>
+                                                                                                                </tr>-->
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <a class="adjust showMore" href="#">Show More</a>
+                                            </div></div>
+
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div>
+                                    </div>
+
+                                    <div id="criterium-page_rank" class="criterium result-0">
+                                        <div class="criterium-head">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>PageRank
+                                            </h3>
+                                        </div>
+                                        <div id="set2Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="PageRank">
+                                            <div class="criterium-content">
+                                                <div class="part progressbar">
+                                                    <div class="content has-title">
+
+                                                        <span class="bar"><span style="width:100%; text-align: center" class="colored-bar" id="pageRank"></span>
+                                                            <span class="value" data-abs-value=""></span></span>
+                                                    </div></div></div></div>
+                                        <div class="criterium-advice-click"><span></span></div>
+                                        <div class="criterium-advice">
+
+
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div>
+                                    </div>
+                                    <div id="criterium-title" class="criterium result-2 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.67264573991031</span>
+                                            <span class="prio-score hidden">12</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="To Improve">
+                                                <span class="fa"></span>Title
+                                            </h3>
+
+                                        </div>
+                                        <div id="set3Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Title">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p itemprop="headline" id="title"></p>
+                                                    <p><span class="bold">Length:</span><span id="titleLength"></span>character(s)</p>
+                                                </div>
+
+                                            </div></div>
+                                        <div class="criterium-quicktips">Check the title of your website</div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-description" class="criterium result-2 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.67264573991031</span>
+                                            <span class="prio-score hidden">12</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="To Improve">
+                                                <span class="fa"></span>Description
+                                            </h3>
+
+                                        </div>
+                                        <div id="set4Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Description1">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p itemprop="description" id="description"></p>
+                                                    <p><span class="bold">Length:</span><span id="descriptionLength"></span>character(s)</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="criterium-quicktips">Improve the Meta Description</div>
+                                        <div class="delimiter"></div></div>
+                                    <!--</div>-->
+                                    <div id="criterium-headings" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.89686098654709</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Headings
+                                            </h3>
+
+                                        </div>
+                                        <div id="set5Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Headings">
+                                            <div class="criterium-content more-less">
+
+
+                                                <div class="part table ">
+                                                    <table class="">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>&nbsp; H1</th>
+                                                                <th>&nbsp; H2</th>
+                                                                <th>&nbsp; H3</th>
+                                                                <th>&nbsp; H4</th>
+                                                                <th>&nbsp; H5</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody  class="tbody_font_size" >
+                                                            <tr class="">
+                                                                <td id="heading1"> </td>
+                                                                <td id="heading2"> </td>
+                                                                <td id="heading3"> </td>
+                                                                <td id="heading4"> </td>
+                                                                <td id="heading5"> </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+
+                                                <div class="part table more-block" style="height: 125px; overflow: hidden;">
+                                                    <table class="no-header open" id="headingstable">
+                                                        <tbody  class="tbody_font_size" >
+                                                            <tr class="" id="h1elements">
+                                                                <!--<td id="h1elements"></td>-->
+                                                            </tr>
+
+                                                            <tr class="over-max-v" id="h2elements">
+                                                                <!--<td ></td>-->
+                                                            </tr>
+
+                                                            <tr class="over-max-v" id="h3elements">
+                                                                <!--<td id="h3elements"></td>-->
+                                                            </tr>
+
+                                                            <tr class="over-max-v" id="h4elements">
+                                                                <!--<td id="h4elements"></td>-->
+                                                            </tr>
+
+                                                            <tr class="over-max-v" id="h5elements">
+                                                                <!--<td id="h5elements"></td>-->
+                                                            </tr>
+
+                                                            <!--                                                    <tr class="">
+                                                                                                                    <td><span class="bold">&lt;H1&gt;</span>  BEYOND SOCIAL MEDIA MANAGEMENT</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="">
+                                                                                                                    <td><span class="bold">&lt;H1&gt;</span>  ACROSS ALL SOCIAL CHANNELS</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="">
+                                                                                                                    <td><span class="bold">&lt;H1&gt;</span>  WHY PEOPLE LOVE SOCIOBOARD</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H1&gt;</span>  With Socioboard, engaging your followers is so easy, fun, and insightful now. Get started today!</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H2&gt;</span>  Our Features</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H2&gt;</span>  Get On Board to See What Our Social Media Marketing Suite Can Do for You</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H2&gt;</span>  ENGAGE YOUR FOLLOWERS EFFECTIVELY</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H2&gt;</span>  some reasons</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H3&gt;</span>  Socioboard offers you an advanced, easy, versatile, customizable and scalable open-source social media marketing tool to drive your brand to newer heights</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H3&gt;</span>  Socioboard makes it easy to keep tabs on social conversations and provides everything you need to efficiently engage your audience.</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H3&gt;</span>  Enjoy Socioboard risk-free for 30 days!</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Sign In</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Monitor</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Analysis</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Insights</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Get User Guide</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  People are talking about your brand. Why not leverage it? Socioboard allows you to listen to, analyze and engage your followers in unusual ways across numerous social media accounts</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  GET IN TOUCH WITH US</td>
+                                                                                                                </tr>-->
+                                                        </tbody>
+                                                    </table>
+                                                    <!--                                            <div class="show-links">
+                                                                                                    <a href="#" class="show-more">Show more</a>
+                                                                                                    <a href="#" class="show-less">Show less</a>
+                                                                                                </div>-->
+                                                </div>
+                                                <a class="adjust showMore" href="#">Show More</a>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Add the important keywords in &lt;H&gt; headings</div>
+                                        <div class="delimiter"></div>
+                                    </div>
+
+                                    <div class="criterium result-0 " id="criterium-meta_keywords">
+                                        <div class="criterium-head">
+                                            <h3>
+                                                Meta Keywords
+                                            </h3>
+                                            <div class="icons">
+                                            </div>
+                                        </div>
+                                        <div id="set6Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="MetaKeywords">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p itemprop="keywords" id="keyword"></p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-advice-click"><span></span>
+                                        </div>
+                                        <div class="criterium-advice">
+
+                                        </div>
+
+                                        <div class="delimiter"></div>
+                                    </div>
+
+
+                                    <!--                                <div id="criterium-keywords_cloud" class="criterium result-0 ">
+                                                                        <div class="criterium-head">
+                                                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                                                <span class="fa"></span>Keywords Cloud
+                                                                            </h3>
+                                                                        </div>
+                                                                        <div class="criterium-content">
+                                                                            <div class="part cloud ">
+                                                                                <ul class="cloud-container">
+                                                                                    <li><span class="number" id="keyword"></span></li>
+                                                                                                                                    <li>socioboard<span class="number">10</span></li>
+                                                                                                                                    <li>media<span class="number">7</span></li>
+                                                                                                                                    <li>tools<span class="number">5</span></li>
+                                                                                                                                    <li>learn<span class="number">4</span></li>
+                                                                                                                                    <li>easy<span class="number">3</span></li>
+                                                                                                                                    <li>advanced<span class="number">3</span></li>
+                                                                                                                                    <li>download<span class="number">3</span></li>
+                                                                                                                                    <li>engage<span class="number">3</span></li>
+                                                                                                                                    <li>followers<span class="number">3</span></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="criterium-quicktips"></div>
+                                                                        <div class="delimiter"></div>
+                                                                    </div>-->
+
+
+
+                                    <!--                                <div id="criterium-inpage_keywords" class="criterium result-1 ">
+                                                                        <div class="criterium-head">
+                                                                            <span class="crit-score-pond hidden">3.3632286995516</span>
+                                                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                                                <span class="fa"></span>Keywords Consistency
+                                                                            </h3>
+                                                                        </div>
+                                                                        <div class="criterium-content">
+                                                                            <div class="part table ">
+                                                                                <table class="">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th></th>
+                                                                                            <th>Keywords</th>
+                                                                                            <th>Freq</th>
+                                                                                            <th>Title</th>
+                                                                                            <th>Desc</th>
+                                                                                            <th>&lt;H&gt;</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody  class="tbody_font_size" >
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon good">Good</span></td>
+                                                                                            <td>social</td>
+                                                                                            <td>15</td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon good">Good</span></td>
+                                                                                            <td>socioboard</td>
+                                                                                            <td>10</td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon good">Good</span></td>
+                                                                                            <td>media</td>
+                                                                                            <td>7</td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon bad">Bad</span></td>
+                                                                                            <td>tools</td>
+                                                                                            <td>5</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon bad">Bad</span></td>
+                                                                                            <td>learn</td>
+                                                                                            <td>4</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="part table ">
+                                                                                <table class="">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th></th>
+                                                                                            <th>Keywords (2 words)</th>
+                                                                                            <th>Freq</th>
+                                                                                            <th>Title</th>
+                                                                                            <th>Desc</th>
+                                                                                            <th>&lt;H&gt;</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody  class="tbody_font_size" >
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon good">Good</span></td>
+                                                                                            <td>social media</td>
+                                                                                            <td>7</td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon average">Average</span></td>
+                                                                                            <td>social crm</td>
+                                                                                            <td>3</td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon bad">Bad</span></td>
+                                                                                            <td>helpdesk integration</td>
+                                                                                            <td>2</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon bad">Bad</span></td>
+                                                                                            <td>register social</td>
+                                                                                            <td>2</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon bad">Bad</span></td>
+                                                                                            <td>team collaboration</td>
+                                                                                            <td>2</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                    
+                                                                            <div class="part table ">
+                                                                                <table class="">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th></th>
+                                                                                            <th>Keywords (3 words)</th>
+                                                                                            <th>Freq</th>
+                                                                                            <th>Title</th>
+                                                                                            <th>Desc</th>
+                                                                                            <th>&lt;H&gt;</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody  class="tbody_font_size" >
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon bad">Bad</span></td>
+                                                                                            <td>advanced scheduling publishing</td>
+                                                                                            <td>2</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon bad">Bad</span></td>
+                                                                                            <td>download guide book</td>
+                                                                                            <td>2</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon average">Average</span></td>
+                                                                                            <td>social media marketing</td>
+                                                                                            <td>2</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon bad">Bad</span></td>
+                                                                                            <td>team collaboration tools</td>
+                                                                                            <td>2</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                        </tr>
+                                                                                        <tr class="">
+                                                                                            <td><span class="icon average">Average</span></td>
+                                                                                            <td>customizable scalable open-source</td>
+                                                                                            <td>2</td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon cross">NOK</span></td>
+                                                                                            <td><span class="icon check">OK</span></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                    
+                                                                        </div>
+                                                                        <div class="criterium-quicktips">Be more consistent with your keywords</div>
+                                                                        <div class="delimiter"></div></div>-->
+                                    <div id="criterium-images" class="criterium result-2 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.48046124279308</span>
+                                            <span class="prio-score hidden">12</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="To Improve">
+                                                <span class="fa"></span>Images
+                                            </h3>
+
+                                        </div>
+                                        <div id="set7Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Images">
+                                            <div class="criterium-content more-less">
+                                                <div class="part text ">
+                                                    <!--                                            <p>We found <strong>14</strong> images on this web page.</p>
+                                                                                                <p><strong>9</strong> alt attributes are empty or missing.</p>-->
+                                                </div>
+
+                                                <div class="part list more-block" style="height: 125px; overflow: hidden;">
+                                                    <table>
+                                                        <tbody  class="tbody_font_size"  id="imagestable">
+                                                            <!--                                                <li class=""><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/google_icon.png</span></li>
+                                                                                                            <li class=""><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/fb_icon_lgn.png</span></li>
+                                                                                                            <li class=""><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/trail-butn.png</span></li>
+                                                                                                            <li class=""><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/slidegraph.png</span></li>
+                                                                                                            <li class="over-max"><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/trail-butn.png</span></li>
+                                                                                                            <li class="over-max"><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/phone-banner.png</span></li>
+                                                                                                            <li class="over-max"><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/img-1.png</span></li>
+                                                                                                            <li class="over-max"><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/signup-butn.png</span></li>-->
+                                                        </tbody>
+                                                    </table>
+
+                                                    <!--                                            <div class="show-links">
+                                                                                                    <a href="#" class="show-more">Show more</a>
+                                                                                                    <a href="#" class="show-less">Show less</a>
+                                                                                                </div>-->
+                                                </div>
+                                                <a class="adjust showMore" href="#">Show More</a>
+                                            </div> </div>
+                                        <div class="criterium-quicktips">Set a name for all your images</div>
+                                        <div class="delimiter"></div></div>
+
+
+
+                                    <div id="criterium-text_html_ratio" class="criterium result-3 ">
+                                        <div class="criterium-head">
+                                            <span class="prio-score hidden">15</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>Text/HTML Ratio
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set8Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="HTMLRatio">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p id="htmlRatio"></p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Write additional content with more keywords</div>
+                                        <div class="delimiter"></div></div>
+
+
+
+                                    <div id="criterium-indexed_pages" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">8.9686098654709</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Indexed Pages
+                                            </h3>
+                                        </div>
+                                        <div id="set9Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="IndexedPages">
+                                            <div class="criterium-content">
+                                                <div class="part progressbar ">
+
+                                                    <div class="content has-title">
+                                                        <span class="bar"><span class="colored-bar" style="width:100%; text-align: center;" id="indexedPages"></span><span class="value" data-abs-value=""></span></span>
+                                                    </div>
+                                                </div>
+                                            </div></div>
+
+                                        <div class="criterium-quicktips">Write more content</div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-inside_pages" class="criterium result-0 hidden ">
+                                        <div class="criterium-head">
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>Internal Pages Analysis
+                                            </h3>
+                                        </div>
+                                        <div id="set10Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div class="criterium-content">
+
+                                        </div>
+                                        <div class="criterium-quicktips">Write unique titles for each page</div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-popular_pages" class="criterium result-0 hidden ">
+                                        <div class="criterium-head">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>Popular Pages
+                                            </h3>
+
+                                        </div>
+                                        <div id="set11Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div class="criterium-content">
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-google_preview" class="criterium result-0 ">
+                                        <div class="criterium-head">
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>Google Preview
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set12Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="GooglePreview">
+                                            <div class="criterium-content">
+                                                <div class="part text google-preview">
+                                                    <p id="reviewGoogleTitle"></p>
+                                                    <p><span class="bold" id="reviewGoogleUrl"></span>/</p>
+                                                    <p id="reviewGoogleDesc"></p>
+                                                </div>
+                                            </div> </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-google_publisher_link" class="criterium result-3 ">
+                                        <div class="criterium-head">
+                                            <span class="prio-score hidden">10</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>Google+ Publisher
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set13Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="GooglePublisher">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p><span class="italic" id="googlePublisher"></span></p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-top_ranking_keywords" class="criterium result-0 hidden ">
+                                        <div class="criterium-head">
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>Google&trade; Ranking
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set14Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div class="criterium-content">
+
+                                        </div>
+
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-links_details" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.3452914798206</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>In-Page Links
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set15Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="pageLinks">
+                                            <div class="criterium-content more-less">
+                                                <div class="part text ">
+                                                    <p></p>
+                                                </div>
+
+
+                                                <!--                                        <div class="part pie ">
+                                                                                            <div class="chart-container pie-chart-container chartify-me">
+                                                                                                <ul class="value value-" title="External Links: NoFollow ">
+                                                                                                    <li></li>
+                                                                                                </ul>
+                                                                                                <ul class="value value-" title="External Links: Passing Juice">
+                                                                                                    <li></li>
+                                                                                                </ul>
+                                                                                                <ul class="value value-" title="Internal Links">
+                                                                                                    <li></li>
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>-->
+
+
+
+
+
+
+
+
+
+                                                <div class="part table more-block" style="height: 125px; overflow: hidden;">
+                                                    <table class="links-details">
+                                                        <thead>
+                                                            <!--<tr>-->
+                                                        <td>Links</td>
+                                                        <td>Type</td>
+                                                        <td>Title</td>
+                                                        <!--</tr>-->
+                                                        </thead>
+                                                        <tbody  class="tbody_font_size"  id="inpagelinkstable">
+                                                            <!--                                                    <tr class="">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/img/ivon.ico" title="http://socioboard.com/Themes/Socioboard/Contents/img/ivon.ico">http://socioboard.com/Themes/Socioboard/Contents/img/ivon.ico</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/fonts.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/fonts.css">http://socioboard.com/Themes/Socioboard/Contents/css/fonts.css</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/bootstrap.min.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/bootstrap.min.css">http://socioboard.com/Themes/Socioboard/Contents/css/bootstrap.min.css</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/sb-admin-2.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/sb-admin-2.css">http://socioboard.com/Themes/Socioboard/Contents/css/sb-admin-2.css</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/stylish-portfolio.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/stylish-portfolio.css">http://socioboard.com/Themes/Socioboard/Contents/css/stylish-portfolio.css</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                            <!--                                                    <tr class="">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/font-awesome.min.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/font-awesome.min.css">http://socioboard.com/Themes/Socioboard/Contents/css/font-awesome.min.css</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/smoothDivScroll.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/smoothDivScroll.css">http://socioboard.com/Themes/Socioboard/Contents/css/smoothDivScroll.css</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/alertify.core.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/alertify.core.css">http://socioboard.com/Themes/Socioboard/Contents/css/alertify.core.css</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                            <!--                                                    <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/alertify.default.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/alertify.default.css">http://socioboard.com/Themes/Socioboard/Contents/css/alertify.default.css</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Index" title="http://socioboard.com/Index/Index">Image</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                            <!--                                                    <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Company" title="http://socioboard.com/Index/Company">Company</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Features" title="http://socioboard.com/Index/Features">Features</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/#" title="http://socioboard.com/#">Versions</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                            <!--                                                    <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.org/" title="http://socioboard.org/">Community</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Versions/Agency" title="http://socioboard.com/Versions/Agency">Agency</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Versions/Enterprise" title="http://socioboard.com/Versions/Enterprise">Enterprise</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                            <!--                                                    <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Pricing" title="http://socioboard.com/Index/Pricing">Pricing</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://wiki.socioboard.com/index.php/Main_Page" title="http://wiki.socioboard.com/index.php/Main_Page">Wiki</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://blog.socioboard.com/category/cases" title="http://blog.socioboard.com/category/cases">Cases</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                            <!--                                                    <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://blog.socioboard.com/" title="http://blog.socioboard.com/">Blogs</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Download" title="http://socioboard.com/Index/Download">Download</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/contact" title="http://socioboard.com/Index/contact">Contact Us</a></td>
+                                                                                                                    <td>Internal Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                            <!--                                                    <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/ForgotPassword.aspx" title="http://www.socioboard.com/ForgotPassword.aspx">Click here to restore</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/Features.aspx#monitor" title="http://www.socioboard.com/Features.aspx#monitor">Learn More</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/Features.aspx#analyze" title="http://www.socioboard.com/Features.aspx#analyze">Learn More</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/Features.aspx#report" title="http://www.socioboard.com/Features.aspx#report">Learn More</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                            <!--<tr class="over-max">-->
+                                                            <!--                                                        <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/Contents/common/Socioboard_User_Guide_1.0.2_Ver%207.pdf" title="http://www.socioboard.com/Contents/common/Socioboard_User_Guide_1.0.2_Ver%207.pdf">Download Guide Book</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.scrolltotop.com/" title="http://www.scrolltotop.com/">Scroll to Top Button</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.facebook.com/SocioBoard" title="https://www.facebook.com/SocioBoard">https://www.facebook.com/SocioBoard</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                            <!--                                                    <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://twitter.com/Socioboard" title="https://twitter.com/Socioboard">https://twitter.com/Socioboard</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.linkedin.com/company/socioboard" title="http://www.linkedin.com/company/socioboard">http://www.linkedin.com/company/socioboard</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>
+                                                                                                                <tr class="over-max">
+                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://plus.google.com/s/socioboard" title="https://plus.google.com/s/socioboard">https://plus.google.com/s/socioboard</a></td>
+                                                                                                                    <td>External Links</td>
+                                                                                                                    <td>Passing Juice</td>
+                                                                                                                </tr>-->
+                                                        </tbody>
+                                                    </table>
+                                                    <!--                                            <div class="show-links">
+                                                                                                    <a href="#" class="show-more">Show more</a>
+                                                                                                    <a href="#" class="show-less">Show less</a>
+                                                                                                </div>-->
+                                                </div>
+                                                <a class="adjust showMore" href="#">Show More</a>
+                                            </div></div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-broken_links" class="criterium result-1 hidden">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">2.2421524663677</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Broken Links
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set16Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>No broken links were found on this web page</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="criterium-quicktips">Fix or Delete Broken Links</div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-backlinks_counter" class="criterium result-1">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">6.6794796793857</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Backlinks Counter
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set17Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Backlinks">
+                                            <div class="criterium-content">
+                                                <div class="part progressbar ">
+                                                    <div class="content">
+                                                        <span class="bar"><span class="colored-bar" style="width:99%; text-align: center;" id="backlinksCounter"></span><span class="value" data-abs-value=""></span></span>
+                                                    </div>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Build more backlinks pointing to your site</div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-www_resolve" class="criterium result-2 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.1210762331839</span>
+                                            <span class="prio-score hidden">20</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="To Improve">
+                                                <span class="fa"></span>WWW Resolve
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set18Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Resolve">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p id="wwwresolve"></p>
+                                                </div>
+                                            </div> </div>
+                                        <div class="criterium-quicktips">Redirect non-www to www</div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-ip_canonicalization" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.44843049327354</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>IP Canonicalization
+                                            </h3>
+                                        </div>
+                                        <div id="set19Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Canonicalization">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p id="ipCanonicalization"></p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-robots_txt" class="criterium result-3 ">
+                                        <div class="criterium-head">
+                                            <span class="prio-score hidden">30</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>Robots.txt
+                                            </h3>
+                                        </div>
+                                        <div id="set20Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Robots">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p><span class="italic" id="robots"></span></p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Add a robots.txt file</div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-xml_sitemaps" class="criterium result-3 ">
+                                        <div class="criterium-head">
+                                            <span class="prio-score hidden">20</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>XML Sitemap
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set21Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="XMLSitemap">
+                                            <div class="criterium-content more-less">
+                                                <div class="part text more-block" style="height: 125px; overflow: hidden;">
+                                                    <table>
+                                                        <tbody  class="tbody_font_size"  id="xmltable">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <a class="adjust showMore" href="#">Show More</a>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Add and Optimize your XML sitemap</div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-clean_url" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.89686098654709</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>URL Rewrite
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set22Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Rewrite">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p id="urlDomain"></p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Rewrite your URLs and clean them up.</div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-underscores_url" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.89686098654709</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Underscores in the URLs
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set23Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="UnderscoresUrl">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p id="underscores"></p>
+                                                </div>
+                                            </div> </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-flash" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.44843049327354</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Flash
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set24Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Flash">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p id="flash">No</p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Use Flash content sparingly</div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-frames" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.44843049327354</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Frames
+                                            </h3>
+
+
+                                        </div>
+                                        <div id="set25Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="Frames">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p id="frames"></p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Check that none of your important content is within a Frame</div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-domain_creation" class="criterium result-3 ">
+                                        <div class="criterium-head">
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>Domain 1st Registered
+                                            </h3>
+
+                                        </div>
+                                        <div id="set26Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="DomainRegistered">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p itemprop="dateCreated" id="domainCreated"></p>
+                                                </div>
+                                            </div>  </div>                                 
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-domain_expiration" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">2.2421524663677</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Domain Expiration
+                                            </h3>
+                                        </div>
+                                        <div id="set27Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="DoaminExpiration">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p id="domainExpired"></p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Extend the registration of your domain</div>
+                                        <div class="delimiter"></div>
+                                    </div>
+
+                                    <div id="criterium-domain_updated" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">2.2421524663677</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Domain Updated
+                                            </h3>
+                                        </div>
+                                        <div id="set28Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="DomainUpdated">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p id="domainUpdated"></p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Extend the registration of your domain</div>
+                                        <div class="delimiter"></div>
+                                    </div>
+
+
+
+
+
+
+                                    <div id="criterium-blog" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">0.89686098654709</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Blog
+                                            </h3>
+                                        </div>
+                                        <div id="set29Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="blog">
+                                            <div class="criterium-content">
+                                                <div class="part text ">
+                                                    <p>We found a Blog on this website.</p>
+                                                </div>
+                                            </div></div>
+                                        <div class="criterium-quicktips">Consider starting a blog</div>
+                                        <div class="delimiter"></div></div>
+                                </div>
+                            </div>
+                            <div class="module" id="module-mobile">
+                                <div class="module-content">
+                                    <h2>Mobile</h2>
+                                    <div id="mobile">
+                                        <div id="criterium-mobile_rendering" class="criterium result-0 ">
+                                            <div class="criterium-head">
+
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                    <span class="fa"></span>Mobile Rendering
+                                                </h3>
+                                            </div>
+                                            <div id="set30Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="mobileRendering">
+                                                <div class="criterium-content">
+                                                    <div class="part image iphone-thumb">
+                                                        <!--<img src="" itemprop="screenshot" alt="Your website on an iPhone" id="iphoneView"/>-->
+                                                        <div id="set53Loader">
+                                                            <div style="text-align:center; display: block" ><img width="10" height="10" style="height: 30%; width: 30%; margin-top: 35%; margin-left: -7%;" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                        </div>
+                                                        <img alt="" itemprop="screenshot" src="" id="iphoneView">
+                                                    </div>
+                                                    <div class="part image ipad-thumb">
+                                                        <div id="set54Loader">
+                                                            <div style="text-align:center; display: block" ><img width="10" height="10" style="height: 30%; width: 30%; margin-top: 24%; margin-left: -3%;" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                        </div>
+                                                        <img src="" itemprop="screenshot"  alt="" id="ipadView"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+
+
+                                        <div id="criterium-mobile_load_time" class="criterium result-1 ">
+                                            <div class="criterium-head">
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                    <span class="fa"></span>Mobile Load Time
+                                                </h3>
+                                            </div>
+
+                                            <div id="set31Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="mobileTime">
+                                                <div class="criterium-content">
+                                                    <div class="part progressbar ">
+                                                        <div class="content">
+                                                            <span class="bar"><span class="colored-bar" style="width:100%; text-align: center" id="mobileLoadTime"></span><span class="value" data-abs-value="1"></span></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+                                        <div id="criterium-mobile_optimization" class="criterium result-3 ">
+                                            <div class="criterium-head">
+                                                <span class="prio-score hidden">20</span>
+
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                    <span class="fa"></span>Mobile Optimization
+                                                </h3>
+
+                                            </div>
+                                            <div id="set32Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="mobileOptimization">
+                                                <div class="criterium-content">
+                                                    <div class="part text ">
+                                                        <p>This website is not optimized for Mobile Visitors</p>
+                                                    </div>
+                                                    <div class="part text checklist">
+                                                        <p><span class="icon grey-missing"></span>Mobile CSS</p>
+                                                        <p><span class="icon grey-missing"></span>Mobile Redirection</p>
+                                                    </div>
+
+                                                    <div class="part text ">
+                                                        <p>Additional mobile optimization techniques:</p>
+                                                    </div>
+
+                                                    <div class="part text checklist">
+                                                        <p><span class="icon grey-missing weak"></span>Meta Viewport Tag</p>
+                                                        <p><span class="icon grey-missing weak"></span>Apple Icon</p>
+                                                        <p><span class="icon grey-found weak"></span>Flash content</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips">Optimize your website for Mobile browsing</div>
+                                            <div class="delimiter"></div></div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div id="module-section-title-measure" class="module-section">Measure</div>
-                            <div id="set1Loader">
-                                <div style="text-align:center; display: block" ><img width="350" height="80" src="https://s3.amazonaws.com/images_ranktracker/load.gif"/></div>
-                            </div>
-                            <div id="visitorsnew">
-                                <div id="module-visitors" class="module">
-                                    <div class="module-content">
-                                        <h2></h2>
 
-                                        <div id="criterium-trafic_ranking" class="criterium result-0 ">
-                                            <div class="criterium-head">
-                                                <h3 class="simple-tooltip" data-original-title="Low impact" rel="tooltip" data-placement="left">
-                                                    <span class="icn"></span>
-                                                    Traffic Rank
-                                                </h3>
-                                                <div class="icons"> </div>
+
+                            <!-- usability -->
+                            <div class="module" id="module-usability">
+                                <div class="module-content">
+                                    <h2>Usability</h2>
+                                    <div id="criterium-url" class="criterium result-0 hidden">
+                                        <div class="criterium-head">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>URL
+                                            </h3>
+                                        </div>
+                                        <div id="set33Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>http://socioboard.com</p>
+                                                <p><span class="bold">Length:</span> 10 character(s)</p>
                                             </div>
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
 
-                                            <div class="criterium-content" id="trafficrank">
+
+                                    <div id="criterium-favicon" class="criterium result-1 hidden">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.3452914798206</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Favicon
+                                            </h3>
+
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>Yes</p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips">Add a Favicon</div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-not_found_error" class="criterium result-1 hidden">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">2.2421524663677</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Custom 404 Page
+                                            </h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>Great, your website has a custom 404 error page.</p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips">Customize the 404 error page</div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-conversion_form" class="criterium result-3 hidden ">
+                                        <div class="criterium-head">
+                                            <span class="prio-score hidden">20</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>Conversion Forms
+                                            </h3>
+
+                                        </div>
+                                        <div class="criterium-content">
+
+                                        </div>
+                                        <div class="criterium-quicktips">Add a conversion form</div>
+                                        <div class="delimiter"></div></div>
+
+
+
+                                    <div id="criterium-above_fold" class="criterium result-0 ">
+                                        <div class="criterium-head">
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class=""></span>Above the Fold Content
+                                            </h3>
+
+                                        </div>
+
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>Place the most important content <strong>above the fold line</strong>.</p>
+                                            </div>
+                                            <div id="set52Loader">
+                                                <div style="text-align:center; display: block" ><img width="10" height="10" style="width: 10%;margin-left: -42%; height: 10%; margin-top: 5%;" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="usability">
+                                                <div class="part above-fold-wrapper">
+
+                                                    <div class="screen">
+                                                        <img id="usabilityImage" src="">
+                                                        <div class="line-wrapper">
+                                                            <p class="text">Fold line</p>
+                                                            <div class="dotted"></div>
+                                                        </div>
+                                                        <div class="bad-zone"></div>
+                                                    </div>
+                                                    <div class="screen-foot"></div>
+                                                </div></div>
+                                        </div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-page_size" class="criterium result-0 hidden">
+                                        <div class="criterium-head">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>Page Size
+                                            </h3>
+                                        </div>
+                                        <div id="set34Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p itemprop="fileSize">30.7 KB (World Wide Web <a rel="nofollow" href="https://developers.google.com/speed/articles/web-metrics" target="_blank">average is 320 Kb</a>)</p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+                                    <div id="criterium-load_time" class="criterium result-1 hidden">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.3452914798206</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Load Time
+                                            </h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>0.17 second(s) (184.45 kB/s)</p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips">Speed-up your website</div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-language" class="criterium result-3 hidden">
+                                        <div class="criterium-head">
+                                            <span class="prio-score hidden">20</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>Language</h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p itemprop="inLanguage"><span class="bold">Declared:</span> Missing</p>
+                                                <p><span class="bold">Detected: </span><i>English</i></p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips">Declare the language used</div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-printability_css" class="criterium result-3 hidden">
+                                        <div class="criterium-head">
+                                            <span class="prio-score hidden">10</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>Printability
+                                            </h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>We could not find a Print-Friendly CSS</p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-microformats" class="criterium result-3 hidden">
+                                        <div class="criterium-head">
+                                            <span class="prio-score hidden">30</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>Microformats</h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>We found 0 type(s) of Microformat</p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-dublin_core" class="criterium result-3 hidden">
+                                        <div class="criterium-head">
+                                            <span class="prio-score hidden">10</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                <span class="fa"></span>Dublin Core</h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p><span class="italic">Missing</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+
+
+
+                                    <div id="criterium-tld_cybersquating_prevention" class="criterium result-0 hidden">
+                                        <div class="criterium-head">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>Domain Availability</h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part table ">
+                                                <table class="">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Domains (<a rel="nofollow" href="http://en.wikipedia.org/wiki/Top-level_domain" target="_blank">TLD</a>)</th>
+                                                            <th>Status</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody  class="tbody_font_size" >
+                                                        <tr class="">
+                                                            <td>socioboard.net</td>
+                                                            <td>in 3 months</td>
+                                                            <td><span class="fa fa-lock"></span></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td>socioboard.org</td>
+                                                            <td>This domain is booked</td>
+                                                            <td><span class="fa fa-lock"></span></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td>socioboard.info</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td>socioboard.biz</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td>socioboard.eu</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-typo_cybersquating_prevention" class="criterium result-0 hidden">
+                                        <div class="criterium-head">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>Typo Availability
+                                            </h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part table ">
+                                                <table class="">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Domains (<a rel="nofollow" href="http://en.wikipedia.org/wiki/Top-level_domain" target="_blank">TLD</a>)</th>
+                                                            <th>Status</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody  class="tbody_font_size" >
+                                                        <tr class="">
+                                                            <td>aocioboard.com</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td>sicioboard.com</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td>soxioboard.com</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td>socuoboard.com</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td>socioblard.com</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td>sociovoard.com</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                        <tr class="over-max">
+                                                            <td>sociobozrd.com</td>
+                                                            <td>Available. <a rel="nofollow" href="http://bit.ly/1qKTAle" target="_blank">Book it now!</a></td>
+                                                            <td><span class="fa fa-check"></span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="show-links">
+                                                    <a href="#" class="show-more">Show more</a>
+                                                    <a href="#" class="show-less">Show less</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-email_security" class="criterium result-1 hidden">
+                                        <div class="criterium-head">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Email Privacy</h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>Good, no email address has been found in plain text.</p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips">Hide email addresses to avoid being spammed</div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-spam_threats" class="criterium result-1 hidden ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">2.2421524663677</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Spam Block</h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                        </div>
+                                        <div class="criterium-quicktips">Contact Spamcop.net to clean your reputation</div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-trust_indicators" class="criterium result-0 hidden ">
+                                        <div class="criterium-head">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                <span class="fa"></span>Trust Indicators</h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
+
+
+                                    <div id="criterium-safe_browsing" class="criterium result-1 hidden">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">4.4843049327354</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Safe Browsing</h3>
+                                        </div>
+                                        <div class="criterium-content">
+                                            <div class="part text ">
+                                                <p>Yes</p>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips">Are you a spammer?</div>
+                                        <div class="delimiter"></div></div>
+
+                                </div>
+                            </div>
+
+
+                            <!-- Technologies -->
+                            <div class="module" id="module-technologies">
+                                <div class="module-content">
+                                    <h2>Technologies</h2>
+                                    <div id="technologies">
+                                        <div id="criterium-ip_information" class="criterium result-0 ">
+                                            <div class="criterium-head">
+
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                    <span class="fa"></span>Server IP
+                                                </h3>
+
+                                            </div>
+                                            <div id="set35Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="serverIP">
+                                                <div class="criterium-content">
+                                                    <div class="part text ">
+                                                        <p id="ipaddress"></p>
+                                                        <p  itemprop="contentLocation"><span class="bold">Server location: </span> <span class="flag us" id="location"></span></p>
+                                                        <!--<p  itemprop="contentLocation"><span class="bold">Latitude: </span> <span class="flag us" id="latitude"></span></p>-->
+                                                        <!--<p  itemprop="contentLocation"><span class="bold">Longitude: </span> <span class="flag us" id="longitude"></span></p>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+
+
+                                        <div id="criterium-technologies" class="criterium result-0 ">
+                                            <div class="criterium-head">
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                    <span class="fa"></span>Technologies</h3>
+                                            </div>
+                                            <div id="set36Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="technology">
+                                                <div class="criterium-content">
+                                                    <div class="part text " >
+                                                        <table class="no-header">
+                                                            <tbody  class="tbody_font_size"  id="technologytable">
+                                                            </tbody>
+                                                        </table>
+                                                        <p id="technologyused"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                    <div class="criterium-content">
+                                                                                    <div class="part text ">
+                                                                                        <p itemprop="featureList">
+                                                                                            <a class="wooindex-bl" target="_blank" href="">
+                                                                                                <span class="aligned-right icon tech-handlebars" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/Handlebars.png')">Handlebars</span>
+                                                                                                JavaScript framework
+                                                                                            </a>
+                                                                                        </p>
+                                                                                        <p itemprop="featureList">
+                                                                                            <a class="wooindex-bl" target="_blank" href="">
+                                                                                                <span class="aligned-right icon tech-iis" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/IIS.png')">IIS</span> Web server
+                                                                                            </a>
+                                                                                        </p>
+                                                                                        <p itemprop="featureList">
+                                                                                            <a class="wooindex-bl" target="_blank" href="">
+                                                                                                <span class="aligned-right icon tech-jquery" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/jQuery.png')">jQuery</span> JavaScript framework
+                                                                                            </a>
+                                                                                        </p>
+                                                                                        <p itemprop="featureList">
+                                                                                            <a class="wooindex-bl" target="_blank" href="">
+                                                                                                <span class="aligned-right icon tech-jquery-ui" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/jQuery UI.png')">jQuery UI</span> JavaScript framework
+                                                                                            </a>
+                                                                                        </p>
+                                                                                        <p itemprop="featureList">
+                                                                                            <a class="wooindex-bl" target="_blank" href="">
+                                                                                                <span class="aligned-right icon tech-microsoft-asp.net" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/Microsoft ASP.NET.png')">Microsoft ASP.NET</span> Web framework
+                                                                                            </a>
+                                                                                        </p>
+                                                                                        <p itemprop="featureList">
+                                                                                            <a class="wooindex-bl" target="_blank" href="">
+                                                                                                <span class="aligned-right icon tech-twitter-bootstrap" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/Twitter Bootstrap.png')">Twitter Bootstrap</span> Web framework
+                                                                                            </a>
+                                                                                        </p>
+                                                                                        <p itemprop="featureList">
+                                                                                            <a class="wooindex-bl" target="_blank" href="">
+                                                                                                <span class="aligned-right icon tech-windows-server" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/Windows Server.png')">Windows Server</span> Operating system
+                                                                                            </a>
+                                                                                        </p>
+                                                                                    </div>         
+                                                                                </div>-->
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+
+
+                                        <!--                                        <div id="criterium-speed_tips" class="criterium result-2 ">
+                                                                                    <div class="criterium-head">
+                                                                                        <span class="crit-score-pond hidden">0.44843049327354</span>
+                                                                                        <span class="prio-score hidden">4</span>
+                                                                                        <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="To Improve">
+                                                                                            <span class="fa"></span>Speed Tips</h3>
+                                                                                    </div>
+                                                                                    <div id="set37Loader">
+                                                                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                                                    </div>
+                                                                                    <div class="criterium-content">
+                                                                                        <div class="part text ">
+                                                                                            <p>Watch out: your website?s speed could be slightly improved.</p>
+                                                                                        </div>
+                                                                                        <div class="part text ">
+                                                                                            <p><span class="icon grey-found"></span>Perfect, your server is using a caching method to speed up page display. </p>
+                                                                                            <p><span class="icon grey-found"></span>Perfect, your website doesn't use nested tables.</p>
+                                                                                            <p><span class="icon grey-missing"></span>Too bad, your website is using inline styles.</p>
+                                                                                            <p><span class="icon grey-missing"></span>Too bad, your website has too many CSS files (more than 4).</p>
+                                                                                            <p><span class="icon grey-missing"></span>Too bad, your website has too many JavaScript files (more than 7).</p>
+                                                                                            <p><span class="icon grey-found"></span>Perfect, your website takes advantage of <a rel="nofollow" href="http://en.wikipedia.org/wiki/Gzip" target="_blank">gzip</a>.</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="criterium-quicktips"></div>
+                                                                                    <div class="delimiter"></div></div>-->
+                                        <div id="criterium-analytics_technologies" class="criterium result-1 ">
+                                            <div class="criterium-head">
+                                                <span class="crit-score-pond hidden">1.3452914798206</span>
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                    <span class="fa"></span>Analytics
+                                                </h3>
+                                            </div>
+                                            <div id="set38Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="analytics">
+                                                <div class="criterium-content">
+                                                    <div class="part text ">
+                                                        <p>
+                                                            <a class="wooindex-bl" target="_blank" href="https://index.woorank.com/en/reviews?technology=google-analytics">
+                                                                <span class="aligned-right icon tech-google-analytics" style="background-image:" id="analyticstable"></span>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+
+
+                                        <div id="criterium-w3c_validity" class="criterium result-3 ">
+                                            <div class="criterium-head">
+                                                <span class="prio-score hidden">10</span>
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
+                                                    <span class="fa"></span>W3C Validity</h3>
+                                            </div>
+                                            <div id="set39Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="wcvalidity">
+                                                <div class="criterium-content">
+                                                    <div class="part text ">
+                                                        <p><span class="bold first-letter-cap">Invalid:</span><span id="w3cvalidity"></span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips">Fix the errors in the code syntax</div>
+                                            <div class="delimiter"></div>
+                                        </div>
+
+                                        <div id="criterium-doctype" class="criterium result-0 ">
+                                            <div class="criterium-head">
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                    <span class="fa"></span>Doctype</h3>
+                                            </div>
+                                            <div id="set40Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="doctype1">
+                                                <div class="criterium-content">
+                                                    <div class="part text ">
+                                                        <p itemprop="fileFormat" id="doctype"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+
+
+                                        <div id="criterium-encoding" class="criterium result-1 ">
+                                            <div class="criterium-head">
+                                                <span class="crit-score-pond hidden">0.44843049327354</span>
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                    <span class="fa"></span>Encoding</h3>
+                                            </div>
+                                            <div id="set41Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="encoding1">
+                                                <div class="criterium-content">
+                                                    <div class="part text ">
+                                                        <p id="encoding"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+
+                                        <div id="criterium-deprecated_html_element" class="criterium result-1 hidden ">
+                                            <div class="criterium-head">
+                                                <span class="crit-score-pond hidden">1.3452914798206</span>
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                    <span class="fa"></span>Deprecated HTML</h3>
+                                            </div>
+                                            <div class="criterium-content">
+                                            </div>
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+
+                                        <div id="criterium-directory_browsing" class="criterium result-1 ">
+                                            <div class="criterium-head">
+                                                <span class="crit-score-pond ">0.44843049327354</span>
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                    <span class="fa"></span>Directory Browsing</h3>
+                                            </div>
+                                            <div id="set42Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="directoryBrowsing">
+                                                <div class="criterium-content">
+                                                    <div class="part text ">
+                                                        <p>No</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+
+
+                                        <div id="criterium-server_signature" class="criterium result-1  ">
+                                            <div class="criterium-head">
+                                                <span class="crit-score-pond ">0.44843049327354</span>
+                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                    <span class="fa"></span>Server Signature</h3>
+                                            </div>
+                                            <div id="set43Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="serverSignature">
+                                                <div class="criterium-content">
+                                                    <div class="part text ">
+                                                        <p>No</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="criterium-quicktips"></div>
+                                            <div class="delimiter"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="module-section" id="module-section-title-promote">Promote</div>
+                            <div class="module" id="module-social">
+                                <div class="module-content">
+                                    <h2>Social</h2>
+                                    <!--<div id="criterium-social_impact" class="criterium result-1 ">-->
+                                    <!--                                        <div class="criterium-head">
+                                                                                <span class="crit-score-pond hidden">4.4843049327354</span>
+                                                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                                                    <span class="fa"></span>Social shareability</h3>
+                                                                            </div>-->
+                                    <!--<div class="criterium-content">-->
+                                    <!--                                            <div class="part text competitor-hide">
+                                                                                    <p itemprop="interactionCount">This website is very popular on Social Networks.</p>
+                                                                                    <p itemprop="interactionCount">
+                                                                                        <span class="big-right-aligned icon fb_likes">Facebook Likes</span>
+                                                                                        <span class="big-right-aligned-content"></span>
+                                                                                    </p>
+                                                                                    <p itemprop="interactionCount">
+                                                                                        <span class="big-right-aligned icon fb_shares">Facebook Shares</span>
+                                                                                        <span class="big-right-aligned-content">284</span>
+                                                                                    </p>
+                                                                                    <p itemprop="interactionCount">
+                                                                                        <span class="big-right-aligned icon fb_comm">Facebook Comments</span>
+                                                                                        <span class="big-right-aligned-content">86</span>
+                                                                                    </p>
+                                                                                    <p itemprop="interactionCount">
+                                                                                        <span class="big-right-aligned icon plus_one">Google&trade; +</span>
+                                                                                        <span class="big-right-aligned-content">99</span>
+                                                                                    </p>
+                                                                                    <p itemprop="interactionCount">
+                                                                                        <span class="big-right-aligned icon tw_bl">Twitter Backlinks</span>
+                                                                                        <span class="big-right-aligned-content">1124</span>
+                                                                                    </p>
+                                                                                </div>-->
+                                    <!--                                            <div class="part text competitor-to-process">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="criterium-quicktips">Promote your website on Social Media</div>
+                                                                            <div class="delimiter"></div></div>-->
+
+
+                                    <!-- twitter_brand_page -->
+
+                                    <div id="criterium-twitter_account" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.3452914798206</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Twitter Account
+                                            </h3>
+
+                                            <div class="icons">
+                                                <span class="importance-1 simple-tooltip" data-placement="top" rel="tooltip" data-original-title="Low impact">
+                                                    <span class="fa fa-bullet-impact"></span><span class="fa fa-bullet-impact"></span><span class="fa fa-bullet-impact"></span>
+                                                    <span>Low impact</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div id="set44Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="twitterAccount">
+                                            <div class="criterium-content">
+                                                <div class="part image cover-image">
+                                                    <img src="" alt="" id="twitterImage">
+                                                </div>
                                                 <div class="part text ">
-                                                    <p>
-                                                        <span class="bold" id="globalrank"><%--= rp.objVisitorsInfo.global_rank   commonseo--%></span>
-                                                        <span class="superscript">th</span>
-                                                        most visited website in
-                                                        <span class="bold">the World</span>
+                                                    <p> <span class="bold"></span></p>
+                                                </div>
+                                                <div class="part text ">
+                                                    <p itemprop="brand">
+                                                        <span class="right-aligned">Name</span>
+                                                        <span class="right-aligned-content">
+                                                            <a rel="nofollow" href="" target="_blank" id="twitterName"></a>
+                                                        </span>
                                                     </p>
                                                     <p>
-                                                        <a class="wooindex-bl" href="https://index.woorank.com/en/reviews?country=us" target="_blank">
-                                                            <span class="bold" id="countryRank"><%-- rp.objVisitorsInfo.country_rank    commonseo--%></span>
-                                                            <span class="superscript">th</span>
-                                                            most visited website in
-                                                            <span class="bold flag us"></span>
-                                                            United States
-                                                        </a>
+                                                        <span class="right-aligned">Count</span>
+                                                        <span class="right-aligned-content" id="twitterCount"></span>
+                                                    </p>
+                                                    <p>
+                                                        <span class="right-aligned">Following</span>
+                                                        <span class="right-aligned-content" id="twitterFollowing"></span>
+                                                    </p>
+                                                    <p>
+                                                        <span class="right-aligned">Followers</span>
+                                                        <span class="right-aligned-content" id="twitterFollower"></span>
+                                                    </p>
+                                                    <p>
+                                                        <span class="right-aligned">List</span>
+                                                        <span class="right-aligned-content" id="twitterList"></span>
+                                                    </p>
+                                                    <p>
+                                                        <span class="right-aligned">Location</span>
+                                                        <span class="right-aligned-content" id="twitterLocation"></span>
+                                                    </p>
+                                                    <p>
+                                                        <span class="right-aligned">Favorities</span>
+                                                        <span class="right-aligned-content" id="twitterFavourites"></span>
+                                                    </p>
+                                                    <p>
+                                                        <span class="right-aligned">Joineddate</span>
+                                                        <span class="right-aligned-content" id="twitterDate"></span>
+                                                    </p>
+                                                    <p>
+                                                        <span class="right-aligned">Description</span>
+                                                        <span class="right-aligned-content" id="twitterDescription"></span>
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class="criterium-advice-click">
-                                                <span>?</span>
+                                        </div>
+                                        <div class="delimiter"></div>
+                                    </div>
+
+
+
+                                    <!-- facebook_brand_page -->
+                                    <div id="criterium-facebook_brand_page" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.3452914798206</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                <span class="fa"></span>Facebook Page
+                                            </h3>
+                                        </div>
+                                        <div id="facebook">
+                                            <div id="set45Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
                                             </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div id="criterium-visitors_loc" class="criterium result-0 open-crit">
-
-                                    <div class="criterium-head">
-                                        <h3 class="simple-tooltip" data-original-title="Low impact" rel="tooltip" data-placement="left">
-                                            <span class="icn"></span>
-                                            Visitors Localization
-                                        </h3>
-                                        <div class="icons"> </div>
-                                    </div>
-                                    <div id="set11Loader">
-                                        <div style="text-align:center; display: block" ><img width="350" height="80" src="https://s3.amazonaws.com/images_ranktracker/load.gif"/></div>
-                                    </div>                               
-                                    <!-- Start of VIsitors Localization --> 
-                                    <div class="criterium-content" id="localozation" >
-                                        <div class="part table ">
-                                            <table class="">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Popular Countries</th>
-                                                        <th>
-                                                            <a target="_blank" href="http://en.wikipedia.org/wiki/Country_code_top-level_domain" rel="nofollow">Percent of Visitors</a>
-                                                        </th>
-                                                        <th>Rank</th>
-                                                        <!--<th></th>-->
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="visitortable">
-
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <!-- End of Visitors Localization -->                 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <h2 class="accordion-header">Social</h2>
-                <div class="accordion-content" style="display: block">
-                    <div class="module" id="module-social">
-                        <div class="module-content">
-                            <h2> Facebook Page</h2>
-                            <div class="criterium result-0 " id="criterium-facebook_brand_page">
-                                <div class="criterium-head">
-                                    <!-- jdfjdfj  _-->
-                                    <div class="icons">
-                                    </div>
-                                </div>
-                                <div id="set2Loader">
-                                    <div style="text-align:center; display: block" ><img width="350" height="80" src="https://s3.amazonaws.com/images_ranktracker/load.gif"/></div>
-                                </div>
-                                <div id="facebook">
-                                    <div class="criterium-content" >
-
-                                        <div class="part image fb-cover">
-                                            <img alt="" src='<%--= rp.objFacebookStructure.facebook_image   commonseo--%>' id="facebookImage">
-                                        </div>
-
-                                        <div class="part text fb-text-iconbloc">
-                                            <p><span class="icon fb-fancount">Likes</span><span id="facebookLikes"></span></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Talking About</p>
-                                            <p id="takingAbout"></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>URL</p>
-                                            <p><a target="_blank" href="#" class="fb-page-url"><span class="fb-bold" id="facebookUrl"><%--= rp.objFacebookStructure.facebook_url   commonseo--%></span></a>
-                                            </p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Name</p>
-                                            <p id="facebookName"><%--= rp.objFacebookStructure.facebook_name   commonseo--%></p>
-                                        </div>
-
-
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Products</p>
-                                            <p id="facebookProduct"><%--= rp.objFacebookStructure.facebook_products--%></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Company Overview</p>
-                                            <p id="facebookOverview"><%--= rp.objFacebookStructure.facebook_overview--%></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>About</p>
-                                            <p id="facebookAbout"><%--= rp.objFacebookStructure.facebook_about--%></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Mission</p>
-                                            <p id="facebookMission"><%--= rp.objFacebookStructure.facebook_mission--%></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Address</p>
-                                            <p id="facebookAddress"><%--= rp.objFacebookStructure.facebook_address--%></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Phone</p>
-                                            <p id="facebookPhone"><%--= rp.objFacebookStructure.facebook_phone--%></p>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        These data regarding the Facebook Page are publicly available.
-                                    </div>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="module" id="module-social">
-                        <div class="module-content">
-                            <h2> Google+ Page </h2>
-                            <div class="criterium result-0 " id="criterium-facebook_brand_page">
-                                <div class="criterium-head">
-
-                                    <div class="icons">
-                                    </div>
-                                </div>                              
-                                <div id="googleplus">
-                                    <div class="criterium-content" >
-
-                                        <div class="part image fb-cover">
-                                            <img alt="" src="" id="googleImage">
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>URL</p>
-                                            <p><a target="_blank" href="#" class="fb-page-url">
-                                                    <span class="fb-bold" id="googleUrl"><%--= rp.objGoogleplus.URL--%></span></a>
-                                            </p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Name</p>
-                                            <p id="googleName"><%--= rp.objGoogleplus.Name--%></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Company_Overview</p>
-                                            <p id="googleOverview"><%--= rp.objGoogleplus.Company_Overview--%></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Introduction</p>
-                                            <p id="googleIntroduction"><%--= rp.objGoogleplus.Introduction--%></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Verified</p>
-                                            <p id="googleVerified"><%--= rp.objGoogleplus.Verified--%></p>
-                                        </div>
-
-                                        <div class="part text fb-text-bloc">
-                                            <p>Tagline</p>
-                                            <p id="googleTagline"><%--= rp.objGoogleplus.Tagline--%></p>
-                                        </div>
-
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        This page is your business listing in Google+. Being active in this social network is important
-                                        for claiming your brand, influencing your search engine rankings and interacting with your network. 
-                                        You might also consider managing your profile with Google My Business (formerly Google Places). 
-
-                                    </div>
-                                    <div class="delimiter"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="accordion-header">Mobile</h2>
-
-                <div class="accordion-content" style="display: block">
-                    <div id="module-mobile" class="module">
-                        <div class="module-content">
-                            <h2>Mobile</h2>
-                            <div id="set3Loader">
-                                <div style="text-align:center; display: block" ><img width="350" height="80" src="https://s3.amazonaws.com/images_ranktracker/load.gif"/></div>
-                            </div>
-                            <div id="mobile">
-                                <div class="criterium result-0 " id="criterium-mobile_rendering">
-
-                                    <div class="criterium-head">
-
-                                        <h3 data-original-title="Low impact" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            <span class="icn"></span>Mobile Rendering
-                                        </h3>
-
-                                        <div class="icons">
-                                            <i class="importance-2 simple-tooltip" data-placement="top" rel="tooltip" data-original-title="Medium impact">Medium impact</i>
-                                        </div>
-                                    </div>
-                                    <div class="mobile-content">
-                                        <div class="part image iphone-thumb">
-
-                                            <img alt="Your website on an iPhone" itemprop="screenshot" src="<%--= rp.objmobilerenderingo.iphoneView   commonseo --%>" id="iphoneView">
-
-                                        </div>
-                                        <div class="part image ipad-thumb">
-                                            <img alt="Your website on an iPad" itemprop="screenshot" src="<%--= rp.objmobilerenderingo.ipadView   commonseo--%>" id="ipadView">
-                                        </div>
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        <p>The number of people using the Mobile Web is huge; over <a target="_blank" href="#" rel="nofollow">75 percent</a>
-                                            of consumers have access to smart phones. ?<a target="_blank" href="#" rel="nofollow">?Your website</a> should <a target="_blank" href="#" rel="nofollow">look nice</a> on the most popular mobile devices.
-                                            <br>
-                                            <br>Tip: Use an analytics tool to track mobile usage of your website.</p>
-                                    </div>
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div class="criterium result-1 " id="criterium-mobile_load_time">
-                                    <div class="criterium-head">
-
-                                        <h3 data-original-title="Passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            <span class="icn"></span>Mobile Load Time
-                                        </h3>
-
-                                        <div class="icons">
-                                            <i class="solvability-2 simple-tooltip" data-placement="top" rel="tooltip" data-original-title="Low Impact">Low Impact</i>
-                                        </div>
-                                    </div>
-
-                                    <div class="criterium-content">
-                                        <div class="part progressbar ">
-                                            <div class="content">
-                                                <span class="bar"><span style="width:62%;" class="colored-bar">Average&nbsp;&nbsp;&nbsp;&nbsp;</span><span data-abs-value="#" class="value">Average</span></span>
+                                            <div id="facebookPage">
+                                                <div class="criterium-content">
+                                                    <div class="part image cover-image">
+                                                        <img src=""  alt="" id="facebookImage"/>
+                                                    </div>
+                                                    <div class="part text text-icon-block">
+                                                        <p><span class="icon fb-fancount"><i class="fa fa-thumbs-up"></i> Likes</span><span id="facebookLikes"></span></p>
+                                                    </div>
+                                                    <div class="part text text-icon-block">
+                                                        <p><span class="icon fb-talkingaboutcount">Talking About</span><span id="takingAbout"></span></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>URL</p>
+                                                        <p><a class="fb-page-url" href="" target="_blank"><span class="fb-bold" id="facebookUrl"></span></a></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Name</p>
+                                                        <p id="facebookName"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>About</p>
+                                                        <p id="facebookAbout"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Company Overview</p>
+                                                        <p id="facebookOverview"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Description</p>
+                                                        <p id="facebookDescription"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Products</p>
+                                                        <p id="facebookProduct"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Mission</p>
+                                                        <p id="facebookMission"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Address</p>
+                                                        <p id="facebookAddress"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Phone</p>
+                                                        <p id="facebookPhone"></p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        <p>Try to load your website on a mobile device and measure the download time. If your website takes more than five seconds to download on a mobile device, you will
-                                            <a target="_blank" href="#" rel="nofollow">lose 74 percent of your audience</a>!
-                                            <br>
-                                            <br>Mobile usage is growing fast, especially in North America, where it will soon outpace desktop browsing usage. <a target="_blank" href="#" rel="nofollow">Make sure your site loads fast</a> 
-                                            and that it looks nice on all types of mobile devices. Be sure to not use Flash, and keep photos and videos to a minimum.
-                                            <br>
-                                            <br>Here are <a target="_blank" href="#" rel="nofollow">two useful tips</a> from Google&trade; for optimizing your mobile site speed.</p>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
 
-                                    </div>
+                                    <!-- google+_brand_page -->
+                                    <div id="criterium-google_plus_page" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.3574660633484</span>
 
-                                    <div class="delimiter"></div>
+                                            <h3 class="simple-tooltip" data-placement="left" style="margin-left: 16%;" rel="tooltip" data-original-title="Passed">
+                                                <span class=""></span>Google+ Page
+                                            </h3>
+                                        </div>
+                                        <div id="googleplus">
+                                            <div id="set46Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="googlePage">
+                                                <div class="criterium-content">
+                                                    <div class="part image cover-image">
+                                                        <img src=""  alt="" id="googleImage" />
+                                                    </div>
+                                                    <div class="part text text-icon-block">
+                                                        <p>
+                                                            <span class="icon gp-plusonecount"></span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="part text text-icon-block">
+                                                        <p><span class="icon gp-circledbycount"></span></p>
+                                                    </div>
+
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>URL</p>
+                                                        <p>
+                                                            <a class="fb-page-url" href="" target="_blank">
+                                                                <span class="fb-bold" id="googleUrl"></span>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Name</p>
+                                                        <p id="googleName"></p>
+                                                    </div>
+
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Follower</p>
+                                                        <p id="googleFollower"></p>
+                                                    </div>
+
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Views</p>
+                                                        <p id="googleViews"></p>
+                                                    </div>
+
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Verified</p>
+                                                        <p id="googleVerified"></p>
+                                                    </div>
+
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Company Overview</p>
+                                                        <p id="googleOverview"></p>
+                                                    </div>
+
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Tagline</p>
+                                                        <p id="googleTagline"></p>
+                                                    </div>
+
+
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <p>Introduction</p>
+                                                        <p id="googleIntroduction"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-advice-click"><span>?</span></div>
+                                        <div class="criterium-advice">
+                                            This page is your business listing in Google+. Being active in this social network is important for claiming your brand, influencing your search engine rankings and interacting with your network. You might also consider <a rel="nofollow" href="http://www.google.com/business/" target="_blank">managing your profile</a> with <a rel="" nofollow="" href="http://blog.woorank.com/2014/06/google-places-for-business-is-google-my-business/" target="_blank">Google My Business (formerly Google Places)</a>.
+
+                                        </div>
+
+                                        <div class="delimiter"></div></div>
+
+                                    <!-- linkedin_brand_page -->
+                                    <div id="criterium-google_plus_page" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.3574660633484</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" style="margin-left: 16%;" rel="tooltip" data-original-title="Passed">
+                                                <span class=""></span>Linkedin
+                                            </h3>
+                                        </div>
+                                        <!--<div id="googleplus">-->
+                                        <div id="set56Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="linkedinAccount">
+                                            <div class="criterium-content">
+                                                <div class="part image cover-image">
+                                                    <img src=""  alt="" id="linkedImage" />
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Follower</p>
+                                                    <p id="linkedFollower"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Description</p>
+                                                    <p id="linkedDescription"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Specialties</p>
+                                                    <p id="linkedSpecialties"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Website</p>
+                                                    <p id="linkedWebsite"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Industry</p>
+                                                    <p id="linkedIndustry"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Type</p>
+                                                    <p id="linkedType"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Headquater</p>
+                                                    <p id="linkedHeadquater"></p>
+                                                </div>
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Company</p>
+                                                    <p id="linkedCompany"></p>
+                                                </div>
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Founded</p>
+                                                    <p id="linkedFounded"></p>
+                                                </div>
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Employee</p>
+                                                    <p id="linkedEmployee"></p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!--</div>-->
+                                        <div class="criterium-advice-click"><span>?</span></div>
+                                        <div class="criterium-advice">
+                                            This page is your business listing in Google+. Being active in this social network is important for claiming your brand, influencing your search engine rankings and interacting with your network. You might also consider <a rel="nofollow" href="http://www.google.com/business/" target="_blank">managing your profile</a> with <a rel="" nofollow="" href="http://blog.woorank.com/2014/06/google-places-for-business-is-google-my-business/" target="_blank">Google My Business (formerly Google Places)</a>.
+
+                                        </div>
+
+                                        <div class="delimiter"></div></div>
+
+                                    <!--Pinterest Page-->
+
+                                    <div id="criterium-google_plus_page" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.3574660633484</span>
+
+                                            <h3 class="simple-tooltip" data-placement="left" style="margin-left: 16%;" rel="tooltip" data-original-title="Passed">
+                                                <span class=""></span>Pinterest
+                                            </h3>
+                                        </div>
+                                        <div id="set57Loader">
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        </div>
+                                        <div id="PinterestAccount">
+                                            <div class="criterium-content">
+                                                <div class="part image cover-image">
+                                                    <img src=""  alt="" id="pInterestImage" />
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Boards</p>
+                                                    <p id="pInterestBoards"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Pins</p>
+                                                    <p id="pInterestPins"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Likes</p>
+                                                    <p id="pInterestLikes"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Follower</p>
+                                                    <p id="pInterestFollower"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Following</p>
+                                                    <p id="pInterestFollowing"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Name</p>
+                                                    <p id="pInterestName"></p>
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Description</p>
+                                                    <p id="pInterestDescription"></p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!--</div>-->
+                                        <div class="criterium-advice-click"><span>?</span></div>
+                                        <div class="criterium-advice">
+                                            This page is your business listing in Google+. Being active in this social network is important for claiming your brand, influencing your search engine rankings and interacting with your network. You might also consider <a rel="nofollow" href="http://www.google.com/business/" target="_blank">managing your profile</a> with <a rel="" nofollow="" href="http://blog.woorank.com/2014/06/google-places-for-business-is-google-my-business/" target="_blank">Google My Business (formerly Google Places)</a>.
+
+                                        </div>
+
+                                        <div class="delimiter"></div></div>
+
                                 </div>
-                                <div class="criterium result-1 " id="criterium-mobile_optimization">
-                                    <div class="criterium-head">
 
-                                        <h3 data-original-title="Passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            <span class="icn"></span>Mobile Optimization
-                                        </h3>
 
-                                        <div class="icons">
-                                            <i class="importance-2 simple-tooltip" data-placement="top" rel="tooltip" data-original-title="Medium impact">Medium impact</i>
-                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">
-                                                <i class="icn icn-gear"></i><i class="icn icn-gear"></i><i class="icn icn-gear"></i>
 
-                                            </i>
-                                        </div>
-                                    </div>
 
-                                    <div class="criterium-content">
-                                        <div class="part text ">
-                                            <p>This web page is super optimized for Mobile Visitors</p>
-                                        </div>
 
-                                        <div class="part text checklist">
-                                            <p><span class="icon grey-found"></span>Mobile CSS</p>
-                                            <p><span class="icon grey-missing weak"></span>Mobile Redirection</p>
-                                        </div>
+                                <!--//***************************************************--> 
 
-                                        <div class="part text ">
-                                            <p>Additional mobile optimization techniques:</p>
-                                        </div>
+                                <!--                                <div  id="criterium-linkedin" class="criterium result-1 ">
+                                                                    <div class="criterium-head">
+                                                                        <span class="crit-score-pond hidden">1.3574660633484</span>
+                                
+                                                                        <h3 class="simple-tooltip" data-placement="left" style="margin-left: 16%;" rel="tooltip" data-original-title="Passed">
+                                                                            <span class=""></span>Linkedin
+                                                                        </h3>
+                                                                    </div>
+                                                                    <div id="googleplus">
+                                                                        <div id="">
+                                                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                                        </div>
+                                                                        <div id="googlePage">
+                                                                            <div class="criterium-content">
+                                                                                <div class="part image cover-image">
+                                                                                    <img src=""  alt="" id="linkedImage" />
+                                                                                </div>
+                                                                                <div class="part text text-icon-block">
+                                                                                    <p>
+                                                                                        <span class="icon gp-plusonecount"></span>
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div class="part text text-icon-block">
+                                                                                    <p><span class="icon gp-circledbycount"></span></p>
+                                                                                </div>
+                                
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Follower</p>
+                                                                                    <p id="linkedFollower"></p>
+                                                                                </div>
+                                
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Website</p>
+                                                                                    <p id="linkedWebsite"></p>
+                                                                                </div>
+                                
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Industry</p>
+                                                                                    <p id="linkedIndustry"></p>
+                                                                                </div>
+                                
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Type</p>
+                                                                                    <p id="linkedType"></p>
+                                                                                </div>
+                                
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Headquater</p>
+                                                                                    <p id="linkedHeadquater"></p>
+                                                                                </div>
+                                
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Company</p>
+                                                                                    <p id="linkedCompany"></p>
+                                                                                </div>
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Founded</p>
+                                                                                    <p id="linkedFounded"></p>
+                                                                                </div>
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Employee</p>
+                                                                                    <p id="linkedEmployee"></p>
+                                                                                </div>
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Description</p>
+                                                                                    <p id="linkedDescription"></p>
+                                                                                </div>
+                                                                                <div class="part text text-block fb-text-bloc">
+                                                                                    <p>Specialties</p>
+                                                                                    <p id="linkedSpecialties"></p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="criterium-advice-click"><span>?</span></div>
+                                                                    <div class="criterium-advice">
+                                                                        This page is your business listing in Google+. Being active in this social network is important for claiming your brand, influencing your search engine rankings and interacting with your network. You might also consider <a rel="nofollow" href="http://www.google.com/business/" target="_blank">managing your profile</a> with <a rel="" nofollow="" href="http://blog.woorank.com/2014/06/google-places-for-business-is-google-my-business/" target="_blank">Google My Business (formerly Google Places)</a>.
+                                
+                                                                    </div>
+                                
+                                                                    <div class="delimiter"></div></div>             -->
 
-                                        <div class="part text checklist">
-                                            <p><span class="icon grey-found weak"></span>Meta Viewport Tag</p>
-                                            <p><span class="icon grey-missing weak"></span>Apple Icon</p>
-                                            <p><span class="icon grey-found weak"></span>Flash content</p>
-                                        </div>
+                                <!--//*************************************************************-->                         
 
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
 
-                                        <p><a target="_blank" href="#" rel="nofollow">Optimize the mobile experience</a> even further with the following options:</p>
-
-                                        <ul>
-                                            <li><a target="_blank" href="#" rel="nofollow">Mobile CSS</a>
-                                            </li>
-                                            <li><a target="_blank" href="#" rel="nofollow">Meta Viewport Tag</a>
-                                            </li>
-                                            <li><a target="_blank" href="#" rel="nofollow">Apple Icon</a>
-                                            </li>
-                                            <li><a target="_blank" href="#" rel="nofollow">Mobile Redirection</a>
-                                            </li>
-                                            <li><a target="_blank" href="#" rel="nofollow">No Flash content</a>
-                                            </li>
-                                        </ul>
-                                        <p></p>
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>
                             </div>
                         </div>
-                    </div>      
+                        <!--                        <div class="module" id="module-local_visibility">
+                                                    <div class="module-content">
+                                                        <h2>Local</h2>
+                                                        <div id="criterium-local_directories" class="criterium result-0 ">
+                                                            <div class="criterium-head">
+                        
+                                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                                    <span class="fa"></span>Local Directories
+                                                                </h3>
+                        
+                                                            </div>
+                                                            <div id="set47Loader">
+                                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                            </div>
+                                                            <div class="criterium-content">
+                        
+                                                                <div class="row">
+                                                                    <form class="no-advice-target val-set-form hidden val-set-googleplaces" method="post" action="/en/setrevdata/googleplaces">
+                                                                        <div>
+                                                                            <p>Add your Google My Business profile or <a href="www.google.be/MyBusiness">create one</a></p>
+                                                                        </div>
+                                                                        <div class="field-container field-container-googleplaces">
+                                                                            <div class="box-color">
+                                                                                <span class="fa fa-googleplaces"></span>
+                                                                            </div>
+                                                                            <input type="text" name="data" placeholder=" plus.google.com/+ProfileURL" />
+                                                                            <input type="hidden" name="pending-data" value="" />
+                                                                            <button class="grey" type="submit">Set</button>
+                                                                            <span class="svg-loader svg-loader-16"></span>
+                                                                            <input type="hidden" value="googleplaces" name="type">
+                                                                        </div>
+                                                                        <div class="error-msg"><p></p></div>
+                                                                    </form>
+                                                                    <p class="hidden wait-msg">
+                                                                        <span class="svg-loader svg-loader-16"></span>
+                                                                        Please wait...
+                                                                    </p>
+                                                                </div>
+                        
+                        
+                                                                <div class="directory-container row">
+                                                                    <div class="icon-Foursquare local-directory simple-tooltip" rel="tooltip" data-placement="left" data-original-title="Foursquare"></div>
+                        
+                                                                    <div class="business-notfound italic">
+                                                                        <p>Missing profile on Foursquare?</p>
+                                                                    </div>
+                                                                </div>
+                        
+                        
+                                                                <div class="row">
+                                                                    <form class="no-advice-target val-set-form hidden val-set-foursquare" method="post" action="/en/setrevdata/foursquare">
+                                                                        <div>
+                                                                            <p>Add your Foursquare page or <a href="http://business.foursquare.com/brands/">create one</a></p>
+                                                                        </div>
+                                                                        <div class="field-container field-container-foursquare">
+                                                                            <div class="box-color">
+                                                                                <span class="fa fa-foursquare"></span>
+                                                                            </div>
+                                                                            <input type="text" name="data" placeholder="foursquare.com/v/PageURL" />
+                                                                            <input type="hidden" name="pending-data" value="" />
+                                                                            <button class="grey" type="submit">Set</button>
+                                                                            <span class="svg-loader svg-loader-16"></span>
+                                                                            <input type="hidden" value="foursquare" name="type">
+                                                                        </div>
+                                                                        <div class="error-msg"><p></p></div>
+                                                                    </form>
+                                                                    <p class="hidden wait-msg">
+                                                                        <span class="svg-loader svg-loader-16"></span>
+                                                                        Please wait...
+                                                                    </p>
+                                                                </div>
+                        
+                        
+                                                                <div class="directory-container row">
+                                                                    <div class="icon-Yelp local-directory simple-tooltip" rel="tooltip" data-placement="left" data-original-title="Yelp"></div>
+                        
+                                                                    <div class="business-notfound italic">
+                                                                        <p>Missing profile on Yelp?</p>
+                                                                    </div>
+                                                                </div>
+                        
+                        
+                                                                <div class="row">
+                                                                    <form class="no-advice-target val-set-form hidden val-set-yelp" method="post" action="/en/setrevdata/yelp">
+                                                                        <div>
+                                                                            <p>Add your Yelp page or <a href="https://biz.yelp.com/">create one</a></p>
+                                                                        </div>
+                                                                        <div class="field-container field-container-yelp">
+                                                                            <div class="box-color">
+                                                                                <span class="fa fa-yelp"></span>
+                                                                            </div>
+                                                                            <input type="text" name="data" placeholder="yelp.com/biz/PageURL" />
+                                                                            <input type="hidden" name="pending-data" value="" />
+                                                                            <button class="grey" type="submit">Set</button>
+                                                                            <span class="svg-loader svg-loader-16"></span>
+                                                                            <input type="hidden" value="yelp" name="type">
+                                                                        </div>
+                                                                        <div class="error-msg"><p></p></div>
+                                                                    </form>
+                                                                    <p class="hidden wait-msg">
+                                                                        <span class="svg-loader svg-loader-16"></span>
+                                                                        Please wait...
+                                                                    </p>
+                                                                </div>
+                        
+                                                            </div>
+                                                            <div class="criterium-quicktips"></div>
+                                                            <div class="delimiter"></div></div>
+                        
+                        
+                        
+                                                        <div id="criterium-local_online_reviews" class="criterium result-0 hidden ">
+                                                            <div class="criterium-head">
+                                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                                                    <span class="fa"></span>Online Reviews</h3>
+                                                            </div>
+                                                            <div class="criterium-content">
+                                                            </div>
+                                                            <div class="criterium-quicktips"></div>
+                                                            <div class="delimiter"></div></div>
+                                                    </div>
+                                                </div>-->
 
-                    <!--                    <p class="first-p"></p>
-                                        <p class="last-p"><a href="#">Mobile</a>
-                                        </p>
-                    
-                    
-                                        <div id="criterium-mobile_rendering" class="criterium result-0 open-crit">
-                                            <div class="criterium-head">
-                                                <h3 class="simple-tooltip" data-original-title="Low impact" rel="tooltip" data-placement="left">
-                                                    <span class="icn"></span>
-                                                    Mobile Rendering
-                                                </h3>
-                                                <div class="icons">
-                                                    <span class="importance-1 simple-tooltip" data-original-title="" rel="tooltip" data-placement="top">
-                                                        <span class="icn icn-bullet-impact"></span>
-                                                        <span class="icn icn-bullet-impact"></span>
-                                                        <span class="icn icn-bullet-impact"></span>
-                    
+
+                        <div class="module-section" id="module-section-title-measure">Measure</div>
+                        <!--<div id="visitorsnew">-->
+                        <div class="module" id="module-visitors">
+                            <div class="module-content">
+                                <h2>Visitors</h2>
+                                <div id="criterium-alexa" class="criterium result-2">
+                                    <div class="criterium-head">
+                                        <span class="crit-score-pond hidden">3.5874439461883</span>
+                                        <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="To Improve">
+                                            <span class="fa"></span>Traffic Estimations</h3>
+                                    </div>
+
+                                    <div id="set55Loader">
+                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                    </div>
+                                    <div id="trafficEstimation1">
+                                        <div class="criterium-content">
+                                            <div class="part progressbar ">
+                                                <div class="content">
+                                                    <span class="bar">
+                                                        <span class="colored-bar" style="width:100%; text-align: center" id="trafficEstimation"></span>
+                                                        <span class="value" data-abs-value=""></span>
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="criterium-content">
-                                                <div class="part image iphone-thumb">
-                                                    <img alt="Your website on an iPhone" itemprop="screenshot" src="http://sitescreens.woorank.com/ebay.in.iphone.png">
-                                                </div>
-                                                <div class="part image ipad-thumb">
-                                                    <img alt="Your website on an iPad" itemprop="screenshot" src="http://sitescreens.woorank.com/ebay.in.ipad.png">
-                                                </div>
-                                            </div>
-                                            <div class="criterium-advice-click">
-                                                <span>?</span>
-                                            </div>
-                                            <div class="criterium-advice" style="display: block;">
+                                        </div>
+                                    </div>
+                                    <div class="criterium-quicktips"></div>
+                                    <div class="delimiter"></div></div>
+                                <div id="criterium-trafic_ranking" class="criterium result-0 ">
+                                    <div class="criterium-head">
+
+                                        <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                            <span class="fa"></span>Traffic Rank
+                                        </h3>
+
+                                    </div>
+                                    <div id="set48Loader">
+                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                    </div>
+                                    <div id="trafficRank1">
+                                        <div class="criterium-content">
+                                            <div class="part text ">
                                                 <p>
-                                                    The number of people using the Mobile Web is huge; over
-                                                    <a target="_blank" href="http://www.ourmobileplanet.com/en/" rel="nofollow">75 percent</a>
-                                                    of consumers have access to smartphones. ?
-                                                    <a target="_blank" href="http://blog.woorank.com/2012/11/6-tips-15-free-tools-awesome-mobile-websites/" rel="nofollow">?Your website</a>
-                                                    should
-                                                    <a target="_blank" href="http://goo.gl/We7mf0" rel="nofollow">look nice</a>
-                                                    on the most popular mobile devices.
-                                                    <br>
-                                                    <br>
+                                                    <span class="bold" id="globalrank"></span>
+                                                    <span class="superscript">th</span> most visited website in 
+                                                    <span class="bold">the World</span>
                                                 </p>
-                                            </div>
-                                            <div class="delimiter"></div>
-                                        </div>-->
+                                                <p>
+                                                    <a class="wooindex-bl" target="_blank" href="">
+                                                        <span class="bold" id="countryRank"></span>
+                                                        <span class="superscript">th </span> most visited website in
+                                                        <b>the Unites states</b>
+                                                    </a>
+                                                </p>
+                                            </div>           
+                                        </div></div>
+                                    <div class="criterium-quicktips"></div>
+                                    <div class="delimiter"></div></div>
 
-                </div>
-
-                <h2 class="accordion-header">SEO</h2>
-
-                <div class="accordion-content" style="display: block">
-                    <div class="module" id="module-seo">
-                        <div class="module-content">
-                            <h2>SEO</h2>
-                            <div id="set4Loader">
-                                <div style="text-align:center; display: block" ><img width="350" height="80" src="https://s3.amazonaws.com/images_ranktracker/load.gif"/></div>
-                            </div>
-                            <div id="seo">
-                                <div class="criterium result-2 " id="criterium-www_resolve">
-
+                                <div id="criterium-adwords_traffic" class="criterium result-0 hidden ">
                                     <div class="criterium-head">
-                                        <span class="crit-score-pond hidden">1.196</span>
-
-                                        <h3 data-original-title="Room for improvement" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            WWW Resolve
-                                        </h3>
-
-                                        <div class="icons">
-                                            <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                        </div>
+                                        <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                            <span class="fa"></span>Adwords Traffic</h3>
+                                    </div>
+                                    <div id="set49Loader">
+                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
                                     </div>
                                     <div class="criterium-content">
-                                        <div class="part text " >
-                                            <p id="wwwresolve"><%-- out.print("" + rp.www_resolve);  commonseo--%></p>
-                                        </div>
                                     </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        <p>Ut wisi enim ad minim veniam,
-                                            <a target="_blank" href="#" class="" rel="nofollow"></a>and <a target="_blank" href="#" class="" rel="nofollow">Lorem</a></p>
-                                        <p><a target="_blank" href="#" rel="nofollow">Redirecting requests</a> from a non-preferred hostname is <a target="_blank" href="#">important</a> </p>
-                                        <p>Once your preferred domain is set, use a.</p>
-                                    </div>
+                                    <div class="criterium-quicktips"></div>
+                                    <div class="delimiter"></div></div>
 
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div class="criterium result-3 " id="criterium-clean_url">
+
+                                <div id="criterium-visitors_loc" class="criterium result-0 ">
                                     <div class="criterium-head">
-
-                                        <h3 data-original-title="Errors to fix" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            URL Rewrite
-                                        </h3>
-                                        <div class="icons" >
-                                            <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">Low impact</i>
-                                            <i data-original-title="Hard to solve" rel="tooltip" data-placement="top" class="solvability-2 simple-tooltip">Hard to solve</i>
+                                        <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
+                                            <span class="fa"></span>Visitors Localization</h3>
+                                    </div>
+                                    <div id="set50Loader">
+                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                    </div>
+                                    <div id="VisitorsLocalization1">
+                                        <div class="criterium-content" id="localozation">
+                                            <!--                                            <div class="part bar " >
+                                                                                            <div class="woomap" id="countryname1">
+                                                                                                <div class="country-info">
+                                                                                                    <div class="name">India</div>
+                                                                                                </div>
+                                                                                                <div class="country-info">
+                                                                                                    <div class="name">China</div>
+                                                                                                </div>
+                                            
+                                                                                            </div>
+                                                                                            <div id="map_canvas"></div>
+                                                                                        </div>-->
+                                            <div class="part table ">
+                                                <table class="">
+                                                    <thead  class="tbody_font_size">
+                                                        <tr>
+                                                            <th>Popular Countries</th>
+                                                            <th><a rel="nofollow" href="http://en.wikipedia.org/wiki/Country_code_top-level_domain" target="_blank">Percent of Visitors</a></th>
+                                                            <th>Rank</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody  class="tbody_font_size"  id="visitortable">
+                                                    </tbody>
+                                                    <!--                                                <tbody  class="tbody_font_size" >
+                                                                                                        <tr class="">
+                                                                                                            <td><a class="wooindex-bl" target="_blank" href="https://index.woorank.com/en/reviews?country=in">India</a></td>
+                                                                                                            <td>socioboard.in</td>
+                                                                                                            <td>This domain is booked</td>
+                                                                                                            <td><span class="fa fa-lock"></span></td>
+                                                                                                        </tr>
+                                                                                                    </tbody>-->
+                                                </table>
+                                            </div>    
                                         </div>
                                     </div>
-                                    <div class="criterium-content">
-                                        <div class="part text " id="urlDomain">
 
-                                        </div>
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        <p>Consider <a target="_blank" href="http://coding.smashingmagazine.com/2011/11/02/introduction-to-url-rewriting/" rel="nofollow">rewriting your URLs</a>.
-                                            <br><a target="_blank" href="#" rel="nofollow">Need Lorem</a> Claritas
-                                        </p>
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div class="criterium result-3 " id="criterium-ip_canonicalization">
-                                    <div class="criterium-head">
-
-
-                                        <h3 data-original-title="Errors to fix" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            IP Canonicalization
-                                        </h3>
-
-                                        <div class="icons">
-                                            <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">Low impact</i>
-                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-content">
-                                        <div class="part text ">
-                                            <p id="ipCanonicalization"><%-- out.print("" + rp.ipcanonicalization);  commonseo--%></p>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div class="criterium result-3 " id="criterium-robots_txt">
-                                    <div class="criterium-head">
-
-                                        <h3 data-original-title="Errors to fix" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            Robots.txt
-                                        </h3>
-
-                                        <div class="icons">
-                                            <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-content">
-                                        <div class="part text ">
-                                            <p><span class="italic" id="robots"><%-- out.print("" + rp.robots);--%></span>
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sin aliud quid voles, postea.
-                                            Num igitur utiliorem tibi hunc Triarium putas esse posse, quam si tua sint Puteolis granaria?</p>
-                                        <p>A <a target="_blank" href="#" rel="nofollow">robots.txt file</a> 
-                                            Expectoque quid ad id, quod quaerebam, respondeas. Deinde disputat, quod cuiusque generis animantium statui deceat extremum. Quibusnam praeteritis?.</p>
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div class="criterium result-3 " id="criterium-xml_sitemaps">
-                                    <div class="criterium-head">
-                                        <h3 data-original-title="Errors to fix" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            XML Sitemap
-                                        </h3>
-                                        <div class="icons">
-                                            <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">Low impact</i>
-                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-content">
-                                        <div class="part text ">
-
-
-                                            <table id="xmltable"> 
-                                                <tr><td>SN.</td><td>Path</td></tr>
-
-                                            </table>
-
-
-
-                                            <center>
-                                                <a id="seeMoreRecords" value="More">Show More</a></br>
-                                                <a id="seeLessRecords" value="Less">Show Less</a>
-                                            </center>
-
-                                        </div>
-
-
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-
-
-                                        <p>A <a target="_blank" href="#" rel="nofollow">robots.txt file</a> Expectoque quid ad id, quod quaerebam, respondeas. 
-                                            Deinde disputat, quod cuiusque generis animantium statui deceat extremum. Quibusnam praeteritis?.</p>
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div class="criterium result-3 " id="criterium-underscores_url">
-                                    <div class="criterium-head">
-
-                                        <h3 data-original-title="Errors to fix" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            Underscores in the URLs
-                                        </h3>
-
-                                        <div class="icons">
-                                            <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">Low impact</i>
-                                            <i data-original-title="Hard to solve" rel="tooltip" data-placement="top" class="solvability-2 simple-tooltip">Hard to solve</i>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-content">
-                                        <div class="part text ">
-                                            <p id="underscores"><%--= rp.underscores_in_url--%></p>
-                                        </div>
-
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-
-                                        Ita multo sanguine profuso in laetitia et in victoria est mortuus. Si longus, levis; Duo Reges: constructio interrete. 
-                                        Gloriosa ostentatio in constituendo summo bono. Tu quidem reddes; Que Manilium, ab iisque M. Nihil opus est exemplis hoc facere longius.
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div class="criterium result-0 " id="criterium-google_preview">
-                                    <div class="criterium-head">
-
-                                        <h3>
-                                            Google Preview
-                                        </h3>
-
-                                        <div class="icons">
-                                            <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-content">
-                                        <div class="part text google-preview">
-                                            <p id="reviewGoogleTitle"><%---= rp.gps.line1--%></p>
-                                            <p><span class="bold" id="reviewGoogleDesc"><%--= rp.gps.line2--%></span>/</p>
-                                            <p id="reviewGoogleUrl"><%--= rp.gps.line3--%></p>
-                                        </div>
-
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        This is an example of what your title and description will look like in search results.
-
-                                    </div>
-
-                                    <div class="delimiter"></div>
                                 </div>
 
-                                <div class="criterium result-1 " id="criterium-flash">
-                                    <div class="criterium-head">
-                                        <span class="crit-score-pond hidden">0.478</span>
 
-                                        <h3 class="simple-tooltip" data-original-title="Successfully passed" rel="tooltip" data-placement="left"> Google Publisher </h3>
-
-                                        <div class="icons">
-                                            <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">Low impact</i>
-                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-content">
-                                        <div class="part text ">
-                                            <p id="googlePublisher"></p>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        <p></p>
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>       
-
-                                <div class="criterium result-1 " id="criterium-title">
-                                    <div class="criterium-head">
-                                        <span class="crit-score-pond hidden">1.435</span>
-
-                                        <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            Title
-                                        </h3>
-
-                                        <div class="icons">
-                                            <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-content">
-                                        <div class="part text ">
-                                            <p itemprop="headline" id="title"></p>
-                                            <p><span class="bold">Length:</span><span id="titleLength"></span>character(s)</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        <p>Lorem ipsum dolor sit amet, has ex posse vituperata, usu ea augue nulla impetus, ea audire utamur insolens quo. Eum quem sint vituperatoribus eu. 
-                                            Pri ad vero recteque. Ut democritum necessitatibus vel, vel adhuc similique
-                                            necessitatibus te.</p>
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div class="criterium result-2 " id="criterium-description">
-                                    <div class="criterium-head">
-                                        <span class="crit-score-pond hidden">0.718</span>
-
-                                        <h3 data-original-title="Room for improvement" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                            Description
-                                        </h3>
-                                        <div class="icons">
-                                            <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-content">
-                                        <div class="part text ">
-                                            <p itemprop="description" id="description"><%-- out.print (                                                        
-                                                    "" + rp.description);--%></p>
-                                            <p><span class="bold">Length:</span><%-- out.print (                                                        
-                                                "" + rp.description.length());--%> character(s)</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        <p>Ei iusto detracto scripserit qui, in choro option inciderint vim. Cu putent labores praesent eos, detraxit conceptam liberavisse cu vel.
-                                            In nam minim forensibus. Ne cum impedit nominati laboramus, ei his integre oporteat
-                                            persecuti.
-                                        </p>
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>
-                                <div class="criterium result-0 " id="criterium-meta_keywords">
-                                    <div class="criterium-head">
-                                        <h3>
-                                            Meta Keywords
-                                        </h3>
-                                        <div class="icons">
-                                        </div>
-                                    </div>
-                                    <div class="criterium-content">
-                                        <div class="part text ">
-                                            <p itemprop="keywords" id="keyword">
-
-
-                                            </p>
-                                            <p><span class="bold">Length:</span>  <abbr class="big-nbr-container">1<abbr>455</abbr></abbr>character(s)</p>
-                                        </div>
-                                    </div>
-                                    <div class="criterium-advice-click"><span>?</span>
-                                    </div>
-                                    <div class="criterium-advice">
-                                        <p>Ei iusto detracto scripserit qui, in choro option inciderint vim. Cu putent labores praesent eos, detraxit conceptam liberavisse cu vel. In nam minim forensibus.
-                                            Ne cum impedit nominati laboramus, ei his integre oporteat
-                                            persecuti.
-                                        </p>
-                                    </div>
-
-                                    <div class="delimiter"></div>
-                                </div>
-                                <!--<div class="criterium result-3 " id="criterium-inside_pages">-->
-                                <!--                                    <div class="criterium-head">
-                                                                        <h3 data-original-title="Errors to fix" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                                                            Internal Pages Analysis
-                                                                        </h3>
-                                                                        <div class="icons">
-                                                                            <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                                                            <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                                                        </div>
-                                                                    </div>-->
-                                <!--                                    <div class="criterium-content">
-                                
-                                                                        <div class="part table ">
-                                                                            <table class="no-header">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Title</th>
-                                                                                        <th>Description</th>
-                                                                                        <th>Text/HTML</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <tr class="">
-                                                                                        <td><a href="#" target="_blank" rel="nofollow" class="">      </a>
-                                                                                        </td>
-                                                                                        <td>               </td>
-                                                                                        <td></td>
-                                                                                    </tr>
-                                                                                    <tr class="">
-                                                                                        <td><a href="#" target="_blank" rel="nofollow" class="">      </a>
-                                                                                        </td>
-                                                                                        <td>               </td>
-                                                                                        <td></td>
-                                                                                    </tr>
-                                                                                    <tr class="">
-                                                                                        <td><a href="#" target="_blank" rel="nofollow" class="">      </a>
-                                                                                        </td>
-                                                                                        <td>                </td>
-                                                                                        <td></td>
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                
-                                                                    </div>-->
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p></p>
-                                </div>
-                                <div class="delimiter"></div>
                             </div>
-                            <div class="criterium result-3 " id="criterium-headings">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="Errors to fix" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        Headings
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">Low impact</i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p><span class="italic">H1  <span id="heading1"></span></span>
-                                        </p>
-                                        <p><span class="italic">H2  <span id="heading2"></span></span>
-                                        </p>
-                                        <p><span class="italic">H3  <span id="heading3"></span></span>
-                                        </p>
-                                        <p><span class="italic">H4  <span id="heading4"></span></span>
-                                        </p>
-                                        <p><span class="italic">H5 <span id="heading5"></span></span>
-                                        </p>
-
-                                        <table class="no-header open" id="headingstable">
-                                            <tbody>
-                                                <tr class="" id="h1elements">
-                                                    <!--<td id="h1elements"></td>-->
-                                                </tr>
-
-                                                <tr class="over-max-v" id="h2elements">
-                                                    <!--<td ></td>-->
-                                                </tr>
-
-                                                <tr class="over-max-v" id="h3elements">
-                                                    <!--<td id="h3elements"></td>-->
-                                                </tr>
-
-                                                <tr class="over-max-v" id="h4elements">
-                                                    <!--<td id="h4elements"></td>-->
-                                                </tr>
-
-                                                <tr class="over-max-v" id="h5elements">
-                                                    <!--<td id="h5elements"></td>-->
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <center>
-                                            <a id="seeMoreRecords4" value="More">Show More</a></br>
-                                            <a id="seeLessRecords4" value="Less">Show Less</a>
-                                        </center>
-                                    </div>
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p></p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 " id="criterium-images">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">1.435</span>
-
-                                    <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        Images
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div  class="part text ">
-                                        <p></p>
-                                        <div>
-                                            <table id="imagestable">
-                                                <tr><td>SN.</td><td>Path</td></tr>
-
-                                            </table>
-                                            <center>
-                                                <a id="seeMoreRecords1" value="More">Show More</a></br>
-                                                <a id="seeLessRecords1" value="Less">Show Less</a>
-                                            </center>
-
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p>Sed haec quidem liberius ab eo dicuntur et saepius. Itaque his sapiens semper vacabit. Sed ad bona praeterita redeamus.
-                                        Aliter autem vobis placet. Quid nunc honeste dicit?</p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-3 " id="criterium-text_html_ratio">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="Errors to fix" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        Text/HTML Ratio
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                        <i data-original-title="Hard to solve" rel="tooltip" data-placement="top" class="solvability-2 simple-tooltip">Hard to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p id="htmlRatio"><%-- =rp.texttohtmlratio--%></p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p></p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 " id="criterium-flash">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">0.478</span>
-
-                                    <h3 class="simple-tooltip" data-original-title="Successfully passed" rel="tooltip" data-placement="left"> Flash </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">Low impact</i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p id="flash"></p>
-                                    </div>
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p></p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 " id="criterium-frames">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">0.478</span>
-
-                                    <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        Frames
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">Low impact</i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p id="frames"><%--= rp.frames--%></p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p></p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-3 " id="criterium-blog">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="Errors to fix" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        Blog
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                        <i data-original-title="Hard to solve" rel="tooltip" data-placement="top" class="solvability-2 simple-tooltip">Hard to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p>We have not found a Blog on this website.</p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p>Utram tandem linguam nescio? Dicam, inquam, et quidem discendi causa magis, quam quo te aut Epicurum reprehensum velim. 
-                                        Nam quibus rebus efficiuntur voluptates, eae non sunt in potestate sapientis.</p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <!--                            <div class="criterium result-2 " id="criterium-inpage_keywords">
-                                                            <div class="criterium-head">
-                                                                <span class="crit-score-pond hidden">1.196</span>
-                            
-                                                                <h3 data-original-title="Room for improvement" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                                                    Keywords Consistency
-                                                                </h3>
-                            
-                                                                <div class="icons">
-                                                                    <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                                                    <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="criterium-content">
-                            
-                                                                <div class="part table ">
-                                                                    <table class="no-header">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th></th>
-                                                                                <th>Keywords</th>
-                                                                                <th>Freq</th>
-                                                                                <th>Title</th>
-                                                                                <th>Desc</th>
-                                                                                <th>&lt;H&gt;</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                            
-                          
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            <div class="criterium-advice-click"><span>?</span>
-            </div>
-            <div class="criterium-advice">
-                <p></p>
-
-            </div>
-
-            <div class="delimiter"></div>
-        </div>-->
-                            <!--                            <div class="criterium result-0 " id="criterium-keywords_cloud">
-                                                            <div class="criterium-head">
-                            
-                                                                <h3>
-                                                                    Keywords Cloud
-                                                                </h3>
-                            
-                                                                <div class="icons">
-                                                                </div>
-                                                            </div>
-                                                            <div class="criterium-content">
-                            
-                                                                <div class="part cloud ">
-                                                                    <ul class="cloud-container">
-                                                                        <li>XYZ<span class="number">2</span>
-                                                                        </li>
-                                                                        <li>QWE<span class="number">2</span>
-                                                                        </li>
-                                                                        <li>ASD<span class="number">2</span>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                            
-                                                            </div>
-                                                            <div class="criterium-advice-click"><span>?</span>
-                                                            </div>
-                                                            <div class="criterium-advice">
-                                                                <p></p>
-                            
-                                                            </div>
-                            
-                                                            <div class="delimiter"></div>
-                                                        </div>-->
-                            <div class="criterium result-1 " id="criterium-links_details">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">1.435</span>
-
-                                    <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        In-Page Links
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">Low impact</i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p> <%--= rp.ipl.links.size()--%> </p>
-                                    </div>
-                                    <!-------Pie Chart Here---->
-                                    <div class="part pie ">
-
-                                    </div>
-                                    <!-------Pie Chart End Here---->
-
-                                    <div class="part table ">
-                                        <table class="no-header" >
-
-                                            <thead>
-                                            <td>Links</td>
-                                            <td>Type</td>
-                                            <td>Juice</td>
-                                            </thead>
-                                            <tbody id="inpagelinkstable">
-
-                                                <%-- for (int i = 0;
-                                                    i< 2; i
-
-                                                    
-                                                        ++) {--%>
-
-                                                <!--
-                                                <tr class="">
-                                                    <td id="links"><a href='<%--= rp.ipl.links.get(i)--%>' target="_blank" rel="nofollow" class="" id="links"><%--= rp.ipl.title.get(i)--%></a>
-                                                    </td>
-                                                    <td id="type"><%--= rp.ipl.type.get(i)--%></td>
-                                                    <td>Passing Juice</td>
-                                                </tr>
-    
-                                                
-                                                <tr class="over-max">
-                                                    <td id="links"><a href='<%--= rp.ipl.links.get(i)--%>' target="_blank" rel="nofollow" class="" id="type"><%--= rp.ipl.title.get(i)--%></a>
-                                                    </td>
-                                                    <td id="type"><%--= rp.ipl.type.get(i)--%></td>
-                                                    <td>Passing Juice</td>
-                                                </tr>
-    
-                                                -->
-                                                <%-- }--%>
-
-                                            </tbody>
-                                        </table>
-
-                                        <center>
-                                            <a id="seeMoreRecords3" value="More">Show More</a></br>
-                                            <a id="seeLessRecords3" value="Less">Show Less</a>
-                                        </center>          
-
-
-                                        <!--                                        <div class="show-links">
-                                                                                    <a class="show-more" href="6">Show more</a>
-                                                                                    <a class="show-less" href="6">Show less</a>
-                                                                                </div>-->
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p></p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <!--                            <div class="criterium result-1 " id="criterium-backlinks_counter">
-                                                            <div class="criterium-head">
-                                                                <span class="crit-score-pond hidden">7.177</span>
-                            
-                                                                <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                                                    Backlinks Counter
-                                                                </h3>
-                            
-                                                                <div class="icons">
-                                                                    <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                                                    <i data-original-title="Hard to solve" rel="tooltip" data-placement="top" class="solvability-2 simple-tooltip">Hard to solve</i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="criterium-content">
-                            
-                            
-                            
-                                                                <div class="part progressbar ">
-                            
-                                                                    <div class="content">
-                            
-                            
-                                                                        <span class="bar"><span style="width:90%;" class="colored-bar"><abbr class="big-nbr-container">1<abbr>170</abbr><abbr>046</abbr></abbr>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                                                            <span class="value"><abbr class="big-nbr-container">1<abbr>170</abbr><abbr>046</abbr></abbr></span></span>
-                                                                    </div>
-                                                                </div>
-                            
-                                                            </div>
-                                                            <div class="criterium-advice-click"><span>?</span>
-                                                            </div>
-                                                            <div class="criterium-advice">
-                                                                <p>Lorem ipsum dolor sit amet, dolorem consequat ea est, ius ea noster perfecto constituto. Esse vero ridens et sed. Idque fabellas has et. Munere semper volutpat his ei.</p>
-                                                                <p>Eam eu modus interesset theophrastus. Nec ea invidunt eleifend. Cu eius harum saepe mel. Ea odio tation sensibus mea, id vis elitr malorum. Per euripidis tincidunt accommodare no.</p>
-                            
-                                                            </div>
-                            
-                                                            <div class="delimiter"></div>
-                                                        </div>-->
-                            <div class="criterium result-1 " id="criterium-page_rank">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">7.177</span>
-
-                                    <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        PageRank
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="High impact" rel="tooltip" data-placement="top" class="importance-3 simple-tooltip">High impact</i>
-                                        <i data-original-title="Very hard to solve" rel="tooltip" data-placement="top" class="solvability-3 simple-tooltip">Very hard to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-
-                                    <div class="part progressbar ">
-
-                                        <div class="content">
-
-                                            <span class="bar"><span style="width:70%;" class="colored-bar" id="pageRank">
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="value">PR 7</span></span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p>Eos et case cetero, mucius doming ex vis.</p>
-                                    <p>Eos et case cetero, mucius doming ex vis. Fugit labores pro cu, duo graece percipitur ne. Sed ad quis gubergren. His primis vidisse posidonium ut. Per ad copiosae principes, ad mei munere persius.</p>
-                                    <p></p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-0 " id="criterium-related_websites">
-                                <div class="criterium-head">
-                                    <!--<span class="crit-score-pond hidden">2.392</span>-->
-                                    <h3>
-                                        Related Websites
-                                    </h3>
-
-                                    <div class="icons">
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part table ">
-                                        <table class="no-header" id="relatedtable">
-
-                                            <tr>
-                                                <td>N°</td>
-                                                <td>URL</td>
-
-                                            </tr>
-                                        </table>
-                                        <center>
-                                            <a id="seeMoreRecords2" value="More">Show More</a></br>
-                                            <a id="seeLessRecords2" value="Less">Show Less</a>
-                                        </center>
-
-                                    </div>
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p></p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 " id="criterium-indexed_pages">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">9.569</span>
-
-                                    <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        Indexed Pages
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                        <i data-original-title="Hard to solve" rel="tooltip" data-placement="top" class="solvability-2 simple-tooltip">Hard to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part progressbar ">
-
-                                        <div class="content has-title">
-                                            <span class="bar"><span style="width:95%;" class="colored-bar"><abbr class="big-nbr-container">14<abbr>400</abbr></abbr>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                                <span class="value"><abbr class="big-nbr-container">14<abbr>400</abbr></abbr></span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p></p>
-                                    <p></p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <!--                            <div class="criterium result-0 " id="criterium-popular_pages">
-                                                            <div class="criterium-head">
-                                                                <h3>
-                                                                    Popular Pages
-                                                                </h3>
-                                                                <div class="icons">
-                                                                </div>
-                                                            </div>
-                                                            <div class="criterium-content">
-                                                                <div class="part text ">
-                                                                    <p><a target="_blank" rel="nofollow" href="#" class="">XYZ</a>
-                                                                    </p>
-                                                                    <p><a target="_blank" rel="nofollow" href="#" class="">XYZ</a>
-                                                                    </p>
-                                                                    <p><a target="_blank" rel="nofollow" href="#" class="">XYZ</a>
-                                                                    </p>
-                                                                    <p><a target="_blank" rel="nofollow" href="#" class="">XYZ</a>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="criterium-advice-click"><span>?</span>
-                                                            </div>
-                                                            <div class="criterium-advice">
-                                                                <p></p>
-                            
-                                                            </div>
-                                                            <div class="delimiter"></div>
-                                                        </div>-->
-                            <div class="criterium result-1 " id="criterium-domain_creation">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">2.392</span>
-                                    <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        Domain 1st Registered
-                                    </h3>
-                                    <div class="icons">
-                                        <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p itemprop="dateCreated" id="domainCreated"><%--= rp.di.created_date--%></p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p></p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 " id="criterium-domain_expiration">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">2.392</span>
-
-                                    <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        Domain Expiration
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p id="domainExpired"><%--= rp.di.expited_date--%></p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p></p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 " id="criterium-domain_expiration">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">2.392</span>
-
-                                    <h3 data-original-title="Successfully passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        Domain Updated
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">Medium impact</i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">Easy to solve</i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p id="domainUpdated"><%--= rp.di.updated_date--%></p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p></p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>        
-                        </div>
+                            <div class="criterium-quicktips"></div>
+                            <div class="delimiter"></div></div>
                     </div>
                 </div>
-            </div>
 
-            <h2 class="accordion-header">Technologies</h2>
-            <div class="accordion-content" style="display: block">
-
-                <div id="module-technologies" class="module">
-                    <div class="module-content">
-                        <h2>Technologies</h2>
-                        <div id="set5Loader">
-                            <div style="text-align:center; display: block" ><img width="350" height="80" src="https://s3.amazonaws.com/images_ranktracker/load.gif"/></div>
-                        </div>
-                        <div id="technologies">
-                            <div class="criterium result-0 " id="criterium-ip_information">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="Low impact" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <span class="icn"></span>Server IP
-                                    </h3>
-
-                                    <div class="icons">
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p id="ipaddress"><%--= rp.ipaddress--%></p>
-                                        <p itemprop="contentLocation"><span class="bold">Server location:</span>
-                                            <i id="flagcode111" class=""></i>
-                                            <span id="location"></span></p>
-                                    </div>
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p>Your server's IP address <a target="_blank" href="#" rel="nofollow">has little impact</a>
-                                        on your SEO. Nevertheless, try to host your website on a server which is geographically close to your visitors. 
-                                        Search engines take the geolocation of a server into account as well as the server speed.</p>
-                                    <p>Use <a target="_blank" href="#" rel="nofollow">DNSstuff</a> for comprehensive reports on your server.</p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-0 " id="criterium-technologies">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="Low impact" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <i class="icn"></i>Technologies
-                                    </h3>
-
-                                    <div class="icons">
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text " >
-                                        <table class="no-header">
-
-                                            <tbody id="technologytable">
-                                            </tbody>
-                                        </table>
-
-
-                                        <p id="technologyused"></p>
-
-
-
-
-
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p>Get to know the technologies used for your website. Some codes might slow down your website. Ask your webmaster to take a look at this.</p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-2 " id="criterium-speed_tips">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="To Improve" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <span class="icn"></span>Speed Tips
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Medium impact" rel="tooltip" data-placement="top" class="importance-2 simple-tooltip">
-                                            <i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i>
-                                            <span>Medium impact</span>
-                                        </i>
-                                        <i data-original-title="Hard to solve" rel="tooltip" data-placement="top" class="solvability-2 simple-tooltip">
-                                            <i class="icn icn-gear"></i><i class="icn icn-gear"></i><i class="icn icn-gear"></i>
-                                            <span>Hard to solve</span>
-                                        </i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p>Watch out: your website?s speed could be slightly improved.</p>
-                                    </div>
-
-                                    <div class="part text ">
-                                        <p><span class="icon grey-found"></span>Perfect, your server is using a caching method to speed up page display.&nbsp;</p>
-                                        <p><span class="icon grey-found"></span>Perfect, your website doesn't use nested tables.</p>
-                                        <p><span class="icon grey-missing"></span>Too bad, your website is using inline styles.</p>
-                                        <p><span class="icon grey-missing"></span>Too bad, your website has too many CSS files (more than 4).</p>
-                                        <p><span class="icon grey-found"></span>Perfect, your website has few JavaScript files.</p>
-                                        <p><span class="icon grey-found"></span>Perfect, your website takes advantage of <a target="_blank" href="#" rel="nofollow">gzip</a>.</p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p>Website speed has a huge effect on SEO. ?<a target="_blank" href="#" rel="nofollow">??Speed-up your website</a> so search engines will reward you by sending more visitors.
-                                        <br>Also, conversion rates are far higher for websites that load faster than their slower competitors.</p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-3 " id="criterium-analytics_technologies">
-                                <div class="criterium-head">
-
-
-                                    <h3 data-original-title="Errors" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <span class="icn"></span>Analytics
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">
-                                            <i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i>
-                                            <span>Low impact</span>
-                                        </i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">
-                                            <i class="icn icn-gear"></i><i class="icn icn-gear"></i><i class="icn icn-gear"></i>
-                                            <span>Easy to solve</span>
-                                        </i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <table class="no-head">
-                                            <thead>
-                                            <td></td>
-                                            </thead>
-                                            <tbody id="analyticstable">
-
-                                            </tbody>
-                                        </table>
-
-
-                                        <p id="analytics"></p>
-
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p>Web analytics let you measure visitor activity on your website. You should have at least one analytics tool installed. 
-                                        It is also good to install one extra tool to have a confirmation of the results.</p>
-                                    <p>Analytics Tools: <a target="_blank" href="#" rel="nofollow">Google&trade; Analytics</a>, <a target="_blank" href="#" rel="nofollow">Quantcast&trade;</a>, 
-                                        <a target="_blank" href="#" rel="nofollow">SiteCatalyst&trade;</a>, <a target="_blank" href="#" rel="nofollow">Piwik&trade;</a>, <a target="_blank" href="#" rel="nofollow">chartbeat&trade;</a>, 
-                                        <a target="_blank" href="#" rel="nofollow">Clicky&trade;</a>, <a target="_blank" href="#" rel="nofollow">ClickTale&trade;</a>, etc.</p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-3 " id="criterium-w3c_validity">
-                                <div class="criterium-head">
-
-
-                                    <h3 data-original-title="Errors" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <span class="icn"></span>W3C Validity
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">
-                                            <i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i>
-                                            <span>Low impact</span>
-                                        </i>
-                                        <i data-original-title="Hard to solve" rel="tooltip" data-placement="top" class="solvability-2 simple-tooltip">
-                                            <i class="icn icn-gear"></i><i class="icn icn-gear"></i><i class="icn icn-gear"></i>
-                                            <span>Hard to solve</span>
-                                        </i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p><span class="bold first-letter-cap"></span><span id="w3cvalidity"></span><%--= rp.objw3cDoctypeEncoding.W3CValidity--%></p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p>Use valid markup that contains no errors. Syntax errors can make your page difficult for search engines to index.</p>
-                                    <p>To find the detected errors, run the <a target="_blank" href="#" rel="nofollow">W3C validation service,</a> or check 
-                                        <a target="_blank" href="#" rel="nofollow">Validator.nu</a> to make sure you don't miss an error.</p>
-                                    <p><a target="_blank" href="#" rel="nofollow">W3C</a> is a consortium that sets web standards.</p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-0 " id="criterium-doctype">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="Low impact" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <i class="icn"></i>Doctype
-                                    </h3>
-
-                                    <div class="icons">
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p itemprop="fileFormat" id="doctype"><%--= rp.objw3cDoctypeEncoding.Doctype--%></p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p>Declaring a <a target="_blank" href="#" rel="nofollow">doctype</a> helps web browsers to render content correctly.</p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 " id="criterium-encoding">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="Passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <i class="icn"></i>Encoding
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">
-                                            <i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i>
-                                            <span>Low impact</span>
-                                        </i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">
-                                            <i class="icn icn-gear"></i><i class="icn icn-gear"></i><i class="icn icn-gear"></i>
-                                            <span>Easy to solve</span>
-                                        </i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p id="encoding"><%--= rp.objw3cDoctypeEncoding.Encoding--%></p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p>Great, language/character encoding is specified.</p>
-                                    <p>Specifying language/character encoding can prevent problems with the rendering of
-                                        <a target="_blank" href="#" rel="nofollow">special characters</a>.</p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 hidden " id="criterium-deprecated_html_element">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="Passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <span class="icn"></span>Deprecated HTML
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">
-                                            <i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i><i class="icn icn-bullet-impact"></i>
-                                            <span>Low impact</span>
-                                        </i>
-                                        <i data-original-title="Hard to solve" rel="tooltip" data-placement="top" class="solvability-2 simple-tooltip">
-                                            <i class="icn icn-gear"></i><i class="icn icn-gear"></i><i class="icn icn-gear"></i>
-                                            <span>Hard to solve</span>
-                                        </i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-                                    <p>Deprecated HTML tags are HTML tags that are no longer used. It is recommended that you remove or replace these HTML tags because they are now obsolete.</p>
-
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 " id="criterium-directory_browsing">
-                                <div class="criterium-head">
-
-                                    <h3 data-original-title="Passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <i class="icn"></i>Directory Browsing
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">
-                                            <span class="icn icn-bullet-impact"></span><span class="icn icn-bullet-impact"></span><span class="icn icn-bullet-impact"></span>
-                                            <span>Low impact</span>
-                                        </i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">
-                                            <span class="icn icn-gear"></span><span class="icn icn-gear"></span><span class="icn icn-gear"></span>
-                                            <span>Easy to solve</span>
-                                        </i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p>No</p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p>Great! Your server prevents visitors from browsing your directory by accessing it directly, this is excellent from a security standpoint.</p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                            <div class="criterium result-1 " id="criterium-server_signature">
-                                <div class="criterium-head">
-                                    <span class="crit-score-pond hidden">0.46082949308756</span>
-
-                                    <h3 data-original-title="Passed" rel="tooltip" data-placement="left" class="simple-tooltip">
-                                        <span class="icn"></span>Server Signature
-                                    </h3>
-
-                                    <div class="icons">
-                                        <i data-original-title="Low impact" rel="tooltip" data-placement="top" class="importance-1 simple-tooltip">
-                                            <span class="icn icn-bullet-impact"></span><span class="icn icn-bullet-impact"></span><span class="icn icn-bullet-impact"></span>
-                                            <span>Low impact</span>
-                                        </i>
-                                        <i data-original-title="Easy to solve" rel="tooltip" data-placement="top" class="solvability-1 simple-tooltip">
-                                            <span class="icn icn-gear"></span><span class="icn icn-gear"></span><span class="icn icn-gear"></span>
-                                            <span>Easy to solve</span>
-                                        </i>
-                                    </div>
-                                </div>
-                                <div class="criterium-content">
-                                    <div class="part text ">
-                                        <p>No</p>
-                                    </div>
-
-                                </div>
-                                <div class="criterium-advice-click"><span>?</span>
-                                </div>
-                                <div class="criterium-advice">
-
-                                    <p>Good, your server signature is off. This is excellent from a security standpoint.</p>
-                                </div>
-
-                                <div class="delimiter"></div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="hidden" id="get-manycontact-quick-wins">
+                    <a class="external-link" href="" rel="nofollow" target="_blank">
+                        <li><i></i>Add a Conversion Form or use ManyContacts </li>
+                    </a>
+                </div>
+                <div class="hidden" id="translations-glossary">
+                    <span class="set_or_create_twitter">[YML:set_or_create_twitter]</span>
+                    <span class="field_placeholder_twitter">[YML:field_placeholder_twitter]</span>
+                    <span class="set">Set</span>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--
-                    End Accordion
-    -->
+        <!--</div>-->
 
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script type="text/javascript">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
+        <script type="text/javascript">
+            /*
+             var latitude;
+             var longitude;
+             
+             function initialize() {
+             alert("initialize");
+             var myLatlng = new google.maps.LatLng(latitude, longitude);
+             alert("initialize 2");
+             var mapOptions = {
+             zoom: 4,
+             center: myLatlng
+             };
+             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+             
+             var marker = new google.maps.Marker({
+             position: myLatlng,
+             map: map,
+             title: 'Hello World!'
+             });
+             }
+             
+             function mapBasic() {
+             new GMaps({
+             div: '#map_canvas',
+             lat: -12.043333,
+             lng: -77.028333
+             });
+             }
+             */
             $(document).ready(function() {
-                $("#visitorsnew").hide();
-                $("#facebook").hide();
-                $("#googleplus").hide();
-                $("#mobile").hide();
-                $("#seo").hide();
-                $("#technologies").hide();
-                $("#localozation").hide();
+
+                /*
+                 alert("HIIIIIIIIIIIIIII");
+                 $("#visitorsnew").hide();
+                 $("#facebook").hide();
+                 $("#googleplus").hide();
+                 $("#mobile").hide();
+                 $("#seo").hide();
+                 $("#technologies").hide();
+                 $("#localozation").hide();
+                 */
+                $("#trafficEstimation1").hide();
+                $("#trafficRank1").hide();
+                $("#VisitorsLocalization1").hide();
+                $("#googlePage").hide();
+                $("#facebookPage").hide();
+                $("#twitterAccount").hide();
+                $("#serverIP").hide();
+                $("#technology").hide();
+                $("#analytics").hide();
+                $("#wcvalidity").hide();
+                $("#doctype1").hide();
+                $("#encoding1").hide();
+                $("#directoryBrowsing").hide();
+                $("#serverSignature").hide();
+                $("#mobileRendering").hide();
+                $("#mobileTime").hide();
+                $("#mobileOptimization").hide();
+                $("#RelatedWebsite").hide();
+                $("#PageRank").hide();
+                $("#Description1").hide();
+                $("#Headings").hide();
+                $("#MetaKeywords").hide();
+                $("#Images").hide();
+                $("#HTMLRatio").hide();
+                $("#IndexedPages").hide();
+                $("#GooglePreview").hide();
+                $("#GooglePublisher").hide();
+                $("#pageLinks").hide();
+                $("#Backlinks").hide();
+                $("#Resolve").hide();
+                $("#Canonicalization").hide();
+                $("#Robots").hide();
+                $("#XMLSitemap").hide();
+                $("#Rewrite").hide();
+                $("#UnderscoresUrl").hide();
+                $("#Flash").hide();
+                $("#Frames").hide();
+                $("#DomainRegistered").hide();
+                $("#DomainExpiration").hide();
+                $("#DomainUpdated").hide();
+                $("#blog").hide();
+                $("#usability").hide();
+                $("#Title").hide();
+                $("#linkedinAccount").hide();
+                $("#PinterestAccount").hide();
+
                 setTimeout(function() {
+                    //                    alert("-------1-------------");
                     var url = document.getElementById('websearchurl').value;
                     var imagessrnumber = 1;
                     var pagelinkshumber = 1;
-                    alert(url);
+                    //                    alert(url);
                     $.ajax({
                         type: 'POST',
-                        url: '${contextPath}/reviews/visitors/' + url + "/",
+                        url: '/reviews/visitors/' + url + ".htm",
                         data: {websearchurl: url},
                         beforeSend: function(xhr) {
                             xhr.setRequestHeader("Accept", "application/json");
@@ -2176,13 +3167,64 @@
                         },
                         success: function(responsejson) {
                             console.log(responsejson);
-
                             $('#set1Loader').hide();
                             $('#set2Loader').hide();
                             $('#set3Loader').hide();
                             $('#set4Loader').hide();
                             $('#set5Loader').hide();
+                            $('#set6Loader').hide();
+                            $('#set7Loader').hide();
+                            $('#set8Loader').hide();
+                            $('#set9Loader').hide();
+                            $('#set10Loader').hide();
                             $('#set11Loader').hide();
+                            $('#set12Loader').hide();
+                            $('#set13Loader').hide();
+                            $('#set14Loader').hide();
+                            $('#set15Loader').hide();
+                            $('#set16Loader').hide();
+                            $('#set17Loader').hide();
+                            $('#set18Loader').hide();
+                            $('#set19Loader').hide();
+                            $('#set20Loader').hide();
+                            $('#set21Loader').hide();
+                            $('#set22Loader').hide();
+                            $('#set23Loader').hide();
+                            $('#set24Loader').hide();
+                            $('#set25Loader').hide();
+                            $('#set26Loader').hide();
+                            $('#set27Loader').hide();
+                            $('#set28Loader').hide();
+                            $('#set29Loader').hide();
+                            $('#set30Loader').hide();
+                            $('#set31Loader').hide();
+                            $('#set32Loader').hide();
+                            $('#set33Loader').hide();
+                            $('#set34Loader').hide();
+                            $('#set35Loader').hide();
+                            $('#set36Loader').hide();
+                            $('#set37Loader').hide();
+                            $('#set38Loader').hide();
+                            $('#set39Loader').hide();
+                            $('#set40Loader').hide();
+                            $('#set41Loader').hide();
+                            $('#set42Loader').hide();
+                            $('#set43Loader').hide();
+                            $('#set44Loader').hide();
+                            $('#set45Loader').hide();
+                            $('#set46Loader').hide();
+                            $('#set47Loader').hide();
+                            $('#set48Loader').hide();
+                            $('#set49Loader').hide();
+                            $('#set50Loader').hide();
+                            $('#set51Loader').hide();
+                            $('#set52Loader').hide();
+                            $('#set53Loader').hide();
+                            $('#set54Loader').hide();
+                            $('#set55Loader').hide();
+                            $('#set56Loader').hide();
+                            $('#set57Loader').hide();
+
                             $("#visitorsnew").show();
                             $("#facebook").show();
                             $("#googleplus").show();
@@ -2190,175 +3232,81 @@
                             $("#seo").show();
                             $("#technologies").show();
                             $("#localozation").show();
+                            $("#trafficEstimation1").show();
+                            $("#trafficRank1").show();
+                            $("#VisitorsLocalization1").show();
+                            $("#googlePage").show();
+                            $("#facebookPage").show();
+                            $("#twitterAccount").show();
+                            $("#serverIP").show();
+                            $("#technology").show();
+                            $("#analytics").show();
+                            $("#wcvalidity").show();
+                            $("#doctype1").show();
+                            $("#encoding1").show();
+                            $("#directoryBrowsing").show();
+                            $("#serverSignature").show();
+                            $("#mobileRendering").show();
+                            $("#mobileTime").show();
+                            $("#mobileOptimization").show();
+                            $("#RelatedWebsite").show();
+                            $("#PageRank").show();
+                            $("#Description1").show();
+                            $("#Headings").show();
+                            $("#MetaKeywords").show();
+                            $("#Images").show();
+                            $("#HTMLRatio").show();
+                            $("#IndexedPages").show();
+                            $("#GooglePreview").show();
+                            $("#GooglePublisher").show();
+                            $("#pageLinks").show();
+                            $("#Backlinks").show();
+                            $("#Resolve").show();
+                            $("#Canonicalization").show();
+                            $("#Robots").show();
+                            $("#XMLSitemap").show();
+                            $("#Rewrite").show();
+                            $("#UnderscoresUrl").show();
+                            $("#Flash").show();
+                            $("#Frames").show();
+                            $("#DomainRegistered").show();
+                            $("#DomainExpiration").show();
+                            $("#DomainUpdated").show();
+                            $("#blog").show();
+                            $("#usability").show();
+                            $("#Title").show();
+                            $("#linkedinAccount").show();
+                            $("#PinterestAccount").show();
 
                             $.each(responsejson.imagedata, function(key, value) {
-//
 
-                                for (var i = 0; i < 1; i++) {
-                                    document.getElementById("imagestable").innerHTML = document.getElementById("imagestable").innerHTML + "<tr><td>" + imagessrnumber + "</td><td>" + value + "</td></tr>";
-                                    imagessrnumber++;
-                                }
-
-                                var trs = $("#imagestable tr");
-                                var btnMore = $("#seeMoreRecords1");
-                                var btnLess = $("#seeLessRecords1");
-                                var trsLength = trs.length;
-                                var currentIndex = 3;
-
-                                trs.hide();
-                                trs.slice(0, 3).show();
-                                checkButton();
-
-                                btnMore.click(function(e) {
-                                    e.preventDefault();
-                                    $("#imagestable tr").slice(currentIndex, currentIndex + 6).show();
-                                    currentIndex += 6;
-                                    checkButton();
-                                });
-
-                                btnLess.click(function(e) {
-                                    e.preventDefault();
-                                    $("#imagestable tr").slice(currentIndex - 3, currentIndex).hide();
-                                    currentIndex -= 3;
-                                    checkButton();
-                                });
-
-                                function checkButton() {
-                                    var currentLength = $("#imagestable tr:visible").length;
-
-                                    if (currentLength >= trsLength) {
-                                        btnMore.hide();
-                                    } else {
-                                        btnMore.show();
-                                    }
-
-                                    if (trsLength > 6 && currentLength > 6) {
-                                        btnLess.show();
-                                    } else {
-                                        btnLess.hide();
-                                    }
-
-                                }
+                                document.getElementById("imagestable").innerHTML = document.getElementById("imagestable").innerHTML + "<tr><td>" + imagessrnumber + "</td><td>" + value + "</td></tr>";
+                                imagessrnumber++;
                             });
-
                             var type;
                             $.each(responsejson.pagelinksdata, function(i, j) {
-//                                console.log(i);
-//                                console.log(j);
-                                for (var i = 0; i < 1; i++) {
-                                    var sample = "<tr><td>" + j.links + "</td><td>" + j.type + "</td><td>" + j.title + "</td></tr>";
-                                    $('#inpagelinkstable').append(sample);
+
+                                var title = (j.title);
+                                var title = title.substring(0, 5) + '..';
+                                var sample = "<tr><td>" + j.links + "</td><td>" + j.type + "</td><td title=" + j.title + ">" + title + "</td></tr>";
+                                $('#inpagelinkstable').append(sample);
+                                //                                }
+                                if (i.contains('type')) {
+                                    type = j;
                                 }
-//                                if (i.contains('type')) {
-//                                    type = j;
-//                                }
-//                                if (!i.contains('type')) {
-//                                    var sample = "<tr><td>" + j + "</td><td>" + type + "</td><td>Title</td></tr>";
-//                                    $('#inpagelinkstable').append(sample);
-//                                }
-
-                                var trs = $("#inpagelinkstable tr");
-                                var btnMore = $("#seeMoreRecords3");
-                                var btnLess = $("#seeLessRecords3");
-                                var trsLength = trs.length;
-                                var currentIndex = 3;
-
-                                trs.hide();
-                                trs.slice(0, 3).show();
-                                checkButton();
-
-                                btnMore.click(function(e) {
-                                    e.preventDefault();
-                                    $("#inpagelinkstable tr").slice(currentIndex, currentIndex + 6).show();
-                                    currentIndex += 6;
-                                    checkButton();
-                                });
-
-                                btnLess.click(function(e) {
-                                    e.preventDefault();
-                                    $("#inpagelinkstable tr").slice(currentIndex - 3, currentIndex).hide();
-                                    currentIndex -= 3;
-                                    checkButton();
-                                });
-
-                                function checkButton() {
-                                    var currentLength = $("#inpagelinkstable tr:visible").length;
-
-                                    if (currentLength >= trsLength) {
-                                        btnMore.hide();
-                                    } else {
-                                        btnMore.show();
-                                    }
-
-                                    if (trsLength > 6 && currentLength > 6) {
-                                        btnLess.show();
-                                    } else {
-                                        btnLess.hide();
-                                    }
-
+                                if (!i.contains('type')) {
+                                    // var sample = "<tr><td>" + j + "</td><td>" + type + "</td><td>Title</td></tr>";
+                                    // $('#inpagelinkstable').append(sample);
                                 }
-
                             });
-
                             var relatednumber = 1;
                             $.each(responsejson.relatedwebsite, function(key, value) {
 
-
-
-                                for (var i = 0; i < 1; i++) {
-                                    document.getElementById("relatedtable").innerHTML = document.getElementById("relatedtable").innerHTML + "<tr><td>" + relatednumber + "</td><td>" + value + "</td></tr>";
-                                    relatednumber++;
-                                }
-
-                                var trs = $("#relatedtable tr");
-                                var btnMore = $("#seeMoreRecords2");
-                                var btnLess = $("#seeLessRecords2");
-                                var trsLength = trs.length;
-                                var currentIndex = 3;
-
-                                trs.hide();
-                                trs.slice(0, 3).show();
-                                checkButton();
-
-                                btnMore.click(function(e) {
-                                    e.preventDefault();
-                                    $("#relatedtable tr").slice(currentIndex, currentIndex + 4).show();
-                                    currentIndex += 4;
-                                    checkButton();
-                                });
-
-                                btnLess.click(function(e) {
-                                    e.preventDefault();
-                                    $("#relatedtable tr").slice(currentIndex - 3, currentIndex).hide();
-                                    currentIndex -= 3;
-                                    checkButton();
-                                });
-
-                                function checkButton() {
-                                    var currentLength = $("#relatedtable tr:visible").length;
-
-                                    if (currentLength >= trsLength) {
-                                        btnMore.hide();
-                                    } else {
-                                        btnMore.show();
-                                    }
-
-                                    if (trsLength > 10 && currentLength > 10) {
-                                        btnLess.show();
-                                    } else {
-                                        btnLess.hide();
-                                    }
-
-                                }
-
-
+                                document.getElementById("relatedtable").innerHTML = document.getElementById("relatedtable").innerHTML + "<tr><td>" + relatednumber + "</td><td>" + value + "</td></tr>";
+                                relatednumber++;
                             });
-
-
                             var tech;
                             $.each(responsejson.technologydata, function(i, j) {
-//                                console.log(i);
-//                                console.log(j);
 
                                 if (i.contains('technologyused')) {
                                     var sample = "<tr><td>" + j + "</td><td>" + "</td><td></td></tr>";
@@ -2369,76 +3317,38 @@
                                     var sample1 = "<tr><td>" + j + "</td><td>" + "</td><td></td></tr>";
                                     $('#analyticstable').append(sample1);
                                 }
-
                             });
-
+                            var visitorrank = 10000000;
+                            var flag = 0;
                             $.each(responsejson.visitorarray, function(i, j) {
 
-//                                console.log(i);
-//                                console.log(j);
-//                                                               
-//                                 if (i.contains('type')) {
-//                                    type = j;
-//                                }
-//                                if (!i.contains('type')) {
-                                var sample = "<tr><td>" + j.country + "</td><td>" + j.percent + "</td><td>" + j.rank + "</td></tr>";
-                                $('#visitortable').append(sample);
-//                                }
+                                if (i.contains('type')) {
+                                    type = j;
+                                }
+                                if (!i.contains('type')) {
+                                    /*
+                                     if (flag === 0) {
+                                     alert('flag is 0')
+                                     $('#country-name').append(j.country);
+                                     flag = 1;
+                                     alert('flag is 1 '+j.country)
+                                     }
+                                     
+                                     var countryname = "<div class='country-info'><div class='name'>" + j.country + "</div></div>"
+                                     $('#countryname1').append(countryname);
+                                     */
+                                    var sample = "<tr><td>" + j.country + "</td><td>" + j.percent + "</td><td>" + j.rank + "</td></tr>";
+                                    $('#visitortable').append(sample);
 
 
+                                }
                             });
                             var xmlnumber = 1;
                             $.each(responsejson.xmldata, function(key, value) {
 
-                                for (var i = 0; i < 1; i++) {
-
-                                    document.getElementById("xmltable").innerHTML = document.getElementById("xmltable").innerHTML + "<tr><td>" + xmlnumber + "</td><td>" + value + "</td></tr>";
-                                    xmlnumber++;
-                                }
-                                var trs = $("#xmltable tr");
-                                var btnMore = $("#seeMoreRecords");
-                                var btnLess = $("#seeLessRecords");
-                                var trsLength = trs.length;
-                                var currentIndex = 3;
-
-                                trs.hide();
-                                trs.slice(0, 3).show();
-                                checkButton();
-
-                                btnMore.click(function(e) {
-                                    e.preventDefault();
-                                    $("#xmltable tr").slice(currentIndex, currentIndex + 6).show();
-                                    currentIndex += 6;
-                                    checkButton();
-                                });
-
-                                btnLess.click(function(e) {
-                                    e.preventDefault();
-                                    $("#xmltable tr").slice(currentIndex - 3, currentIndex).hide();
-                                    currentIndex -= 3;
-                                    checkButton();
-                                });
-
-                                function checkButton() {
-                                    var currentLength = $("#xmltable tr:visible").length;
-
-                                    if (currentLength >= trsLength) {
-                                        btnMore.hide();
-                                    } else {
-                                        btnMore.show();
-                                    }
-
-                                    if (trsLength > 6 && currentLength > 6) {
-                                        btnLess.show();
-                                    } else {
-                                        btnLess.hide();
-                                    }
-
-                                }
-
+                                document.getElementById("xmltable").innerHTML = document.getElementById("xmltable").innerHTML + "<tr><td>" + xmlnumber + "</td><td>" + value + "</td></tr>";
+                                xmlnumber++;
                             });
-
-
                             $.each(responsejson.headingcount, function(key, value) {
 
                                 if (key === 'heading1') {
@@ -2459,50 +3369,46 @@
                             });
                             $.each(responsejson.headingelements, function(i, j) {
 
-//                                console.log(i);
-//                                console.log(j);
-
-
                                 if (i.contains('h1elements')) {
                                     if (j.contains('h1')) {
                                         j = j.replace('h1', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H1&gt;</span>" + j + "</td></tr>");
-//                                   
+                                    //                                   
                                 }
                                 if (i.contains('h2elements')) {
                                     if (j.contains('h2')) {
                                         j = j.replace('h2', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H2&gt;</span>" + j + "</td></tr>");
-//                                    $("#headingtable2").val("<td id=\"h2element\"><span class=\"bold\">&lt;h2&gt;</span></td><tr><td>" + "<span></span>" + j + "</td></td>");
+                                    //                                    $("#headingtable2").val("<td id=\"h2element\"><span class=\"bold\">&lt;h2&gt;</span></td><tr><td>" + "<span></span>" + j + "</td></td>");
                                 }
                                 if (i.contains('h3elements')) {
                                     if (j.contains('h3')) {
                                         j = j.replace('h3', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H3&gt;</span>" + j + "</td></tr>");
-//                                    $("#headingtable3").val("<td id=\"h3element\"><span class=\"bold\">&lt;h3&gt;</span></td><tr><td>" + "<span></span>" + j + "</td></td>");
+                                    //                                    $("#headingtable3").val("<td id=\"h3element\"><span class=\"bold\">&lt;h3&gt;</span></td><tr><td>" + "<span></span>" + j + "</td></td>");
                                 }
                                 if (i.contains('h4element')) {
                                     if (j.contains('h4')) {
                                         j = j.replace('h4', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H4&gt;</span>" + j + "</td></tr>");
-//                                    $("#headingtable4").val("<td id=\"h4element\"><span class=\"bold\">&lt;h4&gt;</span></td><tr><td>" + "<span></span>" + j + "</td></td>");
+                                    //                                    $("#headingtable4").val("<td id=\"h4element\"><span class=\"bold\">&lt;h4&gt;</span></td><tr><td>" + "<span></span>" + j + "</td></td>");
                                 }
                                 if (i.contains('h5element')) {
                                     if (j.contains('h5')) {
                                         j = j.replace('h5', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H5&gt;</span>" + j + "</td></tr>");
-//                                    $("#headingtable5").val('<td id="h5element"><span class="bold">&lt;h5&gt;</span></td><tr><td><span></span>' + j + '</td></td>');
-
+                                    //                                    $("#headingtable5").val('<td id="h5element"><span class="bold">&lt;h5&gt;</span></td><tr><td><span></span>' + j + '</td></td>');
                                 }
-
                             });
 
                             $.each(responsejson.visitmap, function(key, value) {
+
+                                //                                alert(key, value);
 
                                 if (key === 'wwwresolve') {
                                     document.getElementById("wwwresolve").textContent = value;
@@ -2528,6 +3434,7 @@
                                 if (key === 'googlePublisher') {
                                     document.getElementById("googlePublisher").textContent = value;
                                 }
+
                                 if (key === 'title') {
                                     document.getElementById("title").textContent = value;
                                 }
@@ -2550,7 +3457,7 @@
                                     document.getElementById("frames").textContent = value;
                                 }
                                 if (key === 'pageRank') {
-                                    document.getElementById("pageRank").textContent = value;
+                                    document.getElementById("pageRank").innerHTML = value;
                                 }
                                 if (key === 'domainCreated') {
                                     document.getElementById("domainCreated").textContent = value;
@@ -2606,6 +3513,12 @@
                                 if (key === 'googleName') {
                                     document.getElementById("googleName").textContent = value;
                                 }
+                                if (key === 'googleFollower') {
+                                    document.getElementById("googleFollower").textContent = value;
+                                }
+                                if (key === 'googleViews') {
+                                    document.getElementById("googleViews").textContent = value;
+                                }
                                 if (key === 'googleVerified') {
                                     document.getElementById("googleVerified").textContent = value;
                                 }
@@ -2636,6 +3549,12 @@
                                 if (key === 'encoding') {
                                     document.getElementById("encoding").textContent = value;
                                 }
+                                /*
+                                 $(this).css('display', 'none');
+                                 document.getElementById(".test").css({
+                                 display: 'block;'
+                                 });
+                                 */
                                 if (key === 'doctype') {
                                     document.getElementById("doctype").textContent = value;
                                 }
@@ -2648,10 +3567,155 @@
                                 if (key === 'ipadView') {
                                     $("#ipadView").attr('src', value);
                                 }
+                                if (key === 'twitterName') {
+                                    document.getElementById("twitterName").textContent = value;
+                                }
+                                if (key === 'twitterImage') {
+                                    $("#twitterImage").attr('src', value);
+                                }
+                                if (key === 'twitterCount') {
+                                    document.getElementById("twitterCount").textContent = value;
+                                }
+                                if (key === 'twitterFollowing') {
+                                    document.getElementById("twitterFollowing").textContent = value;
+                                }
+                                if (key === 'twitterFollower') {
+                                    document.getElementById("twitterFollower").textContent = value;
+                                }
+                                if (key === 'twitterList') {
+                                    document.getElementById("twitterList").textContent = value;
+                                }
+                                if (key === 'twitterDescription') {
+                                    document.getElementById("twitterDescription").textContent = value;
+                                }
+                                if (key === 'twitterLocation') {
+                                    document.getElementById("twitterLocation").textContent = value;
+                                }
+                                /*
+                                 if (key === 'twitterUrl') {
+                                 document.getElementById("twitterUrl").textContent = value;
+                                 }
+                                 */
+                                if (key === 'twitterFavourites') {
+                                    document.getElementById("twitterFavourites").textContent = value;
+                                }
+                                if (key === 'twitterDate') {
+                                    document.getElementById("twitterDate").textContent = value;
+                                }
+                                if (key === 'dashboardImage') {
+                                    $("#dashboardImage").attr('src', value);
+                                }
+                                if (key === 'usabilityImage') {
+                                    $("#usabilityImage").attr('src', value);
+                                }
+                                if (key === 'descriptionLength') {
+                                    document.getElementById("descriptionLength").textContent = value;
+                                }
+                                if (key === 'passedPercent') {
+                                    document.getElementById("passedPercent").style = 'width:' + value + '%';
+                                }
+                                if (key === 'errorPercent') {
+                                    document.getElementById("errorPercent").style = 'width:' + value + '%';
+                                }
+                                if (key === 'improvePercent') {
+                                    document.getElementById("improvePercent").style = 'width:' + value + '%';
+                                }
+                                if (key === 'indexedPages') {
+                                    document.getElementById("indexedPages").innerHTML = value;
+                                }
+                                if (key === 'backlinksCounter') {
+                                    document.getElementById("backlinksCounter").innerHTML = value;
+                                }
+                                if (key === 'facebookDescription') {
+                                    document.getElementById("facebookDescription").textContent = value;
+                                }
+                                if (key === 'mobileLoadTime') {
+                                    document.getElementById("mobileLoadTime").textContent = value;
+                                }
+                                if (key === 'trafficEstimation') {
+                                    document.getElementById("trafficEstimation").textContent = value;
+                                }
+                                /*
+                                 if (key === 'scoreValue') {
+                                 document.getElementById("scoreValue").innerHTML = value;
+                                 }
+                                 if (key === 'latitude') {
+                                 latitude = value + "";
+                                 alert("latitude " + latitude)
+                                 document.getElementById("latitude").textContent = value;
+                                 }
+                                 if (key === 'longitude') {
+                                 longitude = value + "";
+                                 alert("longitude " + longitude)
+                                 document.getElementById("longitude").textContent = value;
+                                 }
+                                 */
+
+                                if (key === 'pInterestBoards') {
+                                    document.getElementById("pInterestBoards").textContent = value;
+                                }
+                                if (key === 'pInterestPins') {
+                                    document.getElementById("pInterestPins").textContent = value;
+                                }
+                                if (key === 'pInterestLikes') {
+                                    document.getElementById("pInterestLikes").textContent = value;
+                                }
+                                if (key === 'pInterestFollower') {
+                                    document.getElementById("pInterestFollower").textContent = value;
+                                }
+                                if (key === 'pInterestFollowing') {
+                                    document.getElementById("pInterestFollowing").textContent = value;
+                                }
+                                if (key === 'pInterestImage') {
+                                    $("#pInterestImage").attr('src', value);
+                                }
+                                if (key === 'pInterestName') {
+                                    document.getElementById("pInterestName").textContent = value;
+                                }
+                                if (key === 'pInterestDescription') {
+                                    document.getElementById("pInterestDescription").textContent = value;
+                                }
+                                if (key === 'linkedFollower') {
+                                    document.getElementById("linkedFollower").textContent = value;
+                                }
+                                if (key === 'linkedImage') {
+                                    $("#linkedImage").attr('src', value);
+                                }
+                                if (key === 'linkedDescription') {
+                                    document.getElementById("linkedDescription").textContent = value;
+                                }
+                                if (key === 'linkedSpecialties') {
+                                    document.getElementById("linkedSpecialties").textContent = value;
+                                }
+                                if (key === 'linkedWebsite') {
+                                    document.getElementById("linkedWebsite").textContent = value;
+                                }
+                                if (key === 'linkedIndustry') {
+                                    document.getElementById("linkedIndustry").textContent = value;
+                                }
+                                if (key === 'linkedType') {
+                                    document.getElementById("linkedType").textContent = value;
+                                }
+                                if (key === 'linkedHeadquater') {
+                                    document.getElementById("linkedHeadquater").textContent = value;
+                                }
+                                if (key === 'linkedCompany') {
+                                    document.getElementById("linkedCompany").textContent = value;
+                                }
+                                if (key === 'linkedFounded') {
+                                    document.getElementById("linkedFounded").textContent = value;
+                                }
+                                if (key === 'linkedEmployee') {
+                                    document.getElementById("linkedEmployee").textContent = value;
+                                }
+
                             });
+//                            google.maps.event.addDomListener(window, 'load', initialize);
+//                            initialize();
+//                            mapBasic();
                         }
                     });
-                }, 10000);
+                }, 50000);
             });
             /* user defined variables */
             var timeOnSlide = 2,
@@ -2714,81 +3778,45 @@
                 document.body.appendChild(css); // add the new stylesheet to the end of the document
             }
 
-    </script>
+        </script>
 
-    <SCRIPT>
-        $(document).ready(function() {
-            var showChar = 100;
-            var ellipsestext = "...";
-            var moretext = "more";
-            var lesstext = "less";
-            $('.more').each(function() {
-                var content = $(this).html();
-                if (content.length > showChar) {
+        <script>
+            $(function() {
 
-                    var c = content.substr(0, showChar);
-                    var h = content.substr(showChar - 1, content.length - showChar);
-                    var html = c + '<span class="moreelipses">' + ellipsestext + '</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-                    $(this).html(html);
-                }
+                // The height of the content block when it's not expanded
+                var adjustheight = 125;
+                // The "more" link text
+                var moreText = "Show  More";
+                // The "less" link text
+                var lessText = "Show Less";
+                // Sets the .more-block div to the specified height and hides any content that overflows
+                $(".more-less .more-block").css('height', adjustheight).css('overflow', 'hidden');
+                // The section added to the bottom of the "more-less" div
+                $(".more-less").append('');
+                $("a.adjust").text(moreText);
+                $(".adjust").toggle(function() {
+                    $(this).parents("div:first").find(".more-block").css('height', 'auto').css('overflow', 'visible');
+                    // Hide the [...] when expanded
+                    $(this).parents("div:first").find("p.continued").css('display', 'none');
+                    $(this).text(lessText);
+                }, function() {
+                    $(this).parents("div:first").find(".more-block").css('height', adjustheight).css('overflow', 'hidden');
+                    $(this).parents("div:first").find("p.continued").css('display', 'block');
+                    $(this).text(moreText);
+                });
+            });</script>
 
-            });
-            $(".morelink").click(function() {
-                if ($(this).hasClass("less")) {
-                    $(this).removeClass("less");
-                    $(this).html(moretext);
-                } else {
-                    $(this).addClass("less");
-                    $(this).html(lesstext);
-                }
-                $(this).parent().prev().toggle();
-                $(this).prev().toggle();
-                return false;
-            });
-        });
-    </SCRIPT>
-    <script>
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/jquery.min.js" ></script>
+        <!--< script type = "text/javascript" src = "https://s3.amazonaws.com/js-globustracker/review/jquery.min.js" ></script>-->
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/mc.min.js?crc=547697426" ></script>
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/piecon.min.js?crc=-1047366459" ></script>
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/charts.min.js" ></script>
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/mstch.min.js?crc=-1697587399" ></script>
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/push.min.js?crc=-1546243989" ></script>
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/moment.js" ></script>
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/review.min.js" ></script>
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/commons.min.js" ></script>  
 
 
-
-
-    </script>
-    <!-- Footer start -->
-    <div id="footer">		
-        <div class="footer_wrapper">
-            <!--<div class="footer_left">
-                    <div class="footer_left_title">BENEFITS</div>
-                <a href="#">Review Management</a>
-                <a href="#">Social Media Monitoring</a>
-                <a href="#">Marketing & Local SEO</a>
-            </div>
-            <div class="footer_mid">
-                    <div class="footer_mid_title">BLOG</div>
-                <a href="#">
-                    FOHBOH® & CHATMETER DISRUPTS BILLION DOLLAR MYSTERY SHOPPING INDUSTRY WITH FOHBUZZ
-                </a>
-                                    <span>	Online Review Management in the new world: 3rd party reviews disappear from Google Places</span>                    
-            </div>
-            <div class="footer_right">
-                    <div class="footer_right_title">CONNECT WITH US</div>
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">Linkedin</a>
-            </div>-->
-            <!--menu-->
-            <div id="footer_menu">
-                <ul class="footer_menu">
-                    <li><a href="privacy.action"><span><span>PRIVACY POLICY</span></span></a></li>
-                    <li class="nav3"><a href="http://www.linkedin.com/groups/Globustracker-Reputation-Management-Tool-Indian-40949.S.158870491?" target="_blank"><span>
-                                <img src="https://s3.amazonaws.com/images_ranktracker/link_icon.png" width="32" height="32" alt="" /></span></a></li>	
-                    <li class="nav3"><a href="https://twitter.com/Globustrackerr" target="_blank"><span><img src="https://s3.amazonaws.com/images_ranktracker/twit_icon.png" width="32" height="32" alt="" /></span></a></li>								
-                    <li class="nav3"><a href="https://www.facebook.com/pages/Globustracker/290801504407290" target="_blank"><span><img src="https://s3.amazonaws.com/images_ranktracker/fb_icon.png" width="32" height="32" alt="" /></span></a></li>			
-                </ul>
-            </div>
-            <!--end menu-->
-            <div class="footer_bottom">©2013-2014 GlobusTracker. All Rights Reserved. </div>
-        </div>	
-    </div>
-    <!-- Footer end -->
-</body>
+    </body>
 </html>

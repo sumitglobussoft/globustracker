@@ -43,6 +43,7 @@
         <global-results>
             <result name="error">/WEB-INF/jsp_ranktracker_view/failure.jsp</result>
             <result name="login">/WEB-INF/jsp_ranktracker_view/signIn.jsp</result>
+            <result name="renewal">/WEB-INF/jsp_ranktracker_view/accountexpired.jsp</result>
         </global-results>
 
         <!-- configuring global exception mapping-->
@@ -64,8 +65,7 @@
             <result name="CONTINUE" type="redirect">/paymentCoupon.action</result>
             <result name="done">/WEB-INF/jsp_ranktracker_view/success.jsp</result>
         </action>
-        
-        
+              
         <!-- 
         configuring paymentCoupon action
         when paymentCoupon.action will invoke,container will load the ranktracker.action.PaymentCouponAction class and invoke the execute method
@@ -101,7 +101,11 @@
         </action>
         
         <action name="accountCreated" class="ranktracker.action.AccountCreatedAction" method="execute">
-            <result name="success">/WEB-INF/jsp_ranktracker_view/success.jsp</result>
+            <result name="success">/WEB-INF/jsp_ranktracker_view/accountconfirmation.jsp</result>
+        </action>
+        
+        <action name="freeTrial" class="ranktracker.action.AccountCreatedAction" method="activateFree">
+<!--            <result name="success">/WEB-INF/jsp_ranktracker_view/accountconfirmation.jsp</result>-->
         </action>
         
         <action name="forgotPasswordSubmit" class="ranktracker.action.ForgotPasswordAction" method="execute">    
@@ -119,9 +123,14 @@
             <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
         </action>
         
-        <action name="logInSubmit" class="ranktracker.action.SignInSubmitAction" method="executeLogin">            
-            <result name="success" type="redirect">/campaigns.action</result>
+        <action name="logInSubmit" class="ranktracker.action.SignInSubmitAction" method="executeLogin">     
             <result name="input">/WEB-INF/jsp_ranktracker_view/signIn.jsp</result>
+            <result name="renewal">/WEB-INF/jsp_ranktracker_view/accountexpired.jsp</result>       
+            <result name="success" type="redirect">/campaigns.action</result>    
+        </action>
+        
+        <action name="renewal" class="ranktracker.action.SignInSubmitAction" method="executeRenewal">                   
+            <result name="success" type="tiles">renewal</result>      
         </action>
         
         <action name="campaigns" class="ranktracker.action.CampaignsAction" method="execute">            
@@ -160,8 +169,7 @@
         </action>
       
         <action name="tabSettings" class="ranktracker.action.SettingsAction" method="tabSettings">            
-            <result name="success" type="redirect">/settings.action</result>
-            <result name="input">/WEB-INF/jsp_ranktracker_view/profile.jsp</result>  
+            <result name="success" type="redirect">/settings.action</result> 
         </action>
                 
         <action name="updateEmailSettings" class="ranktracker.action.SettingsAction" method="updateEmailSettings">            
@@ -169,8 +177,11 @@
         </action>
         
         <action name="serpskeywords" class="ranktracker.action.SerpsKeywordsAction" method="execute">            
-            <result name="success" type="tiles">serpskeywords</result>
+            <result name="success" type="tiles">serpskeywordsajax</result>
             <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+        </action>
+                
+        <action name="limitedserpskeywords" class="ranktracker.action.SerpsKeywordsAction" method="getLimitedSerps">            
         </action>
         
         <action name="videokeywords" class="ranktracker.action.VideoKeywordsAction" method="execute">            
@@ -200,7 +211,7 @@
         </action>
         
         <action name="changePassword" class="ranktracker.action.SettingsAction" method="changePassword">            
-            <result  name="success" type="redirect">/campaigns.action</result>
+            <result  name="success" type="redirect">/settings.action</result>
         </action>
         
         <action name="changeAdminPassword" class="ranktracker.action.SettingsAction" method="changeAdminPassword">            
@@ -212,7 +223,7 @@
         </action>
         
         <action name="addUser" class="ranktracker.action.SettingsAction" method="addUser">
-            <result  name="success" type="tiles">settings</result>
+            <result  name="success" type="redirect">/settings.action</result>
         </action>
         
         <action name="searchSerpsCampaign" class= "ranktracker.action.SerpsTrackAction" method="searchSerpsCampaign">
@@ -252,6 +263,31 @@
             <result name="login">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
         </action>   
              
+        <action name="SignUpMailContent" class="ranktracker.action.MailBodyAction" method="getSignUpMailContent">
+            <result name="success">/WEB-INF/jsp_ranktracker_view/mailbody.jsp</result>
+        </action>
+       
+        <action name="ForgotPassContent" class="ranktracker.action.MailBodyAction" method="getForgotPassContent">
+            <result name="success">/WEB-INF/jsp_ranktracker_view/mailbody.jsp</result>
+        </action>
+        
+        <action name="ChangePassContent" class="ranktracker.action.MailBodyAction" method="getChangePassContent">
+            <result name="success">/WEB-INF/jsp_ranktracker_view/mailbody.jsp</result>
+        </action>
+        
+        <action name="ContactUsContent" class="ranktracker.action.MailBodyAction" method="getContactUsContent">
+            <result name="success">/WEB-INF/jsp_ranktracker_view/mailbody.jsp</result>
+        </action>
+        
+        <action name="ReportContent" class="ranktracker.action.MailBodyAction" method="getEmailReportContent">
+            <result name="success">/WEB-INF/jsp_ranktracker_view/mailbody.jsp</result>
+        </action>
+        
+        <action name="accountActivation" class="ranktracker.action.PageLinkAction" method="accountActivation">  
+            <result name="success">/WEB-INF/jsp_ranktracker_view/accountconfirmation.jsp</result>         
+            <result name="CONTINUE">/WEB-INF/jsp_ranktracker_view/accountoptions.jsp</result>
+        </action>
+                
     </package>
    
     <!-- declaring reportActions package name-->
@@ -313,12 +349,17 @@
             <result name="success" type="tiles">upgrade</result>
         </action>
         
-        <action name="upgradeOptiondashboard" class="ranktracker.action.UpgradeAction" method="upgradeLinkOption">            
-            <result name="success">/WEB-INF/jsp_ranktracker_view/upgrade.jsp</result>
+        <action name="seoIntelligence" class="ranktracker.action.PageLinkAction" method="seoIntelligence">            
+            <result name="login">/WEB-INF/jsp_ranktracker_view/home.jsp</result>
+            <result name="success" type="tiles">seoIntelligence</result>            
         </action>
         
         <action name="upgrade" class="ranktracker.action.UpgradeAction" method="execute">            
             <result name="success" type="redirect">/paymentPaypalUpgrade.action</result>
+        </action>
+        
+        <action name="accountUpgraded" class="ranktracker.action.UpgradeAction" method="accountUpgraded">
+            <result name="success" type="redirect">/campaigns.action</result> 
         </action>
         
         <action name="signIn" class="ranktracker.action.PageLinkAction" method="signIn">    
@@ -332,10 +373,6 @@
         
         <action name="report" class="ranktracker.action.ReportAction" method="execute">            
             <result name="success" type="tiles">report</result>
-        </action>
-        
-        <action name="reportdashboard" class="ranktracker.action.ReportAction" method="execute">            
-            <result name="success">/WEB-INF/jsp_ranktracker_view/report.jsp</result>
         </action>
         
         <action name="signOut" class="ranktracker.action.PageLinkAction" method="signOut">    
@@ -642,8 +679,8 @@
     
     <package name="jsonResponses" extends="json-default">
         <action name="commonslocaldata" class="ranktracker.action.ReviewAction" method="execute">
-            <result name="success" type="json">/WEB-INF/jsp_ranktracker_view/review.jsp
-            </result>
+            <result name="success" type="json">/WEB-INF/jsp_ranktracker_view/review.jsp</result>
+            <result name="error">/WEB-INF/jsp_ranktracker_view/errormessage.jsp</result>
         </action>
         
         <!--        <action name="visitorsdata" class="ranktracker.action.ReviewAction" method="getVisitorLocalization">

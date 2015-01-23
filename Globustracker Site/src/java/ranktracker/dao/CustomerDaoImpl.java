@@ -4,10 +4,13 @@ package ranktracker.dao;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -171,6 +174,31 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
         //returning the user object
         return objUser;
     }
+    
+    /**
+     * The method retrieves a user details by given token
+     *
+     * @param token
+     * @return Users
+     */
+    @Override
+    public Users getUserDetails(String token) {
+
+         //calling the getSession() to create Criteria for Users class and instantiating objCriteria object 
+        Criteria objCriteria = getSession().createCriteria(Users.class);
+
+        //adding the Restrictions for <loginId> and <password>
+        //Restrictions are where clauses
+        objCriteria.add(Restrictions.eq("token", token));
+
+        //retrieving the Users object, if exist
+        //else return null
+        List<Users> lstUsers = objCriteria.list();
+        if (lstUsers.isEmpty()) {
+            return null;
+        }
+        return lstUsers.get(0);
+    }
 
     /**
      * The method updates timezone of a customer
@@ -198,7 +226,6 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
      */
     @Override
     public Users updatePassword(Integer userID, String oldPassword, String newpassword) {
-
 
         //calling the getSession() to create Criteria for Users class and instantiating objCriteria object 
         Criteria objCriteria = getSession().createCriteria(Users.class);
@@ -630,4 +657,112 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
         }
         return 1;
     }
+
+    public int confirmAccount(String token) {
+        List<Users> lstUsers;
+
+        //invoking the getSession() method to create Criteria for Seokeyworddetails class
+        Criteria objCriteria = getSession().createCriteria(Users.class);
+
+        //adding the Restrictions for <keywordID>
+        objCriteria.add(Restrictions.eq("token", token));
+
+        lstUsers = objCriteria.list();
+
+        try {
+            if (!lstUsers.isEmpty()) {
+                String query = "update Users set active = 1,token='' where token = ?";
+                return getHibernateTemplate().bulkUpdate(query, new Object[]{token});
+            }
+
+            //now invoking the getSession()
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("EXCEPTION IN confirmAccount : " + ex);
+            return 0;
+        }
+        return 0;
+    }
+
+   // Below methods are for OAuth authentication
+    public String encrypt(String message) throws Exception {
+
+        // use key coss2
+        SecretKeySpec skeySpec = new SecretKeySpec("oauth2provider_1".getBytes("UTF-8"), "AES");
+
+        // Instantiate the cipher
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
+
+        byte[] encrypted = cipher.doFinal(message.getBytes());
+        return binaryToHex(encrypted);
+
+    }
+
+    public String decrypt(String encrypted) throws Exception {
+
+        SecretKeySpec skeySpec = new SecretKeySpec("oauth2provider_1".getBytes("UTF-8"), "AES");
+
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, skeySpec);
+        byte[] original = cipher.doFinal(hexToBinary(encrypted));
+        String originalString = new String(original);
+        return originalString;
+    }
+
+    public String generateAccessToken(String username, String userid, String password, String referalcode) {
+        try {
+            String prev = encrypt(username + "&" + userid);
+            String next = getHmacSha256(password + "&" + referalcode);
+            next = next.substring(0, 16);
+
+            return prev + "_" + next;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public byte[] hexToBinary(String hex) {
+        if (hex == null || hex.length() == 0) {
+            return null;
+        }
+
+        byte[] ba = new byte[hex.length() / 2];
+        for (int i = 0; i < ba.length; i++) {
+            ba[i] = (byte) Integer
+                    .parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+        }
+        return ba;
+    }
+
+    // byte[] to hex
+    public String binaryToHex(byte[] ba) {
+        if (ba == null || ba.length == 0) {
+            return null;
+        }
+
+        StringBuffer sb = new StringBuffer(ba.length * 2);
+        String hexNumber;
+        for (int x = 0; x < ba.length; x++) {
+            hexNumber = "0" + Integer.toHexString(0xff & ba[x]);
+
+            sb.append(hexNumber.substring(hexNumber.length() - 2));
+        }
+        return sb.toString();
+    }
+
+    public String getHmacSha256(String str) {
+        byte[] binary = null;
+        try {
+            MessageDigest sh = MessageDigest.getInstance("SHA-256");
+            sh.update(str.getBytes("UTF-8"));
+            binary = sh.digest();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return binaryToHex(binary);
+    }
+
 }

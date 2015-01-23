@@ -16,7 +16,7 @@ import ranktracker.entity.Plans;
  * @author Sushant Gupta <sushant@globussoft.com>
  */
 public class PaymentServiceImpl implements PaymentService {
-
+    
     static Logger l = Logger.getLogger(PaymentServiceImpl.class.getName());
     /**
      * objPaymentDAO The database layer object variable for PaymentDAO object
@@ -35,7 +35,7 @@ public class PaymentServiceImpl implements PaymentService {
      */
     @Override
     public int savePayment(Payments payments) {
-        
+
         //calling the savePayment method of PaymentDAOImpl class
         return objPaymentDAO.savePayment(payments);
     }
@@ -80,8 +80,8 @@ public class PaymentServiceImpl implements PaymentService {
      */
     @Override
     public List<Plans> getPlans(String planName) {
-        
+
         //calling the getPlans method of PaymentDAOImpl class
         return objPaymentDAO.getPlans(planName);
     }
-}
+    }

@@ -5,12 +5,20 @@
 package ranktracker.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import javax.servlet.http.Cookie;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
+import ranktracker.dao.CustomerDao;
+import ranktracker.entity.Customers;
+import ranktracker.entity.Payments;
+import ranktracker.entity.Plans;
 import ranktracker.entity.Site;
+import ranktracker.entity.Users;
+import ranktracker.service.PaymentService;
 import ranktracker.service.SettingsService;
 
 /**
@@ -32,6 +40,12 @@ public class PageLinkAction extends ActionSupport {
     private Site objSite;
     private SettingsService objSettingsService;
     private HttpServletResponse servletResponse;
+    private CustomerDao objCustomerDao;
+    /**
+     * objPaymentService The service layer object variable for PaymentService
+     * object
+     */
+    private PaymentService objPaymentService;
 
     /**
      * The redirect method for home.action
@@ -314,6 +328,98 @@ public class PageLinkAction extends ActionSupport {
         return LOGIN;
     }
 
+    /**
+     * This method is responsible for receiving the account activation request &
+     * activate the account if the user is registered under freeBeeta. If the
+     * user is registered in paid account then it sets the customer general
+     * information in the session & redirect to accountoptions jsp page
+     *
+     * @return
+     * @throws Exception
+     * @author rinkesh jha
+     */
+    public String accountActivation() throws Exception {
+
+        try {
+            //getting request object
+            objRequest = ServletActionContext.getRequest();
+            //getting response object
+            objSession = objRequest.getSession();
+
+            //storing the token
+            String token = objRequest.getParameter("token");
+            //storing the itemName(plan name)
+            String itemName = objRequest.getParameter("itemName");
+
+            System.out.println("TOKEN RECIEVED : " + token);
+            System.out.println("ITEM : " + itemName);
+
+            // if token will be null then it will go to error page
+            if (token == null) {
+                return "error";
+            } else if (itemName == null) {
+                return "error";
+            }
+
+            // if the itemName is freebeeta then it simply activate that account & redirect to accountconfirmed jsp page
+            if (itemName.equalsIgnoreCase("FreeBeta")) {
+                // activating the account & getting the result
+                int result = objCustomerDao.confirmAccount(token);
+
+                System.out.println("result : " + result);
+
+                // if the result is zero then nothing is updated , in that case it will go to erro page
+                if (result == 0) {
+                    return "error";
+                }
+                return SUCCESS;
+            } else {
+                // If the itemName is not freeBeeta then it sets some values in the session & redirects to accountoptions jsp page
+
+                //setting some attributes in thesession
+                objSession.setAttribute("itemName", itemName);
+                objSession.setAttribute("token", token);
+
+                // getting Users object using the token
+                Users objUser = objCustomerDao.getUserDetails(token);
+                // getting the Customers table object
+                Customers objCustomers = objUser.getCustomerID();
+
+                //setting customers general informations
+                objSession.setAttribute("firstname", objCustomers.getFirstName());
+                objSession.setAttribute("lastname", objCustomers.getLastName());
+                objSession.setAttribute("customerID", objCustomers.getCustomerID());
+
+                // redirecting to accountoptions jsp page
+                return "CONTINUE";
+            }
+
+        } catch (Exception ex) {
+            System.out.println("EXCEPTION IN CONFIRMATION : " + ex);
+            return "error";
+        }
+    }
+
+    public String seoIntelligence() {
+
+        //initializing http request object
+        objRequest = ServletActionContext.getRequest();
+
+        //initializing http session object
+        objSession = objRequest.getSession();
+
+        //checking for 'customerID' attribute in session
+        if (objSession.getAttribute("customerID") != null) {
+
+            return SUCCESS;
+        } else {
+
+            //if session attribute 'customerID' is null then return result parameter as 'LOGIN'
+            //this result parameter is mapped in 'struts.xml'
+            return LOGIN;
+        }
+    }
+
     public SettingsService getObjSettingsService() {
         return objSettingsService;
     }
@@ -321,4 +427,21 @@ public class PageLinkAction extends ActionSupport {
     public void setObjSettingsService(SettingsService objSettingsService) {
         this.objSettingsService = objSettingsService;
     }
+
+    public CustomerDao getObjCustomerDao() {
+        return objCustomerDao;
+    }
+
+    public void setObjCustomerDao(CustomerDao objCustomerDao) {
+        this.objCustomerDao = objCustomerDao;
+    }
+
+    public PaymentService getObjPaymentService() {
+        return objPaymentService;
+    }
+
+    public void setObjPaymentService(PaymentService objPaymentService) {
+        this.objPaymentService = objPaymentService;
+    }
+
 }

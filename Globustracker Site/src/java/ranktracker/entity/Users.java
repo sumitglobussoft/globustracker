@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -30,6 +31,12 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")})
 public class Users implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "active")
+    private int active;
+    @Lob
+    @Column(name = "token")
+    private String token;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,8 +54,6 @@ public class Users implements Serializable {
     private String password;
     @Column(name = "UserType")
     private Integer userType;
-    @Column(name = "active")
-    private Integer active;
     @Column(name = "Addeddate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date addeddate;
@@ -150,11 +155,19 @@ public class Users implements Serializable {
         return "ranktracker.entity.Users[ userID=" + userID + " ]";
     }
 
-    public Integer getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(Integer active) {
+    public void setActive(int active) {
         this.active = active;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

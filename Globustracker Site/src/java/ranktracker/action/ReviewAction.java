@@ -82,49 +82,49 @@ public class ReviewAction extends ActionSupport {
 //    }
 
 //    @Action("getreviewhome/{websearchurl}")
-    public String homereview() throws Exception {
-        
-        objRequest = ServletActionContext.getRequest();
-
-        //initializing http session object
-        objSession = objRequest.getSession();
-        websearchurl = objRequest.getParameter("websearchurl");
-        System.out.println("----------------websearchurl = " + websearchurl);
-        objSession.setAttribute("websearchurl", websearchurl);
-        //http:// 54.183.182.139:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
-//        Thread social_thread = new Thread(new Socialreviewsite(websearchurl));
-//        social_thread.start();
-        return SUCCESS;
-    }
-
-    @Override
-    public String execute() throws Exception{
-        
-        JSONObject json = new JSONObject();
-        objRequest = ServletActionContext.getRequest();
-        objResponse = ServletActionContext.getResponse();
-        PrintWriter out = objResponse.getWriter();
-        //initializing http session object
+//    public String homereview() throws Exception {
+//        
+//        objRequest = ServletActionContext.getRequest();
+//
+//        //initializing http session object
 //        objSession = objRequest.getSession();
-        websearchurl = objRequest.getParameter("websearchurl");
-         System.out.println("***********************websearchurl = " + websearchurl);
-        visitmap = objWebsiteReview.getCommonsDetails(websearchurl);
-        
-        jmessage = "Ajax action";
-        try {
-            json.put("jmessage", "Ajax action");
-            json.put("visitmap", visitmap);
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(ReviewAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("++++++++++++++++++++++++++++");
-        
-        objResponse.setContentType("application/json");
-        out.print(json);
-        out.flush();        
-        return SUCCESS;
-    }
+//        websearchurl = objRequest.getParameter("websearchurl");
+//        System.out.println("----------------websearchurl = " + websearchurl);
+//        objSession.setAttribute("websearchurl", websearchurl);
+//        //http:// 54.183.182.139:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
+////        Thread social_thread = new Thread(new Socialreviewsite(websearchurl));
+////        social_thread.start();
+//        return SUCCESS;
+//    }
+
+//    @Override
+//    public String execute() throws Exception{
+//        
+//        JSONObject json = new JSONObject();
+//        objRequest = ServletActionContext.getRequest();
+//        objResponse = ServletActionContext.getResponse();
+//        PrintWriter out = objResponse.getWriter();
+//        //initializing http session object
+////        objSession = objRequest.getSession();
+//        websearchurl = objRequest.getParameter("websearchurl");
+//         System.out.println("***********************websearchurl = " + websearchurl);
+//        visitmap = objWebsiteReview.getCommonsDetails(websearchurl);
+//        
+//        jmessage = "Ajax action";
+//        try {
+//            json.put("jmessage", "Ajax action");
+//            json.put("visitmap", visitmap);
+//        } catch (JSONException ex) {
+//            ex.printStackTrace();
+//            Logger.getLogger(ReviewAction.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        System.out.println("++++++++++++++++++++++++++++");
+//        
+//        objResponse.setContentType("application/json");
+//        out.print(json);
+//        out.flush();        
+//        return SUCCESS;
+//    }
     
 //    public String getVisitorLocalization() throws IOException{
 //        

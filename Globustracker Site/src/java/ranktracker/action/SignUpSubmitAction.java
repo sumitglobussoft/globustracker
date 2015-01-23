@@ -8,11 +8,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.util.Date;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.BeanUtils;
+import ranktracker.dao.CustomerDao;
 import ranktracker.entity.Customers;
 import ranktracker.entity.Payments;
 import ranktracker.entity.Plans;
@@ -53,7 +52,12 @@ public class SignUpSubmitAction extends ActionSupport implements ModelDriven<Sig
     private SendMail objSendMail;
 
     /**
-     * The method saves new customer record to database alongwith users record,
+     * Used for Customer related operations
+     */
+    private CustomerDao objCustomerDao;
+
+    /**
+     * The method saves new customer record to database along with users record,
      * payment record and invokes mail module to send customer welcome mail
      *
      * @return struts return value
@@ -79,10 +83,15 @@ public class SignUpSubmitAction extends ActionSupport implements ModelDriven<Sig
             objUser.setLoginID(objSignUpForm.getEmailId());
 //            objUser.setPassword(new Date().getTime() + "");
             //  String password = RandomPassword();
+
+            //OAuth Token Generation
+            String token = objCustomerDao.generateAccessToken("" + objSignUpForm.getEmailId(), "" + objSignUpForm.getPassword(), "" + objSignUpForm.getAltEmailID(), "" + objSignUpForm.getTimezone());
+
             objUser.setPassword(objSignUpForm.getPassword());
             objUser.setUserType(0);
-            objUser.setActive(1);
+            objUser.setActive(0);
             objUser.setAddeddate(new Date());
+            objUser.setToken(token);
             objCustomer.setTimezoneID(objSignUpForm.getTimezone());
             objCustomer.setAlertEmailID(objSignUpForm.getAltEmailID());
             objCustomer.setAllowedUserCount(objPlan.getUsers());
@@ -93,8 +102,10 @@ public class SignUpSubmitAction extends ActionSupport implements ModelDriven<Sig
             objCustomer = objCustomerService.saveCustomer(objCustomer, objUser);
             objSession.setAttribute("customerID", objCustomer.getCustomerID());
             objPayment.setCustomerID(objCustomer);
+            objSession.removeAttribute("objPayment");
+            objSession.setAttribute("objPayment", objPayment);
 //            objSession.invalidate();
-            objSendMail.execute(1, objUser);
+            objSendMail.execute(1, objUser, objSession.getAttribute("itemName").toString());
 
             objSession.setAttribute("firstname", objSignUpForm.getFirstName());
             objSession.setAttribute("lastname", objSignUpForm.getLastName());
@@ -104,13 +115,13 @@ public class SignUpSubmitAction extends ActionSupport implements ModelDriven<Sig
 //        objSession.setAttribute ("state",objSignUpForm.getState());
 
             // checking for freebeta, if so forward to sucess.jsp by accountCreated.action
-            if (objSession.getAttribute("itemName").equals("FreeBeta")) {
+          //  if (objSession.getAttribute("itemName").equals("FreeBeta")) {
                 objPaymentService.savePayment(objPayment);
                 objSession.invalidate();
-                return "done";
-            }
-
-            return SUCCESS;
+           // }
+            
+            return "done";
+            //return SUCCESS;
         } else {
             objSession.setAttribute("objSignUpForm", objSignUpForm);
             return "CONTINUE";
@@ -121,7 +132,7 @@ public class SignUpSubmitAction extends ActionSupport implements ModelDriven<Sig
         String password = "globus" + (new Random().nextInt(9999 - 1000) + 1000);
         return password;
     }
-
+    
     /**
      * The method validates the form inputs
      */
@@ -323,4 +334,13 @@ public class SignUpSubmitAction extends ActionSupport implements ModelDriven<Sig
     public void setObjSendMail(SendMail objSendMail) {
         this.objSendMail = objSendMail;
     }
+
+    public CustomerDao getObjCustomerDao() {
+        return objCustomerDao;
+    }
+
+    public void setObjCustomerDao(CustomerDao objCustomerDao) {
+        this.objCustomerDao = objCustomerDao;
+    }
+
 }

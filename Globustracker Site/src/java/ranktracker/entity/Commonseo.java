@@ -11,25 +11,20 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
  *
- * @author GLB-008
+ * @author GLB-214
  */
 @Entity
 @Table(name = "commonseo")
-@NamedQueries({
-    @NamedQuery(name = "Commonseo.findAll", query = "SELECT c FROM Commonseo c")})
 public class Commonseo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -38,6 +33,9 @@ public class Commonseo implements Serializable {
     @Lob
     @Column(name = "description")
     private String description;
+    @Lob
+    @Column(name = "descriptionLength")
+    private String descriptionLength;
     @Column(name = "doctype")
     private String doctype;
     @Column(name = "domainCreated")
@@ -124,6 +122,7 @@ public class Commonseo implements Serializable {
     private String robots;
     @Column(name = "takingAbout")
     private String takingAbout;
+    @Lob
     @Column(name = "title")
     private String title;
     @Column(name = "titleLength")
@@ -139,6 +138,100 @@ public class Commonseo implements Serializable {
     private String w3cvalidity;
     @Column(name = "wwwResolve")
     private String wwwResolve;
+    @Lob
+    @Column(name = "twitterName")
+    private String twitterName;
+    @Lob
+    @Column(name = "twitterImage")
+    private String twitterImage;
+    @Column(name = "twitterCount")
+    private String twitterCount;
+    @Column(name = "twitterFollowing")
+    private String twitterFollowing;
+    @Column(name = "twitterFollower")
+    private String twitterFollower;
+    @Lob
+    @Column(name = "twitterDescription")
+    private String twitterDescription;
+    @Lob
+    @Column(name = "twitterLocation")
+    private String twitterLocation;
+    @Column(name = "twitterList")
+    private String twitterList;
+    @Column(name = "twitterFavourites")
+    private String twitterFavourites;
+    @Column(name = "twitterDate")
+    private String twitterDate;
+    @Column(name = "twitterUrl")
+    private String twitterUrl;
+    @Lob
+    @Column(name = "dashboardImage")
+    private String dashboardImage;
+    @Lob
+    @Column(name = "usabilityImage")
+    private String usabilityImage;
+    @Column(name = "googleFollower")
+    private String googleFollower;
+    @Column(name = "googleViews")
+    private String googleViews;
+    @Column(name = "passedPercent")
+    private Integer passedPercent;
+    @Column(name = "errorPercent")
+    private Integer errorPercent;
+    @Column(name = "improvePercent")
+    private Integer improvePercent;
+    @Column(name = "indexedPages")
+    private String indexedPages;
+    @Column(name = "backlinksCounter")
+    private String backlinksCounter;
+    @Lob
+    @Column(name = "facebookDescription")
+    private String facebookDescription;
+    @Column(name = "mobileLoadTime")
+    private String mobileLoadTime;
+    @Column(name = "trafficEstimation")
+    private String trafficEstimation;
+    @Column(name = "scoreValue")
+    private String scoreValue;
+    @Column(name = "pInterestBoards")
+    private String pInterestBoards;
+    @Column(name = "pInterestPins")
+    private String pInterestPins;
+    @Column(name = "pInterestLikes")
+    private String pInterestLikes;
+    @Column(name = "pInterestFollower")
+    private String pInterestFollower;
+    @Column(name = "pInterestFollowing")
+    private String pInterestFollowing;
+    @Column(name = "pInterestImage")
+    private String pInterestImage;
+    @Column(name = "pInterestName")
+    private String pInterestName;
+    @Column(name = "pInterestDescription")
+    private String pInterestDescription;
+    @Column(name = "linkedFollower")
+    private String linkedFollower;
+    @Column(name = "linkedImage")
+    private String linkedImage;
+    @Lob
+    @Column(name = "linkedDescription")
+    private String linkedDescription;
+    @Column(name = "linkedSpecialties")
+    private String linkedSpecialties;
+    @Column(name = "linkedWebsite")
+    private String linkedWebsite;
+    @Column(name = "linkedIndustry")
+    private String linkedIndustry;
+    @Column(name = "linkedType")
+    private String linkedType;
+    @Column(name = "linkedHeadquater")
+    private String linkedHeadquater;
+    @Column(name = "linkedCompany")
+    private String linkedCompany;
+    @Column(name = "linkedFounded")
+    private String linkedFounded;
+    @Column(name = "linkedEmployee")
+    private String linkedEmployee;
 
     public Commonseo() {
     }
@@ -174,6 +267,14 @@ public class Commonseo implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDescriptionLength() {
+        return descriptionLength;
+    }
+
+    public void setDescriptionLength(String descriptionLength) {
+        this.descriptionLength = descriptionLength;
     }
 
     public String getDoctype() {
@@ -550,6 +651,350 @@ public class Commonseo implements Serializable {
 
     public void setWwwResolve(String wwwResolve) {
         this.wwwResolve = wwwResolve;
+    }
+
+    public String getTwitterName() {
+        return twitterName;
+    }
+
+    public void setTwitterName(String twitterName) {
+        this.twitterName = twitterName;
+    }
+
+    public String getTwitterImage() {
+        return twitterImage;
+    }
+
+    public void setTwitterImage(String twitterImage) {
+        this.twitterImage = twitterImage;
+    }
+
+    public String getTwitterCount() {
+        return twitterCount;
+    }
+
+    public void setTwitterCount(String twitterCount) {
+        this.twitterCount = twitterCount;
+    }
+
+    public String getTwitterFollowing() {
+        return twitterFollowing;
+    }
+
+    public void setTwitterFollowing(String twitterFollowing) {
+        this.twitterFollowing = twitterFollowing;
+    }
+
+    public String getTwitterFollower() {
+        return twitterFollower;
+    }
+
+    public void setTwitterFollower(String twitterFollower) {
+        this.twitterFollower = twitterFollower;
+    }
+
+    public String getTwitterDescription() {
+        return twitterDescription;
+    }
+
+    public void setTwitterDescription(String twitterDescription) {
+        this.twitterDescription = twitterDescription;
+    }
+
+    public String getTwitterLocation() {
+        return twitterLocation;
+    }
+
+    public void setTwitterLocation(String twitterLocation) {
+        this.twitterLocation = twitterLocation;
+    }
+
+    public String getTwitterList() {
+        return twitterList;
+    }
+
+    public void setTwitterList(String twitterList) {
+        this.twitterList = twitterList;
+    }
+
+    public String getTwitterFavourites() {
+        return twitterFavourites;
+    }
+
+    public void setTwitterFavourites(String twitterFavourites) {
+        this.twitterFavourites = twitterFavourites;
+    }
+
+    public String getTwitterDate() {
+        return twitterDate;
+    }
+
+    public void setTwitterDate(String twitterDate) {
+        this.twitterDate = twitterDate;
+    }
+
+    public String getTwitterUrl() {
+        return twitterUrl;
+    }
+
+    public void setTwitterUrl(String twitterUrl) {
+        this.twitterUrl = twitterUrl;
+    }
+
+    public String getDashboardImage() {
+        return dashboardImage;
+    }
+
+    public void setDashboardImage(String dashboardImage) {
+        this.dashboardImage = dashboardImage;
+    }
+
+    public String getUsabilityImage() {
+        return usabilityImage;
+    }
+
+    public void setUsabilityImage(String usabilityImage) {
+        this.usabilityImage = usabilityImage;
+    }
+
+    public String getGoogleFollower() {
+        return googleFollower;
+    }
+
+    public void setGoogleFollower(String googleFollower) {
+        this.googleFollower = googleFollower;
+    }
+
+    public String getGoogleViews() {
+        return googleViews;
+    }
+
+    public void setGoogleViews(String googleViews) {
+        this.googleViews = googleViews;
+    }
+
+    public Integer getPassedPercent() {
+        return passedPercent;
+    }
+
+    public void setPassedPercent(Integer passedPercent) {
+        this.passedPercent = passedPercent;
+    }
+
+    public Integer getErrorPercent() {
+        return errorPercent;
+    }
+
+    public void setErrorPercent(Integer errorPercent) {
+        this.errorPercent = errorPercent;
+    }
+
+    public Integer getImprovePercent() {
+        return improvePercent;
+    }
+
+    public void setImprovePercent(Integer improvePercent) {
+        this.improvePercent = improvePercent;
+    }
+
+    public String getIndexedPages() {
+        return indexedPages;
+    }
+
+    public void setIndexedPages(String indexedPages) {
+        this.indexedPages = indexedPages;
+    }
+
+    public String getBacklinksCounter() {
+        return backlinksCounter;
+    }
+
+    public void setBacklinksCounter(String backlinksCounter) {
+        this.backlinksCounter = backlinksCounter;
+    }
+
+    public String getFacebookDescription() {
+        return facebookDescription;
+    }
+
+    public void setFacebookDescription(String facebookDescription) {
+        this.facebookDescription = facebookDescription;
+    }
+
+    public String getMobileLoadTime() {
+        return mobileLoadTime;
+    }
+
+    public void setMobileLoadTime(String mobileLoadTime) {
+        this.mobileLoadTime = mobileLoadTime;
+    }
+
+    public String getTrafficEstimation() {
+        return trafficEstimation;
+    }
+
+    public void setTrafficEstimation(String trafficEstimation) {
+        this.trafficEstimation = trafficEstimation;
+    }
+
+    public String getScoreValue() {
+        return scoreValue;
+    }
+
+    public void setScoreValue(String scoreValue) {
+        this.scoreValue = scoreValue;
+    }
+
+    public String getPInterestBoards() {
+        return pInterestBoards;
+    }
+
+    public void setPInterestBoards(String pInterestBoards) {
+        this.pInterestBoards = pInterestBoards;
+    }
+
+    public String getPInterestPins() {
+        return pInterestPins;
+    }
+
+    public void setPInterestPins(String pInterestPins) {
+        this.pInterestPins = pInterestPins;
+    }
+
+    public String getPInterestLikes() {
+        return pInterestLikes;
+    }
+
+    public void setPInterestLikes(String pInterestLikes) {
+        this.pInterestLikes = pInterestLikes;
+    }
+
+    public String getPInterestFollower() {
+        return pInterestFollower;
+    }
+
+    public void setPInterestFollower(String pInterestFollower) {
+        this.pInterestFollower = pInterestFollower;
+    }
+
+    public String getPInterestFollowing() {
+        return pInterestFollowing;
+    }
+
+    public void setPInterestFollowing(String pInterestFollowing) {
+        this.pInterestFollowing = pInterestFollowing;
+    }
+
+    public String getPInterestImage() {
+        return pInterestImage;
+    }
+
+    public void setPInterestImage(String pInterestImage) {
+        this.pInterestImage = pInterestImage;
+    }
+
+    public String getPInterestName() {
+        return pInterestName;
+    }
+
+    public void setPInterestName(String pInterestName) {
+        this.pInterestName = pInterestName;
+    }
+
+    public String getPInterestDescription() {
+        return pInterestDescription;
+    }
+
+    public void setPInterestDescription(String pInterestDescription) {
+        this.pInterestDescription = pInterestDescription;
+    }
+
+    public String getLinkedFollower() {
+        return linkedFollower;
+    }
+
+    public void setLinkedFollower(String linkedFollower) {
+        this.linkedFollower = linkedFollower;
+    }
+
+    public String getLinkedImage() {
+        return linkedImage;
+    }
+
+    public void setLinkedImage(String linkedImage) {
+        this.linkedImage = linkedImage;
+    }
+
+    public String getLinkedDescription() {
+        return linkedDescription;
+    }
+
+    public void setLinkedDescription(String linkedDescription) {
+        this.linkedDescription = linkedDescription;
+    }
+
+    public String getLinkedSpecialties() {
+        return linkedSpecialties;
+    }
+
+    public void setLinkedSpecialties(String linkedSpecialties) {
+        this.linkedSpecialties = linkedSpecialties;
+    }
+
+    public String getLinkedWebsite() {
+        return linkedWebsite;
+    }
+
+    public void setLinkedWebsite(String linkedWebsite) {
+        this.linkedWebsite = linkedWebsite;
+    }
+
+    public String getLinkedIndustry() {
+        return linkedIndustry;
+    }
+
+    public void setLinkedIndustry(String linkedIndustry) {
+        this.linkedIndustry = linkedIndustry;
+    }
+
+    public String getLinkedType() {
+        return linkedType;
+    }
+
+    public void setLinkedType(String linkedType) {
+        this.linkedType = linkedType;
+    }
+
+    public String getLinkedHeadquater() {
+        return linkedHeadquater;
+    }
+
+    public void setLinkedHeadquater(String linkedHeadquater) {
+        this.linkedHeadquater = linkedHeadquater;
+    }
+
+    public String getLinkedCompany() {
+        return linkedCompany;
+    }
+
+    public void setLinkedCompany(String linkedCompany) {
+        this.linkedCompany = linkedCompany;
+    }
+
+    public String getLinkedFounded() {
+        return linkedFounded;
+    }
+
+    public void setLinkedFounded(String linkedFounded) {
+        this.linkedFounded = linkedFounded;
+    }
+
+    public String getLinkedEmployee() {
+        return linkedEmployee;
+    }
+
+    public void setLinkedEmployee(String linkedEmployee) {
+        this.linkedEmployee = linkedEmployee;
     }
 
     @Override

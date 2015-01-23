@@ -37,6 +37,7 @@ public class WebsiteReviewDaoImpl extends HibernateDaoSupport implements Website
     @Override
     public Map getCommonsDetails(String sitename) {
         Map<String, String> visitormap = new LinkedHashMap<>();
+
         List<Commonseo> commonseo;
         try {
 
@@ -48,6 +49,7 @@ public class WebsiteReviewDaoImpl extends HibernateDaoSupport implements Website
                 Thread.sleep(1000);
                 commonseo = criteria.list();
             }
+
             for (Commonseo commnseo : commonseo) {
                 visitormap.put("wwwresolve", commnseo.getWwwResolve());
                 visitormap.put("ipCanonicalization", commnseo.getIpCanonicalization());
@@ -60,6 +62,7 @@ public class WebsiteReviewDaoImpl extends HibernateDaoSupport implements Website
                 visitormap.put("title", commnseo.getTitle());
                 visitormap.put("titleLength", commnseo.getTitleLength());
                 visitormap.put("description", commnseo.getDescription());
+                visitormap.put("descriptionLength", commnseo.getDescriptionLength());
                 visitormap.put("keyword", commnseo.getKeyword());
                 visitormap.put("htmlRatio", commnseo.getHtmlRatio());
                 visitormap.put("flash", commnseo.getFlash());
@@ -87,6 +90,8 @@ public class WebsiteReviewDaoImpl extends HibernateDaoSupport implements Website
                 visitormap.put("googleTagline", commnseo.getGoogleTagline());
                 visitormap.put("googleIntroduction", commnseo.getGoogleIntroduction());
                 visitormap.put("googleOverview", commnseo.getGoogleOverview());
+                visitormap.put("googleFollower", commnseo.getGoogleFollower());
+                visitormap.put("googleViews", commnseo.getGoogleViews());
                 visitormap.put("flagCode", commnseo.getFlagCode());
                 visitormap.put("location", commnseo.getLocat());
                 visitormap.put("urlDomain", commnseo.getUrlDomain());
@@ -97,10 +102,54 @@ public class WebsiteReviewDaoImpl extends HibernateDaoSupport implements Website
                 visitormap.put("w3cvalidity", commnseo.getW3cvalidity());
                 visitormap.put("encoding", commnseo.getEncoding());
                 visitormap.put("doctype", commnseo.getDoctype());
+                visitormap.put("twitterName", commnseo.getTwitterName());
+                visitormap.put("twitterImage", commnseo.getTwitterImage());
+                visitormap.put("twitterCount", commnseo.getTwitterCount());
+                visitormap.put("twitterFollowing", commnseo.getTwitterFollowing());
+                visitormap.put("twitterFollower", commnseo.getTwitterFollower());
+                visitormap.put("twitterDescription", commnseo.getTwitterDescription());
+                visitormap.put("twitterLocation", commnseo.getTwitterLocation());
+                visitormap.put("twitterUrl", commnseo.getTwitterUrl());
+                visitormap.put("twitterFavourites", commnseo.getTwitterFavourites());
+                visitormap.put("twitterDate", commnseo.getTwitterDate());
+                visitormap.put("twitterList", commnseo.getTwitterList());
+                visitormap.put("dashboardImage", commnseo.getDashboardImage());
+                visitormap.put("usabilityImage", commnseo.getUsabilityImage());
+                visitormap.put("passedPercent", commnseo.getPassedPercent().toString());
+                visitormap.put("errorPercent", commnseo.getErrorPercent().toString());
+                visitormap.put("improvePercent", commnseo.getImprovePercent().toString());
+                visitormap.put("indexedPages", commnseo.getIndexedPages());
+                visitormap.put("backlinksCounter", commnseo.getBacklinksCounter());
+                visitormap.put("facebookDescription", commnseo.getFacebookDescription());
+                visitormap.put("mobileLoadTime", commnseo.getMobileLoadTime());
+                visitormap.put("trafficEstimation", commnseo.getTrafficEstimation());
+//                visitormap.put("scoreValue", commnseo.getScoreValue());
+//                visitormap.put("latitude", ""+commnseo.getLatitude());
+//                visitormap.put("longitude", commnseo.getLongitude());
+                visitormap.put("pInterestBoards", commnseo.getPInterestBoards());
+                visitormap.put("pInterestPins", commnseo.getPInterestPins());
+                visitormap.put("pInterestLikes", commnseo.getPInterestLikes());
+                visitormap.put("pInterestFollower", commnseo.getPInterestFollower());
+                visitormap.put("pInterestFollowing", commnseo.getPInterestFollowing());
+                visitormap.put("pInterestImage", commnseo.getPInterestImage());
+                visitormap.put("pInterestName", commnseo.getPInterestName());
+                visitormap.put("pInterestDescription", commnseo.getPInterestDescription());
+                visitormap.put("linkedFollower", commnseo.getLinkedFollower());
+                visitormap.put("linkedImage", commnseo.getLinkedImage());
+                visitormap.put("linkedDescription", commnseo.getLinkedDescription());
+                visitormap.put("linkedSpecialties", commnseo.getLinkedSpecialties());
+                visitormap.put("linkedWebsite", commnseo.getLinkedWebsite());
+                visitormap.put("linkedIndustry", commnseo.getLinkedIndustry());
+                visitormap.put("linkedType", commnseo.getLinkedType());
+                visitormap.put("linkedHeadquater", commnseo.getLinkedHeadquater());
+                visitormap.put("linkedCompany", commnseo.getLinkedCompany());
+                visitormap.put("linkedFounded", commnseo.getLinkedFounded());
+                visitormap.put("linkedEmployee", commnseo.getLinkedEmployee());
+
                 System.out.println("commnseo.getDoctype() ============ " + commnseo.getDoctype());
                 break;
             }
-        } catch (InterruptedException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(WebsiteReviewDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return visitormap;
@@ -156,13 +205,13 @@ public class WebsiteReviewDaoImpl extends HibernateDaoSupport implements Website
             int k = 1;
             for (Headingelements headingelements : headingcount) {
                 // System.out.println("-------------HEADINGSELEMENTS----------------------");
-                if (headingelements.getH1elements() != null && headingelements.getH1elements().contains("h1")) {                 
+                if (headingelements.getH1elements() != null && headingelements.getH1elements().contains("h1")) {
                     headingmap.put("h1elements" + k, headingelements.getH1elements());
 //                    System.out.println(headingmap);
-                } else if (headingelements.getH2elements() != null && headingelements.getH2elements().contains("h2")) {                 
+                } else if (headingelements.getH2elements() != null && headingelements.getH2elements().contains("h2")) {
                     headingmap.put("h2elements" + k, headingelements.getH2elements());
 //                    System.out.println(headingmap);
-                } else if (headingelements.getH3elements() != null && headingelements.getH3elements().contains("h3")) {                  
+                } else if (headingelements.getH3elements() != null && headingelements.getH3elements().contains("h3")) {
                     headingmap.put("h3elements" + k, headingelements.getH3elements());
 //                    System.out.println(headingmap);
                 } else if (headingelements.getH4elements() != null && headingelements.getH4elements().contains("h4")) {

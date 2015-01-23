@@ -219,11 +219,11 @@
                 var message = document.getElementById('message');
                 message.setAttribute("value", document.getElementById('messageAdded').value);
                 if (document.getElementById("start_interval").checked) {
-                    document.getElementById('start_interval').setAttribute("value", "1");
+                    document.getElementById('start_interval').setAttribute("value", "Yes");
                 }
                 else
                 {
-                    document.getElementById('start_interval').setAttribute("value", "0");
+                    document.getElementById('start_interval').setAttribute("value", "No");
                 }
             }
         </script>

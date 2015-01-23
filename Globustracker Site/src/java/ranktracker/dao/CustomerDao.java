@@ -130,6 +130,13 @@ public interface CustomerDao {
      * @return Users
      */
     public Users getUserDetails(Integer userID);
+     /**
+     * The method retrieves a user details by given token
+     *
+     * @param userID
+     * @return Users
+     */
+    public Users getUserDetails(String token);
 
     /**
      * The method gets keywords count value for a customer
@@ -200,4 +207,24 @@ public interface CustomerDao {
      * @return
      */
     public int updatePlan(int customerId, String plan, int planId, float amount, int campaign, int keyword, int user);
+
+    // Below methods are for OAuth authentication
+    
+    public String encrypt(String message) throws Exception;
+
+    public String decrypt(String encrypted) throws Exception;
+
+    public String generateAccessToken(String username, String userid, String password, String referalcode);
+
+    public byte[] hexToBinary(String hex);
+
+    // byte[] to hex
+    public String binaryToHex(byte[] ba);
+
+    public String getHmacSha256(String str);
+    
+    //this method is for email confirmation & activation of the account
+    
+    public int confirmAccount(String token);
+
 }

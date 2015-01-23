@@ -23,8 +23,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "headingcount")
-@NamedQueries({
-    @NamedQuery(name = "Headingcount.findAll", query = "SELECT h FROM Headingcount h")})
 public class Headingcount implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

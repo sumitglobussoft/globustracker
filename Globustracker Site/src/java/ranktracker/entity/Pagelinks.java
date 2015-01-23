@@ -24,8 +24,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "pagelinks")
-@NamedQueries({
-    @NamedQuery(name = "Pagelinks.findAll", query = "SELECT p FROM Pagelinks p")})
 public class Pagelinks implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

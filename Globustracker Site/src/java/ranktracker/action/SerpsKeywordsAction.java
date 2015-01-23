@@ -5,14 +5,18 @@
 package ranktracker.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import ranktracker.entity.Displaysettings;
 import ranktracker.entity.Seokeyworddetails;
 import ranktracker.entity.Serpkeywords;
@@ -37,6 +41,8 @@ public class SerpsKeywordsAction extends ActionSupport {
      * objRequest The HttpServletRequest object
      */
     private HttpServletRequest objRequest;
+
+    private HttpServletResponse objResponse;
     /**
      * objKeywordsService The service layer object variable for KeywordsService
      * object
@@ -52,7 +58,7 @@ public class SerpsKeywordsAction extends ActionSupport {
     private List<KeywordsLastUpdatedForm> lstkeywordslastupdate;
     private Set<KeywordsLastUpdatedForm> setkeywordslastupdate;
     private List<KeywordsLastUpdatedForm> lstsocialsignalupdate;
-    
+
     private List<Serpkeywords> lstUpdatedKeywords;
     private List<Seokeyworddetails> lstSeoDetails;
     /**
@@ -220,6 +226,13 @@ public class SerpsKeywordsAction extends ActionSupport {
                 }
 
                 lstDisplaysettings = objKeywordsService.getCustomerSettings(customerId);
+                // if the lstDisplaysettings object will become null the below code add one Displaysettings object to the lstDisplaysettings object
+
+                if (lstDisplaysettings.isEmpty()) {
+                    lstDisplaysettings = new ArrayList<>();
+                    Displaysettings d = new Displaysettings(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);// making all tab active 
+                    lstDisplaysettings.add(d);// adding to array list
+                }
 
                 objRequest.setAttribute("highlight", "CAMPAIGNS");
                 return SUCCESS;
@@ -230,6 +243,185 @@ public class SerpsKeywordsAction extends ActionSupport {
             return LOGIN;
         }
         return LOGIN;
+    }
+
+    /**
+     * This method is used in a web service(limitedserpskeywords.action) that
+     * returns 100 seokeywords details, 100 serpkeywords details & social signal
+     * details in the JSON format by each time it is invoked
+     *
+     * @author rinkesh jha
+     * @throws Exception
+     */
+    public void getLimitedSerps() throws Exception {
+
+        objResponse = ServletActionContext.getResponse();//getting response object
+        PrintWriter out = objResponse.getWriter();
+
+        JSONObject result = new JSONObject();// declaring & creating the JSONObject
+
+        //initializing http request object
+        objRequest = ServletActionContext.getRequest();//getting request object
+        //initializing http session object
+        objSession = objRequest.getSession();//getting session object
+
+        try {
+
+            System.out.println("CUSTOMER ID : " + objSession.getAttribute("customerID"));
+
+            //checking for initial value(It is used for the starting row number)
+            if (objRequest.getParameter("initial") != null) {
+                if (objSession.getAttribute("customerID") != null) { //checking for customer id
+                    if (objRequest.getParameter("campaignId") != null) { //checking for campaignId
+
+                        campaignId = Integer.parseInt(objRequest.getParameter("campaignId"));
+                        customerId = Integer.parseInt(objSession.getAttribute("customerID").toString());
+                        int initial = Integer.parseInt(objRequest.getParameter("initial"));
+
+                        //retrieving the list of keywords object from getData method of KeywordsServiceImpl for <campaignId>
+                        Object[] dataObject = objKeywordsService.getSerpDataLimited(campaignId, customerId, initial);//getting all the serps & seo data
+                        lstUpdatedKeywords = (List<Serpkeywords>) dataObject[0];// assigning serpskeywords data
+                        lstSeoDetails = (List<Seokeyworddetails>) dataObject[1];//assigning seokeywords data
+                        lstDisplaysettings = objKeywordsService.getCustomerSettings(customerId);// getting display settings of that particular customerId
+
+                        // if the lstDisplaysettings object will become null the below code add one Displaysettings object to the lstDisplaysettings object
+                        if (lstDisplaysettings.isEmpty()) {
+                            Displaysettings d = new Displaysettings(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+                            lstDisplaysettings.add(d);
+                        }
+
+                        // FETCHING OF DISPLAY SETTINGS & MAKING JSON
+                        //making display settings json 
+                        JSONObject jsonDisplaySettings = new JSONObject();
+
+                        //putting all the display settings into the jsonDisplaySettings object
+                        jsonDisplaySettings.put("Googletab", lstDisplaysettings.get(0).getGoogletab());
+                        jsonDisplaySettings.put("Yahootab", lstDisplaysettings.get(0).getYahootab());
+                        jsonDisplaySettings.put("Bingtab", lstDisplaysettings.get(0).getBingtab());
+                        jsonDisplaySettings.put("Daychangetab", lstDisplaysettings.get(0).getDaychangetab());
+                        jsonDisplaySettings.put("Weekchangetab", lstDisplaysettings.get(0).getWeekchangetab());
+                        jsonDisplaySettings.put("Monthchangetab", lstDisplaysettings.get(0).getMonthchangetab());
+                        jsonDisplaySettings.put("Alexatab", lstDisplaysettings.get(0).getAlexatab());
+                        jsonDisplaySettings.put("Backlinkstab", lstDisplaysettings.get(0).getBacklinkstab());
+                        jsonDisplaySettings.put("Monthlysearchstab", lstDisplaysettings.get(0).getMonthlysearchstab());
+                        jsonDisplaySettings.put("Serpcampaigntab", lstDisplaysettings.get(0).getSerpcampaigntab());
+                        jsonDisplaySettings.put("Videocampaigntab", lstDisplaysettings.get(0).getVideocampaigntab());
+
+                        result.put("displaySettings", jsonDisplaySettings);// adding the displaySettings JSON to main result JSON
+
+                        // FETCHING SERPS KEYWORDS & MAKING JSON
+                        int i = 0;
+                        try {
+                            // creating JSON array of serps keywords that contain collection of different serpkeywords
+                            JSONArray serpkeywordArray = new JSONArray();
+                            for (Serpkeywords updatedKeywords : lstUpdatedKeywords) {
+
+                                if (i >= initial && i <= (initial + 49)) {// cheking for initial values
+                                    JSONObject keyword = new JSONObject(); // making single row JSON object for a serp keyword
+
+                                    // putting all the attributes in keyword object
+                                    keyword.put("KeywordID", updatedKeywords.getKeywordID());
+                                    //keyword.put("CampaignID", updatedKeywords.getCampaignID());
+                                    keyword.put("Url", updatedKeywords.getUrl());
+                                    keyword.put("Keyword", updatedKeywords.getKeyword());
+                                    keyword.put("LinkGoogle", updatedKeywords.getLinkGoogle());
+                                    keyword.put("Region", updatedKeywords.getRegion());
+                                    keyword.put("RankGoogle", updatedKeywords.getRankGoogle());
+                                    keyword.put("BestMatchRankGoogle", updatedKeywords.getBestMatchRankGoogle());
+                                    keyword.put("BestMatchLinkGoogle", updatedKeywords.getBestMatchLinkGoogle());
+                                    keyword.put("GooglePageRank", updatedKeywords.getGooglePageRank());
+                                    keyword.put("RankBing", updatedKeywords.getRankBing());
+                                    keyword.put("BestMatchRankBing", updatedKeywords.getBestMatchRankBing());
+                                    keyword.put("RankYahoo", updatedKeywords.getRankYahoo());
+                                    keyword.put("BestMatchRankYahoo", updatedKeywords.getBestMatchRankYahoo());
+                                    keyword.put("BestMatchLinkYahoo", updatedKeywords.getBestMatchLinkYahoo());
+                                    keyword.put("RankGoogleDayChange", updatedKeywords.getRankGoogleDayChange());
+                                    keyword.put("RankGoogleWeekChange", updatedKeywords.getRankGoogleWeekChange());
+                                    keyword.put("RankGoogleMonthChange", updatedKeywords.getRankGoogleMonthChange());
+                                    keyword.put("RankBingDayChange", updatedKeywords.getRankBingDayChange());
+                                    keyword.put("RankBingWeekChange", updatedKeywords.getRankBingWeekChange());
+                                    keyword.put("RankBingMonthChange", updatedKeywords.getRankBingMonthChange());
+                                    keyword.put("RankYahooDayChange", updatedKeywords.getRankYahooDayChange());
+                                    keyword.put("RankYahooWeekChange", updatedKeywords.getRankGoogleWeekChange());
+                                    keyword.put("RankYahooMonthChange", updatedKeywords.getRankYahooMonthChange());
+                                    keyword.put("GoogleUpdatedDate", updatedKeywords.getGoogleUpdatedDate());
+                                    keyword.put("YahooUpdateDate", updatedKeywords.getYahooUpdateDate());
+                                    keyword.put("BingUpdateDate", updatedKeywords.getBingUpdateDate());
+                                    keyword.put("Visibility", updatedKeywords.getVisibility());
+
+                                    //adding this single JSON object to main JSON array of serp keywords
+                                    serpkeywordArray.put(keyword);
+                                }
+                                i++;
+                            }
+
+                            //adding the serpkeywordArray to the main result JSON object
+                            result.put("serpskeywords", serpkeywordArray);
+
+                        } catch (Exception ea) {
+                        }
+
+                        // FETCHING SEO KEYWORDS & MAKING JSON
+                        i = 0;
+                        try {
+                            // creating JSON array of seo keywords that contain collection of different seokeywords
+                            JSONArray seokeywordArray = new JSONArray();
+                            for (Seokeyworddetails seoKeyword : lstSeoDetails) {
+
+                                if (i >= initial && i <= (initial + 49)) {// cheking for initial values
+                                    // making single row JSON object for a seo keyword
+                                    JSONObject keyword = new JSONObject();
+
+                                    // putting all the attributes in keyword object
+                                    keyword.put("SEOKeywordId", seoKeyword.getSEOKeywordId());
+                                    // keyword.put("CampaignID",seoKeyword.getCampaignID());
+                                    // keyword.put("KeywordID", seoKeyword.getKeywordID());
+                                    keyword.put("Url", seoKeyword.getUrl());
+                                    keyword.put("Keyword", seoKeyword.getKeyword());
+                                    keyword.put("SearchVolume", seoKeyword.getSearchVolume());
+                                    keyword.put("GoogleCPC", seoKeyword.getGoogleCPC());
+                                    keyword.put("KeywordCompetition", seoKeyword.getKeywordCompetition());
+                                    keyword.put("NumberofResult", seoKeyword.getNumberofResult());
+                                    keyword.put("GooglePA", seoKeyword.getGooglePA());
+                                    keyword.put("GoogleDA", seoKeyword.getGoogleDA());
+                                    keyword.put("SiteIndexing", seoKeyword.getSiteIndexing());
+                                    keyword.put("AddedDate", seoKeyword.getAddedDate());
+                                    keyword.put("RankPage", seoKeyword.getRankPage());
+                                    keyword.put("RankAlexa", seoKeyword.getRankAlexa());
+                                    keyword.put("CountBackLinks", seoKeyword.getCountBackLinks());
+                                    keyword.put("CountMonthlySearches", seoKeyword.getCountMonthlySearches());
+                                    keyword.put("Visibility", seoKeyword.getVisibility());
+
+                                    //adding this single JSON object to main JSON array of seo keywords
+                                    seokeywordArray.put(keyword);
+                                }
+                                i++;
+                            }
+
+                            //adding the seokeywordArray to the main result JSON object
+                            result.put("seokeywords", seokeywordArray);
+
+                        } catch (Exception ea) {
+                        }
+
+                    } else {
+                        result.put("result", "No campaigns id");
+                    }
+                } else {
+                    result.put("result", "No customer id");
+                }
+            } else {
+                result.put("result", "No initial value");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("result", "invalid");
+        }
+        objResponse.setContentType("text");
+        objResponse.setHeader("Cache-Control", "no-cache");
+        out.write(result.toString());
+
     }
 
     /**
@@ -778,4 +970,13 @@ public class SerpsKeywordsAction extends ActionSupport {
     public void setLstSeoDetails(List<Seokeyworddetails> lstSeoDetails) {
         this.lstSeoDetails = lstSeoDetails;
     }
+
+    public HttpServletResponse getObjResponse() {
+        return objResponse;
+    }
+
+    public void setObjResponse(HttpServletResponse objResponse) {
+        this.objResponse = objResponse;
+    }
+
 }

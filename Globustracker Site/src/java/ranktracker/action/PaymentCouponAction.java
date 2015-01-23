@@ -64,6 +64,7 @@ public class PaymentCouponAction extends ActionSupport {
 
         //retrieving the plan details from PaymentServiceImpl
         lstPlans = objPaymentService.getPlans("FreeBeta");
+        //lstPlans = objPaymentService.getPlans(objSession.getAttribute("itemName").toString());
 
         Payments objPayment = new Payments();
 
@@ -72,7 +73,7 @@ public class PaymentCouponAction extends ActionSupport {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.DAY_OF_YEAR, 30);
-        objPayment.setAmount(0);
+        objPayment.setAmount(lstPlans.get(0).getAmount());
         objPayment.setEndDate(calendar.getTime());
         objPayment.setPaymentDate(new Date());
         if (objSignUpForm != null) {
@@ -80,6 +81,8 @@ public class PaymentCouponAction extends ActionSupport {
         }
         objPayment.setPlanID(lstPlans.get(0));
         objPayment.setEbayTransactionID("freebeta");
+       // objPayment.setPlan(objSession.getAttribute("itemName").toString());
+        objPayment.setPlan("");
 
         //setting the <objPayment> object in session
         if (objSignUpForm != null) {
@@ -87,10 +90,6 @@ public class PaymentCouponAction extends ActionSupport {
         }
 
         return SUCCESS;
-//        } else {
-//            addActionError("Incorrect coupon code");
-//            return INPUT;
-//        }
     }
 
     /**

@@ -113,7 +113,11 @@ public class CampaignsAction extends ActionSupport {
 
         //checking for 'customerID' attribute in session
         if (objSession.getAttribute("customerID") != null) {
-
+            
+            System.out.println("activationPeriod "+objSession.getAttribute("activationPeriod").toString());
+            if (objSession.getAttribute("activationPeriod").toString().equals("0")) {                
+                return "renewal";
+            }
             //reading the 'customerID' from session and type casting it to integer
             String sCustomerID = objSession.getAttribute("customerID").toString();
             Integer customerID = Integer.parseInt(sCustomerID);

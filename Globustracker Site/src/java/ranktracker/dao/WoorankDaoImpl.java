@@ -30,6 +30,7 @@ public class WoorankDaoImpl extends HibernateDaoSupport implements WoorankDao {
         session.beginTransaction();
         session.save(objcommonseo);
         session.getTransaction().commit();
+     //   session.close();
     }
 
     @Override
@@ -37,6 +38,7 @@ public class WoorankDaoImpl extends HibernateDaoSupport implements WoorankDao {
         session.beginTransaction();
         session.save(objheadingcount);
         session.getTransaction().commit();
+      //  session.close();
     }
 
     @Override
@@ -50,6 +52,7 @@ public class WoorankDaoImpl extends HibernateDaoSupport implements WoorankDao {
             for (int i = 0; i < result.size(); i++) {
                 objCommonseo = (Commonseo) result.get(i);
             }
+          //  session.close();
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
@@ -57,7 +60,6 @@ public class WoorankDaoImpl extends HibernateDaoSupport implements WoorankDao {
         return objCommonseo;
     }
 
-    
     @Override
     public Headingcount getHeadingCountDetails(String url) {
         Headingcount objHeadingcount = new Headingcount();
@@ -69,133 +71,125 @@ public class WoorankDaoImpl extends HibernateDaoSupport implements WoorankDao {
             for (int i = 0; i < result.size(); i++) {
                 objHeadingcount = (Headingcount) result.get(i);
             }
-
+         //   session.close();
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
         return objHeadingcount;
     }
-   
-    
+
     public List<Headingelements> getHeadingelementsDetails(String url) {
-        
-        List<Headingelements> result=null;
+
+        List<Headingelements> result = null;
         try {
 
             Query queryResult = session.createQuery("from Headingelements where url = :url");
             queryResult.setString("url", url);
             result = queryResult.list();
-            
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
+     //   session.close();
         return result;
     }
-    
-    
+
     public List<Image> getImageDetails(String url) {
-        
-        List<Image> result=null;
+
+        List<Image> result = null;
         try {
 
             Query queryResult = session.createQuery("from Image where url = :url");
             queryResult.setString("url", url);
             result = queryResult.list();
-            
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
+      //  session.close();
         return result;
     }
-    
+
     public List<Pagelinks> getPagelinksDetails(String url) {
-        
-        List<Pagelinks> result=null;
+
+        List<Pagelinks> result = null;
         try {
 
             Query queryResult = session.createQuery("from Pagelinks where url = :url");
             queryResult.setString("url", url);
             result = queryResult.list();
-            
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
+     //   session.close();
         return result;
     }
-    
-    
-     public List<Relatedwebsite> getRelatedwebsiteDetails(String url) {
-        
-        List<Relatedwebsite> result=null;
+
+    public List<Relatedwebsite> getRelatedwebsiteDetails(String url) {
+
+        List<Relatedwebsite> result = null;
         try {
 
             Query queryResult = session.createQuery("from Relatedwebsite where url = :url");
             queryResult.setString("url", url);
             result = queryResult.list();
-            
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
+       // session.close();
         return result;
     }
-    
-    
- 
+
     public List<Technology> getTechnologyDetails(String url) {
-        
-        List<Technology> result=null;
+
+        List<Technology> result = null;
         try {
 
             Query queryResult = session.createQuery("from Technology where url = :url");
             queryResult.setString("url", url);
             result = queryResult.list();
-            
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
+       // session.close();
         return result;
     }
-    
-    
+
     @Override
-     public List<Visitorarray> getVisitorarrayDetails(String url) {
-        
-        List<Visitorarray> result=null;
+    public List<Visitorarray> getVisitorarrayDetails(String url) {
+
+        List<Visitorarray> result = null;
         try {
 
             Query queryResult = session.createQuery("from Visitorarray where url = :url");
             queryResult.setString("url", url);
             result = queryResult.list();
-            
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
+      //  session.close();
         return result;
     }
-    
-    
+
     @Override
-     public List<Xmldata> getXmldataDetails(String url) {
-        
-        List<Xmldata> result=null;
+    public List<Xmldata> getXmldataDetails(String url) {
+
+        List<Xmldata> result = null;
         try {
 
             Query queryResult = session.createQuery("from Xmldata where url = :url");
             queryResult.setString("url", url);
             result = queryResult.list();
-            
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
+      //  session.close();
         return result;
     }
-    
-    
+
 }

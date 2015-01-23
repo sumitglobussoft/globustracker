@@ -384,7 +384,7 @@ public class ChartAction extends ActionSupport {
         for (Videokeywords obj : lstVideokeywords) {
 //            if (obj.getVideoLink().equalsIgnoreCase("vimeo.com")) {
             category.append("['YouTube','Dailymotion','Vimeo','Metacafe']");
-            sbData.append("[{  colorByPoint: true,data:[").append(obj.getYoutubeviewcoint()).append(",").append(obj.getYoutubeCommentCount()).append(",").append(obj.getYoutubeLikeCount()).append(",").append(obj.getYoutubeDislikeCount()).append("],").append(sbDatalabel).append("}]");
+            sbData.append("[{  colorByPoint: true,data:[").append(obj.getYoutubeViewCount()).append(",").append(obj.getDailymotionViewCount()).append(",").append(obj.getVimeoViewCount()).append(",").append(obj.getMetacafeViewCount()).append("],").append(sbDatalabel).append("}]");//am1
 //            }
 //            if (obj.getVideoLink().equalsIgnoreCase("youtube.com")) {
 //                category.append("['View Count','Like Count','DisLike Count','Daily View Count']");

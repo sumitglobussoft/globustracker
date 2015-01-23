@@ -20,15 +20,7 @@
         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/switch.css">
 
-        <!-- javascript -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/theme.js"></script>
-
-
         <link rel="stylesheet" href="https://s3.amazonaws.com/css-globustracker/main.css">
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/main.js"></script>
 
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 
@@ -198,7 +190,30 @@
             </div>
         </div>
 
-        <div id="tabs">
+        <div class="row text-center" style="margin-top: 4%;">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default" style="background: #E8F7FC; border: #b2e6f4 1px solid;">
+                    <div class="panel-body text-center" style="padding-bottom: 7%;">
+                        <h3>Website Review</h3><br />
+                        <div class="row">
+                            <!--<form action="" class="form-group">-->
+                            <div class="col-md-3">
+                                <label class="control-label" style="margin-top: 7%;">URL</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="url" class="form-control" required id="sitename" placeholder="http://www.abc.com" />
+                            </div>
+                            <div class="col-md-3">
+                                <input class="btn btn-primary" style="margin-top: 1%;" type="submit" value="Review My Site" onclick="return searchReview();" />
+                            </div>
+                            <!--</form>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tabs" style="margin-top: 1%;">
             <div class="container">
                 <div class="row header">
                     <div class="col-md-12">
@@ -351,7 +366,7 @@
                                     Keywords
                                 </div>
                             </div>
-                            <a class="btn-signup button-clear" href="sessionSaver.action?itemName=FreeBet">
+                            <a class="btn-signup button-clear" href="sessionSaver.action?itemName=FreeBeta">
                                 <span>Try It For Free</span>
                             </a>
                         </div>
@@ -494,115 +509,123 @@
             </div>
         </div>
 
+        <!-- javascript -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
+        <script src="https://s3.amazonaws.com/js-globustracker/theme.js"></script>
+
+        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/main.js"></script>
+
         <script type="text/javascript">
-            $(function() {
-                var $navDots = $("#hero nav a");
-                var $next = $(".slide-nav.next");
-                var $prev = $(".slide-nav.prev");
-                var $slides = $("#hero .slides .slide");
-                var actualIndex = 0;
-                var swiping = false;
-                var interval;
+                                        $(function() {
+                                            var $navDots = $("#hero nav a");
+                                            var $next = $(".slide-nav.next");
+                                            var $prev = $(".slide-nav.prev");
+                                            var $slides = $("#hero .slides .slide");
+                                            var actualIndex = 0;
+                                            var swiping = false;
+                                            var interval;
 
-                $navDots.click(function(e) {
-                    e.preventDefault();
-                    if (swiping) {
-                        return;
-                    }
-                    swiping = true;
+                                            $navDots.click(function(e) {
+                                                e.preventDefault();
+                                                if (swiping) {
+                                                    return;
+                                                }
+                                                swiping = true;
 
-                    actualIndex = $navDots.index(this);
-                    updateSlides(actualIndex);
-                });
+                                                actualIndex = $navDots.index(this);
+                                                updateSlides(actualIndex);
+                                            });
 
-                $next.click(function(e) {
-                    e.preventDefault();
-                    if (swiping) {
-                        return;
-                    }
-                    swiping = true;
+                                            $next.click(function(e) {
+                                                e.preventDefault();
+                                                if (swiping) {
+                                                    return;
+                                                }
+                                                swiping = true;
 
-                    clearInterval(interval);
-                    interval = null;
+                                                clearInterval(interval);
+                                                interval = null;
 
-                    actualIndex++;
-                    if (actualIndex >= $slides.length) {
-                        actualIndex = 0;
-                    }
+                                                actualIndex++;
+                                                if (actualIndex >= $slides.length) {
+                                                    actualIndex = 0;
+                                                }
 
-                    updateSlides(actualIndex);
-                });
+                                                updateSlides(actualIndex);
+                                            });
 
-                $prev.click(function(e) {
-                    e.preventDefault();
-                    if (swiping) {
-                        return;
-                    }
-                    swiping = true;
+                                            $prev.click(function(e) {
+                                                e.preventDefault();
+                                                if (swiping) {
+                                                    return;
+                                                }
+                                                swiping = true;
 
-                    clearInterval(interval);
-                    interval = null;
+                                                clearInterval(interval);
+                                                interval = null;
 
-                    actualIndex--;
-                    if (actualIndex < 0) {
-                        actualIndex = $slides.length - 1;
-                    }
+                                                actualIndex--;
+                                                if (actualIndex < 0) {
+                                                    actualIndex = $slides.length - 1;
+                                                }
 
-                    updateSlides(actualIndex);
-                });
+                                                updateSlides(actualIndex);
+                                            });
 
-                function updateSlides(index) {
-                    // update nav dots
-                    $navDots.removeClass("active");
-                    $navDots.eq(index).addClass("active");
+                                            function updateSlides(index) {
+                                                // update nav dots
+                                                $navDots.removeClass("active");
+                                                $navDots.eq(index).addClass("active");
 
-                    // update slides
-                    var $activeSlide = $("#hero .slide.active");
-                    var $nextSlide = $slides.eq(index);
+                                                // update slides
+                                                var $activeSlide = $("#hero .slide.active");
+                                                var $nextSlide = $slides.eq(index);
 
-                    $activeSlide.fadeOut();
-                    $nextSlide.addClass("next").fadeIn();
+                                                $activeSlide.fadeOut();
+                                                $nextSlide.addClass("next").fadeIn();
 
-                    setTimeout(function() {
-                        $slides.removeClass("next").removeClass("active");
-                        $nextSlide.addClass("active");
-                        $activeSlide.removeAttr('style');
-                        swiping = false;
-                    }, 1000);
-                }
+                                                setTimeout(function() {
+                                                    $slides.removeClass("next").removeClass("active");
+                                                    $nextSlide.addClass("active");
+                                                    $activeSlide.removeAttr('style');
+                                                    swiping = false;
+                                                }, 1000);
+                                            }
 
 
-                interval = setInterval(function() {
-                    if (swiping) {
-                        return;
-                    }
-                    swiping = true;
+                                            interval = setInterval(function() {
+                                                if (swiping) {
+                                                    return;
+                                                }
+                                                swiping = true;
 
-                    actualIndex++;
-                    if (actualIndex >= $slides.length) {
-                        actualIndex = 0;
-                    }
+                                                actualIndex++;
+                                                if (actualIndex >= $slides.length) {
+                                                    actualIndex = 0;
+                                                }
 
-                    updateSlides(actualIndex);
-                }, 5000);
+                                                updateSlides(actualIndex);
+                                            }, 5000);
 
-                // demo player
-                var $videoModal = $(".video-modal");
-                $("#demo-player").click(function() {
-                    $videoModal.toggleClass("active");
-                    clearInterval(interval);
-                    interval = null;
-                });
-                $videoModal.click(function() {
-                    $videoModal.removeClass("active");
-                    setTimeout(function() {
-                        $videoModal.find(".wrap").html('<iframe src="//www.youtube.com/embed/a95pHRnDgFU" width="620" height="350" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
-                    }, 1000);
-                })
-                $videoModal.find(".wrap").click(function(e) {
-                    e.stopPropagation();
-                });
-            });
+                                            // demo player
+                                            var $videoModal = $(".video-modal");
+                                            $("#demo-player").click(function() {
+                                                $videoModal.toggleClass("active");
+                                                clearInterval(interval);
+                                                interval = null;
+                                            });
+                                            $videoModal.click(function() {
+                                                $videoModal.removeClass("active");
+                                                setTimeout(function() {
+                                                    $videoModal.find(".wrap").html('<iframe src="//www.youtube.com/embed/a95pHRnDgFU" width="620" height="350" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+                                                }, 1000);
+                                            })
+                                            $videoModal.find(".wrap").click(function(e) {
+                                                e.stopPropagation();
+                                            });
+                                        });
         </script>
 
         <script  type='text/javascript'>
@@ -615,45 +638,29 @@
 
             function searchReview() {
                 var siteurl = $("#sitename").val();
-                if (siteurl === "") {
-                    alert("Please Enter Site Name To Review");
-                    return false;
-                }
-                var urlexp = new RegExp('(http|ftp|https)://[a-z0-9\-_]+(\.[a-z0-9\-_]+)+([a-z0-9\-\.,@\?^=%&;:/~\+#]*[a-z0-9\-@\?^=%&;/~\+#])?', 'i');
-                var validity = urlexp.test(siteurl);
-                //
-                //            //Code for url existane
-                //
-                //
-                //            var existance = false;
-                //            $.ajax({
-                //                type: 'HEAD',
-                //                url: siteurl,
-                //                success: function() {
-                //                    // page exists
-                //                    existance = true;
-                //                },
-                //                error: function() {
-                //                    existance = false;
-                //
-                //                }
-                //            });
-                //
-                //            if (!existance) {
-                //                alert("This url does not exist , please enter valid url");
-                //                return false;
-                //            }
-                //            ///////////////////////
+//                var encodedURL = encodeURIComponent(siteurl);
+//                var isValid = false;
+//
+//                $.ajax({
+//                    url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + encodedURL + "%22&format=json",
+//                    type: "get",
+//                    async: false,
+//                    dataType: "json",
+//                    success: function(data) {
+//                        isValid = data.query.results != null;
+//                    },
+//                    error: function() {
+//                        isValid = false;
+//                    }
+//                });
+//
+//                if(!isValid){
+//                    window.location.href = "error";
+//                    return false;
+//                }
 
-
-
-                if (!validity) {
-                    alert("Please enter a valid Url Link");
-                    return false;
-                }
                 siteurl = siteurl.replace("http://", "").replace("https://", "").replace("www.", "");
-                alert(siteurl);
-                window.location.href = "/reviews/site/" + siteurl + "/";
+                window.location.href = "/reviews/site/" + siteurl + ".htm";
             }
         </script>
 
@@ -661,7 +668,7 @@
             var _glc = _glc || [];
             _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDgsSBXVzZXJzGMKCkH0M');
             var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' :
-                'http://my.clickdesk.com/clickdesk-ui/browser/');
+                    'http://my.clickdesk.com/clickdesk-ui/browser/');
             var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
             var glcspt = document.createElement('script');
             glcspt.type = 'text/javascript';

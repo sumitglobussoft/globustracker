@@ -24,8 +24,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "headingelements")
-@NamedQueries({
-    @NamedQuery(name = "Headingelements.findAll", query = "SELECT h FROM Headingelements h")})
 public class Headingelements implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
