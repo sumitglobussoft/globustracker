@@ -692,7 +692,7 @@ public class StartCrawler {
                 }
             }
         } else if (args.length == 1 && args[0].equalsIgnoreCase("newkeywords")) {
-            System.out.println("---------------latest entry crawler Start------------");
+            System.out.println("---------------Latest entry crawler Start------------");
             appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
             objKeywordDao = appContext.getBean("objKeywordDao", KeywordsDao.class);
             //     FetchPagewithClientAthentication fetchclientpage = appContext.getBean("fetchSourcewithAuthentication", FetchPagewithClientAthentication.class);
@@ -717,45 +717,45 @@ public class StartCrawler {
 
             }
             System.out.println("---------------new serp keywords------------" + lstnewserpkeywords.size());
-            Iterator lstitr2 = newvideolst.iterator();
-            while (lstitr.hasNext()) {
-                Videokeywords newone = (Videokeywords) lstitr.next();
-                if (newone.getVisibility() == 1) {
-                    lstnewvideokeywords.add(newone);
-                }
-
-            }
+//            Iterator lstitr2 = newvideolst.iterator();
+//            while (lstitr.hasNext()) {
+//                Videokeywords newone = (Videokeywords) lstitr.next();
+//                if (newone.getVisibility() == 1) {
+//                    lstnewvideokeywords.add(newone);
+//                }
+//
+//            }
             ExecutorService executor = Executors.newFixedThreadPool(4);
             System.out.println("---------------new Video keywords------------" + lstnewvideokeywords.size());
             if (!lstnewserpkeywords.isEmpty()) {
-
-                Thread yahoosearch = new Thread(new Yahoo_search(appContext, lstnewserpkeywords));
-                yahoosearch.start();
-                yahoosearch.join();
 
                 Thread searchgoogle = new Thread(new Google_search(appContext, lstnewserpkeywords));
                 searchgoogle.start();
                 searchgoogle.join();
 
+                Thread yahoosearch = new Thread(new Yahoo_search(appContext, lstnewserpkeywords));
+                yahoosearch.start();
+                yahoosearch.join();
+
                 Thread bingsearch = new Thread(new Bing_search(appContext, lstnewserpkeywords));
                 bingsearch.start();
                 bingsearch.join();
             }
-            if (!lstnewvideokeywords.isEmpty()) {
 
-                Runnable worker1 = new Youtube_search(lstnewvideokeywords, appContext);
-                executor.execute(worker1);
-
-                Runnable worker2 = new YoutubeStatistics(lstnewvideokeywords, appContext);
-                executor.execute(worker2);
-
-                Runnable worker3 = new Dailymotion_search(lstnewvideokeywords, appContext);
-                executor.execute(worker3);
-
-                Runnable worker4 = new Vimeo_search(lstnewvideokeywords, appContext);
-                executor.execute(worker4);
-            }
-
+//            if (!lstnewvideokeywords.isEmpty()) {
+//
+//                Runnable worker1 = new Youtube_search(lstnewvideokeywords, appContext);
+//                executor.execute(worker1);
+//
+//                Runnable worker2 = new YoutubeStatistics(lstnewvideokeywords, appContext);
+//                executor.execute(worker2);
+//
+//                Runnable worker3 = new Dailymotion_search(lstnewvideokeywords, appContext);
+//                executor.execute(worker3);
+//
+//                Runnable worker4 = new Vimeo_search(lstnewvideokeywords, appContext);
+//                executor.execute(worker4);
+//            }
         } else {
             showOption();
         }

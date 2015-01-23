@@ -8,6 +8,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Callable;
 import org.apache.http.client.methods.HttpGet;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ranktracker.dao.ProxyDao;
 import ranktracker.utility.Bing_search;
 import ranktracker.utility.FetchPagewithClientAthentication;
 
@@ -25,12 +28,16 @@ public class GetBingThread implements Callable<Queue<String>> {
     String bestMatchLinkGoogle;
     String bnKeyword;
     int portNo;
+    ProxyDao objProxyDao;
+    ApplicationContext appContext;
 
     public GetBingThread(HttpGet httpget, int id, String bnKeyword, int portNo) {
         this.httpget = httpget;
         this.id = id;
         this.bnKeyword = bnKeyword;
         this.portNo = portNo;
+        appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        objProxyDao = appContext.getBean("objProxyDao", ProxyDao.class);
     }
 
     @Override
@@ -43,9 +50,9 @@ public class GetBingThread implements Callable<Queue<String>> {
             String responseBody;
             String pagename = new StringBuilder().append(Thread.currentThread().getName()).append(id) + ".txt";
             synchronized (bingser) {
-                responseBody = fetchpagewithclient.fetchPageSourcefromClientBing(httpget.getURI(), pagename ,portNo);
+                responseBody = fetchpagewithclient.fetchPageSourcefromClientBing(httpget.getURI(), pagename, portNo, objProxyDao.getProxyList());
                 String mainpage = fetchpagewithclient.getShowPage() + "/" + pagename;
-                pagelinks = bingser.getBingMainLinks(responseBody,bnKeyword);
+                pagelinks = bingser.getBingMainLinks(responseBody, bnKeyword);
 //                File f = new File(mainpage);
 //                f.delete();
             }

@@ -5,11 +5,11 @@
 package ranktracker.utility;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +21,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
+import ranktracker.dao.ProxyDao;
+import ranktracker.entity.ProxyData;
 import ranktracker.entity.Serpkeywords;
 
 /**
@@ -38,6 +40,7 @@ public class Google_search implements Runnable {
     int goKeywordID;
     Boolean found = false;
     String bestMatchLinkGoogle = null;
+    ProxyDao objProxyDao;
 
     public Google_search() {
     }
@@ -45,49 +48,88 @@ public class Google_search implements Runnable {
     public Google_search(ApplicationContext appContext, List<Serpkeywords> lstKeywords) {
         this.appContext = appContext;
         this.lstKeywords = lstKeywords;
+        this.objProxyDao = appContext.getBean("objProxyDao", ProxyDao.class);
+    }
+
+    public boolean checkForRecentUpdatedKeyword(Serpkeywords serpkeyword) {
+        try {
+            String currentDate[] = (new Date()).toString().split(" ");
+            String endDate[] = serpkeyword.getGoogleUpdatedDate().split(" ");
+
+            //Wed Jan 07 13:45:08 IST 2015
+            //Fri Jan 02 13:40:06 IST 2015
+            if (currentDate[0].equalsIgnoreCase(endDate[0])) {
+                if (currentDate[1].equalsIgnoreCase(endDate[1])) {
+
+                    if (currentDate[2].equalsIgnoreCase(endDate[2])) {
+
+                        if (currentDate[5].equalsIgnoreCase(endDate[5])) {
+
+                            System.out.println("SAME TIME : " + serpkeyword.getKeyword() + " [" + serpkeyword.getKeywordID() + "]");
+                            return true;
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception s) {
+            System.out.println("" + s);
+
+        }
+        return false;
     }
 
     @Override
     public void run() {
         //int keywordcount = lstKeywords.size();
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+        System.out.println("++++++++++++++++  STARTING GOOGLE CRAWLER ++++++++++++++++++++++++");
+        ExecutorService executor = Executors.newFixedThreadPool(10);
+        System.out.println("Available Processors :" + Runtime.getRuntime().availableProcessors());
 
+        //ExecutorService executor=Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         //This loop selects one keyword at a moment
-
 //        Stack<Serpkeywords> lstKeywordsStack = new Stack<>();
 //        for (Serpkeywords serpkeywords : lstKeywords) {
 //            lstKeywordsStack.push(serpkeywords);
 //        }
-        
+        int i = 0;
+        List<ProxyData> proxylist=objProxyDao.getProxyList();
         Iterator googleitr = lstKeywords.iterator();
-        while(googleitr.hasNext()){
-        //while (!lstKeywordsStack.empty()) {
+        while (googleitr.hasNext()) {
+            //while (!lstKeywordsStack.empty()) {
             try {
-                Serpkeywords k =(Serpkeywords) googleitr.next();
-                goUrl = k.getUrl();
-                goKeyword = k.getKeyword();
-                goLinkGoogle = "www." + k.getLinkGoogle();
-                goKeywordID = k.getKeywordID();
-                Runnable worker = new GooglePagenLinksSearch(goUrl, goKeyword, goLinkGoogle, goKeywordID, appContext);
+                i++;
+
+                Serpkeywords k = (Serpkeywords) googleitr.next();
+
+                if (checkForRecentUpdatedKeyword(k)) {
+                    continue;
+                }
+//                goUrl = k.getUrl();
+//                goKeyword = k.getKeyword();
+//                goLinkGoogle = "www." + k.getLinkGoogle();
+//                goKeywordID = k.getKeywordID();
+                //Runnable worker = new GooglePagenLinksSearch(goUrl, goKeyword, goLinkGoogle, goKeywordID, appContext);
 //                Thread worker = new Thread(new GooglePagenLinksSearch(goUrl, goKeyword, goLinkGoogle, goKeywordID, appContext));
 //                worker.start();
 //                worker.join();
+                //executor.execute(worker);
 
-                executor.execute(worker);
-            } 
-            // catch (InterruptedException ex) {
+                executor.submit(new GooglePagenLinksSearch(k, appContext, i, proxylist));
+
+            } // catch (InterruptedException ex) {
             catch (Exception ex) {
                 Logger.getLogger(Google_search.class.getName()).log(Level.SEVERE, null, ex);
                 ex.printStackTrace();
             }
-            
+
         }
-         executor.shutdown();
-            try {
-                executor.awaitTermination(10, TimeUnit.MINUTES);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Google_search.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        executor.shutdown();
+        try {
+            executor.awaitTermination(10, TimeUnit.MINUTES);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Google_search.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Queue<String> getGooglePageCitationLinks(String url) {
@@ -108,7 +150,7 @@ public class Google_search implements Runnable {
         }
         return mainlinks;
     }
-    
+
     public Queue<String> getGooglePagenationLinks(String url) {
         Queue<String> othpagenlinks = new LinkedList<>();
         try {
@@ -128,5 +170,12 @@ public class Google_search implements Runnable {
         }
         return othpagenlinks;
     }
-   
+
+    public ProxyDao getObjProxyDao() {
+        return objProxyDao;
+    }
+
+    public void setObjProxyDao(ProxyDao objProxyDao) {
+        this.objProxyDao = objProxyDao;
+    }
 }

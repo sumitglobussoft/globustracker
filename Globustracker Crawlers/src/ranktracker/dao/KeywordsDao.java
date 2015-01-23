@@ -409,6 +409,10 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
         Integer weekrankgoogle, weekrankg = 0, monthrankgoogle, monthrankg = 0, googlezero = 0, googleminus = -1, googleplus = 1;
         Integer weekrankbing, weekrankb = 0, monthrankbing, monthrankb = 0;
         Integer weekrankyahoo, weekranky = 0, monthrankyahoo, monthranky = 0;
+
+        Integer dayChangeGoogle = 0;
+        Integer dayChangeYahoo = 0;
+        Integer dayChangeBing = 0;
         try {
             switch (link) {
                 case "google.com":
@@ -416,45 +420,55 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
                     query = "update Serpkeywords set rankGoogle = ?,bestMatchRankGoogle = ?,"
                             + "bestMatchLinkGoogle = ?, rankGoogleDayChange = ?, rankGoogleWeekChange =?,"
                             + "rankGoogleMonthChange = ?, googleUpdatedDate= ? where keywordID = ?";
-                    weekrankgoogle = getWeekRank(keywordId, "google.com");
-                    weekrankg = weekrankgoogle - webRank;
-                    monthrankgoogle = getMonthRank(keywordId, "google.com");
-                    monthrankg = monthrankgoogle - webRank;
+                    if (!serpkeys.getGoogleUpdatedDate().equals("-")) {
+                        weekrankgoogle = getWeekRank(keywordId, "google.com");
+                        weekrankg = (weekrankgoogle == 0) ? 0 : weekrankgoogle - webRank;
+                        monthrankgoogle = getMonthRank(keywordId, "google.com");
+                        monthrankg = (monthrankgoogle == 0) ? 0 : monthrankgoogle - webRank;
+                        dayChangeGoogle = serpkeys.getRankGoogle() - webRank;
+                    }
                     if (lastgooglewebrank == 0) {
-                    } else if (lastgooglewebrank != 0 && webRank == 501) {
+                    } else if (lastgooglewebrank != 0 && webRank == 0) {
                         webRank = lastgooglewebrank;
                     }
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, serpkeys.getRankGoogle() - webRank, weekrankg, monthrankg, new Date().toString(), keywordId});
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeGoogle, weekrankg, monthrankg, new Date().toString(), keywordId});
                     break;
                 case "yahoo.com":
                 case "yahoo":
                     query = "update Serpkeywords set rankYahoo = ?,bestMatchRankYahoo = ?,"
                             + "bestMatchLinkYahoo = ?, rankYahooDayChange = ?, rankYahooWeekChange = ?,"
                             + "rankYahooMonthChange = ?, yahooUpdateDate= ? where keywordID = ?";
-                    weekrankyahoo = getWeekRank(keywordId, "yahoo.com");
-                    weekranky = weekrankyahoo - webRank;
-                    monthrankyahoo = getMonthRank(keywordId, "yahoo.com");
-                    monthranky = monthrankyahoo - webRank;
+
+                    if (!serpkeys.getYahooUpdateDate().equals("-")) {
+                        weekrankyahoo = getWeekRank(keywordId, "yahoo.com");
+                        weekranky = weekrankyahoo == 0 ? 0 : weekrankyahoo - webRank;
+                        monthrankyahoo = getMonthRank(keywordId, "yahoo.com");
+                        monthranky = monthrankyahoo == 0 ? 0 : monthrankyahoo - webRank;
+                        dayChangeYahoo = serpkeys.getRankYahoo() - webRank;
+                    }
                     if (lastyahoowebrank == 0) {
-                    } else if (lastyahoowebrank != 0 && webRank == 501) {
+                    } else if (lastyahoowebrank != 0 && webRank == 0) {
                         webRank = lastyahoowebrank;
                     }
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, serpkeys.getRankYahoo() - webRank, weekranky, monthranky, new Date().toString(), keywordId});
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeYahoo, weekranky, monthranky, new Date().toString(), keywordId});
                     break;
                 case "bing.com":
                 case "bing":
                     query = "update Serpkeywords set rankBing = ?,bestMatchRankBing = ?,"
                             + "bestMatchLinkBing = ?, rankBingDayChange = ?, rankBingWeekChange = ?,"
                             + "rankBingMonthChange = ?, bingUpdateDate= ? where keywordID = ?";
-                    weekrankbing = getWeekRank(keywordId, "bing.com");
-                    weekrankb = weekrankbing - webRank;
-                    monthrankbing = getMonthRank(keywordId, "bing.com");
-                    weekrankb = monthrankbing - webRank;
+                    if (!serpkeys.getBingUpdateDate().equals("-")) {
+                        weekrankbing = getWeekRank(keywordId, "bing.com");
+                        weekrankb = weekrankbing == 0 ? 0 : weekrankbing - webRank;
+                        monthrankbing = getMonthRank(keywordId, "bing.com");
+                        monthrankb = monthrankbing == 0 ? 0 : monthrankbing - webRank;
+                        dayChangeBing = serpkeys.getRankBing() - webRank;
+                    }
                     if (lastbingwebrank == 0) {
-                    } else if (lastbingwebrank != 0 && webRank == 501) {
+                    } else if (lastbingwebrank != 0 && webRank == 0) {
                         webRank = lastbingwebrank;
                     }
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, serpkeys.getRankBing() - webRank, weekrankb, monthrankb, new Date().toString(), keywordId});
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeBing, weekrankb, monthrankb, new Date().toString(), keywordId});
                     break;
             }
         } catch (DataAccessException e) {
@@ -1256,7 +1270,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
             } else {
                 Iterator itr = lstkeyword.iterator();
                 Videokeywords objvideokeywords = (Videokeywords) itr.next();
-                int last_view = objvideokeywords.getYoutubeviewcoint();
+                int last_view = objvideokeywords.getYoutubeViewCount();
                 return last_view;
             }
         } catch (DataAccessException e) {
@@ -1266,10 +1280,16 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void saveYoutubeStatistics(Integer keywordId, int total_view, int like_count, int dislike_count, int comment_count, short daily_view) {
+    public void saveYoutubeStatistics(Integer keywordId, int youtube_view_count, int vimeo_view_count, int metacafe_view_count, int dailymotion_view_count, short daily_view) {
         try {
-            String hqlQuery = "update Videokeywords set youtubeviewcoint = ?,youtubeLikeCount=?,YoutubeDislikeCount = ?,YoutubeCommentCount=?,youtubeDailyViewCount=? where videokeywordID = ? ";
-            getHibernateTemplate().bulkUpdate(hqlQuery, new Object[]{(total_view), (like_count), (dislike_count), (comment_count), (daily_view), (keywordId)});
+            System.out.println("youtube_view_count="+youtube_view_count);
+            System.out.println("vimeo_view_count="+vimeo_view_count);
+            System.out.println("metacafe_view_count="+metacafe_view_count);
+            System.out.println("dailymotion_view_count="+dailymotion_view_count);
+            System.out.println("daily_view="+daily_view);
+            System.out.println("(new Date().toString())="+(new Date().toString()));
+            String hqlQuery = "update Videokeywords set YoutubeViewCount = ?,VimeoViewCount=?,MetacafeViewCount = ?,DailymotionViewCount=?,youtubeDailyViewCount=?,ViewStatisticsUpdatedDate=? where videokeywordID = ? ";
+            getHibernateTemplate().bulkUpdate(hqlQuery, new Object[]{(youtube_view_count), (vimeo_view_count), (metacafe_view_count), (dailymotion_view_count), (daily_view),(new Date().toString()), (keywordId)});
             System.out.println("********updated*******");
 
         } catch (DataAccessException e) {
@@ -1376,39 +1396,57 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
             switch (link) {
                 case "youtube.com":
                 case "youtube":
-                    if (lastyoutuberank == 0) {
+                    if (lastyoutuberank == 0 && webRank == 501) {
+                        webRank = lastyoutuberank;  
                     } else if (lastyoutuberank != 0 && webRank == 501) {
                         webRank = lastyoutuberank;
+                    }else if (lastyoutuberank != 0 && webRank == 0) {
+                        webRank = lastyoutuberank;
+                    } else if (lastyoutuberank == 0) {
                     }
-                    query = "update Videokeywords set rankYoutube = ? where videokeywordID = ?";
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, keywordId});
+                    query = "update Videokeywords set rankYoutube = ?,YoutubeUpdatedDate=? where videokeywordID = ?";
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank,new Date().toString(), keywordId});
                     break;
                 case "dailymotion.com":
                 case "dailymotion":
-                    if (lastdailymotionrank == 0) {
+                    if (lastdailymotionrank == 0 && webRank == 501) {
+                        webRank = lastdailymotionrank; 
                     } else if (lastdailymotionrank != 0 && webRank == 501) {
                         webRank = lastdailymotionrank;
+                    } else if (lastdailymotionrank != 0 && webRank == 0) {
+                        webRank = lastdailymotionrank;
+                    } else if (lastdailymotionrank == 0) {
                     }
-                    query = "update Videokeywords set rankDailyMotion = ? where videokeywordID = ?";
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, keywordId});
+                    query = "update Videokeywords set rankDailyMotion = ?,DailymotionUpdatedDate=? where videokeywordID = ?";
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank,new Date().toString(), keywordId});
                     break;
                 case "metacafe.com":
                 case "metacafe":
-                    if (lastmetacaferank == 0) {
+                    if (lastmetacaferank == 0 && webRank == 501) {
+                        webRank = lastmetacaferank;
                     } else if (lastmetacaferank != 0 && webRank == 501) {
                         webRank = lastmetacaferank;
+                    } else if (lastmetacaferank != 0 && webRank == 0) {
+                        webRank = lastmetacaferank;
+                    } else if (lastmetacaferank == 0) {
+
                     }
-                    query = "update Videokeywords set rankMetacafe = ? where videokeywordID = ?";
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, keywordId});
+
+                    query = "update Videokeywords set RankMetacafe=?,MetaCafeUpdatedDate= ? where videokeywordID = ?";
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, new Date().toString(), keywordId});
                     break;
                 case "vimeo.com":
                 case "vimeo":
-                    if (lastvimeorank == 0) {
+                    if (lastvimeorank == 0 && webRank == 501) {
+                        webRank = lastvimeorank;
                     } else if (lastvimeorank != 0 && webRank == 501) {
                         webRank = lastvimeorank;
+                    } else if (lastvimeorank != 0 && webRank == 0) {
+                        webRank = lastvimeorank;
+                    } else if (lastvimeorank == 0) {
                     }
-                    query = "update Videokeywords set rankVimeo = ? where videokeywordID = ?";
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, keywordId});
+                    query = "update Videokeywords set rankVimeo = ?,VimeoUpdatedDate=? where videokeywordID = ?";
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, new Date().toString(), keywordId});
                     break;
             }
         } catch (DataAccessException e) {
@@ -1575,7 +1613,8 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
     public List<Serpkeywords> getNewSerpList() {
         List<Serpkeywords> lstKeywords = new ArrayList();
         try {
-            String query = "from Serpkeywords where RankGoogle = 0";
+            //String query = "from Serpkeywords where RankGoogle = 0";
+            String query = "from Serpkeywords where GoogleUpdatedDate = '-' or YahooUpdateDate ='-' or BingUpdateDate='-'";
             lstKeywords = getHibernateTemplate().find(query);
         } catch (DataAccessException e) {
             l.debug(e + " " + e.getMessage());

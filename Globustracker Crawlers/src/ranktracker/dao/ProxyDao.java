@@ -1,14 +1,15 @@
 package ranktracker.dao;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import ranktracker.entity.Serpkeywords;
 import ranktracker.entity.ProxyData;
 
 /**
@@ -37,16 +38,15 @@ public class ProxyDao extends CustomHibernateDaoSupport implements Runnable {
      */
     public void changeProxy(String google) {
         try {
-            
-              getHibernateTemplate().delete( ProxyDao.objProxyData);
+
+            getHibernateTemplate().delete(ProxyDao.objProxyData);
 //            if (google.equals("google")) {
 //                ProxyDao.objProxyData.setGoogleBlocked(1);
 //            } else {
 //                ProxyDao.objProxyData.setBlocked(1);
 //            }
 //            getHibernateTemplate().update(ProxyDao.objProxyData);
-            
-            
+
         } catch (Exception e) {
         }
         HibernateTemplate ht = getHibernateTemplate();
@@ -188,5 +188,25 @@ public class ProxyDao extends CustomHibernateDaoSupport implements Runnable {
         } catch (Exception e) {
             l.error(e + "Exception comes in proxy insertion");
         }
+    }
+
+    public List<ProxyData> getProxyList() {
+
+        List<ProxyData> proxylist = new ArrayList<>();
+
+        try {
+            //System.out.println("baba");
+            List plist = getHibernateTemplate().find("FROM ProxyData");
+            Iterator itr = plist.iterator();
+            while (itr.hasNext()) {
+                ProxyData c = (ProxyData) itr.next();
+
+                proxylist.add(c);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return proxylist;
     }
 }

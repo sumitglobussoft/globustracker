@@ -8,10 +8,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.client.utils.URIBuilder;
@@ -22,6 +26,9 @@ import org.jsoup.select.Elements;
 import org.springframework.context.ApplicationContext;
 import ranktracker.crawler.vimeo.VimeoPagenLinks;
 import ranktracker.dao.KeywordsDao;
+import ranktracker.dao.ProxyDao;
+import ranktracker.entity.ProxyData;
+import ranktracker.entity.Serpkeywords;
 import ranktracker.entity.Videokeywords;
 
 /**
@@ -44,106 +51,152 @@ public class Vimeo_search extends Thread {
     String vimeourl;
     FetchPagewithClientAthentication fetchSourcewithAuthentication;
     FetchPageBodySource fetchsource;
+     ProxyDao objProxyDao;
 
     public Vimeo_search(List<Videokeywords> lstVideokeywords, ApplicationContext appContext) {
         this.appContext = appContext;
         this.lstVideokeywords = lstVideokeywords;
         this.fetchSourcewithAuthentication = appContext.getBean("fetchSourcewithAuthentication", FetchPagewithClientAthentication.class);
         this.objKeywordDao = appContext.getBean("objKeywordDao", KeywordsDao.class);
+         this.objProxyDao = appContext.getBean("objProxyDao", ProxyDao.class);
     }
 
     public Vimeo_search() {
     }
-
-    @Override
-    public void run() {
-        Boolean matchfound = false;
-        VimeoPagenLinks vimeopagenlinks = new VimeoPagenLinks(fetchSourcewithAuthentication);
+    public boolean checkForRecentUpdatedKeyword(Videokeywords videokewords) {
         try {
-            for (Videokeywords videokewords : lstVideokeywords) {
-                vimUrl = videokewords.getVimeoURL();
-                vimKeyword = videokewords.getVideoKeyword();
-                vimKeywordId = videokewords.getVideokeywordID();
-                //vimKeyword=vimKeyword.replaceAll(" ", "+");
-                System.out.println("Vim Keyword = " + vimKeyword);
-                //String newurl="http://vimeo.com/search/sort:relevant/format:detail?q="+vimKeyword;
-                // http://vimeo.com/search/sort:relevant/format:detail?q=Best+self+help+books
-                if (!videokewords.getVimeoURL().isEmpty()) {
+            String currentDate[] = (new Date()).toString().split(" ");
+            String endDate[] = videokewords.getVimeoUpdatedDate().split(" ");
 
-                      try {
-//                       
-                       int count=0;
-                       URI uri = new URIBuilder()//http://vimeo.com/search?q=superman+hero
-                            .setScheme("http")
-                            .setHost("vimeo.com")
-                            .setPath("/search/page:1/sort:relevant/format:detail")
-                            .setParameter("q", vimKeyword)
-                            .build();
-                       String newuri=uri.toString();
-                       //String newuri="http://vimeo.com/search/page:1/sort:relevant/format:detail?q="+vimKeyword;
-                        for(int k=1;k<=10;k++){
-                            int l=0; 
-                            
-                        System.out.println("searchurl = " + newuri);
-                        String pagesource=fetchSourcewithAuthentication.fetchPageSourcefromVimeo(newuri);;
-                        while (pagesource.length()<1000 && l<=3){
-                            System.out.println("second attempt searchurl = " + newuri);
-                         pagesource=fetchSourcewithAuthentication.fetchPageSourcefromVimeo(newuri);;
-                         l++;
+            //Wed Jan 07 13:45:08 IST 2015
+            //Fri Jan 02 13:40:06 IST 2015
+            if (currentDate[0].equalsIgnoreCase(endDate[0])) {
+                if (currentDate[1].equalsIgnoreCase(endDate[1])) {
+
+                    if (currentDate[2].equalsIgnoreCase(endDate[2])) {
+
+                        if (currentDate[5].equalsIgnoreCase(endDate[5])) {
+
+                            System.out.println("SAME TIME : " + videokewords.getVideoKeyword()+ " [" + videokewords.getVideokeywordID() + "]");
+                            return true;
                         }
-                         System.out.println("pagelsource lenth "+ pagesource.length());
-                        mainlinks = getVimeoPageCitationLinks(pagesource);
-                        matchfound = findSingleLink(mainlinks, vimUrl,count);
-                        if (matchfound){break;}
-                        else{newuri=getVimeoPaginationLinks(pagesource);
-                        if(newuri.length()<=10){break;}
-                        else{
-                           newuri="http://vimeo.com"+newuri;
-                        }}
-                        count=count+10;
-                        }
-                         if (!matchfound) {
-                                objKeywordDao.saveYoutubeResult(vimKeywordId, vimKeyword, "No Link Found", 501);
-                            }
-                        
-                    } catch (Exception ex) {
-                        Logger.getLogger(Youtube_search.class.getName()).log(Level.SEVERE, null, ex);
-                        ex.printStackTrace();
                     }
-                    
-                    
-                    
-                    
-                    
-                    
-//                    URI uri = new URIBuilder()//http://vimeo.com/search?q=superman+hero
-//                            .setScheme("http")
-//                            .setHost("vimeo.com")
-//                            .setPath("/search")
-//                            .setParameter("q", videokewords.getVideoKeyword())
-//                            .build();
-//
-//                    String mainpagename = "/vimeomain.html";
-//                    fetchSourcewithAuthentication.fetchPageSourcefromVimeo(uri, mainpagename);
-//                    String mainpagepath = fetchSourcewithAuthentication.getShowPage() + mainpagename;
-//                    mainlinks = getVimeoPageCitationLinks(mainpagepath);
-//                    matchfound = findSingleLink(mainlinks);
-//                    if (!matchfound) {
-//                        pagenlinks = getVimeoPaginationLinks(mainpagepath);
-//                        File f = new File(mainpagepath);
-//                        f.delete();
-//                        try {
-//                            othermainlinks = vimeopagenlinks.getOtherVimeoPageLinksCrawl(pagenlinks, vimUrl);
-//                            findandSaveVimeoRank(othermainlinks);
-//                        } catch (IOException | InterruptedException ex) {
-//                            Logger.getLogger(Vimeo_search.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    }
-
                 }
             }
+
+        } catch (Exception s) {
+            System.out.println("" + s);
+
+        }
+        return false;
+    }
+    
+    @Override
+    public void run() {
+//        Boolean matchfound = false;
+//        VimeoPagenLinks vimeopagenlinks = new VimeoPagenLinks(fetchSourcewithAuthentication);
+        ExecutorService executor = Executors.newFixedThreadPool(10);
+             List<ProxyData> proxylist=objProxyDao.getProxyList();
+        try {
+             
+            for (Videokeywords videokewords : lstVideokeywords) {
+                
+                 if (checkForRecentUpdatedKeyword(videokewords)) {
+                    continue;
+                }
+//                
+                executor.submit(new VimeoPagenLinks(lstVideokeywords, objKeywordDao, vimUrl, vimKeyword, vimKeywordId, fetchSourcewithAuthentication, fetchsource, videokewords,proxylist));
+                
+//                vimUrl = videokewords.getVimeoURL();
+//                vimKeyword = videokewords.getVideoKeyword();
+//                vimKeywordId = videokewords.getVideokeywordID();
+//                //vimKeyword=vimKeyword.replaceAll(" ", "+");
+//                System.out.println("Vim Keyword = " + vimKeyword);
+//                //String newurl="http://vimeo.com/search/sort:relevant/format:detail?q="+vimKeyword;
+//                // http://vimeo.com/search/sort:relevant/format:detail?q=Best+self+help+books
+//                if (!videokewords.getVimeoURL().isEmpty()) {
+//
+//                      try {
+////                       
+//                       int count=0;
+//                       URI uri = new URIBuilder()//http://vimeo.com/search?q=superman+hero
+//                            .setScheme("http")
+//                            .setHost("vimeo.com")
+//                            .setPath("/search/page:1/sort:relevant/format:detail")
+//                            .setParameter("q", vimKeyword)
+//                            .build();
+//                       String newuri=uri.toString();
+//                       //String newuri="http://vimeo.com/search/page:1/sort:relevant/format:detail?q="+vimKeyword;
+//                        for(int k=1;k<=10;k++){
+//                            int l=0; 
+//                            
+//                        System.out.println("searchurl = " + newuri);
+//                        String pagesource=fetchSourcewithAuthentication.fetchPageSourcefromVimeo(newuri);;
+//                        while (pagesource.length()<1000 && l<=3){
+//                            System.out.println("second attempt searchurl = " + newuri);
+//                         pagesource=fetchSourcewithAuthentication.fetchPageSourcefromVimeo(newuri);;
+//                         l++;
+//                        }
+//                         System.out.println("pagelsource lenth "+ pagesource.length());
+//                        mainlinks = getVimeoPageCitationLinks(pagesource);
+//                        matchfound = findSingleLink(mainlinks, vimUrl,count);
+//                        if (matchfound){break;}
+//                        else{newuri=getVimeoPaginationLinks(pagesource);
+//                        if(newuri.length()<=10){break;}
+//                        else{
+//                           newuri="http://vimeo.com"+newuri;
+//                        }}
+//                        count=count+10;
+//                        }
+//                         if (!matchfound) {
+//                                objKeywordDao.saveYoutubeResult(vimKeywordId, vimKeyword, "No Link Found", 501);
+//                            }
+//                        
+//                    } catch (Exception ex) {
+//                        Logger.getLogger(Youtube_search.class.getName()).log(Level.SEVERE, null, ex);
+//                        ex.printStackTrace();
+//                    }
+//                    
+//                    
+//                    
+//                    
+//                    
+//                    
+////                    URI uri = new URIBuilder()//http://vimeo.com/search?q=superman+hero
+////                            .setScheme("http")
+////                            .setHost("vimeo.com")
+////                            .setPath("/search")
+////                            .setParameter("q", videokewords.getVideoKeyword())
+////                            .build();
+////
+////                    String mainpagename = "/vimeomain.html";
+////                    fetchSourcewithAuthentication.fetchPageSourcefromVimeo(uri, mainpagename);
+////                    String mainpagepath = fetchSourcewithAuthentication.getShowPage() + mainpagename;
+////                    mainlinks = getVimeoPageCitationLinks(mainpagepath);
+////                    matchfound = findSingleLink(mainlinks);
+////                    if (!matchfound) {
+////                        pagenlinks = getVimeoPaginationLinks(mainpagepath);
+////                        File f = new File(mainpagepath);
+////                        f.delete();
+////                        try {
+////                            othermainlinks = vimeopagenlinks.getOtherVimeoPageLinksCrawl(pagenlinks, vimUrl);
+////                            findandSaveVimeoRank(othermainlinks);
+////                        } catch (IOException | InterruptedException ex) {
+////                            Logger.getLogger(Vimeo_search.class.getName()).log(Level.SEVERE, null, ex);
+////                        }
+////                    }
+//
+//                }
+            }
+        
         } catch (Exception e) {
             e.printStackTrace();
+        }
+            executor.shutdown();
+        try {
+            executor.awaitTermination(10, TimeUnit.MINUTES);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Vimeo_search.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

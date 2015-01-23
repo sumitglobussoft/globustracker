@@ -4,10 +4,11 @@
  */
 package ranktracker.crawler.yahoo;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -15,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -29,6 +31,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.context.ApplicationContext;
 import ranktracker.dao.KeywordsDao;
+import ranktracker.entity.ProxyData;
+import ranktracker.entity.Serpkeywords;
 import ranktracker.utility.FetchPagewithClientAthentication;
 import ranktracker.utility.Yahoo_search;
 
@@ -36,32 +40,44 @@ import ranktracker.utility.Yahoo_search;
  *
  * @Laxmi Kiran Nallam (laxmikiran@globussoft.com)
  */
-public class YahooPagenLinks implements Runnable {
+public class YahooPagenLinks implements Callable<String> {
 
+    Serpkeywords objSerpKeeywords;
     ApplicationContext appContext;
-    public String yaUrl;
-    public String yaKeyword;
-    public String yaLinkYahoo;
-    public int yaCrawlCount;
-    public Integer yaKeywordID;
-    boolean found = false;
-    public String bestMatchLinkYahoo = null;
     KeywordsDao objKeywordDao;
     FetchPagewithClientAthentication fetchSourcewithProx;
-    public int bestMatchRankYahoo;
-    // int newWebRankYahoo;
     Yahoo_search yahoosearch;
+    int keywordNumber = 0;
+    List<ProxyData> proxyList;
+
+//    public String yaUrl;
+//    public String yaKeyword;
+    public String yaLinkYahoo = "search.yahoo.com";
+    public int yaCrawlCount;
+//    public Integer yaKeywordID;
+    boolean found = false;
+//    public String bestMatchLinkYahoo = "No Link Found";
+
+//    public int bestMatchRankYahoo;
+    // int newWebRankYahoo;
+    boolean bestMatchRankFound = false;
+    boolean rankFound = false;
+    int counter = 0;
+
     static org.apache.log4j.Logger l = org.apache.log4j.Logger.getLogger(Yahoo_search.class.getName());
 
-    public YahooPagenLinks(String yaUrl, String yaKeyword, String yaLinkYahoo, Integer yaKeywordID, ApplicationContext appContext) {
-        this.yaUrl = yaUrl;
-        this.yaKeyword = yaKeyword;
-        this.yaLinkYahoo = yaLinkYahoo;
-        this.yaKeywordID = yaKeywordID;
+    public YahooPagenLinks(Serpkeywords objSerpKeeywords, ApplicationContext appContext, int i, List<ProxyData> proxyList) {
+//        this.yaUrl = yaUrl;
+//        this.yaKeyword = yaKeyword;
+//        this.yaLinkYahoo = yaLinkYahoo;
+//        this.yaKeywordID = yaKeywordID;
+        this.objSerpKeeywords = objSerpKeeywords;
         this.appContext = appContext;
         this.objKeywordDao = appContext.getBean("objKeywordDao", KeywordsDao.class);
         this.fetchSourcewithProx = appContext.getBean("fetchSourcewithAuthentication", FetchPagewithClientAthentication.class);
         this.yahoosearch = appContext.getBean("yahooSearch", Yahoo_search.class);
+        this.keywordNumber = i;
+        this.proxyList = proxyList;
     }
 
     public List getOtherYahooPageLinksCrawl(Queue pagenLinks, int portno) throws IOException, InterruptedException, URISyntaxException {
@@ -103,91 +119,291 @@ public class YahooPagenLinks implements Runnable {
         return newpagelinks;
     }
 
-    @Override
-    public void run() {
-        System.out.println("------start keyword" + yaKeyword + "-----------");
-        yaLinkYahoo = "in.search.yahoo.com";
-        int yaCrawlCount;
-        Boolean foundmatch = false;
-        int tStop = 0;
-        Queue<String> mainlinks = new LinkedList<>();
-        Queue<String> pagenyahoolinks = new LinkedList<>();
-        int j = 1;
-        int portno = generateRandomPortforYahoo();
+    public boolean getRank(String url, String domain) throws MalformedURLException {
 
-        try {
-            for (int i = 1; i <= 600; i = i + 100) {
-                int l = 0;
-                String basicuri = new URIBuilder()
-                        .setScheme("http")
-                        .setHost(yaLinkYahoo)
-                        .build()
-                        .toString();
-                String input = fetchSourcewithProx.fetchPageSourcefromClientYahoo(basicuri);
-//                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~" + input);
-//            String input=FetchGooglePage.fetchGoogleIndex(basicuri);
-                try {
+        // System.out.println("getRank");
+        // System.out.println("url: " + url);
+        // System.out.println("domain: " + domain);
+        String tempurl = url.replace("http://www.", "");
+        tempurl = tempurl.replace("https://www.", "");
+        tempurl = tempurl.replace("www.", "");
+        tempurl = tempurl.replace("http://", "");
+        tempurl = tempurl.replace("https://", "");
+        tempurl = tempurl.replace("/", "");
 
-                    String proxylt = getYahooylt(input);
+        String tempdomain = domain.replace("http://www.", "");
+        tempdomain = tempdomain.replace("https://www.", "");
+        tempdomain = tempdomain.replace("www.", "");
+        tempdomain = tempdomain.replace("http://", "");
+        tempdomain = tempdomain.replace("https://", "");
+        tempdomain = tempdomain.replace("/", "");
 
-                    String uri = new URIBuilder()
-                            .setScheme("http")
-                            .setHost(yaLinkYahoo)
-                            .setPath("/search;" + proxylt)
-                            .setParameter("p", yaKeyword)
-                            //                          .setParameter("toggle", "1")
-                            //                          .setParameter("cop", "mss")
-                            .setParameter("ei", "UTF-8")
-                            //                          .setParameter("fr2", "sb-top")
-                            .setParameter("fr", "yfp-t-746")
-                            .setParameter("b", "" + i)
-                            .setParameter("pstart", "" + j)
-                            .setParameter("n", "100")
-                            .build()
-                            .toString();
-//                    System.out.println("*************" + uri);//4
-                    String mainpage = fetchSourcewithProx.fetchPageSourcefromClientYahoo(uri);
-                    while (mainpage.length() < 100 && l <= 4) {
-                        System.out.println("second attempt searchurl = " + uri);
-                        mainpage = fetchSourcewithProx.fetchPageSourcefromClientYahoo(uri);
-                        l++;
-                    }
-                    mainlinks = getYahooMainLinks(mainpage);
-                    if (mainlinks == null) {
-                        System.out.println("NO Results for" + yaKeyword);
-                        break;
-                    }
-                } catch (NullPointerException e) {
-                }
-                // System.out.println(mainlinks);
-                if (i <= 10) {
-                    foundmatch = findLinksofSite(mainlinks, i, yaUrl);
-                    System.out.println("~~~~~~~~~~~ FOUND MATCH URL ~~~~~~~~~~~~~" + foundmatch);
-                } else {
-                    foundmatch = findLinksofSite(mainlinks, i / 2, yaUrl);
-                    System.out.println("~~~~~~~~~~~ FOUND MATCH URL ~~~~~~~~~~~~~" + foundmatch);
-                }
-                if (foundmatch) {
-                    System.out.println("complete");
-                    objKeywordDao.saveResult(yaKeywordID, bestMatchRankYahoo, bestMatchRankYahoo, bestMatchLinkYahoo, "yahoo.com");
-                    System.out.println("saved");
-                    System.out.println("------finish keyword" + yaKeyword + "-----------");
-                    break;
-                } else {
-
-                }
-                j++;
+        if (tempurl.equalsIgnoreCase(tempdomain)) {
+            // System.out.println("one");
+            return true;
+        } else if (!domain.contains("/")) {
+            if (new URL("http://" + url.replace("http://", "").replace("https://", "")).getHost().toString().contains(new URL("http://" + objSerpKeeywords.getUrl().replace("http://", "").replace("https://", "")).getHost().toString())) {
+                //System.out.println("two");
+                return true;
             }
-            if (!foundmatch) {
-                objKeywordDao.saveResult(yaKeywordID, 501, bestMatchRankYahoo, "No link found", "yahoo.com");
-                System.out.println("------finish keyword" + yaKeyword + "-----------");
-            }
-
-        } catch (Exception ex) {
-
         }
+        return false;
     }
 
+    public boolean findRanks(Document doc, int page) throws MalformedURLException {
+
+        Elements results = doc.select("div[id=web] ol li span[class*=url]");
+        
+        System.out.println("-- PAGE : " + page);
+        for (Element result : results) {
+            try {
+                counter++;
+                String url = "http://" + result.text();
+                //String url = result.select("cite").first().text();
+                System.out.println("        -- RESULT : " + counter + " --- ---- ---- ---- ---- ---- ");
+                System.out.println("        -- URL : " + url);
+
+                if (!bestMatchRankFound) {
+                    if (new URL(url).getHost().toString().contains(new URL("http://" + objSerpKeeywords.getUrl().replace("http://", "").replace("https://", "")).getHost().toString())) {
+                        objSerpKeeywords.setBestMatchRankYahoo(counter);
+                        bestMatchRankFound = true;
+                        objSerpKeeywords.setBestMatchLinkYahoo(url);
+                        System.out.println("        -- Best Match Link : " + objSerpKeeywords.getBestMatchLinkYahoo());
+                        System.out.println("        -- Best Match Rank : " + objSerpKeeywords.getBestMatchRankYahoo());
+
+                    }
+                }
+
+                if (!rankFound) {
+                    // url = result.select("cite").first().text();
+                    if (getRank(url, objSerpKeeywords.getUrl())) {
+                        objSerpKeeywords.setRankYahoo(counter);
+                        rankFound = true;
+                        System.out.println("        -- Rank Found : " + objSerpKeeywords.getRankYahoo());
+                        return true;
+
+                    }
+                }
+            } catch (Exception ew) {
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String call() throws InterruptedException {
+        try {
+            System.out.println("== [ " + this.keywordNumber + " ] =======================================================================================================");
+            System.out.println("------ YahooPagenLinks");
+            System.out.println("    -- yaKeyword = " + objSerpKeeywords.getKeyword());
+            System.out.println("    -- yaKeywordID = " + objSerpKeeywords.getKeywordID());
+            System.out.println("    -- yaLinkYahoo = " + yaLinkYahoo);
+            System.out.println("    -- yaUrl = " + objSerpKeeywords.getUrl());
+
+            String yahoostring = "http://" + yaLinkYahoo + "/search?p=" + objSerpKeeywords.getKeyword().replace(" ", "+");
+            System.out.println("    -- Yahoo Url: " + yahoostring);
+
+            Document doc = Jsoup.parse(fetchSourcewithProx.fetchPageSourcefromClientGoogle(new URI(yahoostring), "", 0, this.proxyList));
+
+           // System.out.println("" + doc);
+            findRanks(doc, 1);
+
+            if (!rankFound) {
+                String nextLink;
+                for (int i = 2; i < 26; i++) {
+                    try {
+                        nextLink = doc.select("a[id=pg-next]").first().attr("href");
+                        System.out.println("nextLink : " + nextLink);
+                        doc = Jsoup.parse(fetchSourcewithProx.fetchPageSourcefromClientGoogle(new URI(nextLink), "", 0, this.proxyList));
+                        if (findRanks(doc, i)) {
+                            break;
+                        }
+                    } catch (Exception ex) {
+                        System.out.println("EXCEPTION IN PAGINATION : " + ex);
+                    }
+                }
+            }
+
+            System.out.println("bestMatchRankYahoo : " + objSerpKeeywords.getBestMatchRankYahoo());
+            System.out.println("bestMatchLinkYahoo : " + objSerpKeeywords.getBestMatchLinkYahoo());
+            System.out.println("rankYahoo : " + objSerpKeeywords.getRankYahoo());
+           objKeywordDao.saveResult(objSerpKeeywords.getKeywordID(), objSerpKeeywords.getRankYahoo(),objSerpKeeywords.getBestMatchRankYahoo(), objSerpKeeywords.getBestMatchLinkYahoo(), "yahoo.com");
+        } catch (Exception run1) {
+            Logger.getLogger(Yahoo_search.class.getName()).log(Level.SEVERE, null, run1);
+            run1.printStackTrace();
+            return "failed";
+        }
+        return "success";
+    }
+
+//    @Override
+//    public String call() throws InterruptedException {
+//        System.out.println("== [ " + this.keywordNumber + " ] =======================================================================================================");
+//        System.out.println("------ YahooPagenLinks");
+//        System.out.println("    -- yaKeyword = " + objSerpKeeywords.getKeyword());
+//        System.out.println("    -- yaKeywordID = " + objSerpKeeywords.getKeywordID());
+//        System.out.println("    -- yaLinkYahoo = " + yaLinkYahoo);
+//        System.out.println("    -- yaUrl = " + objSerpKeeywords.getUrl());
+//
+//        // yaLinkYahoo = "in.search.yahoo.com";
+//        Boolean foundmatch = false;
+//        Queue<String> mainlinks = new LinkedList<>();
+//        int j = 1;
+//
+//        try {
+//            for (int i = 1; i <= 600; i = i + 100) {
+//                int l = 0;
+//                String basicuri = new URIBuilder()
+//                        .setScheme("http")
+//                        .setHost(yaLinkYahoo)
+//                        .build()
+//                        .toString();
+//                String input = fetchSourcewithProx.fetchPageSourcefromClientYahoo(basicuri, this.proxyList);
+////                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~" + input);
+////            String input=FetchGooglePage.fetchGoogleIndex(basicuri);
+//                try {
+//
+//                    String proxylt = getYahooylt(input);
+//
+//                    String uri = new URIBuilder()
+//                            .setScheme("http")
+//                            .setHost(yaLinkYahoo)
+//                            .setPath("/search;" + proxylt)
+//                            .setParameter("p", objSerpKeeywords.getKeyword())
+//                            //                          .setParameter("toggle", "1")
+//                            //                          .setParameter("cop", "mss")
+//                            .setParameter("ei", "UTF-8")
+//                            //                          .setParameter("fr2", "sb-top")
+//                            .setParameter("fr", "yfp-t-746")
+//                            .setParameter("b", "" + i)
+//                            .setParameter("pstart", "" + j)
+//                            .setParameter("n", "100")
+//                            .build()
+//                            .toString();
+////                    System.out.println("*************" + uri);//4
+//                    String mainpage = fetchSourcewithProx.fetchPageSourcefromClientYahoo(uri, this.proxyList);
+//                    while (mainpage.length() < 100 && l <= 4) {
+//                        System.out.println("second attempt searchurl = " + uri);
+//                        mainpage = fetchSourcewithProx.fetchPageSourcefromClientYahoo(uri, this.proxyList);
+//                        l++;
+//                    }
+//                    mainlinks = getYahooMainLinks(mainpage);
+//                    if (mainlinks == null) {
+//                        System.out.println("NO Results for" + objSerpKeeywords.getKeyword());
+//                        break;
+//                    }
+//                } catch (NullPointerException e) {
+//                }
+//                // System.out.println(mainlinks);
+//                if (i <= 10) {
+//                    foundmatch = findLinksofSite(mainlinks, i, objSerpKeeywords.getUrl());
+//                    System.out.println("    ~~~~~~~~~~~ FOUND MATCH URL ~~~~~~~~~~~~~" + foundmatch);
+//                } else {
+//                    foundmatch = findLinksofSite(mainlinks, i / 2, objSerpKeeywords.getUrl());
+//                    System.out.println("    ~~~~~~~~~~~ FOUND MATCH URL ~~~~~~~~~~~~~" + foundmatch);
+//                }
+//                if (foundmatch) {
+//                    System.out.println("    complete");
+//                    objKeywordDao.saveResult(objSerpKeeywords.getKeywordID(), objSerpKeeywords.getBestMatchRankYahoo(), objSerpKeeywords.getBestMatchRankYahoo(), objSerpKeeywords.getBestMatchLinkYahoo(), "yahoo.com");
+//                    System.out.println("    saved");
+//                    System.out.println("    ------finish keyword" + objSerpKeeywords.getKeyword() + "-----------");
+//                    break;
+//                } else {
+//                }
+//                j++;
+//            }
+//            if (!foundmatch) {
+//                objKeywordDao.saveResult(objSerpKeeywords.getKeywordID(), 0, objSerpKeeywords.getBestMatchRankYahoo(), "No link found", "yahoo.com");
+//                System.out.println("    ------finish keyword" + objSerpKeeywords.getKeyword() + "-----------");
+//            }
+//
+//        } catch (Exception ex) {
+//        }
+//
+//        return "success";
+//    }
+//    @Override
+//    public void run() {
+//        System.out.println("------start keyword" + objSerpKeeywords.getKeyword() + "-----------");
+//        yaLinkYahoo = "in.search.yahoo.com";
+//        int yaCrawlCount;
+//        Boolean foundmatch = false;
+//        int tStop = 0;
+//        Queue<String> mainlinks = new LinkedList<>();
+//        Queue<String> pagenyahoolinks = new LinkedList<>();
+//        int j = 1;
+//        int portno = generateRandomPortforYahoo();
+//
+//        try {
+//            for (int i = 1; i <= 600; i = i + 100) {
+//                int l = 0;
+//                String basicuri = new URIBuilder()
+//                        .setScheme("http")
+//                        .setHost(yaLinkYahoo)
+//                        .build()
+//                        .toString();
+//                String input = fetchSourcewithProx.fetchPageSourcefromClientYahoo(basicuri, this.proxyList);
+////                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~" + input);
+////            String input=FetchGooglePage.fetchGoogleIndex(basicuri);
+//                try {
+//
+//                    String proxylt = getYahooylt(input);
+//
+//                    String uri = new URIBuilder()
+//                            .setScheme("http")
+//                            .setHost(yaLinkYahoo)
+//                            .setPath("/search;" + proxylt)
+//                            .setParameter("p", yaKeyword)
+//                            //                          .setParameter("toggle", "1")
+//                            //                          .setParameter("cop", "mss")
+//                            .setParameter("ei", "UTF-8")
+//                            //                          .setParameter("fr2", "sb-top")
+//                            .setParameter("fr", "yfp-t-746")
+//                            .setParameter("b", "" + i)
+//                            .setParameter("pstart", "" + j)
+//                            .setParameter("n", "100")
+//                            .build()
+//                            .toString();
+////                    System.out.println("*************" + uri);//4
+//                    String mainpage = fetchSourcewithProx.fetchPageSourcefromClientYahoo(uri, this.proxyList);
+//                    while (mainpage.length() < 100 && l <= 4) {
+//                        System.out.println("second attempt searchurl = " + uri);
+//                        mainpage = fetchSourcewithProx.fetchPageSourcefromClientYahoo(uri, this.proxyList);
+//                        l++;
+//                    }
+//                    mainlinks = getYahooMainLinks(mainpage);
+//                    if (mainlinks == null) {
+//                        System.out.println("NO Results for" + yaKeyword);
+//                        break;
+//                    }
+//                } catch (NullPointerException e) {
+//                }
+//                // System.out.println(mainlinks);
+//                if (i <= 10) {
+//                    foundmatch = findLinksofSite(mainlinks, i, yaUrl);
+//                    System.out.println("~~~~~~~~~~~ FOUND MATCH URL ~~~~~~~~~~~~~" + foundmatch);
+//                } else {
+//                    foundmatch = findLinksofSite(mainlinks, i / 2, yaUrl);
+//                    System.out.println("~~~~~~~~~~~ FOUND MATCH URL ~~~~~~~~~~~~~" + foundmatch);
+//                }
+//                if (foundmatch) {
+//                    System.out.println("complete");
+//                    objKeywordDao.saveResult(yaKeywordID, bestMatchRankYahoo, bestMatchRankYahoo, bestMatchLinkYahoo, "yahoo.com");
+//                    System.out.println("saved");
+//                    System.out.println("------finish keyword" + yaKeyword + "-----------");
+//                    break;
+//                } else {
+//                }
+//                j++;
+//            }
+//            if (!foundmatch) {
+//                objKeywordDao.saveResult(yaKeywordID, 0, bestMatchRankYahoo, "No link found", "yahoo.com");
+//                System.out.println("------finish keyword" + yaKeyword + "-----------");
+//            }
+//
+//        } catch (Exception ex) {
+//        }
+//    }
     public static Queue<String> getYahooMainLinks(String mainpage) {
         int count = 0;
         Queue<String> l = new LinkedList<>();
@@ -230,7 +446,7 @@ public class YahooPagenLinks implements Runnable {
                 }
             }
 
-            System.out.println("------------------FETCHING YAHOO URL-------------------");
+            //  System.out.println("------------------FETCHING YAHOO URL-------------------");
             Iterator itr = l.iterator();
             while (itr.hasNext()) {
                 String link = itr.next().toString();
@@ -242,7 +458,6 @@ public class YahooPagenLinks implements Runnable {
         }
         return newlink;
     }
-    
 
     public static String getYahooylt(String input) {
         String[] stringylt = new String[2];
@@ -276,18 +491,18 @@ public class YahooPagenLinks implements Runnable {
                 String linksinpage = (String) itrr.next();
                 System.out.println(linksinpage);
 
-                System.out.print(count);
+                System.out.print(count + " ");
                 Boolean fond = false;
 
                 bestmatchlink = findBestMatchLink(linksinpage, yaUrl);
 
                 if (bestmatchlink != null) {
                     if (flag2) {
-                        bestMatchLinkYahoo = bestmatchlink;
+                        objSerpKeeywords.setBestMatchLinkYahoo(bestmatchlink);
                         System.out.println("bestMatchLink"
                                 + "Yahoo = " + bestmatchlink);
                         bestfirstMatchRankYahoo = count;
-                        bestMatchRankYahoo = bestfirstMatchRankYahoo;
+                        objSerpKeeywords.setBestMatchRankYahoo(bestfirstMatchRankYahoo);
 
                         System.out.println("bestMatchRankYahoo = " + bestfirstMatchRankYahoo);
                         foundmatch = true;

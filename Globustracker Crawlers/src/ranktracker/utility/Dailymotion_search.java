@@ -9,12 +9,16 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.client.utils.URIBuilder;
@@ -25,6 +29,8 @@ import org.jsoup.select.Elements;
 import org.springframework.context.ApplicationContext;
 import ranktracker.crawler.dailymotion.DailymotionPagenLinks;
 import ranktracker.dao.KeywordsDao;
+import ranktracker.dao.ProxyDao;
+import ranktracker.entity.ProxyData;
 import ranktracker.entity.Videokeywords;
 
 /**
@@ -48,66 +54,113 @@ public class Dailymotion_search extends Thread {
     Queue<String> mainlinks = new LinkedList<>();
     Queue<String> pageslinks = new LinkedList<>();
     Queue<String> othermainlinks = new LinkedList<>();
+     ProxyDao objProxyDao;
 
     public Dailymotion_search(List<Videokeywords> lstVideokeywords, ApplicationContext appContext) {
         this.appContext = appContext;
         this.lstVideokeywords = lstVideokeywords;
         this.objKeywordDao = appContext.getBean("objKeywordDao", KeywordsDao.class);
         this.fetchSourcewithAuthentication = appContext.getBean("fetchSourcewithAuthentication", FetchPagewithClientAthentication.class);
+        this.objProxyDao = appContext.getBean("objProxyDao", ProxyDao.class);
     }
 
     public Dailymotion_search() {
     }
 
-    @Override
-    public void run() {
-        Boolean matchfound1 = false;
-        Boolean matchfound2 = false;
-//        FetchPageBodySource fetchsource=appContext.getBean("fetchSource", FetchPageBodySource.class);
-        DailymotionPagenLinks dailymotionpagenlinks = new DailymotionPagenLinks();
+      public boolean checkForRecentUpdatedKeyword(Videokeywords videokeywords) {
         try {
+            String currentDate[] = (new Date()).toString().split(" ");
+            String endDate[] = videokeywords.getDailymotionUpdatedDate().split(" ");
 
-            for (Videokeywords videokeywords : lstVideokeywords) {
-                if (!videokeywords.getDailymotionURL().isEmpty()) {
-                    dmUrl = videokeywords.getDailymotionURL();
-                    dmKeyword = videokeywords.getVideoKeyword();
-                    dmKeywordId = videokeywords.getVideokeywordID();
-                    //dmKeyword = dmKeyword.replace(" ", "+");
-                    int count = 0;
+            //Wed Jan 07 13:45:08 IST 2015
+            //Fri Jan 02 13:40:06 IST 2015
+            if (currentDate[0].equalsIgnoreCase(endDate[0])) {
+                if (currentDate[1].equalsIgnoreCase(endDate[1])) {
 
-                    for (int k = 1; k <= 12; k++) {
-                        int l = 0;
-                        String num=Integer.toString(k);
-                        URI newuri = new URIBuilder()
-                                .setScheme("http")
-                                .setHost("www.dailymotion.com")
-                                .setPath("/en/relevance/universal/search/" + dmKeyword + "/"+num)
-                                .build();
-                       // String newuri = "http://www.dailymotion.com/us/relevance/search/" + dmKeyword + "/" + k;
+                    if (currentDate[2].equalsIgnoreCase(endDate[2])) {
 
-                        String pagesource = fetchSourcewithAuthentication.fetchPageSourcefromDailymotion(newuri);
-                        while (pagesource.length() < 1000 && l <= 3) {
-                            System.out.println("second attempt searchurl = " + newuri);
-                            pagesource = fetchSourcewithAuthentication.fetchPageSourcefromDailymotion(newuri);
-                            l++;
+                        if (currentDate[5].equalsIgnoreCase(endDate[5])) {
+
+                            System.out.println("SAME TIME : " + videokeywords.getVideoKeyword() + " [" + videokeywords.getVideokeywordID() + "]");
+                            return true;
                         }
-                        if (pagesource.length() <= 1000) {
-                            System.out.println("THIS PAGE LEFT" + newuri);
-                        }
-                        mainlinks = getDailymotionCitationLinksCrawl(pagesource);
-                        matchfound1 = findandSaveDailyMotionRank(mainlinks, count);
-                        count = count + 18;
-                        if (matchfound1) {
-                            break;
-                        }
-                    }
-                    if (!matchfound1) {
-                        objKeywordDao.saveDailymotionResult(dmKeywordId, dmKeyword, "No Link Found", 501);
                     }
                 }
             }
+
+        } catch (Exception s) {
+            System.out.println("" + s);
+
+        }
+        return false;
+    }
+    
+    @Override
+    public void run() {
+//        Boolean matchfound1 = false;
+//        Boolean matchfound2 = false;
+//        FetchPageBodySource fetchsource=appContext.getBean("fetchSource", FetchPageBodySource.class);
+        List<ProxyData> proxylist=objProxyDao.getProxyList();
+         ExecutorService executor = Executors.newFixedThreadPool(10);
+       // DailymotionPagenLinks dailymotionpagenlinks = new DailymotionPagenLinks();
+        try {
+           
+
+            for (Videokeywords videokeywords : lstVideokeywords) {
+               
+                if (checkForRecentUpdatedKeyword(videokeywords)) {
+                    continue;
+                }
+                
+                executor.submit(new DailymotionPagenLinks(objKeywordDao, fetchSourcewithAuthentication, dmUrl, dmKeyword, dmKeywordId, dailymotionurl, videokeywords,proxylist));
+                
+//                if (!videokeywords.getDailymotionURL().isEmpty()) {
+//                    dmUrl = videokeywords.getDailymotionURL();
+//                    dmKeyword = videokeywords.getVideoKeyword();
+//                    dmKeywordId = videokeywords.getVideokeywordID();
+//                    //dmKeyword = dmKeyword.replace(" ", "+");
+//                    int count = 0;
+//
+//                    for (int k = 1; k <= 12; k++) {
+//                        int l = 0;
+//                        String num=Integer.toString(k);
+//                        URI newuri = new URIBuilder()
+//                                .setScheme("http")
+//                                .setHost("www.dailymotion.com")
+//                                .setPath("/en/relevance/universal/search/" + dmKeyword + "/"+num)
+//                                .build();
+//                       // String newuri = "http://www.dailymotion.com/us/relevance/search/" + dmKeyword + "/" + k;
+//
+//                        String pagesource = fetchSourcewithAuthentication.fetchPageSourcefromDailymotion(newuri);
+//                        while (pagesource.length() < 1000 && l <= 3) {
+//                            System.out.println("second attempt searchurl = " + newuri);
+//                            pagesource = fetchSourcewithAuthentication.fetchPageSourcefromDailymotion(newuri);
+//                            l++;
+//                        }
+//                        if (pagesource.length() <= 1000) {
+//                            System.out.println("THIS PAGE LEFT" + newuri);
+//                        }
+//                        mainlinks = getDailymotionCitationLinksCrawl(pagesource);
+//                        matchfound1 = findandSaveDailyMotionRank(mainlinks, count);
+//                        count = count + 18;
+//                        if (matchfound1) {
+//                            break;
+//                        }
+//                    }
+//                    if (!matchfound1) {
+//                        objKeywordDao.saveDailymotionResult(dmKeywordId, dmKeyword, "No Link Found", 501);
+//                    }
+//                }
+            }
+        
         } catch (Exception e) {
             e.printStackTrace();
+        }
+               executor.shutdown();
+        try {
+            executor.awaitTermination(10, TimeUnit.MINUTES);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Dailymotion_search.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 //        Boolean matchfound1 = false;

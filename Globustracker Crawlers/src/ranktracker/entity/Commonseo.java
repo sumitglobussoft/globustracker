@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ranktracker.entity;
 
 import java.io.Serializable;
@@ -14,16 +12,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author GLB-008
+ * @author GLB-131
  */
 @Entity
 @Table(name = "commonseo")
+@XmlRootElement
 public class Commonseo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,6 +34,9 @@ public class Commonseo implements Serializable {
     @Lob
     @Column(name = "description")
     private String description;
+    @Lob
+    @Column(name = "descriptionLength")
+    private String descriptionLength;
     @Column(name = "doctype")
     private String doctype;
     @Column(name = "domainCreated")
@@ -137,6 +138,59 @@ public class Commonseo implements Serializable {
     private String w3cvalidity;
     @Column(name = "wwwResolve")
     private String wwwResolve;
+    @Lob
+    @Column(name = "twitterName")
+    private String twitterName;
+    @Lob
+    @Column(name = "twitterImage")
+    private String twitterImage;
+    @Column(name = "twitterCount")
+    private String twitterCount;
+    @Column(name = "twitterFollowing")
+    private String twitterFollowing;
+    @Column(name = "twitterFollower")
+    private String twitterFollower;
+    @Lob
+    @Column(name = "twitterDescription")
+    private String twitterDescription;
+    @Lob
+    @Column(name = "twitterLocation")
+    private String twitterLocation;
+    @Column(name = "twitterList")
+    private String twitterList;
+    @Column(name = "twitterFavourites")
+    private String twitterFavourites;
+    @Column(name = "twitterDate")
+    private String twitterDate;
+    @Column(name = "twitterUrl")
+    private String twitterUrl;
+    @Lob
+    @Column(name = "dashboardImage")
+    private String dashboardImage;
+    @Lob
+    @Column(name = "usabilityImage")
+    private String usabilityImage;
+    @Column(name = "googleFollower")
+    private String googleFollower;
+    @Column(name = "googleViews")
+    private String googleViews;
+    @Column(name = "passedPercent")
+    private Integer passedPercent;
+    @Column(name = "errorPercent")
+    private Integer errorPercent;
+    @Column(name = "improvePercent")
+    private Integer improvePercent;
+    @Column(name = "indexedPages")
+    private String indexedPages;
+    @Column(name = "backlinksCounter")
+    private String backlinksCounter;
+    @Lob
+    @Column(name = "facebookDescription")
+    private String facebookDescription;
+    @Column(name = "mobileLoadTime")
+    private String mobileLoadTime;
+    @Column(name = "trafficEstimation")
+    private String trafficEstimation;
 
     public Commonseo() {
     }
@@ -172,6 +226,14 @@ public class Commonseo implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDescriptionLength() {
+        return descriptionLength;
+    }
+
+    public void setDescriptionLength(String descriptionLength) {
+        this.descriptionLength = descriptionLength;
     }
 
     public String getDoctype() {
@@ -548,6 +610,190 @@ public class Commonseo implements Serializable {
 
     public void setWwwResolve(String wwwResolve) {
         this.wwwResolve = wwwResolve;
+    }
+
+    public String getTwitterName() {
+        return twitterName;
+    }
+
+    public void setTwitterName(String twitterName) {
+        this.twitterName = twitterName;
+    }
+
+    public String getTwitterImage() {
+        return twitterImage;
+    }
+
+    public void setTwitterImage(String twitterImage) {
+        this.twitterImage = twitterImage;
+    }
+
+    public String getTwitterCount() {
+        return twitterCount;
+    }
+
+    public void setTwitterCount(String twitterCount) {
+        this.twitterCount = twitterCount;
+    }
+
+    public String getTwitterFollowing() {
+        return twitterFollowing;
+    }
+
+    public void setTwitterFollowing(String twitterFollowing) {
+        this.twitterFollowing = twitterFollowing;
+    }
+
+    public String getTwitterFollower() {
+        return twitterFollower;
+    }
+
+    public void setTwitterFollower(String twitterFollower) {
+        this.twitterFollower = twitterFollower;
+    }
+
+    public String getTwitterDescription() {
+        return twitterDescription;
+    }
+
+    public void setTwitterDescription(String twitterDescription) {
+        this.twitterDescription = twitterDescription;
+    }
+
+    public String getTwitterLocation() {
+        return twitterLocation;
+    }
+
+    public void setTwitterLocation(String twitterLocation) {
+        this.twitterLocation = twitterLocation;
+    }
+
+    public String getTwitterList() {
+        return twitterList;
+    }
+
+    public void setTwitterList(String twitterList) {
+        this.twitterList = twitterList;
+    }
+
+    public String getTwitterFavourites() {
+        return twitterFavourites;
+    }
+
+    public void setTwitterFavourites(String twitterFavourites) {
+        this.twitterFavourites = twitterFavourites;
+    }
+
+    public String getTwitterDate() {
+        return twitterDate;
+    }
+
+    public void setTwitterDate(String twitterDate) {
+        this.twitterDate = twitterDate;
+    }
+
+    public String getTwitterUrl() {
+        return twitterUrl;
+    }
+
+    public void setTwitterUrl(String twitterUrl) {
+        this.twitterUrl = twitterUrl;
+    }
+
+    public String getDashboardImage() {
+        return dashboardImage;
+    }
+
+    public void setDashboardImage(String dashboardImage) {
+        this.dashboardImage = dashboardImage;
+    }
+
+    public String getUsabilityImage() {
+        return usabilityImage;
+    }
+
+    public void setUsabilityImage(String usabilityImage) {
+        this.usabilityImage = usabilityImage;
+    }
+
+    public String getGoogleFollower() {
+        return googleFollower;
+    }
+
+    public void setGoogleFollower(String googleFollower) {
+        this.googleFollower = googleFollower;
+    }
+
+    public String getGoogleViews() {
+        return googleViews;
+    }
+
+    public void setGoogleViews(String googleViews) {
+        this.googleViews = googleViews;
+    }
+
+    public Integer getPassedPercent() {
+        return passedPercent;
+    }
+
+    public void setPassedPercent(Integer passedPercent) {
+        this.passedPercent = passedPercent;
+    }
+
+    public Integer getErrorPercent() {
+        return errorPercent;
+    }
+
+    public void setErrorPercent(Integer errorPercent) {
+        this.errorPercent = errorPercent;
+    }
+
+    public Integer getImprovePercent() {
+        return improvePercent;
+    }
+
+    public void setImprovePercent(Integer improvePercent) {
+        this.improvePercent = improvePercent;
+    }
+
+    public String getIndexedPages() {
+        return indexedPages;
+    }
+
+    public void setIndexedPages(String indexedPages) {
+        this.indexedPages = indexedPages;
+    }
+
+    public String getBacklinksCounter() {
+        return backlinksCounter;
+    }
+
+    public void setBacklinksCounter(String backlinksCounter) {
+        this.backlinksCounter = backlinksCounter;
+    }
+
+    public String getFacebookDescription() {
+        return facebookDescription;
+    }
+
+    public void setFacebookDescription(String facebookDescription) {
+        this.facebookDescription = facebookDescription;
+    }
+
+    public String getMobileLoadTime() {
+        return mobileLoadTime;
+    }
+
+    public void setMobileLoadTime(String mobileLoadTime) {
+        this.mobileLoadTime = mobileLoadTime;
+    }
+
+    public String getTrafficEstimation() {
+        return trafficEstimation;
+    }
+
+    public void setTrafficEstimation(String trafficEstimation) {
+        this.trafficEstimation = trafficEstimation;
     }
 
     @Override
