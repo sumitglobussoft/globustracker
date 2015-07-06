@@ -21,8 +21,6 @@ public interface WoorankDao {
 
     public Headingcount getHeadingCountDetails(String url);
 
-   
-
     public List<Image> getImageDetails(String url);
 
     public List<Pagelinks> getPagelinksDetails(String url);

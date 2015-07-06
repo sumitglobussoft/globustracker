@@ -51,7 +51,7 @@ public class Youtube_search implements Runnable {
     private Boolean flag = false;
     int youtuberank;
     String youtubeurl;
-     ProxyDao objProxyDao;
+    ProxyDao objProxyDao;
 
     public Youtube_search(List<Videokeywords> lstVideokeywords, ApplicationContext appContext) {
         this.appContext = appContext;
@@ -94,7 +94,7 @@ public class Youtube_search implements Runnable {
 
     @Override
     public void run() {
-        List<ProxyData> proxylist=objProxyDao.getProxyList();
+        List<ProxyData> proxylist = objProxyDao.getProxyList();
         ExecutorService executor = Executors.newFixedThreadPool(10);
         try {
 //            YoutubePagenLinks youtubepagenlinks = new YoutubePagenLinks();

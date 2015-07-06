@@ -17,13 +17,16 @@
    
     <!-- creating bean datasource by providing db properties -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://50.116.31.63:3306/globustracker" /> 
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />             
+                <property name="url" value="jdbc:mysql://130.211.71.28:3306/globustrackernewdb" /> 
         <property name="username" value="brandzter" />
-        <property name="password" value="B#45dZT3Rmysql" />         
-<!--        <property name="url" value="jdbc:mysql://localhost:3306/globustracker"/>
+        <property name="password" value="B#45dZT3Rmysql" />    
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/globustrackernewdb"/>
         <property name="username" value="root" />
         <property name="password" value="" /> -->
+        <!--        <property name="url" value="jdbc:mysql://localhost:3306/creamyseo"/>
+        <property name="username" value="creamyseo" />
+        <property name="password" value="23XKCm#f" /> -->
     </bean>
  
  

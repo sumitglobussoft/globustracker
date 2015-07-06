@@ -99,7 +99,8 @@ public class UpgradeAction extends ActionSupport {
 
             objSession.setAttribute("allowedKeywordCount", objCustomers.getAllowedKeywordCount());
             objSession.setAttribute("allowedCampaignCount", objCustomers.getAllowedCampaignsCount());
-
+            objSession.setAttribute("activationPeriod", 1);
+            
             return "success";
 
         } catch (Exception ex) {

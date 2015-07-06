@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ranktracker.entity;
 
 import java.io.Serializable;
@@ -11,8 +10,11 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -99,10 +101,12 @@ public class Commonseo implements Serializable {
     private String htmlRatio;
     @Column(name = "ipCanonicalization")
     private String ipCanonicalization;
+    @Lob
     @Column(name = "ipadView")
     private String ipadView;
     @Column(name = "ipaddress")
     private String ipaddress;
+    @Lob
     @Column(name = "iphoneView")
     private String iphoneView;
     @Lob
@@ -232,6 +236,32 @@ public class Commonseo implements Serializable {
     private String linkedFounded;
     @Column(name = "linkedEmployee")
     private String linkedEmployee;
+    @Column(name = "latitude")
+    private String latitude;
+    @Column(name = "longitude")
+    private String longitude;
+    @Column(name = "aLexaRank")
+    private String aLexaRank;
+    @Column(name = "facebookShareCount")
+    private String facebookShareCount;
+    @Column(name = "facebookLikesCount")
+    private String facebookLikesCount;
+    @Column(name = "facebookComment")
+    private String facebookComment;
+    @Column(name = "facebookTotalCount")
+    private String facebookTotalCount;
+    @Column(name = "facebookClickCount")
+    private String facebookClickCount;
+    @Column(name = "facebookCommentsBoxCount")
+    private String facebookCommentsBoxCount;
+    @Column(name = "linkedInCount")
+    private String linkedInCount;
+    @Column(name = "pinterestCount")
+    private String pinterestCount;
+    @Column(name = "twitterCounts")
+    private String twitterCounts;
+    @Column(name = "googlePlusLike")
+    private String googlePlusLike;
 
     public Commonseo() {
     }
@@ -997,29 +1027,108 @@ public class Commonseo implements Serializable {
         this.linkedEmployee = linkedEmployee;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getLatitude() {
+        return latitude;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Commonseo)) {
-            return false;
-        }
-        Commonseo other = (Commonseo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
-    @Override
-    public String toString() {
-        return "ranktracker.entity.Commonseo[ id=" + id + " ]";
+    public String getLongitude() {
+        return longitude;
     }
-    
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getALexaRank() {
+        return aLexaRank;
+    }
+
+    public void setALexaRank(String aLexaRank) {
+        this.aLexaRank = aLexaRank;
+    }
+
+    public String getFacebookShareCount() {
+        return facebookShareCount;
+    }
+
+    public void setFacebookShareCount(String facebookShareCount) {
+        this.facebookShareCount = facebookShareCount;
+    }
+
+    public String getFacebookLikesCount() {
+        return facebookLikesCount;
+    }
+
+    public void setFacebookLikesCount(String facebookLikesCount) {
+        this.facebookLikesCount = facebookLikesCount;
+    }
+
+    public String getFacebookComment() {
+        return facebookComment;
+    }
+
+    public void setFacebookComment(String facebookComment) {
+        this.facebookComment = facebookComment;
+    }
+
+    public String getFacebookTotalCount() {
+        return facebookTotalCount;
+    }
+
+    public void setFacebookTotalCount(String facebookTotalCount) {
+        this.facebookTotalCount = facebookTotalCount;
+    }
+
+    public String getFacebookClickCount() {
+        return facebookClickCount;
+    }
+
+    public void setFacebookClickCount(String facebookClickCount) {
+        this.facebookClickCount = facebookClickCount;
+    }
+
+    public String getFacebookCommentsBoxCount() {
+        return facebookCommentsBoxCount;
+    }
+
+    public void setFacebookCommentsBoxCount(String facebookCommentsBoxCount) {
+        this.facebookCommentsBoxCount = facebookCommentsBoxCount;
+    }
+
+    public String getLinkedInCount() {
+        return linkedInCount;
+    }
+
+    public void setLinkedInCount(String linkedInCount) {
+        this.linkedInCount = linkedInCount;
+    }
+
+    public String getPinterestCount() {
+        return pinterestCount;
+    }
+
+    public void setPinterestCount(String pinterestCount) {
+        this.pinterestCount = pinterestCount;
+    }
+
+    public String getTwitterCounts() {
+        return twitterCounts;
+    }
+
+    public void setTwitterCounts(String twitterCounts) {
+        this.twitterCounts = twitterCounts;
+    }
+
+    public String getGooglePlusLike() {
+        return googlePlusLike;
+    }
+
+    public void setGooglePlusLike(String googlePlusLike) {
+        this.googlePlusLike = googlePlusLike;
+    }
+ 
 }

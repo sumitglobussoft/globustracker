@@ -34,7 +34,8 @@
                     <center>
                         <p style="color: green; text-align: center; font-size:22px;"></p>
                         <p style="color: green; text-align: center; font-size:40px;">Welcome to GlobusTracker</p>
-                        <p style="color: orangered; text-align: center; font-size:15px; margin-top: 25px;">You are successfully registered with GlobusTracker</p>
+                        <p style="color: orangered; text-align: center; font-size:15px; margin-top: 25px;">Thanks for registering with GlobusTracker,</p>
+                         <p style="color: orangered; text-align: center; font-size:15px; margin-top: 25px;">Please check your mail inbox to complete the registration</p>
                         <p style="margin-top: 25px;"><a href="signIn.action">Login Here</a></p>
                     </center>
                 </div>

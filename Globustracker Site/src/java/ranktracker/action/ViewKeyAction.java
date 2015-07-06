@@ -5,16 +5,21 @@
 package ranktracker.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import ranktracker.entity.Campaigns;
 import ranktracker.entity.Customers;
+import ranktracker.entity.Displaysettings;
 import ranktracker.entity.Seokeyworddetails;
 import ranktracker.entity.Serpkeywords;
 import ranktracker.entity.Videokeywords;
@@ -39,6 +44,8 @@ public class ViewKeyAction extends ActionSupport {
      * objRequest The HttpServletRequest object
      */
     private HttpServletRequest objRequest;
+
+    private HttpServletResponse objResponse;
     /**
      * lstkeywords The list containing Keywords objects
      */
@@ -161,6 +168,7 @@ public class ViewKeyAction extends ActionSupport {
                 System.out.println("Execption = " + e);
             }
 
+            System.out.println("baba");
             return SUCCESS;
         } else {
 
@@ -168,6 +176,150 @@ public class ViewKeyAction extends ActionSupport {
             //this result parameter is mapped in 'struts.xml'
             return LOGIN;
         }
+    }
+
+    /**
+     * This method is used in a web service(limitedserpskeywords.action) that
+     * returns 100 seokeywords details, 100 serpkeywords details & social signal
+     * details in the JSON format by each time it is invoked
+     *
+     * @author rinkesh jha
+     * @throws Exception
+     */
+    public void getLimitedSerpsForKeyView() throws Exception {
+
+        objResponse = ServletActionContext.getResponse();//getting response object
+        PrintWriter out = objResponse.getWriter();
+
+        JSONObject result = new JSONObject();// declaring & creating the JSONObject
+
+        //initializing http request object
+        objRequest = ServletActionContext.getRequest();//getting request object
+
+        try {
+
+          
+            if (objRequest.getParameter("key") != null) {
+                  //checking for initial value(It is used for the starting row number)
+                if (objRequest.getParameter("initial") != null) {
+                    Object[] objData = objCampaignsService.getViewKeyDetails(objRequest.getParameter("key"));
+                    campaignId = ((List<Campaigns>) objData[0]).get(0).getCampaignID();
+                    int initial = Integer.parseInt(objRequest.getParameter("initial"));
+                    //retrieving the list of keywords object from getData method of KeywordsServiceImpl for <campaignId>
+                    Object[] dataObject = objKeywordsService.getSerpDataLimited(campaignId, initial);//getting all the serps & seo data
+                    lstUpdatedKeywords = (List<Serpkeywords>) dataObject[0];// assigning serpskeywords data
+                    lstSeoDetails = (List<Seokeyworddetails>) dataObject[1];//assigning seokeywords data
+
+                    // FETCHING SERPS KEYWORDS & MAKING JSON
+                    int i = 0;
+                    try {
+                        // creating JSON array of serps keywords that contain collection of different serpkeywords
+                        JSONArray serpkeywordArray = new JSONArray();
+                        for (Serpkeywords updatedKeywords : lstUpdatedKeywords) {
+
+                            if (i >= initial && i <= (initial + 49)) {// cheking for initial values
+                                JSONObject keyword = new JSONObject(); // making single row JSON object for a serp keyword
+
+                                // putting all the attributes in keyword object
+                                keyword.put("KeywordID", updatedKeywords.getKeywordID());
+                                //keyword.put("CampaignID", updatedKeywords.getCampaignID());
+                                keyword.put("Url", updatedKeywords.getUrl());
+                                keyword.put("Keyword", updatedKeywords.getKeyword());
+                                keyword.put("LinkGoogle", updatedKeywords.getLinkGoogle());
+                                keyword.put("Region", updatedKeywords.getRegion());
+                                keyword.put("RankGoogle", updatedKeywords.getRankGoogle());
+                                keyword.put("BestMatchRankGoogle", updatedKeywords.getBestMatchRankGoogle());
+                                keyword.put("BestMatchLinkGoogle", updatedKeywords.getBestMatchLinkGoogle());
+                                keyword.put("GooglePageRank", updatedKeywords.getGooglePageRank());
+                                keyword.put("RankBing", updatedKeywords.getRankBing());
+                                keyword.put("BestMatchRankBing", updatedKeywords.getBestMatchRankBing());
+                                keyword.put("RankYahoo", updatedKeywords.getRankYahoo());
+                                keyword.put("BestMatchRankYahoo", updatedKeywords.getBestMatchRankYahoo());
+                                keyword.put("BestMatchLinkYahoo", updatedKeywords.getBestMatchLinkYahoo());
+                                keyword.put("RankGoogleDayChange", updatedKeywords.getRankGoogleDayChange());
+                                keyword.put("RankGoogleWeekChange", updatedKeywords.getRankGoogleWeekChange());
+                                keyword.put("RankGoogleMonthChange", updatedKeywords.getRankGoogleMonthChange());
+                                keyword.put("RankBingDayChange", updatedKeywords.getRankBingDayChange());
+                                keyword.put("RankBingWeekChange", updatedKeywords.getRankBingWeekChange());
+                                keyword.put("RankBingMonthChange", updatedKeywords.getRankBingMonthChange());
+                                keyword.put("RankYahooDayChange", updatedKeywords.getRankYahooDayChange());
+                                keyword.put("RankYahooWeekChange", updatedKeywords.getRankGoogleWeekChange());
+                                keyword.put("RankYahooMonthChange", updatedKeywords.getRankYahooMonthChange());
+                                keyword.put("GoogleUpdatedDate", updatedKeywords.getGoogleUpdatedDate());
+                                keyword.put("YahooUpdateDate", updatedKeywords.getYahooUpdateDate());
+                                keyword.put("BingUpdateDate", updatedKeywords.getBingUpdateDate());
+                                keyword.put("Visibility", updatedKeywords.getVisibility());
+
+                                //adding this single JSON object to main JSON array of serp keywords
+                                serpkeywordArray.put(keyword);
+                            }
+                            i++;
+                        }
+
+                        //adding the serpkeywordArray to the main result JSON object
+                        result.put("serpskeywords", serpkeywordArray);
+
+                    } catch (Exception ea) {
+                    }
+
+                    // FETCHING SEO KEYWORDS & MAKING JSON
+                    i = 0;
+                    try {
+                        // creating JSON array of seo keywords that contain collection of different seokeywords
+                        JSONArray seokeywordArray = new JSONArray();
+                        for (Seokeyworddetails seoKeyword : lstSeoDetails) {
+
+                            if (i >= initial && i <= (initial + 49)) {// cheking for initial values
+                                // making single row JSON object for a seo keyword
+                                JSONObject keyword = new JSONObject();
+
+                                // putting all the attributes in keyword object
+                                keyword.put("SEOKeywordId", seoKeyword.getSEOKeywordId());
+                                    // keyword.put("CampaignID",seoKeyword.getCampaignID());
+                                // keyword.put("KeywordID", seoKeyword.getKeywordID());
+                                keyword.put("Url", seoKeyword.getUrl());
+                                keyword.put("Keyword", seoKeyword.getKeyword());
+                                keyword.put("SearchVolume", seoKeyword.getSearchVolume());
+                                keyword.put("GoogleCPC", seoKeyword.getGoogleCPC());
+                                keyword.put("KeywordCompetition", seoKeyword.getKeywordCompetition());
+                                keyword.put("NumberofResult", seoKeyword.getNumberofResult());
+                                keyword.put("GooglePA", seoKeyword.getGooglePA());
+                                keyword.put("GoogleDA", seoKeyword.getGoogleDA());
+                                keyword.put("SiteIndexing", seoKeyword.getSiteIndexing());
+                                keyword.put("AddedDate", seoKeyword.getAddedDate());
+                                keyword.put("RankPage", seoKeyword.getRankPage());
+                                keyword.put("RankAlexa", seoKeyword.getRankAlexa());
+                                keyword.put("CountBackLinks", seoKeyword.getCountBackLinks());
+                                keyword.put("CountMonthlySearches", seoKeyword.getCountMonthlySearches());
+                                keyword.put("Visibility", seoKeyword.getVisibility());
+
+                                //adding this single JSON object to main JSON array of seo keywords
+                                seokeywordArray.put(keyword);
+                            }
+                            i++;
+                        }
+
+                        //adding the seokeywordArray to the main result JSON object
+                        result.put("seokeywords", seokeywordArray);
+
+                    } catch (Exception ea) {
+                    }
+
+                } else {
+                    result.put("result", "No Initial value");
+                }
+            } else {
+                result.put("result", "No Key value");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("result", "invalid");
+        }
+        objResponse.setContentType("text");
+        objResponse.setHeader("Cache-Control", "no-cache");
+        out.write(result.toString());
+
     }
 
     /**
@@ -392,4 +544,13 @@ public class ViewKeyAction extends ActionSupport {
     public void setVideotrackhst(List<Videokeywords> videotrackhst) {
         this.videotrackhst = videotrackhst;
     }
+
+    public HttpServletResponse getObjResponse() {
+        return objResponse;
+    }
+
+    public void setObjResponse(HttpServletResponse objResponse) {
+        this.objResponse = objResponse;
+    }
+
 }

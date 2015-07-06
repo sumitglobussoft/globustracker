@@ -14,19 +14,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
  *
- * @author GLB-008
+ * @author GLB-214
  */
 @Entity
 @Table(name = "headingelements")
 public class Headingelements implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue
+  
     @Column(name = "id")
     private Integer id;
     @Lob
@@ -44,7 +46,7 @@ public class Headingelements implements Serializable {
     @Lob
     @Column(name = "h5elements")
     private String h5elements;
-    @Basic(optional = false)
+  
     @Column(name = "url")
     private String url;
 
@@ -114,31 +116,6 @@ public class Headingelements implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Headingelements)) {
-            return false;
-        }
-        Headingelements other = (Headingelements) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "ranktracker.entity.Headingelements[ id=" + id + " ]";
     }
     
 }

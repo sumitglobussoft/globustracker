@@ -1,6 +1,7 @@
 package ranktracker.crawler.seomoz;
 
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import ranktracker.dao.KeywordsDao;
+import ranktracker.entity.Seokeyworddetails;
 import ranktracker.entity.Serpkeywords;
 
 /**
@@ -78,8 +80,8 @@ public class BacklinksCounter implements Runnable {
             l.debug(e + "  " + e.getMessage());
             e.printStackTrace();
         }
-        String accessID = "member-8d27ee524f";
-        String secretKey = "ad366140095f3318e8e0ebad56b601b7";
+        String accessID = "Enter the AccessID for SeoMoz";
+        String secretKey = "Enter the SecretKey for SeoMoz";
         Authenticator authenticator = new Authenticator();
         authenticator.setAccessID(accessID);
         authenticator.setSecretKey(secretKey);
@@ -126,8 +128,36 @@ public class BacklinksCounter implements Runnable {
         Integer[] countPaDa;
         String domainName;
         Integer keywordId;
+        List<Serpkeywords> lstKeywordsURL = new ArrayList<>();
+        List<Seokeyworddetails> listUpdatedKeywords = new ArrayList<>();
         try {
             for (Serpkeywords objKeywords : lstKeywords) {
+                boolean check = false;
+                if (lstKeywordsURL.size() != 0) {
+                   // System.out.println("came to dis section");
+                    for (Serpkeywords stringURL : lstKeywordsURL) {
+                      
+                        if (stringURL.getUrl().equalsIgnoreCase(objKeywords.getUrl())) {
+                            System.out.println("true");
+                            check = true;
+                        }
+                    }
+                }
+                if (check == false) {
+                    lstKeywordsURL.add(objKeywords);
+                }
+            }
+        } catch (Exception ex) {
+            l.debug(ex + "  " + ex.getMessage());
+        }
+     
+
+        try {
+            //  for (Serpkeywords objKeywords : lstKeywords) {
+             Seokeyworddetails objSeokeyworddetails=null;
+            for (Serpkeywords objKeywords : lstKeywordsURL) {
+                 objSeokeyworddetails = new Seokeyworddetails();
+
                 domainName = objKeywords.getUrl().trim();
                 keywordId = objKeywords.getKeywordID();
                 countBackLinks = setBackLinksCounter.get(domainName);
@@ -141,13 +171,45 @@ public class BacklinksCounter implements Runnable {
                 System.out.println("Domain:::::: " + domainName);
                 System.out.println("da:::: " + dacount);
                 System.out.println("pa:::: " + pacount);
+                System.out.println("Backlinks :: " + countBackLinks);
 
-                objKeywordDao.saveBackLinksResult(keywordId, domainName, objKeywords.getKeyword(), objKeywords.getCampaignID(), countBackLinks, startTrackId, endtrackId);
-                objKeywordDao.savePaDaResult(keywordId, domainName, objKeywords.getKeyword(), objKeywords.getCampaignID(), pacount, dacount);
+                objSeokeyworddetails.setKeywordID(objKeywords);
+                objSeokeyworddetails.setUrl(domainName);
+                objSeokeyworddetails.setKeyword(objKeywords.getKeyword());
+                objSeokeyworddetails.setCampaignID(objKeywords.getCampaignID());
+                objSeokeyworddetails.setCountBackLinks(countBackLinks);
+                objSeokeyworddetails.setGooglePA(pacount);
+                objSeokeyworddetails.setGoogleDA(dacount);
+
+                listUpdatedKeywords.add(objSeokeyworddetails);
+
+//                objKeywordDao.saveBackLinksResult1(keywordId, domainName, objKeywords.getKeyword(), objKeywords.getCampaignID(), countBackLinks, startTrackId, endtrackId, objKeywords.getUrl());
+//                objKeywordDao.savePaDaResult1(keywordId, domainName, objKeywords.getKeyword(), objKeywords.getCampaignID(), pacount, dacount, objKeywords.getUrl());
             }
+
         } catch (Exception ex) {
             l.debug(ex + "  " + ex.getMessage());
         }
+
+        try {
+
+            for (Seokeyworddetails objUniqueURL : listUpdatedKeywords) {
+
+                for (Serpkeywords objKeywords : lstKeywords) {
+                    if (objUniqueURL.getUrl().equals(objKeywords.getUrl())) {
+                        keywordId = objUniqueURL.getKeywordID().getKeywordID();
+                        objKeywordDao.saveBackLinksResult(objKeywords.getKeywordID(), objKeywords.getUrl(), objKeywords.getKeyword(), objKeywords.getCampaignID(), objUniqueURL.getCountBackLinks(), startTrackId, endtrackId);
+                        objKeywordDao.savePaDaResult(objKeywords.getKeywordID(), objKeywords.getUrl(), objKeywords.getKeyword(), objKeywords.getCampaignID(),objUniqueURL.getGooglePA() , objUniqueURL.getGoogleDA());
+
+                    }
+
+                }
+            }
+
+        } catch (Exception ex) {
+            l.debug(ex + "  " + ex.getMessage());
+        }
+
     }
 
     public Integer[] getPaDaCounts(String domain) {
@@ -157,8 +219,8 @@ public class BacklinksCounter implements Runnable {
             l.debug(e + "  " + e.getMessage());
             e.printStackTrace();
         }
-        String accessID = "member-8d27ee524f";
-        String secretKey = "ad366140095f3318e8e0ebad56b601b7";
+        String accessID = "Enter the accessID for SeoMoz";
+        String secretKey = "Enter the secretKey for SeoMoz";
         Authenticator authenticator = new Authenticator();
         authenticator.setAccessID(accessID);
         authenticator.setSecretKey(secretKey);
@@ -201,8 +263,8 @@ public class BacklinksCounter implements Runnable {
 
     private int getDAvalue(String domainName) {
         domainName = domainName.substring(0, domainName.indexOf("/"));
-        String accessID = "member-8d27ee524f";
-        String secretKey = "ad366140095f3318e8e0ebad56b601b7";
+        String accessID = "Enter the accessID for SeoMoz";
+        String secretKey = "Enter the secretKey for SeoMoz";
         Authenticator authenticator = new Authenticator();
         authenticator.setAccessID(accessID);
         authenticator.setSecretKey(secretKey);

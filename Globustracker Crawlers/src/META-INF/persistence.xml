@@ -36,13 +36,13 @@
     <class>ranktracker.entity.Campaignkeywords</class>
     <class>ranktracker.entity.Pagelinks</class>
     <class>ranktracker.entity.Visitorarray</class>
-    <class>ranktracker.entity.Commonseo</class>
     <class>ranktracker.entity.Mailhistory</class>
     <class>ranktracker.entity.Proxydata</class>
     <class>ranktracker.entity.Trackhistory</class>
     <class>ranktracker.entity.Plans</class>
+    <class>ranktracker.entity.Commonseo</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ranktracker"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/databasename"/>
       <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

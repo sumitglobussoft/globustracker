@@ -13,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -23,8 +21,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "site")
-@NamedQueries({
-    @NamedQuery(name = "Site.findAll", query = "SELECT s FROM Site s")})
 public class Site implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

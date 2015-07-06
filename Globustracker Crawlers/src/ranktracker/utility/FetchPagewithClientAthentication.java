@@ -88,7 +88,7 @@ public class FetchPagewithClientAthentication {
                         System.out.println("PROX FAILURE");
                     }
                     if (count > 15) {
-                        fetchPageSourcefromClientPlain(newurl, pagename);
+                        //  fetchPageSourcefromClientPlain(newurl, pagename);
                     }
                 } while (returnresponse == 503 || returnresponse == 502);
             } else {
@@ -114,7 +114,7 @@ public class FetchPagewithClientAthentication {
                     System.out.println("PROX FAILURE");
                 }
                 if (count > 15) {
-                    fetchPageSourcefromClientPlain(newurl, pagename);
+                    // fetchPageSourcefromClientPlain(newurl, pagename);
                 }
             } while (returnresponse == 503 || returnresponse == 502);
         } finally {
@@ -134,8 +134,8 @@ public class FetchPagewithClientAthentication {
         String responsebody;
         String userAgent = UserAgents.getRandomUserAgent();
         try (CloseableHttpClient httpclient = HttpClients.custom()
-                        .setUserAgent(userAgent)
-                        .build()) {
+                .setUserAgent(userAgent)
+                .build()) {
             HttpGet httpget = new HttpGet(newurl);
             System.out.println("executing request " + httpget.getURI());
             ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
@@ -155,6 +155,183 @@ public class FetchPagewithClientAthentication {
         }
         writeResponseFile(responsebody, pagename);
     }
+
+    public String fetchPageSourceWithoutPROXY(URI newurl) throws IOException, InterruptedException {
+
+        CredentialsProvider credsprovider = new BasicCredentialsProvider();
+
+        //-----------------------------------------------------------------------
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setSocketTimeout(5000)
+                .setConnectTimeout(5000)
+                .setConnectionRequestTimeout(5000)
+                .build();
+
+        CloseableHttpClient httpclient = HttpClients.custom()
+                .setDefaultCredentialsProvider(credsprovider)
+                .setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0")
+                .setDefaultRequestConfig(requestConfig)
+                .build();
+        String responsebody = "";
+        String responsestatus = null;
+        int count = 0;
+        try {
+            HttpGet httpget = new HttpGet(newurl);
+            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+            httpget.addHeader("Accept-Encoding", "gzip, deflate");
+            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
+            httpget.addHeader("Connection", "keep-alive");
+
+//            System.out.println("Response status " + httpget.getRequestLine());
+            CloseableHttpResponse resp = httpclient.execute(httpget);
+            responsestatus = resp.getStatusLine().toString();
+            if (responsestatus.contains("503") || responsestatus.contains("502") || responsestatus.contains("403")
+                    || responsestatus.contains("400") || responsestatus.contains("407") || responsestatus.contains("401")
+                    || responsestatus.contains("402") || responsestatus.contains("404") || responsestatus.contains("405")
+                    || responsestatus.contains("SSLHandshakeException") || responsestatus.contains("999")
+                    || responsestatus.contains("ClientProtocolException") || responsestatus.contains("SocketTimeoutException")
+                    || "".equals(responsestatus)) {
+                Thread.sleep(10000);
+                do {
+                    count++;
+                    responsebody = fetchPageSourceWithoutPROXYSecond(newurl);
+                    if (responsebody == null) {
+                        Thread.sleep(10000);
+                        System.out.println("PROX FAILURE");
+                    }
+                    if (count > 20) {
+                        Thread.sleep(1000);
+                        break;
+                    }
+                } while (responsebody == null || "".equals(responsebody));
+            } else {
+                HttpEntity entity = resp.getEntity();
+                System.out.println(resp.getStatusLine());
+                if (entity != null) {
+                    //  System.out.println("Response content length: " + entity.getContentLength());
+                    BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String inputLine;
+                    while ((inputLine = in.readLine()) != null) {
+                        responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
+                    }
+                    // writeResponseFile(responsebody, pagename);
+                }
+                EntityUtils.consume(entity);
+            }
+        } catch (IOException | IllegalStateException e) {
+            System.out.println("Exception = " + e);
+            do {
+                count++;
+                responsebody = fetchPageSourceWithoutPROXYSecond(newurl);
+                if (responsebody == null) {
+                    System.out.println("PROX FAILURE");
+                }
+                if (count > 15) {
+                    Thread.sleep(50000);
+//                    responsebody = fetchPageSourcefromClientGoogleSecond(newurl);
+                    break;
+                }
+            } while (responsebody == null || "".equals(responsebody));
+        } finally {
+            httpclient.close();
+        }
+        return responsebody;
+    }
+
+    public String fetchPageSourceWithoutPROXYSecond(URI newurl) throws IOException {
+        System.out.println("2nd pRoxy method");
+
+        CredentialsProvider credsprovider = new BasicCredentialsProvider();
+        //-----------------------------------------------------------------------
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setSocketTimeout(5000)
+                .setConnectTimeout(5000)
+                .setConnectionRequestTimeout(5000)
+                .build();
+
+        CloseableHttpClient httpclient = HttpClients.custom()
+                .setDefaultCredentialsProvider(credsprovider)
+                .setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0")
+                .setDefaultRequestConfig(requestConfig)
+                .build();
+        String responsebody = "";
+        String responsestatus = null;
+        try {
+            HttpGet httpget = new HttpGet(newurl);
+            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+            httpget.addHeader("Accept-Encoding", "gzip, deflate");
+            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
+            httpget.addHeader("Connection", "keep-alive");
+
+            System.out.println("Response status" + httpget.getRequestLine());
+            CloseableHttpResponse resp = httpclient.execute(httpget);
+            responsestatus = resp.getStatusLine().toString();
+            if (responsestatus.contains("503") || responsestatus.contains("502") || responsestatus.contains("400")
+                    || responsestatus.contains("401") || responsestatus.contains("402") || responsestatus.contains("403")
+                    || responsestatus.contains("407") || responsestatus.contains("404") || responsestatus.contains("405")
+                    || responsestatus.contains("SSLHandshakeException") || responsestatus.contains("999")
+                    || responsestatus.contains("ClientProtocolException") || responsestatus.contains("SocketTimeoutException")
+                    || responsestatus == null || "".equals(responsestatus)) {
+                return null;
+            } else {
+                HttpEntity entity = resp.getEntity();
+                System.out.println(resp.getStatusLine());
+                if (entity != null) {
+//                    System.out.println("Response content length: " + entity.getContentLength());
+                    BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String inputLine;
+                    while ((inputLine = in.readLine()) != null) {
+                        responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
+                    }
+                    // writeResponseFile(responsebody, pagename);
+                }
+                EntityUtils.consume(entity);
+            }
+        } catch (IOException | IllegalStateException e) {
+            return null;
+        } finally {
+            httpclient.close();
+        }
+        return responsebody;
+    }
+
+//    public String fetchPageSourcefromClientWithoutProxy(URI newurl) throws IOException {
+//        System.out.println("---------------Without Proxy-----------------");
+//        String responsebody;
+//        String userAgent = UserAgents.getRandomUserAgent();
+//        try (CloseableHttpClient httpclient = HttpClients.custom()
+//                .setUserAgent(userAgent)
+//                .build()) {
+//            HttpGet httpget = new HttpGet(newurl);
+//            System.out.println("executing request " + httpget.getURI());
+//            ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
+//                @Override
+//                public String handleResponse(
+//                        final HttpResponse response) throws ClientProtocolException, IOException {
+//                    int status = response.getStatusLine().getStatusCode();
+//                    System.out.println("status" + status);
+//                    //  int count=5;     
+//                    if (status >= 200 && status < 300) {
+//                        HttpEntity entity = response.getEntity();
+//                        return entity != null ? EntityUtils.toString(entity) : null;
+//                    } else {
+//                        status = response.getStatusLine().getStatusCode();
+//                        System.out.println("status" + status);
+//
+//                        throw new ClientProtocolException("Unexpected response status: " + status);
+//
+//                    }
+//
+//                }
+//            };
+//
+//            responsebody = httpclient.execute(httpget, responseHandler);
+//            System.out.println("responsebodyFetchWtoutP ");
+//            System.out.println(responsebody);
+//
+//        }
+//        return responsebody;
+//    }
 
     public void writeResponseFile(String responseBody, String filename) {
         String str = getShowPage();
@@ -271,7 +448,6 @@ public class FetchPagewithClientAthentication {
 //        int portno = Integer.parseInt(proxyinfo[1]);
 //        String username = proxyinfo[2];
 //        String password = proxyinfo[3];
-
         ProxyData proxydata = proxylist.get(new Random().nextInt(proxylist.size()));
         //System.out.println("<PROXY> " + proxydata.getIPAddress() + ":" + proxydata.getPortNo() + ":" + proxydata.getProxyUser() + ":" + proxydata.getProxyPassword());
         String ip = proxydata.getIPAddress();
@@ -370,12 +546,11 @@ public class FetchPagewithClientAthentication {
 //        String username = proxyinfo[2];
 //        String password = proxyinfo[3];
         ProxyData proxydata = proxylist.get(new Random().nextInt(proxylist.size()));
-    //    System.out.println("<PROXY> " + proxydata.getIPAddress() + ":" + proxydata.getPortNo() + ":" + proxydata.getProxyUser() + ":" + proxydata.getProxyPassword());
+        //    System.out.println("<PROXY> " + proxydata.getIPAddress() + ":" + proxydata.getPortNo() + ":" + proxydata.getProxyUser() + ":" + proxydata.getProxyPassword());
         String ip = proxydata.getIPAddress();
         int portno = proxydata.getPortNo();
         String username = proxydata.getProxyUser();
         String password = proxydata.getProxyPassword();
-
 
         CredentialsProvider credsprovider = new BasicCredentialsProvider();
         credsprovider.setCredentials(
@@ -540,7 +715,6 @@ public class FetchPagewithClientAthentication {
         String username = proxydata.getProxyUser();
         String password = proxydata.getProxyPassword();
 
-
         CredentialsProvider credsprovider = new BasicCredentialsProvider();
         credsprovider.setCredentials(
                 new AuthScope(ip, portno),
@@ -684,20 +858,19 @@ public class FetchPagewithClientAthentication {
     }
 
     public String fetchPageSourcefromYahooSecond(String newurl, List<ProxyData> proxylist) throws IOException {
-       // String[] proxyinfo = getProxyDetails().split(":");
+        // String[] proxyinfo = getProxyDetails().split(":");
 //        String ip = proxyinfo[0];
 //        int portno = Integer.parseInt(proxyinfo[1]);
 //        String username = proxyinfo[2];
 //        String password = proxyinfo[3];
 
         ProxyData proxydata = proxylist.get(new Random().nextInt(proxylist.size()));
-       // System.out.println("<PROXY> " + proxydata.getIPAddress() + ":" + proxydata.getPortNo() + ":" + proxydata.getProxyUser() + ":" + proxydata.getProxyPassword());
+        // System.out.println("<PROXY> " + proxydata.getIPAddress() + ":" + proxydata.getPortNo() + ":" + proxydata.getProxyUser() + ":" + proxydata.getProxyPassword());
         String ip = proxydata.getIPAddress();
         int portno = proxydata.getPortNo();
         String username = proxydata.getProxyUser();
         String password = proxydata.getProxyPassword();
 
-
         CredentialsProvider credsprovider = new BasicCredentialsProvider();
         credsprovider.setCredentials(
                 new AuthScope(ip, portno),
@@ -748,556 +921,6 @@ public class FetchPagewithClientAthentication {
             httpclient.close();
         }
         return responsebody;
-    }
-
-    // public void fetchPageSourcefromVimeo(URI newurl, String pagename) throws IOException {
-    public String fetchPageSourcefromVimeo(String newurl) throws IOException {
-        String[] proxyinfo = getProxyDetails().split(":");
-        String ip = proxyinfo[0];
-        int portno = Integer.parseInt(proxyinfo[1]);
-        String username = proxyinfo[2];
-        String password = proxyinfo[3];
-
-        CredentialsProvider credsprovider = new BasicCredentialsProvider();
-        credsprovider.setCredentials(
-                new AuthScope(ip, portno),
-                new UsernamePasswordCredentials(username, password));
-        HttpHost proxy = new HttpHost(ip, portno);
-        //-----------------------------------------------------------------------
-        String userAgent = UserAgents.getRandomUserAgent();
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setDefaultCredentialsProvider(credsprovider)
-                .setUserAgent(userAgent)
-                .setProxy(proxy)
-                .build();
-        String responsebody = "";
-        String responsestatus = null;
-        int returnresponse;
-        int count = 0;
-        try {
-            HttpGet httpget = new HttpGet(newurl);
-            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            httpget.addHeader("Accept-Encoding", "gzip, deflate");
-            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
-            httpget.addHeader("Cache-Control", "max-age=0");
-            httpget.addHeader("Connection", "keep-alive");
-            System.out.println("Response status" + httpget.getRequestLine());
-            CloseableHttpResponse resp = httpclient.execute(httpget);
-            responsestatus = resp.getStatusLine().toString();
-
-            if (responsestatus.contains("503") || responsestatus.contains("502") || responsestatus.contains("400")
-                    || responsestatus.contains("402") || responsestatus.contains("403") || responsestatus.contains("404")
-                    || responsestatus.contains("407") || responsestatus.contains("406") || responsestatus.contains("SSLHandshakeException")
-                    || responsestatus.contains("999") || responsestatus.contains("504") || responsestatus.contains("505")) {
-//                do {
-//                    count++;
-//                    returnresponse = fetchPageSourcefromClientforVimeo2(newurl, pagename, portNo);
-//                    if (returnresponse == 503) {
-//                        System.out.println("PROX FAILURE Vimeo");
-//                        try {
-//                            Thread.sleep(1000);
-//                            portNo = generateRandomPort();
-//                        } catch (InterruptedException ex) {
-//                            java.util.logging.Logger.getLogger(FetchPagewithClientAthentication.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    }
-//                    if (count > 15) {
-//                        fetchPageSourcefromClientforVimeo2(newurl, pagename, portNo);
-//                    }
-//                } while (returnresponse == 503 || returnresponse == 502);
-            } else {
-                HttpEntity entity = resp.getEntity();
-                System.out.println(resp.getStatusLine());
-                if (entity != null) {
-                    System.out.println("Response content length: " + entity.getContentLength());
-                    BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
-                    }
-                    //writeResponseFile(responsebody, pagename);
-                }
-                EntityUtils.consume(entity);
-            }
-        } catch (IOException | IllegalStateException e) {
-            System.out.println("Exception = " + e);
-//            do {
-//                count++;
-//                returnresponse = fetchPageSourcefromClientforVimeo2(newurl, pagename, portNo);
-//                if (returnresponse == 503) {
-//                    System.out.println("PROX FAILURE Vimeo Exception");
-//                    try {
-//                        Thread.sleep(1000);
-//                        portNo = generateRandomPort();
-//                    } catch (InterruptedException ex) {
-//                        java.util.logging.Logger.getLogger(FetchPagewithClientAthentication.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                }
-//                if (count > 15) {
-//                    fetchPageSourcefromClientforVimeo2(newurl, pagename, portNo);
-//                }
-//            } while (returnresponse == 503 || returnresponse == 502);
-        } finally {
-            httpclient.close();
-        }
-        return responsebody;
-    }
-
-    public int fetchPageSourcefromClientforVimeo2(URI newurl, String pagename, int portNo) throws IOException {
-        String[] proxyinfo = getProxyDetails().split(":");
-        String ip = proxyinfo[0];
-        int portno = Integer.parseInt(proxyinfo[1]);
-        String username = proxyinfo[2];
-        String password = proxyinfo[3];
-
-        CredentialsProvider credsprovider = new BasicCredentialsProvider();
-        credsprovider.setCredentials(
-                new AuthScope(ip, portno),
-                new UsernamePasswordCredentials(username, password));
-        HttpHost proxy = new HttpHost(ip, portno);
-        //-----------------------------------------------------------------------
-        String userAgent = UserAgents.getRandomUserAgent();
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setDefaultCredentialsProvider(credsprovider)
-                .setUserAgent(userAgent)
-                .setProxy(proxy)
-                .build();
-        String responsebody = "";
-        String responsestatus = null;
-        try {
-            HttpGet httpget = new HttpGet(newurl);
-            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            httpget.addHeader("Accept-Encoding", "gzip, deflate");
-            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
-            httpget.addHeader("Cache-Control", "max-age=0");
-            httpget.addHeader("Connection", "keep-alive");
-//            System.out.println("Response status" + httpget.getRequestLine());
-            CloseableHttpResponse resp = httpclient.execute(httpget);
-            responsestatus = resp.getStatusLine().toString();
-            if (responsestatus.contains("503") || responsestatus.contains("502") || responsestatus.contains("400")
-                    || responsestatus.contains("401") || responsestatus.contains("402") || responsestatus.contains("403")
-                    || responsestatus.contains("407") || responsestatus.contains("406") || responsestatus.contains("SSLHandshakeException")
-                    || responsestatus.contains("999") || responsestatus.contains("504") || responsestatus.contains("505")) {
-                return 503;
-            } else {
-                HttpEntity entity = resp.getEntity();
-                System.out.println(resp.getStatusLine());
-                if (entity != null) {
-                    System.out.println("Response content length: " + entity.getContentLength());
-                    BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
-                    }
-                    writeResponseFile(responsebody, pagename);
-                }
-                EntityUtils.consume(entity);
-            }
-        } catch (IOException | IllegalStateException e) {
-            return 503;
-        } finally {
-            httpclient.close();
-        }
-        return 0;
-    }
-
-    public void fetchPageSourceFromMetacafe(URI newurl, String pagename) throws IOException {
-        String[] proxyinfo = getProxyDetails().split(":");
-        String ip = proxyinfo[0];
-        int portno = Integer.parseInt(proxyinfo[1]);
-        String username = proxyinfo[2];
-        String password = proxyinfo[3];
-
-        CredentialsProvider credsprovider = new BasicCredentialsProvider();
-        credsprovider.setCredentials(
-                new AuthScope(ip, portno),
-                new UsernamePasswordCredentials(username, password));
-        HttpHost proxy = new HttpHost(ip, portno);
-        //-----------------------------------------------------------------------
-        String userAgent = UserAgents.getRandomUserAgent();
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setDefaultCredentialsProvider(credsprovider)
-                .setUserAgent(userAgent)
-                .setProxy(proxy)
-                .build();
-        String responsebody = "";
-        String responsestatus = null;
-        int returnresponse;
-        int count = 0;
-        try {
-            HttpGet httpget = new HttpGet(newurl);
-            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            httpget.addHeader("Accept-Encoding", "gzip, deflate");
-            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
-            httpget.addHeader("Cache-Control", "max-age=0");
-            httpget.addHeader("Connection", "keep-alive");
-            System.out.println("Response status" + httpget.getRequestLine());
-
-            CloseableHttpResponse resp = httpclient.execute(httpget);
-            responsestatus = resp.getStatusLine().toString();
-            if (responsestatus.contains("503") || responsestatus.contains("502") || responsestatus.contains("400")
-                    || responsestatus.contains("402") || responsestatus.contains("403") || responsestatus.contains("404")
-                    || responsestatus.contains("407") || responsestatus.contains("406") || responsestatus.contains("SSLHandshakeException")
-                    || responsestatus.contains("999") || responsestatus.contains("504") || responsestatus.contains("505")) {
-                do {
-                    count++;
-                    returnresponse = fetchPageSourceFromMetcafe2(newurl, pagename, portno);
-                    if (returnresponse == 503) {
-                        System.out.println("PROX FAILURE");
-                    }
-                    if (count > 15) {
-                        fetchPageSourcefromClientPlain(newurl, pagename);
-                    }
-                } while (returnresponse == 503 || returnresponse == 502);
-            } else {
-                HttpEntity entity = resp.getEntity();
-                System.out.println(resp.getStatusLine());
-                if (entity != null) {
-                    System.out.println("Response content length: " + entity.getContentLength());
-                    BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
-                    }
-                    writeResponseFile(responsebody, pagename);
-                }
-                EntityUtils.consume(entity);
-            }
-        } catch (IOException | IllegalStateException e) {
-            System.out.println("Exception = " + e);
-            do {
-                count++;
-                returnresponse = fetchPageSourceFromMetcafe2(newurl, pagename, portno);
-                if (returnresponse == 503) {
-                    System.out.println("PROX FAILURE");
-                }
-                if (count > 15) {
-                    fetchPageSourcefromClientPlain(newurl, pagename);
-                }
-            } while (returnresponse == 503 || returnresponse == 502);
-        } finally {
-            httpclient.close();
-        }
-    }
-
-    public int fetchPageSourceFromMetcafe2(URI newurl, String pagename, int portNo) throws IOException {
-        String[] proxyinfo = getProxyDetails().split(":");
-        String ip = proxyinfo[0];
-        int portno = Integer.parseInt(proxyinfo[1]);
-        String username = proxyinfo[2];
-        String password = proxyinfo[3];
-
-        CredentialsProvider credsprovider = new BasicCredentialsProvider();
-        credsprovider.setCredentials(
-                new AuthScope(ip, portno),
-                new UsernamePasswordCredentials(username, password));
-        HttpHost proxy = new HttpHost(ip, portno);
-        //-----------------------------------------------------------------------
-        String userAgent = UserAgents.getRandomUserAgent();
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setDefaultCredentialsProvider(credsprovider)
-                .setUserAgent(userAgent)
-                .setProxy(proxy)
-                .build();
-        String responsebody = "";
-        String responsestatus = null;
-        try {
-            HttpGet httpget = new HttpGet(newurl);
-            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            httpget.addHeader("Accept-Encoding", "gzip, deflate");
-            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
-            httpget.addHeader("Cache-Control", "max-age=0");
-            httpget.addHeader("Connection", "keep-alive");
-//            System.out.println("Response status" + httpget.getRequestLine());
-            CloseableHttpResponse resp = httpclient.execute(httpget);
-            responsestatus = resp.getStatusLine().toString();
-            if (responsestatus.contains("503") || responsestatus.contains("502") || responsestatus.contains("400")
-                    || responsestatus.contains("401") || responsestatus.contains("402") || responsestatus.contains("403")
-                    || responsestatus.contains("407") || responsestatus.contains("406") || responsestatus.contains("SSLHandshakeException")
-                    || responsestatus.contains("999") || responsestatus.contains("504") || responsestatus.contains("505")) {
-                return 503;
-            } else {
-                HttpEntity entity = resp.getEntity();
-                System.out.println(resp.getStatusLine());
-                if (entity != null) {
-                    System.out.println("Response content length: " + entity.getContentLength());
-                    BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
-                    }
-                    writeResponseFile(responsebody, pagename);
-                }
-                EntityUtils.consume(entity);
-            }
-        } catch (IOException | IllegalStateException e) {
-            return 503;
-        } finally {
-            httpclient.close();
-        }
-        return 0;
-    }
-
-    public String fetchPageSourcefromYoutube(URI newurl) throws IOException, InterruptedException {
-        String[] proxyinfo = getProxyDetails().split(":");
-        String ip = proxyinfo[0];
-        int portno = Integer.parseInt(proxyinfo[1]);
-        String username = proxyinfo[2];
-        String password = proxyinfo[3];
-
-        CredentialsProvider credsprovider = new BasicCredentialsProvider();
-        credsprovider.setCredentials(
-                new AuthScope(ip, portno),
-                new UsernamePasswordCredentials(username, password));
-        HttpHost proxy = new HttpHost(ip, portno);
-        //-----------------------------------------------------------------------
-        String userAgent = UserAgents.getRandomUserAgent();
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setDefaultCredentialsProvider(credsprovider)
-                .setUserAgent(userAgent)
-                .setProxy(proxy)
-                .build();
-        String responsebody = "";
-        String responsestatus = null;
-        int returnresponse;
-        int count = 0;
-        try {
-            HttpGet httpget = new HttpGet(newurl);
-            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            httpget.addHeader("Accept-Encoding", "gzip, deflate");
-            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
-            httpget.addHeader("Connection", "keep-alive");
-//            httpget.addHeader("Host","www.google.com");
-//            httpget.addHeader("Referer","https://www.google.com/webhp?hl=en");
-//            RequestConfig requestConfig = RequestConfig.custom()
-//                    .setSocketTimeout(5000)
-//                    .setConnectTimeout(5000)
-//                    .setConnectionRequestTimeout(5000)
-//                    .build();
-//            httpget.setConfig(requestConfig);
-            System.out.println("Response status" + httpget.getRequestLine());
-            CloseableHttpResponse resp = httpclient.execute(httpget);
-            responsestatus = resp.getStatusLine().toString();
-            if (responsestatus.contains("503") || responsestatus.contains("502") || responsestatus.contains("403")
-                    || responsestatus.contains("400") || responsestatus.contains("407") || responsestatus.contains("401")
-                    || responsestatus.contains("402") || responsestatus.contains("404") || responsestatus.contains("405")
-                    || responsestatus.contains("SSLHandshakeException") || responsestatus.contains("999")
-                    || responsestatus.contains("ClientProtocolException") || responsestatus.contains("SocketTimeoutException")
-                    || "".equals(responsestatus)) {
-                Thread.sleep(10000);
-                do {
-                    count++;
-                    responsebody = fetchPageSourcefromClientforYoutube2(newurl);
-                    if (responsebody == null) {
-                        Thread.sleep(10000);
-                        System.out.println("PROX FAILURE");
-                    }
-                    if (count > 20) {
-//                            Thread.sleep(1000);
-                        break;
-                    }
-                } while (responsebody == null || "".equals(responsebody));
-            } else {
-                HttpEntity entity = resp.getEntity();
-                System.out.println(resp.getStatusLine());
-                if (entity != null) {
-                    System.out.println("Response content length: " + entity.getContentLength());
-                    BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
-                    }
-                    // writeResponseFile(responsebody, pagename);
-                }
-                EntityUtils.consume(entity);
-            }
-        } catch (IOException | IllegalStateException e) {
-            System.out.println("Exception = " + e);
-            do {
-                count++;
-                responsebody = fetchPageSourcefromClientforYoutube2(newurl);
-                if (responsebody == null) {
-                    System.out.println("PROX FAILURE");
-                }
-                if (count > 15) {
-                    Thread.sleep(50000);
-                    responsebody = fetchPageSourcefromClientforYoutube2(newurl);
-                }
-            } while (responsebody == null || "".equals(responsebody));
-        } finally {
-            httpclient.close();
-        }
-        return responsebody;
-    }
-
-    public String fetchPageSourcefromClientforYoutube2(URI newurl) throws IOException {
-        String[] proxyinfo = getProxyDetails().split(":");
-        String ip = proxyinfo[0];
-        int portno = Integer.parseInt(proxyinfo[1]);
-        String username = proxyinfo[2];
-        String password = proxyinfo[3];
-
-        CredentialsProvider credsprovider = new BasicCredentialsProvider();
-        credsprovider.setCredentials(
-                new AuthScope(ip, portno),
-                new UsernamePasswordCredentials(username, password));
-        HttpHost proxy = new HttpHost(ip, portno);
-        //-----------------------------------------------------------------------
-        String userAgent = UserAgents.getRandomUserAgent();
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setDefaultCredentialsProvider(credsprovider)
-                .setUserAgent(userAgent)
-                .setProxy(proxy)
-                .build();
-        String responsebody = "";
-        String responsestatus = null;
-        try {
-            HttpGet httpget = new HttpGet(newurl);
-            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            httpget.addHeader("Accept-Encoding", "gzip, deflate");
-            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
-            httpget.addHeader("Connection", "keep-alive");
-//             RequestConfig requestConfig = RequestConfig.custom()
-//                    .setSocketTimeout(5000)
-//                    .setConnectTimeout(5000)
-//                    .setConnectionRequestTimeout(5000)
-//                    .build();
-//            httpget.setConfig(requestConfig);
-            System.out.println("Response status" + httpget.getRequestLine());
-            CloseableHttpResponse resp = httpclient.execute(httpget);
-            responsestatus = resp.getStatusLine().toString();
-            if (responsestatus.contains("503") || responsestatus.contains("502") || responsestatus.contains("400")
-                    || responsestatus.contains("401") || responsestatus.contains("402") || responsestatus.contains("403")
-                    || responsestatus.contains("407") || responsestatus.contains("404") || responsestatus.contains("405")
-                    || responsestatus.contains("SSLHandshakeException") || responsestatus.contains("999")
-                    || responsestatus.contains("ClientProtocolException") || responsestatus.contains("SocketTimeoutException")
-                    || responsestatus == null || "".equals(responsestatus)) {
-                return null;
-            } else {
-                HttpEntity entity = resp.getEntity();
-                System.out.println(resp.getStatusLine());
-                if (entity != null) {
-                    System.out.println("Response content length: " + entity.getContentLength());
-                    BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
-                    }
-                    // writeResponseFile(responsebody, pagename);
-                }
-                EntityUtils.consume(entity);
-            }
-        } catch (IOException | IllegalStateException e) {
-            return null;
-        } finally {
-            httpclient.close();
-        }
-        return responsebody;
-    }
-
-    public String fetchPageSourcefromDailymotion(URI newurl) throws IOException {
-        String[] proxyinfo = getProxyDetails().split(":");
-        String ip = proxyinfo[0];
-        int portno = Integer.parseInt(proxyinfo[1]);
-        String username = proxyinfo[2];
-        String password = proxyinfo[3];
-
-        CredentialsProvider credsprovider = new BasicCredentialsProvider();
-        credsprovider.setCredentials(
-                new AuthScope(ip, portno),
-                new UsernamePasswordCredentials(username, password));
-        HttpHost proxy = new HttpHost(ip, portno);
-        //-----------------------------------------------------------------------
-        String userAgent = UserAgents.getRandomUserAgent();
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setDefaultCredentialsProvider(credsprovider)
-                .setUserAgent(userAgent)
-                .setProxy(proxy)
-                .build();
-        String responsebody = "";
-        String responsestatus = null;
-        try {
-            HttpGet httpget = new HttpGet(newurl);
-            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            httpget.addHeader("Accept-Encoding", "gzip, deflate");
-            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
-            httpget.addHeader("Connection", "keep-alive");
-            System.out.println("Response status" + httpget.getRequestLine());
-            CloseableHttpResponse resp = httpclient.execute(httpget);
-            responsestatus = resp.getStatusLine().toString();
-            HttpEntity entity = resp.getEntity();
-            System.out.println(resp.getStatusLine());
-            if (entity != null) {
-                System.out.println("Response content length: " + entity.getContentLength());
-                BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
-                }
-            }
-            EntityUtils.consume(entity);
-        } finally {
-            httpclient.close();
-        }
-        return responsebody;
-    }
-
-    public int fetchPageSourcefromClientforDailymotion2(URI newurl, String pagename, int portNo) throws IOException {
-        String[] proxyinfo = getProxyDetails().split(":");
-        String ip = proxyinfo[0];
-        int portno = Integer.parseInt(proxyinfo[1]);
-        String username = proxyinfo[2];
-        String password = proxyinfo[3];
-
-        CredentialsProvider credsprovider = new BasicCredentialsProvider();
-        credsprovider.setCredentials(
-                new AuthScope(ip, portno),
-                new UsernamePasswordCredentials(username, password));
-        HttpHost proxy = new HttpHost(ip, portno);
-        //-----------------------------------------------------------------------
-        String userAgent = UserAgents.getRandomUserAgent();
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setDefaultCredentialsProvider(credsprovider)
-                .setUserAgent(userAgent)
-                .setProxy(proxy)
-                .build();
-        String responsebody = "";
-        String responsestatus = null;
-        try {
-            HttpGet httpget = new HttpGet(newurl);
-            httpget.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            httpget.addHeader("Accept-Encoding", "gzip, deflate");
-            httpget.addHeader("Accept-Language", "en-US,en;q=0.5");
-            httpget.addHeader("Cache-Control", "max-age=0");
-            httpget.addHeader("Connection", "keep-alive");
-//            System.out.println("Response status" + httpget.getRequestLine());
-            CloseableHttpResponse resp = httpclient.execute(httpget);
-            responsestatus = resp.getStatusLine().toString();
-            if (responsestatus.contains("503") || responsestatus.contains("502") || responsestatus.contains("400")
-                    || responsestatus.contains("401") || responsestatus.contains("402") || responsestatus.contains("403")
-                    || responsestatus.contains("407") || responsestatus.contains("406") || responsestatus.contains("SSLHandshakeException")
-                    || responsestatus.contains("999") || responsestatus.contains("504") || responsestatus.contains("505")) {
-                return 503;
-            } else {
-                HttpEntity entity = resp.getEntity();
-                System.out.println(resp.getStatusLine());
-                if (entity != null) {
-                    System.out.println("Response content length: " + entity.getContentLength());
-                    BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        responsebody = new StringBuilder().append(responsebody).append(inputLine).toString();
-                    }
-                    writeResponseFile(responsebody, pagename);
-                }
-                EntityUtils.consume(entity);
-            }
-        } catch (IOException | IllegalStateException e) {
-            return 503;
-        } finally {
-            httpclient.close();
-        }
-        return 0;
     }
 
     public void fetchPageForCheckingIfSiteDown(String host, String clientemail) throws Exception {
@@ -1400,9 +1023,6 @@ public class FetchPagewithClientAthentication {
                     lines.add(line);
                 }
             }
-
-
-
 
             // Choose a random one from the list
             proxy = lines.get(new Random().nextInt(lines.size()));

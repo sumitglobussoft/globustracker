@@ -35,7 +35,7 @@ public class GetMetacafeThread implements Callable<Map<String, String>> {
             System.out.println(id + " about to get something from "+ httpget.getURI());
             System.out.println("------------------"+ id +"-------------------");
             String filename=(Thread.currentThread().getName())+".txt";
-            fetchclientpage.fetchPageSourceFromMetacafe(httpget.getURI(),filename);
+            //fetchclientpage.fetchPageSourceFromMetacafe(httpget.getURI(),filename);
             synchronized(metasearch){
             pagelinks=metasearch.getMetacafePageCitationLinks(pagepath);
             File f=new File(pagepath);

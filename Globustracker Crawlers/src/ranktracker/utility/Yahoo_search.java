@@ -93,9 +93,9 @@ public class Yahoo_search implements Runnable {
             i++;
             try {
                 Serpkeywords objKeyword = (Serpkeywords) yahooitr.next();
-                if (checkForRecentUpdatedKeyword(objKeyword)) {
-                    continue;
-                }
+//                if (checkForRecentUpdatedKeyword(objKeyword)) {
+//                    continue;
+//                }
 //                yaUrl = objKeyword.getUrl();
 //                yaKeyword = objKeyword.getKeyword();
 //                yaLinkYahoo = "search.yahoo.com";

@@ -154,25 +154,16 @@ public class GooglePagenLinksSearch implements Callable<String> {
         // System.out.println("getRank");
         // System.out.println("url: " + url);
         // System.out.println("domain: " + domain);
-        String tempurl = url.replace("http://www.", "");
-        tempurl = tempurl.replace("https://www.", "");
-        tempurl = tempurl.replace("www.", "");
-        tempurl = tempurl.replace("http://", "");
-        tempurl = tempurl.replace("https://", "");
+        String tempurl = url.replace("https://", "").replace("http://", "").replace("www.", "");
         tempurl = tempurl.replace("/", "");
-
-        String tempdomain = domain.replace("http://www.", "");
-        tempdomain = tempdomain.replace("https://www.", "");
-        tempdomain = tempdomain.replace("www.", "");
-        tempdomain = tempdomain.replace("http://", "");
-        tempdomain = tempdomain.replace("https://", "");
-        tempdomain = tempdomain.replace("/", "");
+       
+        String tempdomain = domain.replace("/", "");
 
         if (tempurl.equalsIgnoreCase(tempdomain)) {
             // System.out.println("one");
             return true;
         } else if (!domain.contains("/")) {
-            if (new URL("http://" + url.replace("http://", "").replace("https://", "")).getHost().toString().contains(new URL("http://" + objSerpsKeywords.getUrl().replace("http://", "").replace("https://", "")).getHost().toString())) {
+            if (new URL("http://" + url.replace("http://", "").replace("https://", "").replace("www.", "")).getHost().toString().equalsIgnoreCase(new URL("http://" + domain).getHost().toString())) {
                 //System.out.println("two");
                 return true;
             }
@@ -193,7 +184,7 @@ public class GooglePagenLinksSearch implements Callable<String> {
                 System.out.println("        -- URL : " + url);
 
                 if (!bestMatchRankFound) {
-                    if (new URL(url).getHost().toString().contains(new URL("http://" + objSerpsKeywords.getUrl().replace("http://", "").replace("https://", "")).getHost().toString())) {
+                    if (new URL("http://" + url.replace("http://", "").replace("https://", "").replace("www.", "")).getHost().toString().equalsIgnoreCase(new URL("http://" + objSerpsKeywords.getUrl()).getHost().toString())) {
                         objSerpsKeywords.setBestMatchRankGoogle(counter);
                         bestMatchRankFound = true;
                         objSerpsKeywords.setBestMatchLinkGoogle(url);
@@ -255,7 +246,7 @@ public class GooglePagenLinksSearch implements Callable<String> {
             System.out.println("bestMatchRankGoogle : " + objSerpsKeywords.getBestMatchRankGoogle());
             System.out.println("bestMatchLinkGoogle : " + objSerpsKeywords.getBestMatchLinkGoogle());
             System.out.println("rankGoogle : " + objSerpsKeywords.getRankGoogle());
-            objKeywordDao.saveResult(objSerpsKeywords.getKeywordID(), objSerpsKeywords.getRankGoogle(), objSerpsKeywords.getBestMatchRankGoogle(), objSerpsKeywords.getBestMatchLinkGoogle(), "google.com");
+            objKeywordDao.saveResult(objSerpsKeywords.getKeywordID(), objSerpsKeywords.getRankGoogle(), objSerpsKeywords.getBestMatchRankGoogle(), objSerpsKeywords.getBestMatchLinkGoogle(), "google.com",objSerpsKeywords.getKeyword(),objSerpsKeywords.getUrl());
             return "success";
         } catch (Exception run1) {
             Logger.getLogger(Google_search.class.getName()).log(Level.SEVERE, null, run1);

@@ -105,7 +105,7 @@
         </action>
         
         <action name="freeTrial" class="ranktracker.action.AccountCreatedAction" method="activateFree">
-<!--            <result name="success">/WEB-INF/jsp_ranktracker_view/accountconfirmation.jsp</result>-->
+            <!--            <result name="success">/WEB-INF/jsp_ranktracker_view/accountconfirmation.jsp</result>-->
         </action>
         
         <action name="forgotPasswordSubmit" class="ranktracker.action.ForgotPasswordAction" method="execute">    
@@ -195,6 +195,9 @@
      
         <action name="viewKey" class="ranktracker.action.ViewKeyAction" method="execute">
             <result name="success" type="tiles">viewKey</result>
+        </action>
+        
+        <action name="limitedserpskeywordsForKeyView" class="ranktracker.action.ViewKeyAction" method="getLimitedSerpsForKeyView">            
         </action>
         
         <action name="viewKeyVideo" class="ranktracker.action.ViewKeyAction" method="executeVideo">
@@ -419,6 +422,10 @@
             <result name="login">/WEB-INF/jsp_ranktracker_view/adminlog.jsp</result>
             <result name="success" type="redirect">admin.action</result>     
         </action>            
+        
+        <action name="youtubechecker" class="ranktracker.action.PageLinkAction" method="youtubechecker">  
+            <result name="success" type="tiles">youtubechecker</result>
+        </action>
         
     </package>
     
@@ -687,5 +694,8 @@
             <result name="success" type="json">/WEB-INF/jsp_ranktracker_view/review.jsp
             </result>
         </action>-->
+        <action name="databaseExist" class="ranktracker.action.ReviewAction" method="checkExistency">
+        </action>
+        
     </package>
 </struts>

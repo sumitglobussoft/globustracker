@@ -240,7 +240,6 @@
                                                 <tbody>
                                                     <s:iterator value="videotrackhst">
                                                         <tr>
-                                                        <tr>
                                                             <td style="text-align: left;"><s:property value="videoKeyword" /></td>
                                                             <td title="<s:property value="youtubeURL" />"><s:property value="youtubeURL" /></td>
                                                             <s:if test="%{rankYoutube!=501 }">
@@ -270,7 +269,7 @@
                                                             <s:else >
                                                                 <td style="text-align: center;">N/A</td>
                                                             </s:else>
-                                                                <td style="text-align: center;"><a href="javascript:drawVideoChart('<s:property value="videokeywordID"/>','30');" id="google_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#chartmodal"></i></a></td>
+                                                            <td style="text-align: center;"><a href="javascript:drawVideoChart('<s:property value="videokeywordID"/>','30');" id="google_chart" title="Chart"><i class="fa fa-2x fa-bar-chart-o" data-toggle="modal" data-target="#chartmodal"></i></a></td>
                                                             <td style="text-align: center;"><a href="javascript:editKeyword(<s:property value="videokeywordID" />, '<s:property value="youtubeURL" />','<s:property value="dailymotionURL" />','<s:property value="vimeoURL" />', '<s:property value="metacafeURL" />','<s:property value="videoKeyword" />');" id="edit" title="Edit"><i class="fa fa-pencil fa-2x txt-color-yellow" data-toggle="modal" data-target="#editmodal"></i></a></td>
                                                             <td style="text-align: center;"><a href="javascript:deleteKeyword(<s:property value="videokeywordID"/>);" title="Delete"><i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#deletemodal"></i></a></td>    
                                                         </tr>
@@ -728,10 +727,10 @@
         var jString = "{\"keywordId\":\"" + keywordId + "\" , \"range\":\"" + range + "\"}";
         var chart;
         $.getJSON(
-                'ajax/getVideoChartData.action',
-                {
-                    jString: jString
-                },
+        'ajax/getVideoChartData.action',
+        {
+            jString: jString
+        },
         function(jMap) {
             chart = new Highcharts.Chart({
                 chart: {
@@ -749,12 +748,12 @@
                 },
                 credits: {
                     enabled: false
-                            //                    text: 'globustracker.com',
-                            //                    href: 'http://www.globustracker.com/'
+                    //                    text: 'globustracker.com',
+                    //                    href: 'http://www.globustracker.com/'
                 },
                 xAxis: {
                     categories:
-                            eval(jMap.dataMap.category),
+                        eval(jMap.dataMap.category),
                     //                        ['View Count', 'Like Count' ,  'DisLike Count',  'Comment Count ',  'Daily View Count'  ],
                     labels: {
                         x: 3,
@@ -839,19 +838,19 @@
             }
         }
         $.post(
-                'ajax/addVideoKeyword.action',
-                {
-                    arrKeywords: keyword,
-                    youtubeurl: youtubeurl,
-                    vimeourl: vimeourl,
-                    metacafeurl: metacafeurl,
-                    dailymotionurl: dailymotionurl
-                },
+        'ajax/addVideoKeyword.action',
+        {
+            arrKeywords: keyword,
+            youtubeurl: youtubeurl,
+            vimeourl: vimeourl,
+            metacafeurl: metacafeurl,
+            dailymotionurl: dailymotionurl
+        },
         function(jMessage) {
             alertMes = jMessage.message;
             window.location = "videokeywords.action";
         },
-                'json');
+        'json');
     }
 
     function addVideoKeywords() {
@@ -907,19 +906,19 @@
             }
         }
         $.post(
-                'ajax/addVideoKeyword.action',
-                {
-                    arrKeywords: keywords,
-                    youtubeurl: youtubeurl,
-                    vimeourl: vimeourl,
-                    metacafeurl: metacafeurl,
-                    dailymotionurl: dailymotionurl
-                },
+        'ajax/addVideoKeyword.action',
+        {
+            arrKeywords: keywords,
+            youtubeurl: youtubeurl,
+            vimeourl: vimeourl,
+            metacafeurl: metacafeurl,
+            dailymotionurl: dailymotionurl
+        },
         function(jMessage) {
             alertMes = jMessage.message;
             window.location = "videokeywords.action";
         },
-                'json');
+        'json');
     }
 
     function editKeyword(keywordId, youtubeurl, dailymotionurl, vimeourl, metacafeurl, keyword) {
@@ -1008,20 +1007,20 @@
             }
         }
         $.post(
-                'ajax/editVideoKeyword.action',
-                {
-                    keywordId: keywordId,
-                    arrKeywords: keyword,
-                    youtubeurl: youtubeurl,
-                    dailymotionurl: dailymotionurl,
-                    vimeourl: vimeourl,
-                    metacafeurl: metacafeurl
-                },
+        'ajax/editVideoKeyword.action',
+        {
+            keywordId: keywordId,
+            arrKeywords: keyword,
+            youtubeurl: youtubeurl,
+            dailymotionurl: dailymotionurl,
+            vimeourl: vimeourl,
+            metacafeurl: metacafeurl
+        },
         function(jMessage) {
             alertMes = jMessage.message;
             window.location = "videokeywords.action";
         },
-                'json');
+        'json');
     }
 
     function deleteKeyword(keywordId)
@@ -1032,15 +1031,15 @@
     function deleteVideoKeyword() {
         var jString = document.deleteForm.videoKeywordId.value;
         $.post(
-                'ajax/deleteVideoKeyword.action',
-                {
-                    jString: jString
-                },
+        'ajax/deleteVideoKeyword.action',
+        {
+            jString: jString
+        },
         function(jMessage) {
             alertMes = jMessage.message;
             window.location = "videokeywords.action";
         },
-                'json');
+        'json');
     }
 
 </script>

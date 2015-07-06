@@ -32,11 +32,11 @@ public class FetchPageHttpClient extends Thread implements FetchPage {
             clientParams.setSoTimeout(10000);
             clientParams.setConnectionManagerTimeout(10000);
             httpClient = new HttpClient(clientParams);
-//            httpClient.getHostConfiguration().setProxy("46.227.68.2", 3128);
-//             cred = new UsernamePasswordCredentials("mmongoose", "I-PHNBV9JHW6US");
+//            httpClient.getHostConfiguration().setProxy("Ip address", 111);
+//             cred = new UsernamePasswordCredentials("Username", "Password");
             /**proxyrack**/
-            httpClient.getHostConfiguration().setProxy("198.7.62.203", 333);
-            cred = new UsernamePasswordCredentials("brandzter", "brandzter1234!@#$");
+            httpClient.getHostConfiguration().setProxy("Ip Address", 111);
+            cred = new UsernamePasswordCredentials("Username", "Password");
             httpClient.getState().setProxyCredentials(AuthScope.ANY, cred);
             httpClient.getParams().setCookiePolicy(CookiePolicy.RFC_2109);
 

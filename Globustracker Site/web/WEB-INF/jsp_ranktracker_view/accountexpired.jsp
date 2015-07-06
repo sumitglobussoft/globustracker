@@ -76,6 +76,9 @@
             <div id="logo-group">
                 <span id="logo"><img src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" alt="SmartAdmin"> </span>           
             </div>
+            <div class="pull-right" style="margin-top: 7px">
+                <a class="btn btn-default" href="signOut.action">LogOut</a>
+            </div>
         </header>
         <!-- END HEADER -->
 

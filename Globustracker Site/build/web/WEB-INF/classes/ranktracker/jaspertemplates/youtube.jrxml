@@ -40,16 +40,16 @@ where A.CampaignID = 663 and A.Visibility = 1]]>
 	<field name="RankMetacafe" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="Youtubeviewcoint" class="java.lang.Integer">
+	<field name="YoutubeViewCount" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="YoutubeLikeCount" class="java.lang.Integer">
+	<field name="VimeoViewCount" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="YoutubeDislikeCount" class="java.lang.Integer">
+	<field name="MetacafeViewCount" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="YoutubeCommentCount" class="java.lang.Integer">
+	<field name="DailymotionViewCount" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="YoutubeDailyViewcount" class="java.lang.Integer">

@@ -4,9 +4,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
-import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import ranktracker.entity.Commonseo;
 import ranktracker.entity.Headingcount;
@@ -15,7 +13,6 @@ import ranktracker.entity.Image;
 import ranktracker.entity.Pagelinks;
 import ranktracker.entity.Relatedwebsite;
 import ranktracker.entity.Technology;
-import ranktracker.entity.Videokeywords;
 import ranktracker.entity.Visitorarray;
 import ranktracker.entity.Xmldata;
 
@@ -26,7 +23,7 @@ public class WoorankDaoImpl extends HibernateDaoSupport implements WoorankDao {
     @Override
     public void insertCommonseo(Commonseo objcommonseo) {
 
-        //getSession().save(objcommonseo);
+//        getSession().save(objcommonseo);
         session.beginTransaction();
         session.save(objcommonseo);
         session.getTransaction().commit();
@@ -94,6 +91,7 @@ public class WoorankDaoImpl extends HibernateDaoSupport implements WoorankDao {
         return result;
     }
 
+    @Override
     public List<Image> getImageDetails(String url) {
 
         List<Image> result = null;
@@ -110,6 +108,7 @@ public class WoorankDaoImpl extends HibernateDaoSupport implements WoorankDao {
         return result;
     }
 
+    @Override
     public List<Pagelinks> getPagelinksDetails(String url) {
 
         List<Pagelinks> result = null;
@@ -142,6 +141,7 @@ public class WoorankDaoImpl extends HibernateDaoSupport implements WoorankDao {
         return result;
     }
 
+    @Override
     public List<Technology> getTechnologyDetails(String url) {
 
         List<Technology> result = null;

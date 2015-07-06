@@ -1,12 +1,101 @@
 [Thread-27] ERROR org.hibernate.util.JDBCExceptionReporter 10/08/2013 18:38:37 - Table 'ranktracker_local.campaignkeywords' doesn't exist
 [Thread-14] ERROR ranktracker.utility.ProxyPageSource 10/08/2013 18:56:26 - java.net.SocketTimeoutException: Read timed out  Read timed out url http://www.stumbleupon.com/content/9bGzKg
 [Thread-17] ERROR org.hibernate.util.JDBCExceptionReporter 10/08/2013 18:57:46 - Table 'ranktracker_local.campaignkeywords' doesn't exist
-[main] ERROR org.hibernate.util.JDBCExceptionReporter 22/12/2014 19:45:42 - Communications link failure
-
-Last packet sent to the server was 10 ms ago.
-[main] ERROR org.hibernate.util.JDBCExceptionReporter 22/12/2014 19:46:04 - Communications link failure
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 02/01/2015 12:08:02 - Communications link failure
 
 Last packet sent to the server was 0 ms ago.
-[main] ERROR org.hibernate.util.JDBCExceptionReporter 22/12/2014 19:46:04 - Communications link failure
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:42:24 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:42:27 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:42:27 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:42:30 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:42:30 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:43:18 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:43:21 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:43:21 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:43:23 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:43:23 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:44:52 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:44:55 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:44:55 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:44:57 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 05/01/2015 17:44:57 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 06/01/2015 17:09:06 - Communications link failure
+
+Last packet sent to the server was 10 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 06/01/2015 17:09:08 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 06/01/2015 17:09:08 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 06/01/2015 17:09:11 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 06/01/2015 17:09:11 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 09/01/2015 16:58:04 - Access denied for user 'creamyseo'@'localhost' (using password: YES)
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 09/01/2015 16:58:05 - Access denied for user 'creamyseo'@'localhost' (using password: YES)
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 09/01/2015 16:58:05 - Access denied for user 'creamyseo'@'localhost' (using password: YES)
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 09/01/2015 16:58:06 - Access denied for user 'creamyseo'@'localhost' (using password: YES)
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 09/01/2015 16:58:06 - Access denied for user 'creamyseo'@'localhost' (using password: YES)
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 13/01/2015 10:54:55 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.hql.PARSER 03/02/2015 16:54:45 - line 1:59: unexpected token: limit
+[main] ERROR org.hibernate.hql.PARSER 03/02/2015 16:54:45 - line 1:69: unexpected token: ,
+[main] ERROR org.hibernate.hql.PARSER 03/02/2015 16:55:13 - line 1:59: unexpected token: limit
+[main] ERROR org.hibernate.hql.PARSER 03/02/2015 16:55:13 - line 1:66: unexpected token: ,
+[main] ERROR org.hibernate.hql.PARSER 03/02/2015 16:55:41 - line 1:59: unexpected token: limit
+[main] ERROR org.hibernate.hql.PARSER 03/02/2015 16:55:41 - line 1:66: unexpected token: ,
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 01/04/2015 13:11:39 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 01/04/2015 13:12:01 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 01/04/2015 13:12:01 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 01/04/2015 13:12:23 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[main] ERROR org.hibernate.util.JDBCExceptionReporter 01/04/2015 13:12:23 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[Thread-1] ERROR org.hibernate.util.JDBCExceptionReporter 01/04/2015 13:12:44 - Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+[Thread-1] ERROR org.hibernate.util.JDBCExceptionReporter 01/04/2015 13:12:44 - Communications link failure
 
 Last packet sent to the server was 0 ms ago.

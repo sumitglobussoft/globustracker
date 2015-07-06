@@ -82,14 +82,13 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
      * @return
      */
     @Override
-    public List<Serpkeywords> getSerpKeywords(Integer campaignId, Integer customerID) {
+    public List<Serpkeywords> getSerpKeywords(Integer campaignId) {
         //invoking the getSession() method to retrieve object of Campaigns class for <campaignId>
 //        Campaigns objCampaigns = (Campaigns) getSession().get(Campaigns.class, campaignId);
         Criteria objCriteria = getSession().createCriteria(Campaigns.class);
         try {
             //adding Restrictions for <url>,<keyword> and <linkGoogle>
             objCriteria.add(Restrictions.eq("campaignID", campaignId));
-            objCriteria.add(Restrictions.eq("customerID", new Customers(customerID)));
             objCriteria.add(Restrictions.eq("visibility", 1));
             //retrieving the list of keywords object from objCriteria object
             //Campaigns objCampaigns = (Campaigns) objCriteria.list().iterator().next();
@@ -118,13 +117,12 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
     }
 
     @Override
-    public List<Seokeyworddetails> getSeoDetails(Integer campaignId, Integer customerID) {
+    public List<Seokeyworddetails> getSeoDetails(Integer campaignId) {
         //invoking the getSession() method to retrieve object of Campaigns class for <campaignId>
 //        Campaigns objCampaigns = (Campaigns) getSession().get(Campaigns.class, campaignId);
         Criteria objCriteria = getSession().createCriteria(Campaigns.class);
         //adding Restrictions for <url>,<keyword> and <linkGoogle>
         objCriteria.add(Restrictions.eq("campaignID", campaignId));
-        objCriteria.add(Restrictions.eq("customerID", new Customers(customerID)));
         objCriteria.add(Restrictions.eq("visibility", 1));
         //retrieving the list of keywords object from objCriteria object
         //Campaigns objCampaigns = (Campaigns) objCriteria.list().iterator().next();
@@ -168,14 +166,13 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
      * @return
      */
     @Override
-    public List<Videokeywords> getVideoKeywords(Integer campaignId, Integer customerId) {
+    public List<Videokeywords> getVideoKeywords(Integer campaignId) {
         List vkeywords;
         List lstKeywords = new ArrayList();
         //Campaigns objCampaigns = (Campaigns) getSession().get(Campaigns.class, campaignId);
         Criteria objCriteria = getSession().createCriteria(Campaigns.class);
         //adding Restrictions for <url>,<keyword> and <linkGoogle>
         objCriteria.add(Restrictions.eq("campaignID", campaignId));
-        objCriteria.add(Restrictions.eq("customerID", new Customers(customerId)));
         objCriteria.add(Restrictions.eq("campaignType", "video"));
         objCriteria.add(Restrictions.eq("visibility", 1));
         //retrieving the list of keywords object from objCriteria object
@@ -279,7 +276,7 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                     //if yes and visibility is 1 then continue the loop
                     for (Serpkeywords objKeywords : storedkeywordses) {
 
-                        if (objKeywords.getKeyword().equalsIgnoreCase(keyword.toString()) && objKeywords.getUrl().equalsIgnoreCase(url)) {
+                        if (objKeywords.getKeyword().equalsIgnoreCase(keyword.toString()) && objKeywords.getUrl().equalsIgnoreCase(url) && objKeywords.getLinkGoogle().equalsIgnoreCase(linkGoogle)) {
                             if (objKeywords.getVisibility() == 1) {
                                 foundInSameCampaign = true;
                                 foundKeyword++;
@@ -291,7 +288,7 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                                     objKeywords.setCampaignID(objCampaigns);
                                     getSession().update(objKeywords);
                                     foundInSameCampaign = true;
-                                    keywordAdded++;
+
                                     //now have to increase active keyword count
                                     objCustomer.setActiveKeywordCount(objCustomer.getActiveKeywordCount() + 1);
                                     getSession().save(objCustomer);
@@ -319,9 +316,9 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                         objKeyword.setBestMatchLinkGoogle("");
                         objKeyword.setBestMatchLinkYahoo("");
                         objKeyword.setRegion(engine);
-                        objKeyword.setGoogleUpdatedDate(new Date().toString());
-                        objKeyword.setYahooUpdateDate(new Date().toString());
-                        objKeyword.setBingUpdateDate(new Date().toString());
+                        objKeyword.setGoogleUpdatedDate("-");
+                        objKeyword.setYahooUpdateDate("-");
+                        objKeyword.setBingUpdateDate("-");
                         objKeyword.setVisibility(1);
                         objCampaigns.getSerpkeywordsCollection().add(objKeyword);
                         //invoking getSession method to save <objCampaigns> object
@@ -389,6 +386,11 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                     videokeywords.setRankDailyMotion(n);
                     videokeywords.setMetacafeURL(metacafeurl);
                     videokeywords.setRankMetacafe(n);
+                    videokeywords.setYoutubeUpdatedDate("-");
+                    videokeywords.setVimeoUpdatedDate("-");
+                    videokeywords.setMetaCafeUpdatedDate("-");
+                    videokeywords.setDailymotionUpdatedDate("-");
+                    videokeywords.setViewStatisticsUpdatedDate("-");
                     videokeywords.setVideoKeyword(key);
                     videokeywords.setVisibility(Short.parseShort("1"));
                     getHibernateTemplate().save(videokeywords);
@@ -434,6 +436,11 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                                 setkey.setVimeoViewCount(n);//am2
                                 setkey.setMetacafeViewCount(n);//am3
                                 setkey.setDailymotionViewCount(n);//am4
+                                setkey.setYoutubeUpdatedDate("-");
+                                setkey.setVimeoUpdatedDate("-");
+                                setkey.setMetaCafeUpdatedDate("-");
+                                setkey.setDailymotionUpdatedDate("-");
+                                setkey.setViewStatisticsUpdatedDate("-");
                                 setkey.setVisibility(Short.parseShort("1"));
                                 getSession().update(setkey);
                                 Customers customer = (Customers) getSession().get(Customers.class, customerID);
@@ -464,6 +471,11 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                         videoKeywords.setVimeoViewCount(n);//am6
                         videoKeywords.setMetacafeViewCount(n);//am7
                         videoKeywords.setDailymotionViewCount(n);//am8
+                        videoKeywords.setYoutubeUpdatedDate("-");
+                        videoKeywords.setVimeoUpdatedDate("-");
+                        videoKeywords.setMetaCafeUpdatedDate("-");
+                        videoKeywords.setDailymotionUpdatedDate("-");
+                        videoKeywords.setViewStatisticsUpdatedDate("-");
                         videoKeywords.setCampaignID(new Campaigns(campaign.getCampaignID()));
                         videoKeywords.setVisibility(Short.parseShort("1"));
                         getHibernateTemplate().save(videoKeywords);
@@ -961,18 +973,27 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                 if (!videokeyword.getYoutubeURL().equalsIgnoreCase(youtubeurl)) {
                     videokeyword.setRankYoutube(n);
                     videokeyword.setYoutubeViewCount(n);//am9
+                    videokeyword.setYoutubeUpdatedDate("-");
+                    videokeyword.setViewStatisticsUpdatedDate("-");
+
                 }
                 if (!videokeyword.getDailymotionURL().equalsIgnoreCase(dailymotionurl)) {
                     videokeyword.setRankDailyMotion(n);
                     videokeyword.setDailymotionViewCount(n);//am10
+                    videokeyword.setDailymotionUpdatedDate("-");
+                    videokeyword.setViewStatisticsUpdatedDate("-");
                 }
                 if (!videokeyword.getVimeoURL().equalsIgnoreCase(vimeourl)) {
                     videokeyword.setRankVimeo(n);
                     videokeyword.setVimeoViewCount(n);//am11
+                    videokeyword.setVimeoUpdatedDate("-");
+                    videokeyword.setViewStatisticsUpdatedDate("-");
                 }
                 if (!videokeyword.getMetacafeURL().equalsIgnoreCase(metacafeurl)) {
                     videokeyword.setRankMetacafe(n);
                     videokeyword.setMetacafeViewCount(n);//am12
+                    videokeyword.setMetaCafeUpdatedDate("-");
+                    videokeyword.setViewStatisticsUpdatedDate("-");
                 }
                 if (!keyword.equalsIgnoreCase(videokeyword.getVideoKeyword())) {
                     videokeyword.setRankYoutube(n);
@@ -983,6 +1004,10 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                     videokeyword.setVimeoViewCount(n);//am15
                     videokeyword.setRankMetacafe(n);
                     videokeyword.setMetacafeViewCount(n);//am16
+                    videokeyword.setYoutubeUpdatedDate("-");
+                    videokeyword.setVimeoUpdatedDate("-");
+                    videokeyword.setMetaCafeUpdatedDate("-");
+                    videokeyword.setDailymotionUpdatedDate("-");
                 }
                 videokeyword.setYoutubeURL(youtubeurl);
                 videokeyword.setDailymotionURL(dailymotionurl);
@@ -1049,8 +1074,8 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
      * @throws IOException
      */
     public int insertIntoSeoDetails(Object keywrd, Integer customerID, Integer keyid, Campaigns objCampaigns) throws IOException {
-        String keysem = "648ec3d46dbd48fb4a469dd08a6d2c41";
-        //String keysem = "XXXXXXXXXXXXXXXXXXXXXXX";
+        //Enter the Key XXXXXXXXXXXXXXXXXXXXXXX for Semrush Api
+        String keysem = "XXXXXXXXXXXXXXXXXXXXXXX";
         String keyword1 = keywrd.toString();
         String keyword = keyword1.replaceAll(" ", "+");
 
@@ -1378,7 +1403,7 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
             return ssData;
         }
     }
-    
+
     @Override
     public int editUrl(Integer urlID, String url, Integer campaignID) {
         Campaigns objCampaigns = (Campaigns) getSession().get(Campaigns.class, campaignID);

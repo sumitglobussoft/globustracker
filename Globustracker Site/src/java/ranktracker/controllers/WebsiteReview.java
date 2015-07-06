@@ -97,27 +97,31 @@ public class WebsiteReview {
             InetAddress address = InetAddress.getByName(new URL("http://www." + sitename).getHost());
             ipaddress = address.getHostAddress();
         } catch (Exception ex) {
-            try{
-            InetAddress address = InetAddress.getByName(new URL("https://www." + sitename).getHost());
-            ipaddress = address.getHostAddress();
-            }catch(Exception q){
-                
+            try {
+                InetAddress address = InetAddress.getByName(new URL("https://www." + sitename).getHost());
+                ipaddress = address.getHostAddress();
+            } catch (Exception q) {
+
             }
         }
         if (ipaddress == null) {
             return new ModelAndView("errormessage");
         }
+        try {
+            if (!website.equals(sitename)) {
+                Thread social_thread = new Thread(new Socialreviewsite(sitename));
+                social_thread.start();
+                website = sitename;
+                System.out.println("=================website===================" + website);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
 
-        if (!website.equals(sitename)) {
-//            Thread social_thread = new Thread(new Socialreviewsite(sitename));
-//            social_thread.start();
-
-            website = sitename;
         }
-
         return new ModelAndView("review");
 
-            }
+        //http:// Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
+    }
 
     /*
      @RequestMapping(value = "/site/{sitename}", method = RequestMethod.GET)
@@ -143,7 +147,7 @@ public class WebsiteReview {
      return new ModelAndView("errormessage");
      }
 
-   
+     //http:// Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
      //        Thread social_thread = new Thread(new Socialreviewsite(sitename));
      //        social_thread.start();
      //        return new ModelAndView("review");

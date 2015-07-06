@@ -2,12 +2,12 @@ package ranktracker.crawler;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -16,6 +16,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +28,9 @@ import ranktracker.crawler.google.pagerank.PRGenerator;
 import ranktracker.crawler.seomoz.BacklinksCounter;
 import ranktracker.crawler.youtube.YoutubeStatistics;
 import ranktracker.dao.KeywordsDao;
+import ranktracker.dao.WoorankDao;
 import ranktracker.entity.Campaigns;
+import ranktracker.entity.Commonseo;
 import ranktracker.entity.Serpkeywords;
 import ranktracker.entity.Socialsignalurls;
 import ranktracker.entity.Videokeywords;
@@ -83,11 +86,12 @@ public class StartCrawler {
         //beans are the objects,see line no. 56 and 60 of applicationContext.xml
         ApplicationContext appContext;
         KeywordsDao objKeywordDao;
+        WoorankDao objWoorankDao;
         List<Serpkeywords> lstKeywords = null;
         List<Videokeywords> lstVideokeywords = new ArrayList<>();
         Set<String> setDomains = new LinkedHashSet<>(0);
 
-        if (args.length > 1) {
+        if (args.length == 2) {
             temp1 = args[0].split(":");
             tempcrawler = temp1[0];
             temp2 = args[1].split(":");
@@ -145,8 +149,17 @@ public class StartCrawler {
                 System.out.println("------------------------------------");
                 if (crawlername.equalsIgnoreCase("youtube") || crawlername.equalsIgnoreCase("vimeo") || crawlername.equalsIgnoreCase("dailymotion") || crawlername.equalsIgnoreCase("metacafe") || crawlername.equalsIgnoreCase("youtubecounts")) {
                     lstVideokeywords = objKeywordDao.getCustomerVideoKeywords(clientid);
-                } else {
+                } else if (crawlername.equalsIgnoreCase("google")) {
                     lstKeywords = objKeywordDao.getCustomerKeywords(clientid);
+                    Iterator itr = lstKeywords.iterator();
+                    while (itr.hasNext()) {
+                        Serpkeywords keywrds = (Serpkeywords) itr.next();
+                        //set of all the url; url for the specified keyword
+                        //System.out.println("KeywordId : "+keywrds.getKeywordId());
+                        setDomains.add(keywrds.getUrl().trim());
+                    }
+                } else {
+                    lstKeywords = objKeywordDao.getCustomerKeywordsForAll(clientid);
                     Iterator itr = lstKeywords.iterator();
                     while (itr.hasNext()) {
                         Serpkeywords keywrds = (Serpkeywords) itr.next();
@@ -290,7 +303,7 @@ public class StartCrawler {
                         ex.printStackTrace();
                     }
                 }
-
+                setDomains.clear();
                 lstKeywords = objKeywordDao.getCustomerKeywords(customerid);
                 Iterator ittr = lstKeywords.iterator();
                 while (ittr.hasNext()) {
@@ -309,6 +322,22 @@ public class StartCrawler {
                     Thread searchgoogle = new Thread(new Google_search(appContext, lstKeywords));
                     searchgoogle.start();
                     searchgoogle.join();
+                }
+                setDomains.clear();
+                lstKeywords = objKeywordDao.getCustomerKeywordsForAll(customerid);
+                ittr = lstKeywords.iterator();
+                while (ittr.hasNext()) {
+                    Serpkeywords keywrds = (Serpkeywords) ittr.next();
+                    //set of all the url; url for the specified keyword
+                    setDomains.add(keywrds.getUrl().trim());
+                }
+
+                if (!lstKeywords.isEmpty()) {
+
+//                    Thread tsignifier = new Thread(new ThreadCreator_signifier("all", setDomains, lstKeywords, appContext));
+//                    tsignifier.start();
+//                    tsignifier.join();
+                    Thread.sleep(500);
 
                     Thread yahoosearch = new Thread(new Yahoo_search(appContext, lstKeywords));
                     yahoosearch.start();
@@ -413,6 +442,36 @@ public class StartCrawler {
 
                 }
             }
+        } else if (args.length == 1 && args[0].equalsIgnoreCase("woorank")) {
+            System.out.println("------------WOORANK CRAWLER SYSTEM------------------");
+            appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+            objKeywordDao = appContext.getBean("objKeywordDao", KeywordsDao.class);
+            objWoorankDao = appContext.getBean("objWoorankDao", WoorankDao.class);
+
+            InputStream inStream = new StartCrawler().getClass().getClassLoader().getResourceAsStream("log4j.properties");
+            Properties props = new Properties();
+            props.load(inStream);
+            PropertyConfigurator.configure(props);
+
+            List<Commonseo> lstCommonseo = new ArrayList<>();
+            lstCommonseo = objKeywordDao.getAllCommonseoUrls();
+            for (Commonseo commonseo : lstCommonseo) {
+                System.out.println("    -- newuri = " + commonseo.getUrlDomain());
+                try {
+                    URI newuri = new URIBuilder()
+                            .setScheme("http")
+                            .setHost("Ipaddress")
+                            .setPath("/Globuswooclonecrawler/Reviewsite")
+                            .setParameter("websitename", commonseo.getUrlDomain())
+                            .build();
+
+                    objWoorankDao.fetchXMLContent(newuri);
+                } catch (URISyntaxException ex) {
+                    java.util.logging.Logger.getLogger(StartCrawler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
         } else if (args.length == 1 && args[0].equalsIgnoreCase("yahoo")) {
             System.out.println("-------YAHOO CRAWLER START-------------");
             appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -441,7 +500,7 @@ public class StartCrawler {
                 System.out.println(campaignid + campaigns.getCampaign());
 //                int i=0;  //1
 //                while(i>=0){ //2
-                lstkeywordses = objKeywordDao.getCampaignKeywords(campaignid);
+                lstkeywordses = objKeywordDao.getCampaignKeywordsForAll(campaignid);
 
                 if (!lstkeywordses.isEmpty()) {
 
@@ -480,7 +539,7 @@ public class StartCrawler {
 //                Campaigns campaigns = (Campaigns) campitr.next();
                 List<Serpkeywords> lstkeywordses = new ArrayList<>();
                 int campaignid = campaigns.getCampaignID();
-                lstkeywordses = objKeywordDao.getCampaignKeywords(campaignid); //2
+                lstkeywordses = objKeywordDao.getCampaignKeywordsForAll(campaignid); //2
                 Iterator lstitr = lstkeywordses.iterator();
                 while (lstitr.hasNext()) {
                     Serpkeywords serpkeys = (Serpkeywords) lstitr.next();
@@ -530,7 +589,7 @@ public class StartCrawler {
                 Campaigns campaigns = lstCampaignsStack.pop();
                 List<Serpkeywords> lstkeywordses = new ArrayList<>();
                 int campaignid = campaigns.getCampaignID();
-                lstkeywordses = objKeywordDao.getCampaignKeywords(campaignid);  //3
+                lstkeywordses = objKeywordDao.getCampaignKeywordsForAll(campaignid);  //3
                 Integer customerid = campaigns.getCustomerID().getCustomerID().intValue();
                 System.out.println("customerid = " + customerid);
 
@@ -697,7 +756,7 @@ public class StartCrawler {
             objKeywordDao = appContext.getBean("objKeywordDao", KeywordsDao.class);
             //     FetchPagewithClientAthentication fetchclientpage = appContext.getBean("fetchSourcewithAuthentication", FetchPagewithClientAthentication.class);
             List<Serpkeywords> lstnewserpkeywords = new ArrayList<>();
-            List<Videokeywords> lstnewvideokeywords = new ArrayList<>();
+            // List<Videokeywords> lstnewvideokeywords = new ArrayList<>();
 
             InputStream inStream = new StartCrawler().getClass().getClassLoader().getResourceAsStream("log4j.properties");
             Properties props = new Properties();
@@ -717,21 +776,26 @@ public class StartCrawler {
 
             }
             System.out.println("---------------new serp keywords------------" + lstnewserpkeywords.size());
-//            Iterator lstitr2 = newvideolst.iterator();
-//            while (lstitr.hasNext()) {
-//                Videokeywords newone = (Videokeywords) lstitr.next();
-//                if (newone.getVisibility() == 1) {
-//                    lstnewvideokeywords.add(newone);
-//                }
-//
-//            }
-            ExecutorService executor = Executors.newFixedThreadPool(4);
-            System.out.println("---------------new Video keywords------------" + lstnewvideokeywords.size());
+            System.out.println("---------------new Video keywords------------" + newvideolst.size());
+
             if (!lstnewserpkeywords.isEmpty()) {
 
                 Thread searchgoogle = new Thread(new Google_search(appContext, lstnewserpkeywords));
                 searchgoogle.start();
                 searchgoogle.join();
+            }
+
+            lstnewserpkeywords.clear();
+            newserplst = objKeywordDao.getNewSerpListForAll();
+            lstitr = newserplst.iterator();
+            while (lstitr.hasNext()) {
+                Serpkeywords newone = (Serpkeywords) lstitr.next();
+                if (newone.getVisibility() == 1) {
+                    lstnewserpkeywords.add(newone);
+                }
+
+            }
+            if (!lstnewserpkeywords.isEmpty()) {
 
                 Thread yahoosearch = new Thread(new Yahoo_search(appContext, lstnewserpkeywords));
                 yahoosearch.start();
@@ -742,20 +806,127 @@ public class StartCrawler {
                 bingsearch.join();
             }
 
-//            if (!lstnewvideokeywords.isEmpty()) {
+//            Iterator lstitr2 = newvideolst.iterator();
+//            while (lstitr2.hasNext()) {
+//                Videokeywords newone = (Videokeywords) lstitr2.next();
+//                if (newone.getVisibility() == 1) {
+//                    lstnewvideokeywords.add(newone);
+//                }
 //
-//                Runnable worker1 = new Youtube_search(lstnewvideokeywords, appContext);
-//                executor.execute(worker1);
-//
-//                Runnable worker2 = new YoutubeStatistics(lstnewvideokeywords, appContext);
-//                executor.execute(worker2);
-//
-//                Runnable worker3 = new Dailymotion_search(lstnewvideokeywords, appContext);
-//                executor.execute(worker3);
-//
-//                Runnable worker4 = new Vimeo_search(lstnewvideokeywords, appContext);
-//                executor.execute(worker4);
 //            }
+            System.out.println("---------------new Video keywords------------" + newvideolst.size());
+
+            ExecutorService executor = Executors.newFixedThreadPool(5);
+            if (!newvideolst.isEmpty()) {
+
+                Runnable worker1 = new Youtube_search(newvideolst, appContext);
+                executor.execute(worker1);
+
+                Runnable worker2 = new YoutubeStatistics(newvideolst, appContext);
+                executor.execute(worker2);
+
+                Runnable worker3 = new Dailymotion_search(newvideolst, appContext);
+                executor.execute(worker3);
+
+                Runnable worker4 = new Vimeo_search(newvideolst, appContext);
+                executor.execute(worker4);
+
+                Runnable worker5 = new Metacafe_search(newvideolst, appContext);
+                executor.execute(worker5);
+            }
+            executor.shutdown();
+            try {
+                executor.awaitTermination(10, TimeUnit.MINUTES);
+            } catch (InterruptedException ex) {
+                java.util.logging.Logger.getLogger(Google_search.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (args.length == 1 && args[0].contains("distribute")) {
+
+            System.out.println("--- Keywords Distribution mechanism starts ---");
+
+            String crawlerName = args[0];
+
+            if (crawlerName.equalsIgnoreCase("distribute-google")) {
+                crawlerName = "google";
+            } else if (crawlerName.equalsIgnoreCase("distribute-yahoo")) {
+                crawlerName = "yahoo";
+            } else if (crawlerName.equalsIgnoreCase("distribute-bing")) {
+                crawlerName = "bing";
+            } else {
+                System.out.println("invalid args ");
+                showOption();
+                return;
+            }
+            System.out.println("    -- crawlerName : " + crawlerName);
+
+            appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+            objKeywordDao = appContext.getBean("objKeywordDao", KeywordsDao.class);
+
+            InputStream inStream = new StartCrawler().getClass().getClassLoader().getResourceAsStream("log4j.properties");
+            Properties props = new Properties();
+            props.load(inStream);
+            PropertyConfigurator.configure(props);
+            int countKeyword = objKeywordDao.countKeywordRows();
+            int keywordsAmount = countKeyword / 5;
+            System.out.println("    -- Total keywords available : " + countKeyword);
+            System.out.println("    -- No of keywords/Instance : " + keywordsAmount);
+            int initial = 1;
+            for (int i = 1; i <= 5; i++) {
+
+                // Runtime.getRuntime().exec("java BrandzterRankTrackerCrawler "+crawlerName+" "+initial+" "+(initial+keywordsAmount-1));
+                if (i == 5) {
+                    System.out.println("java -jar BrandzterRankTrackerCrawler.jar " + crawlerName + " " + initial + " " + (countKeyword));
+                    Runtime.getRuntime().exec("java -jar BrandzterRankTrackerCrawler.jar " + crawlerName + " " + initial + " " + (countKeyword));
+
+                } else {
+                    System.out.println("java -jar BrandzterRankTrackerCrawler.jar " + crawlerName + " " + initial + " " + (initial + keywordsAmount - 1));
+                    Runtime.getRuntime().exec("java -jar BrandzterRankTrackerCrawler.jar " + crawlerName + " " + initial + " " + (initial + keywordsAmount - 1));
+
+                }
+                initial += keywordsAmount;
+            }
+
+        } else if (args.length == 3) {
+            System.out.println("--- Instance mechanism starts for crawlerName---");
+
+            String crawlerName = args[0];
+            System.out.println("    -- crawlerName : " + crawlerName);
+            int startLimit = Integer.parseInt(args[1]);
+            System.out.println("    -- startLimit : " + startLimit);
+            int endLimit = Integer.parseInt(args[2]);
+            System.out.println("    -- endLimit : " + endLimit);
+
+            appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+            objKeywordDao = appContext.getBean("objKeywordDao", KeywordsDao.class);
+            //     FetchPagewithClientAthentication fetchclientpage = appContext.getBean("fetchSourcewithAuthentication", FetchPagewithClientAthentication.class);
+            // List<Videokeywords> lstnewvideokeywords = new ArrayList<>();
+
+            InputStream inStream = new StartCrawler().getClass().getClassLoader().getResourceAsStream("log4j.properties");
+            Properties props = new Properties();
+            props.load(inStream);
+            PropertyConfigurator.configure(props);
+
+            List<Serpkeywords> newserplst = objKeywordDao.getKeywords(startLimit, endLimit);
+
+            System.out.println("---------------serp keywords------------" + newserplst.size());
+
+            if (!newserplst.isEmpty()) {
+
+                if (crawlerName.equalsIgnoreCase("google")) {
+                    Thread searchgoogle = new Thread(new Google_search(appContext, newserplst));
+                    searchgoogle.start();
+                }
+
+                if (crawlerName.equalsIgnoreCase("yahoo")) {
+                    Thread yahoosearch = new Thread(new Yahoo_search(appContext, newserplst));
+                    yahoosearch.start();
+                }
+                if (crawlerName.equalsIgnoreCase("bing")) {
+                    Thread bingsearch = new Thread(new Bing_search(appContext, newserplst));
+                    bingsearch.start();
+                }
+            }
+
         } else {
             showOption();
         }

@@ -18,8 +18,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,8 +29,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "reviewsite")
-@NamedQueries({
-    @NamedQuery(name = "Reviewsite.findAll", query = "SELECT r FROM Reviewsite r")})
 public class Reviewsite implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -11,8 +11,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -21,8 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "campaignkeywords")
-@NamedQueries({
-    @NamedQuery(name = "Campaignkeywords.findAll", query = "SELECT c FROM Campaignkeywords c")})
 public class Campaignkeywords implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId

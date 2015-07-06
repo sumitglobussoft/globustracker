@@ -2,39 +2,13 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
-    
-    <!--definition for 'base.definition' 
-    setting the title
-    setting the header : to be read from '/WEB-INF/jsp_ranktracker_layout/userHeader.jsp'
-    setting the body : to be load at the running time
-    setting the footer : to be read from '/WEB-INF/jsp_ranktracker_layout/userFooter.jsp'
-    -->
-    <definition name="baseReview.definition"
-                template="WEB-INF/jsp_ranktracker_layout/layout.jsp">
-        <put-attribute name="title" value="Best Rank Tracker | SERP Tracker | Youtube Rank Tracker | Social Signals Tracker" />
-        <put-attribute name="header" value="/WEB-INF/jsp_ranktracker_layout/userHeader.jsp" />        
-        <put-attribute name="body" value="" />
-        <put-attribute name="footer" value="/WEB-INF/jsp_ranktracker_layout/userFooter.jsp" />
-    </definition>
-    
-    <definition name="review" extends="baseReview.definition">
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/review.jsp" />
-    </definition>
-    
+       
     <!--definition for 'baseUser.definition' 
-    setting the title
-    setting the header : to be read from '/WEB-INF/jsp_ranktracker_layout/userHeader.jsp'
-    setting the body : to be load at the running time
-    setting the footer : to be read from '/WEB-INF/jsp_ranktracker_layout/userFooter.jsp'
+      setting the title
+      setting the body : to be load at the running time
     -->
-    <definition name="baseUser.definition"
-                template="WEB-INF/jsp_ranktracker_layout/userLayout.jsp">
-        <put-attribute name="title" value="Best Rank Tracker | SERP Tracker | Youtube Rank Tracker | Social Signals Tracker" />
-        <put-attribute name="body" value="" />
-    </definition>
-    
     <definition name="adminUser.definition"
-                template="WEB-INF/jsp_ranktracker_layout/adminLayout.jsp">
+                 template="WEB-INF/jsp_ranktracker_layout/adminLayout.jsp">
         <put-attribute name="body" value="" />
     </definition>
     
@@ -45,15 +19,17 @@
     <definition name="adminAccount" extends="adminUser.definition">        
         <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/adminAccount.jsp" />
     </definition>
-        
-    <!-- 
-    defination name 'campaigns' is extending property of 'baseUser.definition'
-    i.e
-    header from '/WEB-INF/jsp_ranktracker_layout/userHeader.jsp'
-    body from '/WEB-INF/jsp_ranktracker_view/campaigns.jsp'
-    footer from '/WEB-INF/jsp_ranktracker_layout/userFooter.jsp'
+    
+    <!--definition for 'baseUser.definition' 
+      setting the title
+      setting the body : to be load at the running time
     -->
-
+    <definition name="baseUser.definition"
+                template="WEB-INF/jsp_ranktracker_layout/userLayout.jsp">
+        <put-attribute name="title" value="Best Rank Tracker | SERP Tracker | Youtube Rank Tracker | Social Signals Tracker" />
+        <put-attribute name="body" value="" />
+    </definition>
+              
     <definition name="campaigns" extends="baseUser.definition">        
         <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/campaigns.jsp" />
     </definition>
@@ -90,8 +66,8 @@
         <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/video.jsp" />
     </definition>
     
-    <definition name="serpskeywords" extends="baseUser.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/serpskeywords.jsp" />
+    <definition name="serpskeywordsajax" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/serpskeywordsajax.jsp" />
     </definition>    
        
     <definition name="videokeywords" extends="baseUser.definition">        
@@ -101,87 +77,17 @@
     <definition name="adminpanel" extends="baseUser.definition">        
         <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/adminpanel.jsp" />
     </definition> 
-
-    <!--definition for 'baseGuest.definition' 
-    setting the title
-    setting the header : to be read from '/WEB-INF/jsp_ranktracker_layout/guestHeader.jsp'
-    setting the body : to be load at the running time
-    setting the footer : to be read from '/WEB-INF/jsp_ranktracker_layout/guestFooter.jsp'
-    -->
-    <definition name="baseGuest.definition"
-                template="/WEB-INF/jsp_ranktracker_layout/layout.jsp">
-        <put-attribute name="title" value="Best Rank Tracker | SERP Tracker | Youtube Rank Tracker | Social Signals Tracker" />
-        <put-attribute name="header" value="/WEB-INF/jsp_ranktracker_layout/guestHeader.jsp" />        
-        <put-attribute name="body" value="" />
-        <put-attribute name="footer" value="/WEB-INF/jsp_ranktracker_layout/guestFooter.jsp" />
-    </definition>
-
-    <definition name="privacy" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/privacy.jsp" />
-    </definition>
     
-    <definition name="home" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/home.jsp" />
-    </definition>
-        
-    <definition name="signIn" extends="baseGuest.definition">        
-        <put-attribute name="header" value="/WEB-INF/jsp_ranktracker_layout/accessHeader.jsp" />
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/signIn.jsp" />
-    </definition>      
+    <definition name="renewal" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/renewal.jsp" />
+    </definition> 
     
-    <definition name="signUp" extends="baseGuest.definition"> 
-        <put-attribute name="header" value="/WEB-INF/jsp_ranktracker_layout/accessHeader.jsp" />               
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/newSignUp.jsp" />
-    </definition>
+    <definition name="seoIntelligence" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/seoIntelligence.jsp" />
+    </definition> 
     
-    <definition name="payment" extends="baseGuest.definition">        
-        <put-attribute name="header" value="/WEB-INF/jsp_ranktracker_layout/accessHeader.jsp" />        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/payment.jsp" />
-    </definition>
-
-    <definition name="success" extends="baseGuest.definition">        
-        <put-attribute name="header" value="/WEB-INF/jsp_ranktracker_layout/accessHeader.jsp" />        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/success.jsp" />       
-    </definition>
-        
-    <definition name="error" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/failure.jsp" />
-    </definition>
-    
-    <definition name="forgotPassword" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/forgotPassword.jsp" />
-    </definition>
-    
-    <definition name="about" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/about.jsp" />
-    </definition>
-    
-    <definition name="features" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/features.jsp" />
-    </definition>
-    
-    <definition name="pricing" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/payment.jsp" />
-    </definition>
-    
-    <definition name="tour" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/tour.jsp" />
-    </definition>
-    
-    <definition name="contact" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/contact.jsp" />
-    </definition>
-    
-    <definition name="adminlogin" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/adminlog.jsp" />
-    </definition>
-    
-    <definition name="faq" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/faq.jsp" />
-    </definition>
-    
-    <definition name="ecomtracker" extends="baseGuest.definition">        
-        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/ecomtracker.jsp" />
+    <definition name="youtubechecker" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/youtubebulkchecker.jsp" />
     </definition> 
     
     <!--definition for 'viewLayout.definition' 

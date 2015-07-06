@@ -150,30 +150,21 @@ public class BingPagenLinks implements Callable {
         return foundmatch;
     }
 
-    public boolean getRank(String url, String domain) throws MalformedURLException {
+   public boolean getRank(String url, String domain) throws MalformedURLException {
 
         // System.out.println("getRank");
         // System.out.println("url: " + url);
         // System.out.println("domain: " + domain);
-        String tempurl = url.replace("http://www.", "");
-        tempurl = tempurl.replace("https://www.", "");
-        tempurl = tempurl.replace("www.", "");
-        tempurl = tempurl.replace("http://", "");
-        tempurl = tempurl.replace("https://", "");
+        String tempurl = url.replace("https://", "").replace("http://", "").replace("www.", "");
         tempurl = tempurl.replace("/", "");
-
-        String tempdomain = domain.replace("http://www.", "");
-        tempdomain = tempdomain.replace("https://www.", "");
-        tempdomain = tempdomain.replace("www.", "");
-        tempdomain = tempdomain.replace("http://", "");
-        tempdomain = tempdomain.replace("https://", "");
-        tempdomain = tempdomain.replace("/", "");
+       
+        String tempdomain = domain.replace("/", "");
 
         if (tempurl.equalsIgnoreCase(tempdomain)) {
             // System.out.println("one");
             return true;
         } else if (!domain.contains("/")) {
-            if (new URL("http://" + url.replace("http://", "").replace("https://", "")).getHost().toString().contains(new URL("http://" + objSerpKeywords.getUrl().replace("http://", "").replace("https://", "")).getHost().toString())) {
+            if (new URL("http://" + url.replace("http://", "").replace("https://", "").replace("www.", "")).getHost().toString().equalsIgnoreCase(new URL("http://" + domain).getHost().toString())) {
                 //System.out.println("two");
                 return true;
             }
@@ -195,7 +186,7 @@ public class BingPagenLinks implements Callable {
                 System.out.println("        -- URL : " + url);
 
                 if (!bestMatchRankFound) {
-                    if (new URL(url).getHost().toString().contains(new URL("http://" + objSerpKeywords.getUrl().replace("http://", "").replace("https://", "")).getHost().toString())) {
+                    if (new URL("http://" + url.replace("http://", "").replace("https://", "").replace("www.", "")).getHost().toString().equalsIgnoreCase(new URL("http://" + objSerpKeywords.getUrl()).getHost().toString())) {
                         objSerpKeywords.setBestMatchRankBing(counter);
                         bestMatchRankFound = true;
                         objSerpKeywords.setBestMatchLinkBing(url);
@@ -259,7 +250,7 @@ public class BingPagenLinks implements Callable {
             System.out.println("bestMatchRankBing : " + objSerpKeywords.getBestMatchRankBing());
             System.out.println("bestMatchLinkBing : " + objSerpKeywords.getBestMatchLinkBing());
             System.out.println("rankBing : " + objSerpKeywords.getRankBing());
-           objKeywordDao.saveResult(objSerpKeywords.getKeywordID(), objSerpKeywords.getRankBing(),objSerpKeywords.getBestMatchRankBing(), objSerpKeywords.getBestMatchLinkBing(), "bing.com");
+           objKeywordDao.saveResult(objSerpKeywords.getKeywordID(), objSerpKeywords.getRankBing(),objSerpKeywords.getBestMatchRankBing(), objSerpKeywords.getBestMatchLinkBing(), "bing.com",objSerpKeywords.getKeyword(),objSerpKeywords.getUrl());
 
         } catch (Exception e) {
         }
@@ -623,7 +614,7 @@ public class BingPagenLinks implements Callable {
                             objSerpKeywords.setRankBing(count);
                             System.out.println("newWebRankBing for " + objSerpKeywords.getKeyword() + " = " + objSerpKeywords.getRankBing());
                             System.out.println("Best Matched Url for " + objSerpKeywords.getKeyword() + " = " + linksinpage);
-                            objKeywordDao.saveResult(objSerpKeywords.getKeywordID(), objSerpKeywords.getRankBing(), objSerpKeywords.getBestMatchRankBing(), objSerpKeywords.getBestMatchLinkBing(), "bing.com");
+                            objKeywordDao.saveResult(objSerpKeywords.getKeywordID(), objSerpKeywords.getRankBing(), objSerpKeywords.getBestMatchRankBing(), objSerpKeywords.getBestMatchLinkBing(), "bing.com",objSerpKeywords.getKeyword(),objSerpKeywords.getUrl());
                             foundmatch = true;
                             flag = false;
                             break;

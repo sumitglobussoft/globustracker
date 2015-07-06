@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 19, 2014 at 05:01 PM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Host: localhost
+-- Generation Time: Jul 06, 2015 at 01:42 PM
+-- Server version: 5.5.16
+-- PHP Version: 5.3.8
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `globus`
+-- Database: `globustracker`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `alertsdata` (
   `TrackDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`AlertID`),
   KEY `CustomerID` (`CustomerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=90024 ;
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `campaigns` (
   `CompanyLogoLink` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`CampaignID`),
   KEY `CustomerID` (`CustomerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=76 ;
 
 -- --------------------------------------------------------
 
@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `commonseo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `countryRank` varchar(255) DEFAULT NULL,
   `description` text,
+  `descriptionLength` text,
   `doctype` varchar(255) DEFAULT NULL,
   `domainCreated` varchar(255) DEFAULT NULL,
   `domainExpired` varchar(255) DEFAULT NULL,
@@ -137,8 +138,64 @@ CREATE TABLE IF NOT EXISTS `commonseo` (
   `urlDomain` varchar(255) DEFAULT NULL,
   `w3cvalidity` varchar(255) DEFAULT NULL,
   `wwwResolve` varchar(255) DEFAULT NULL,
+  `twitterName` text,
+  `twitterImage` text,
+  `twitterCount` varchar(20) DEFAULT NULL,
+  `twitterFollowing` varchar(20) DEFAULT NULL,
+  `twitterFollower` varchar(20) DEFAULT NULL,
+  `twitterDescription` text,
+  `twitterLocation` text,
+  `twitterList` varchar(20) DEFAULT NULL,
+  `twitterFavourites` varchar(100) DEFAULT NULL,
+  `twitterDate` varchar(100) DEFAULT NULL,
+  `twitterUrl` varchar(100) DEFAULT NULL,
+  `dashboardImage` text,
+  `usabilityImage` text,
+  `googleFollower` varchar(30) DEFAULT NULL,
+  `googleViews` varchar(30) DEFAULT NULL,
+  `passedPercent` int(30) DEFAULT NULL,
+  `errorPercent` int(30) DEFAULT NULL,
+  `improvePercent` int(30) DEFAULT NULL,
+  `indexedPages` varchar(30) DEFAULT NULL,
+  `backlinksCounter` varchar(30) DEFAULT NULL,
+  `facebookDescription` text,
+  `mobileLoadTime` varchar(30) DEFAULT NULL,
+  `trafficEstimation` varchar(30) DEFAULT NULL,
+  `scoreValue` varchar(10) DEFAULT NULL,
+  `pInterestBoards` varchar(20) DEFAULT NULL,
+  `pInterestPins` varchar(20) DEFAULT NULL,
+  `pInterestLikes` varchar(20) DEFAULT NULL,
+  `pInterestFollower` varchar(20) DEFAULT NULL,
+  `pInterestFollowing` varchar(20) DEFAULT NULL,
+  `pInterestImage` varchar(500) DEFAULT NULL,
+  `pInterestName` varchar(200) DEFAULT NULL,
+  `pInterestDescription` varchar(1000) DEFAULT NULL,
+  `linkedFollower` varchar(100) DEFAULT NULL,
+  `linkedImage` varchar(500) DEFAULT NULL,
+  `linkedDescription` text,
+  `linkedSpecialties` varchar(1000) DEFAULT NULL,
+  `linkedWebsite` varchar(300) DEFAULT NULL,
+  `linkedIndustry` varchar(200) DEFAULT NULL,
+  `linkedType` varchar(100) DEFAULT NULL,
+  `linkedHeadquater` varchar(500) DEFAULT NULL,
+  `linkedCompany` varchar(50) DEFAULT NULL,
+  `linkedFounded` varchar(10) DEFAULT NULL,
+  `linkedEmployee` varchar(30) DEFAULT NULL,
+  `latitude` varchar(20) DEFAULT NULL,
+  `longitude` varchar(20) DEFAULT NULL,
+  `aLexaRank` varchar(20) DEFAULT NULL,
+  `facebookShareCount` varchar(20) DEFAULT NULL,
+  `facebookLikesCount` varchar(20) DEFAULT NULL,
+  `facebookComment` varchar(20) DEFAULT NULL,
+  `facebookTotalCount` varchar(20) DEFAULT NULL,
+  `facebookClickCount` varchar(20) DEFAULT NULL,
+  `facebookCommentsBoxCount` varchar(20) DEFAULT NULL,
+  `linkedInCount` varchar(20) DEFAULT NULL,
+  `pinterestCount` varchar(20) DEFAULT NULL,
+  `twitterCounts` varchar(20) DEFAULT NULL,
+  `googlePlusLike` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -185,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `CompanyLogoLink` varchar(200) COLLATE utf8_unicode_ci DEFAULT '0',
   `CompanyDescription` varchar(500) COLLATE utf8_unicode_ci DEFAULT '0',
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=58 ;
 
 -- --------------------------------------------------------
 
@@ -241,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `headingcount` (
   `heading5` varchar(255) DEFAULT NULL,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -258,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `headingelements` (
   `h5elements` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -271,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `src` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -315,9 +372,24 @@ CREATE TABLE IF NOT EXISTS `pagelinks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `links` text,
   `title` text,
-  `type` varchar(255) DEFAULT NULL,
+  `type` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paymenthistory`
+--
+
+CREATE TABLE IF NOT EXISTS `paymenthistory` (
+  `historyId` int(11) NOT NULL AUTO_INCREMENT,
+  `customerId` int(20) NOT NULL,
+  `plan` varchar(20) NOT NULL,
+  `paymentDate` date DEFAULT NULL,
+  PRIMARY KEY (`historyId`),
+  KEY `customerId` (`customerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -407,10 +479,10 @@ CREATE TABLE IF NOT EXISTS `proxydata` (
 
 CREATE TABLE IF NOT EXISTS `relatedwebsite` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `relatedLinks` varchar(255) DEFAULT NULL,
+  `relatedLinks` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -558,7 +630,7 @@ CREATE TABLE IF NOT EXISTS `serpkeywords` (
   `Visibility` int(2) NOT NULL DEFAULT '1',
   PRIMARY KEY (`KeywordID`),
   KEY `CampaignID` (`CampaignID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=645 ;
 
 -- --------------------------------------------------------
 
@@ -666,11 +738,11 @@ CREATE TABLE IF NOT EXISTS `socialtrackhistory` (
 
 CREATE TABLE IF NOT EXISTS `technology` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `analytics` varchar(255) DEFAULT NULL,
-  `tech_used` varchar(255) DEFAULT NULL,
+  `analytics` text,
+  `techUsed` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -722,9 +794,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `UserType` int(11) DEFAULT '0',
   `active` int(2) NOT NULL,
   `Addeddate` timestamp NULL DEFAULT NULL,
+  `token` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`UserID`),
   KEY `FK__customers` (`CustomerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=53 ;
 
 -- --------------------------------------------------------
 
@@ -744,11 +817,16 @@ CREATE TABLE IF NOT EXISTS `videokeywords` (
   `RankDailyMotion` smallint(6) NOT NULL DEFAULT '0',
   `MetacafeURL` varchar(255) DEFAULT '0',
   `RankMetacafe` smallint(6) NOT NULL DEFAULT '0',
-  `Youtubeviewcoint` int(11) NOT NULL DEFAULT '0',
-  `YoutubeLikeCount` int(11) NOT NULL DEFAULT '0',
-  `YoutubeDislikeCount` int(11) NOT NULL DEFAULT '0',
-  `YoutubeCommentCount` int(11) NOT NULL DEFAULT '0',
+  `YoutubeViewCount` int(11) NOT NULL DEFAULT '0',
+  `VimeoViewCount` int(11) NOT NULL DEFAULT '0',
+  `MetacafeViewCount` int(11) NOT NULL DEFAULT '0',
+  `DailymotionViewCount` int(11) NOT NULL DEFAULT '0',
   `YoutubeDailyViewcount` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `YoutubeUpdatedDate` varchar(200) DEFAULT NULL,
+  `VimeoUpdatedDate` varchar(200) DEFAULT NULL,
+  `DailymotionUpdatedDate` varchar(200) DEFAULT NULL,
+  `MetaCafeUpdatedDate` varchar(200) DEFAULT NULL,
+  `ViewStatisticsUpdatedDate` varchar(200) DEFAULT NULL,
   `Visibility` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`VideokeywordID`),
   KEY `CampaignID` (`CampaignID`)
@@ -785,7 +863,7 @@ CREATE TABLE IF NOT EXISTS `visitorarray` (
   `rank` varchar(255) DEFAULT NULL,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -796,9 +874,9 @@ CREATE TABLE IF NOT EXISTS `visitorarray` (
 CREATE TABLE IF NOT EXISTS `xmldata` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
-  `xmlfiles` varchar(255) DEFAULT NULL,
+  `xmlfiles` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Constraints for dumped tables
@@ -833,6 +911,12 @@ ALTER TABLE `displaysettings`
 --
 ALTER TABLE `mailhistory`
   ADD CONSTRAINT `FK_mailhistory_customers` FOREIGN KEY (`CustomerId`) REFERENCES `customers` (`CustomerID`);
+
+--
+-- Constraints for table `paymenthistory`
+--
+ALTER TABLE `paymenthistory`
+  ADD CONSTRAINT `paymenthistory_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customers` (`CustomerID`) ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `payments`

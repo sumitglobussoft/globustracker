@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ranktracker.entity.Alertsdata;
 import ranktracker.entity.Campaigns;
+import ranktracker.entity.Commonseo;
 import ranktracker.entity.Customers;
 import ranktracker.entity.Serpkeywords;
 import ranktracker.entity.Monitor;
@@ -65,11 +66,55 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
+    public List<Serpkeywords> getCustomerKeywordsForAll(Integer customerid) {
+        System.out.println("customerid = " + customerid);
+        List<Serpkeywords> keywordobj = new ArrayList<>();
+        List lstkeywrd;
+        try {
+            Integer campid = 0;
+            List lstcampaign = getHibernateTemplate().find("FROM Campaigns where customerID=? and visibility = 1", new Object[]{new Customers(customerid)});
+            Iterator itr = lstcampaign.iterator();
+            while (itr.hasNext()) {
+                Campaigns c = (Campaigns) itr.next();
+                campid = c.getCampaignID();
+                lstkeywrd = getHibernateTemplate().find("FROM Serpkeywords where CampaignID=? and visibility = 1 group by CampaignID,Url,Keyword", new Object[]{campid});
+                Iterator ittr = lstkeywrd.iterator();
+                while (ittr.hasNext()) {
+                    Serpkeywords keyobj = (Serpkeywords) ittr.next();
+                    System.out.println("ky = " + keyobj.getKeyword());
+                    keywordobj.add(keyobj);
+                }
+            }
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return keywordobj;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<Serpkeywords> getCampaignKeywords(Integer campaignid) {
         List<Serpkeywords> keywordobj = new ArrayList<>();
         List lstkeywrd;
         try {
             lstkeywrd = getHibernateTemplate().find("FROM Serpkeywords where CampaignID=? and visibility = 1", new Object[]{campaignid});
+            Iterator ittr = lstkeywrd.iterator();
+            while (ittr.hasNext()) {
+                Serpkeywords keyobj = (Serpkeywords) ittr.next();
+                System.out.println("ky = " + keyobj.getKeyword());
+                keywordobj.add(keyobj);
+            }
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return keywordobj;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public List<Serpkeywords> getCampaignKeywordsForAll(Integer campaignid) {
+        List<Serpkeywords> keywordobj = new ArrayList<>();
+        List lstkeywrd;
+        try {
+            lstkeywrd = getHibernateTemplate().find("FROM Serpkeywords where CampaignID=? and visibility = 1 group by Url,Keyword", new Object[]{campaignid});
             Iterator ittr = lstkeywrd.iterator();
             while (ittr.hasNext()) {
                 Serpkeywords keyobj = (Serpkeywords) ittr.next();
@@ -112,6 +157,13 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
         }
         return lstvideokeywords;
     }
+    
+     @Transactional(propagation = Propagation.REQUIRED)
+     public List<Commonseo> getAllCommonseoUrls(){
+         List<Commonseo> lstCommonseo = getHibernateTemplate().find("from Commonseo");
+         return lstCommonseo;
+    }
+     
     /*
      * @method getTrackIdRange() : read the start track id and end track id from trackhistory table
      */
@@ -192,9 +244,10 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
      */
     @Transactional(readOnly = true)
     public Integer countKeywordRows() {
-        List<Integer> lstSize = getHibernateTemplate().find("select max(keywordID)from Serpkeywords");
+        List<Integer> lstSize = getHibernateTemplate().find("select keywordID from Serpkeywords where Visibility=1");
         //System.out.println("List size" + lstSize.get(0));
-        return lstSize.get(0);
+
+        return lstSize.size();
     }
 
     /**
@@ -206,10 +259,19 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
      */
     @Transactional(readOnly = true)
     public List<Serpkeywords> getKeywords(Integer sKeywordID, Integer eKeywordID) {
-        List<Serpkeywords> lstKeywords = getHibernateTemplate().find("from Serpkeywords k "
-                + "where k.keywordID between ? and ?", new Object[]{sKeywordID, eKeywordID});
+        List<Serpkeywords> lstKeywords = getHibernateTemplate().find("from Serpkeywords "
+                + "where Visibility=1");
 
-        return lstKeywords;
+        List<Serpkeywords> keywordList=new ArrayList<>();
+        
+        for (int i = 1; i <= lstKeywords.size(); i++) {
+            if(i>=sKeywordID&&i<=eKeywordID){
+                keywordList.add(lstKeywords.get(i-1));
+            }
+            
+        }
+
+        return keywordList;
     }
 
     /**
@@ -280,7 +342,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
      */
     @Transactional(propagation = Propagation.REQUIRED)
     public void saveResult(Integer keywordId, Integer webRank, Integer bestMatchRank,
-            String bestMatchLink, String link) {
+            String bestMatchLink, String link, String Keyword, String URL) {
 
         try {
             Serpstrackhistory serpstrackhst = new Serpstrackhistory();
@@ -293,7 +355,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
             getHibernateTemplate().save(serpstrackhst);
             updateAlertsRank(keywordId, link, webRank);
 
-            updateUserKeywords(keywordId, webRank, bestMatchRank, bestMatchLink, link);
+            updateUserKeywords(keywordId, webRank, bestMatchRank, bestMatchLink, link, Keyword, URL);
 
         } catch (HibernateException e) {
             System.out.println("HibernateException in KeywordsDao " + e);
@@ -397,10 +459,12 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
      * @param bestMatchRank
      * @param bestMatchLink
      * @param link
+     * @param Keyword
+     * @param URL
      */
     @Transactional(propagation = Propagation.REQUIRED)
     public void updateUserKeywords(Integer keywordId, Integer webRank, Integer bestMatchRank,
-            String bestMatchLink, String link) {
+            String bestMatchLink, String link, String Keyword, String URL) {
         String query = null;
         Serpkeywords serpkeys = (Serpkeywords) getSession().get(Serpkeywords.class, keywordId);
         int lastgooglewebrank = serpkeys.getRankGoogle();
@@ -417,6 +481,10 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
             switch (link) {
                 case "google.com":
                 case "google":
+//                    query = "update Serpkeywords set rankGoogle = ?,bestMatchRankGoogle = ?,"
+//                            + "bestMatchLinkGoogle = ?, rankGoogleDayChange = ?, rankGoogleWeekChange =?,"
+//                            + "rankGoogleMonthChange = ?, googleUpdatedDate= ? where keywordID = ?";
+
                     query = "update Serpkeywords set rankGoogle = ?,bestMatchRankGoogle = ?,"
                             + "bestMatchLinkGoogle = ?, rankGoogleDayChange = ?, rankGoogleWeekChange =?,"
                             + "rankGoogleMonthChange = ?, googleUpdatedDate= ? where keywordID = ?";
@@ -437,7 +505,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
                 case "yahoo":
                     query = "update Serpkeywords set rankYahoo = ?,bestMatchRankYahoo = ?,"
                             + "bestMatchLinkYahoo = ?, rankYahooDayChange = ?, rankYahooWeekChange = ?,"
-                            + "rankYahooMonthChange = ?, yahooUpdateDate= ? where keywordID = ?";
+                            + "rankYahooMonthChange = ?, yahooUpdateDate= ? where Keyword  = ? and Url = ?";
 
                     if (!serpkeys.getYahooUpdateDate().equals("-")) {
                         weekrankyahoo = getWeekRank(keywordId, "yahoo.com");
@@ -450,13 +518,13 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
                     } else if (lastyahoowebrank != 0 && webRank == 0) {
                         webRank = lastyahoowebrank;
                     }
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeYahoo, weekranky, monthranky, new Date().toString(), keywordId});
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeYahoo, weekranky, monthranky, new Date().toString(), Keyword, URL});
                     break;
                 case "bing.com":
                 case "bing":
                     query = "update Serpkeywords set rankBing = ?,bestMatchRankBing = ?,"
                             + "bestMatchLinkBing = ?, rankBingDayChange = ?, rankBingWeekChange = ?,"
-                            + "rankBingMonthChange = ?, bingUpdateDate= ? where keywordID = ?";
+                            + "rankBingMonthChange = ?, bingUpdateDate= ? where Keyword  = ? and Url = ?";
                     if (!serpkeys.getBingUpdateDate().equals("-")) {
                         weekrankbing = getWeekRank(keywordId, "bing.com");
                         weekrankb = weekrankbing == 0 ? 0 : weekrankbing - webRank;
@@ -468,7 +536,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
                     } else if (lastbingwebrank != 0 && webRank == 0) {
                         webRank = lastbingwebrank;
                     }
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeBing, weekrankb, monthrankb, new Date().toString(), keywordId});
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeBing, weekrankb, monthrankb, new Date().toString(), Keyword, URL});
                     break;
             }
         } catch (DataAccessException e) {
@@ -706,6 +774,49 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
             } else {
                 String hqlQuery = "update Seokeyworddetails set countBackLinks = ? where keywordID = ? ";
                 getHibernateTemplate().bulkUpdate(hqlQuery, new Object[]{countBackLinks, new Serpkeywords(keywordId)});
+                System.out.println("********updated*******");
+            }
+        } catch (DataAccessException | IllegalStateException | HibernateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void saveBackLinksResult1(Integer keywordId, String url, String keyword, Campaigns objcampaigns, Integer countBackLinks, Integer startTrackId, Integer endTrackId, String keywordURL) {
+        //List<Trackhistory> lstTrackhistory = getTrackHistorySingleRecord(keywordId, startTrackId, endTrackId);
+        // Trackhistory objTrackhistory = lstTrackhistory.get(0);
+        List lstseokeyword;
+
+        try {
+            lstseokeyword = getHibernateTemplate().find("FROM Seokeyworddetails where Url = ? ", new Object[]{keywordURL});
+            if (lstseokeyword.isEmpty()) {
+                try {
+                    Seokeyworddetails seodata = new Seokeyworddetails();
+                    seodata.setCampaignID(objcampaigns);
+                    seodata.setKeywordID(new Serpkeywords(keywordId));
+                    seodata.setUrl(url);
+                    seodata.setKeyword(keyword);
+                    seodata.setSearchVolume(0);
+                    seodata.setGoogleCPC((float) 0);
+                    seodata.setKeywordCompetition((float) 0);
+                    seodata.setNumberofResult((long) 0);
+                    seodata.setGooglePA(0);
+                    seodata.setGoogleDA(0);
+                    seodata.setSiteIndexing("");
+                    seodata.setAddedDate(new Date());
+                    seodata.setRankPage(0);
+                    seodata.setRankAlexa(0);
+                    seodata.setCountBackLinks(countBackLinks);
+                    seodata.setCountMonthlySearches(0);
+                    seodata.setVisibility(1);
+                    getHibernateTemplate().save(seodata);
+                } catch (DataAccessException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("**********inserted********");
+            } else {
+                String hqlQuery = "update Seokeyworddetails set countBackLinks = ? where Url = ? ";
+                getHibernateTemplate().bulkUpdate(hqlQuery, new Object[]{countBackLinks, keywordURL});
                 System.out.println("********updated*******");
             }
         } catch (DataAccessException | IllegalStateException | HibernateException e) {
@@ -1282,14 +1393,14 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
     @Transactional(propagation = Propagation.REQUIRED)
     public void saveYoutubeStatistics(Integer keywordId, int youtube_view_count, int vimeo_view_count, int metacafe_view_count, int dailymotion_view_count, short daily_view) {
         try {
-            System.out.println("youtube_view_count="+youtube_view_count);
-            System.out.println("vimeo_view_count="+vimeo_view_count);
-            System.out.println("metacafe_view_count="+metacafe_view_count);
-            System.out.println("dailymotion_view_count="+dailymotion_view_count);
-            System.out.println("daily_view="+daily_view);
-            System.out.println("(new Date().toString())="+(new Date().toString()));
+            System.out.println("youtube_view_count=" + youtube_view_count);
+            System.out.println("vimeo_view_count=" + vimeo_view_count);
+            System.out.println("metacafe_view_count=" + metacafe_view_count);
+            System.out.println("dailymotion_view_count=" + dailymotion_view_count);
+            System.out.println("daily_view=" + daily_view);
+            System.out.println("(new Date().toString())=" + (new Date().toString()));
             String hqlQuery = "update Videokeywords set YoutubeViewCount = ?,VimeoViewCount=?,MetacafeViewCount = ?,DailymotionViewCount=?,youtubeDailyViewCount=?,ViewStatisticsUpdatedDate=? where videokeywordID = ? ";
-            getHibernateTemplate().bulkUpdate(hqlQuery, new Object[]{(youtube_view_count), (vimeo_view_count), (metacafe_view_count), (dailymotion_view_count), (daily_view),(new Date().toString()), (keywordId)});
+            getHibernateTemplate().bulkUpdate(hqlQuery, new Object[]{(youtube_view_count), (vimeo_view_count), (metacafe_view_count), (dailymotion_view_count), (daily_view), (new Date().toString()), (keywordId)});
             System.out.println("********updated*******");
 
         } catch (DataAccessException e) {
@@ -1397,20 +1508,20 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
                 case "youtube.com":
                 case "youtube":
                     if (lastyoutuberank == 0 && webRank == 501) {
-                        webRank = lastyoutuberank;  
+                        webRank = lastyoutuberank;
                     } else if (lastyoutuberank != 0 && webRank == 501) {
                         webRank = lastyoutuberank;
-                    }else if (lastyoutuberank != 0 && webRank == 0) {
+                    } else if (lastyoutuberank != 0 && webRank == 0) {
                         webRank = lastyoutuberank;
                     } else if (lastyoutuberank == 0) {
                     }
                     query = "update Videokeywords set rankYoutube = ?,YoutubeUpdatedDate=? where videokeywordID = ?";
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank,new Date().toString(), keywordId});
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, new Date().toString(), keywordId});
                     break;
                 case "dailymotion.com":
                 case "dailymotion":
                     if (lastdailymotionrank == 0 && webRank == 501) {
-                        webRank = lastdailymotionrank; 
+                        webRank = lastdailymotionrank;
                     } else if (lastdailymotionrank != 0 && webRank == 501) {
                         webRank = lastdailymotionrank;
                     } else if (lastdailymotionrank != 0 && webRank == 0) {
@@ -1418,7 +1529,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
                     } else if (lastdailymotionrank == 0) {
                     }
                     query = "update Videokeywords set rankDailyMotion = ?,DailymotionUpdatedDate=? where videokeywordID = ?";
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank,new Date().toString(), keywordId});
+                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, new Date().toString(), keywordId});
                     break;
                 case "metacafe.com":
                 case "metacafe":
@@ -1623,10 +1734,23 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
+    public List<Serpkeywords> getNewSerpListForAll() {
+        List<Serpkeywords> lstKeywords = new ArrayList();
+        try {
+            //String query = "from Serpkeywords where RankGoogle = 0";
+            String query = "from Serpkeywords where GoogleUpdatedDate = '-' or YahooUpdateDate ='-' or BingUpdateDate='-' group by CampaignID,Url,Keyword";
+            lstKeywords = getHibernateTemplate().find(query);
+        } catch (DataAccessException e) {
+            l.debug(e + " " + e.getMessage());
+        }
+        return lstKeywords;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<Videokeywords> getNewVideoList() {
         List<Videokeywords> lstKeywords = new ArrayList();
         try {
-            String query = "from Videokeywords where RankYoutube = 0";
+            String query = "from Videokeywords where (YoutubeUpdatedDate='-' or VimeoUpdatedDate='-' or DailymotionUpdatedDate='-' or MetaCafeUpdatedDate='-') and Visibility ='1'";
             lstKeywords = getHibernateTemplate().find(query);
         } catch (DataAccessException e) {
             l.debug(e + " " + e.getMessage());
@@ -1726,6 +1850,47 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
             } else {
                 String hqlQuery = "update Seokeyworddetails set googlePA = ?,googleDA=?,addedDate=?  where keywordID = ? ";
                 getHibernateTemplate().bulkUpdate(hqlQuery, new Object[]{pacount, dacount, new Date(), new Serpkeywords(keywoId)});
+                System.out.println("********updated*******");
+            }
+        } catch (DataAccessException | IllegalStateException | HibernateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void savePaDaResult1(Integer keywoId, String url, String keyword, Campaigns objcampaigns, Integer pacount, Integer dacount, String KeywordsURL) {
+        List lstseokeyword;
+
+        try {
+            lstseokeyword = getHibernateTemplate().find("FROM Seokeyworddetails where keywordID = ? ", new Object[]{new Serpkeywords(keywoId)});
+            if (lstseokeyword.isEmpty()) {
+                try {
+                    Seokeyworddetails seodata = new Seokeyworddetails();
+                    seodata.setCampaignID(objcampaigns);
+                    seodata.setKeywordID(new Serpkeywords(keywoId));
+                    seodata.setUrl(url);
+                    seodata.setKeyword(keyword);
+                    seodata.setSearchVolume(0);
+                    seodata.setGoogleCPC((float) 0);
+                    seodata.setKeywordCompetition((float) 0);
+                    seodata.setNumberofResult((long) 0);
+                    seodata.setGooglePA(pacount);
+                    seodata.setGoogleDA(dacount);
+                    seodata.setSiteIndexing("");
+                    seodata.setAddedDate(new Date());
+                    seodata.setRankPage(0);
+                    seodata.setRankAlexa(0);
+                    seodata.setCountBackLinks(0);
+                    seodata.setCountMonthlySearches(0);
+                    seodata.setVisibility(1);
+                    getHibernateTemplate().save(seodata);
+                } catch (DataAccessException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("**********inserted********");
+            } else {
+                String hqlQuery = "update Seokeyworddetails set googlePA = ?,googleDA=?,addedDate=?  where Url = ? ";
+                getHibernateTemplate().bulkUpdate(hqlQuery, new Object[]{pacount, dacount, new Date(), KeywordsURL});
                 System.out.println("********updated*******");
             }
         } catch (DataAccessException | IllegalStateException | HibernateException e) {

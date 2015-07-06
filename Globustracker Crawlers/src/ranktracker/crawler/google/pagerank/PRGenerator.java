@@ -7,9 +7,13 @@ package ranktracker.crawler.google.pagerank;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.http.HttpEntity;
@@ -25,7 +29,10 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.context.ApplicationContext;
 import ranktracker.dao.KeywordsDao;
+import ranktracker.dao.ProxyDao;
+import ranktracker.entity.ProxyData;
 import ranktracker.entity.Serpkeywords;
+import ranktracker.utility.FetchPagewithClientAthentication;
 import ranktracker.utility.UserAgents;
 
 /**
@@ -46,24 +53,39 @@ public class PRGenerator extends Thread {
      */
     private List<Serpkeywords> lstKeywords;
 
+    ProxyDao objProxyDao;
+    FetchPagewithClientAthentication fetchclientpage;
+    List<ProxyData> proxyList;
+
     public PRGenerator(List<Serpkeywords> lstKeywords, ApplicationContext appContext) {
         this.objKeywordDao = appContext.getBean("objKeywordDao", KeywordsDao.class);
         this.lstKeywords = lstKeywords;
-
+        this.objProxyDao = appContext.getBean("objProxyDao", ProxyDao.class);
+        this.fetchclientpage = appContext.getBean("fetchSourcewithAuthentication", FetchPagewithClientAthentication.class);
+        this.proxyList = objProxyDao.getProxyList();
     }
 
     @Override
-    public void run(){
-         String result = "0";
+    public void run() {
+        String result = "0";
         int count = 0;
         int keywordID;
         for (Serpkeywords k : lstKeywords) {
             keywordID = k.getKeywordID();
             if (count < 1) {
                 String url = k.getUrl();
-             try {
+                try {
                     String PRurl = "http://tools.mercenie.com/page-rank-checker/api/?format=json&urls=http://www." + url;
-                    String input = fetchGooglePageRank(PRurl);
+                   // String input = fetchGooglePageRank(PRurl);
+                    String input="";
+                    try {
+                        input = fetchclientpage.fetchPageSourcefromClientGoogle(new URI(PRurl), "", 0, this.proxyList);
+                    } catch (URISyntaxException ex) {
+                        Logger.getLogger(PRGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(PRGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                     // What Google returned? Example : Rank_1:1:9, PR = 9
                     String[] pr = input.split("http");
                     Pattern pattern = Pattern.compile("pagerank(.*?)}");
@@ -78,11 +100,11 @@ public class PRGenerator extends Thread {
                 }
             }
             count = 1;
-            System.out.println("pagerank for"+keywordID+"=="+result);
+           // System.out.println("pagerank for" + keywordID + "==" + result);
             objKeywordDao.saveGooglePageRank(keywordID, Integer.parseInt(result));
 
         }
-        
+
 //     String result = "";
 //       HashGenerationJE jenkinsHash = new HashGenerationJE();
 //	long hash = jenkinsHash.hash(("info:" + domain).getBytes());
@@ -107,9 +129,9 @@ public class PRGenerator extends Thread {
     public String fetchGooglePageRank(String pageurl) throws IOException {
         CredentialsProvider credsprovider = new BasicCredentialsProvider();
         credsprovider.setCredentials(
-                new AuthScope("95.85.29.99", 1678),
-                new UsernamePasswordCredentials("mongoose", "Fjh30fi"));
-        HttpHost proxy = new HttpHost("95.85.29.99", 1678);
+                new AuthScope("IP Address", 111),
+                new UsernamePasswordCredentials("Username", "Password"));
+        HttpHost proxy = new HttpHost("Ip Address", 111);
         String userAgent = UserAgents.getRandomUserAgent();
         CloseableHttpClient httpclient = HttpClients.custom()
                 .setDefaultCredentialsProvider(credsprovider)

@@ -287,9 +287,9 @@ public class YoutubeStatistics extends Thread {
         int portNo = generateRandomPort();
         CredentialsProvider credsprovider = new BasicCredentialsProvider();
         credsprovider.setCredentials(
-                new AuthScope("95.85.29.99", portNo),
-                new UsernamePasswordCredentials("mongoose", "Fjh30fi"));
-        HttpHost proxy = new HttpHost("95.85.29.99", portNo);
+                new AuthScope("Ip Address", portNo),
+                new UsernamePasswordCredentials("Username", "Password"));
+        HttpHost proxy = new HttpHost("Ip Address", portNo);
         String userAgent = UserAgents.getRandomUserAgent();
         CloseableHttpClient httpclient = HttpClients.custom()
                 .setDefaultCredentialsProvider(credsprovider)

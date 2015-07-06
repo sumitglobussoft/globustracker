@@ -17,8 +17,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,8 +28,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "campaigns")
-@NamedQueries({
-    @NamedQuery(name = "Campaigns.findAll", query = "SELECT c FROM Campaigns c")})
 public class Campaigns implements Serializable {
 
     private static final long serialVersionUID = 1L;

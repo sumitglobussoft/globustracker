@@ -76,6 +76,7 @@
                 <value>ranktracker.entity.Technology</value>
                 <value>ranktracker.entity.Visitorarray</value>
                 <value>ranktracker.entity.Xmldata</value>
+                <value>ranktracker.entity.Paymenthistory</value>
             </list>
         </property>
 

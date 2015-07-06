@@ -241,6 +241,6 @@ public interface KeywordsService {
      */
     public String getKeywordName(Integer keywordID);
 
-    public Object[] getSerpDataLimited(Integer campaignId, Integer customerId, int initial);
+    public Object[] getSerpDataLimited(Integer campaignId, int initial);
     
 }

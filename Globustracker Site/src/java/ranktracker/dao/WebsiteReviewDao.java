@@ -35,4 +35,6 @@ public interface WebsiteReviewDao {
     
     public Map getXmldata(String sitename);
     
+    public boolean isExists(String sitename);
+    
 }

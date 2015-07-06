@@ -5,17 +5,12 @@
 package ranktracker.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import ranktracker.dao.CustomerDao;
 import ranktracker.entity.Customers;
-import ranktracker.entity.Payments;
-import ranktracker.entity.Plans;
 import ranktracker.entity.Site;
 import ranktracker.entity.Users;
 import ranktracker.service.PaymentService;
@@ -420,6 +415,26 @@ public class PageLinkAction extends ActionSupport {
         }
     }
 
+    public String youtubechecker() {
+
+        //initializing http request object
+        objRequest = ServletActionContext.getRequest();
+
+        //initializing http session object
+        objSession = objRequest.getSession();
+
+        //checking for 'customerID' attribute in session
+        if (objSession.getAttribute("customerID") != null) {
+
+            return SUCCESS;
+        } else {
+
+            //if session attribute 'customerID' is null then return result parameter as 'LOGIN'
+            //this result parameter is mapped in 'struts.xml'
+            return LOGIN;
+        }
+    }
+
     public SettingsService getObjSettingsService() {
         return objSettingsService;
     }
@@ -443,5 +458,4 @@ public class PageLinkAction extends ActionSupport {
     public void setObjPaymentService(PaymentService objPaymentService) {
         this.objPaymentService = objPaymentService;
     }
-
 }

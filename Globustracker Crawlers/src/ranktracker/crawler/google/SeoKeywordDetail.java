@@ -62,7 +62,8 @@ public class SeoKeywordDetail extends Thread {
     }
 
     public int insertIntoSeoDetails(String keyword, Integer keywordID, String url, Campaigns objCampaigns) throws IOException {
-        String keysem = "648ec3d46dbd48fb4a469dd08a6d2c41";
+        //Replace the xxxxxxxxx and enter the access key for semrush API
+        String keysem = "xxxxxxxxx";
         // String keyword1 = keyword.toString();
         String keyword2 = keyword.replaceAll(" ", "+");
 

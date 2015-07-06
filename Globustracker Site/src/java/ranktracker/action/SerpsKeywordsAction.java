@@ -279,7 +279,7 @@ public class SerpsKeywordsAction extends ActionSupport {
                         int initial = Integer.parseInt(objRequest.getParameter("initial"));
 
                         //retrieving the list of keywords object from getData method of KeywordsServiceImpl for <campaignId>
-                        Object[] dataObject = objKeywordsService.getSerpDataLimited(campaignId, customerId, initial);//getting all the serps & seo data
+                        Object[] dataObject = objKeywordsService.getSerpDataLimited(campaignId, initial);//getting all the serps & seo data
                         lstUpdatedKeywords = (List<Serpkeywords>) dataObject[0];// assigning serpskeywords data
                         lstSeoDetails = (List<Seokeyworddetails>) dataObject[1];//assigning seokeywords data
                         lstDisplaysettings = objKeywordsService.getCustomerSettings(customerId);// getting display settings of that particular customerId

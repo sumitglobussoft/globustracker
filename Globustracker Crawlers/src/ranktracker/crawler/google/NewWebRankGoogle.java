@@ -465,7 +465,7 @@ public class NewWebRankGoogle extends Thread {
                         this.b=false;
                     }
                    //Storing in database
-                    objKeywordDao.saveResult(keywordId , newWebRankGoogle , bestMatchRankGoogle , bestMatchLinkGoogle,"google.com");
+                    objKeywordDao.saveResult(keywordId , newWebRankGoogle , bestMatchRankGoogle , bestMatchLinkGoogle,"google.com",dto.getKeyword(),dto.getUrl());
                    // SaveData.write(keywordId, "google",newWebRankGoogle,bestMatchRankGoogle,bestMatchLinkGoogle)  ;
                    // objKeywordDao.newUpdateKeywords( keywordId,ThreadCreator_google.sTrackID, ThreadCreator_google.eTrackID  );
                     dto.setDone(true);

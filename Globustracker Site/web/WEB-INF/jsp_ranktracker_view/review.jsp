@@ -13,9 +13,18 @@
         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
 
         <style>
-            /*           .test {
-                            display: none;
-                        }*/
+            .part.text.text-block.fb-text-bloc > img {
+                height: 16px;
+                padding-right: 4%;
+            }
+
+            .part.text.text-block.fb-text-bloc {
+                display: flex;
+            }
+
+/*            .part.text.text-block.fb-text-bloc > p {
+                font-weight: bold;
+            }*/
         </style>
 
         <!-- javascript -->
@@ -25,18 +34,7 @@
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
-        <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
 
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <!--[if IE]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
     </head>
     <body class="review lang-en"  id="home2">
 
@@ -97,6 +95,30 @@
                 </nav>
             </div>
         </header>
+
+
+
+
+        <div style="" class="row text-center">
+            <div class="col-md-6 col-md-offset-1">
+                <div style="" class="">
+                    <div style="" class="">
+                        <br>
+                        <div class="row">
+                            <!--<form id="generate-report" class="ajax-generate-report generate-form ">-->
+                            <div class="col-md-6 col-md-offset-1">
+                                <input type="url" placeholder="http://www.abc.com" id="sitename" required="" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="submit" value="Website Review" style="margin-top: 1%;" class="btn btn-primary" onclick="return WebsiteReview();">
+                            </div><br>
+                            <!--</form>-->
+                        </div><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="content" itemprop="mainContentOfPage">
             <div id="grid">
 
@@ -166,10 +188,6 @@
                 <div id="right-panel" class="tbody_font_size free-rev" itemscope itemtype="" >
                     <!--<img src="https://s3.amazonaws.com/images-globustracker/review/sharing-sprite.png" class="img-responsive" />-->
                     <link itemprop="additionalType" content="" />
-                    <!--                    <div id="young-message" class="message ">
-                                            <span class="fa fa-conversation">  </span>
-                                           
-                                        </div>-->
 
                     <meta itemprop="thumbnailUrl" content="https://s3.amazonaws.com/images-globustracker/review/socioboard.com.png" />
                     <meta itemprop="url" content="socioboard.com" />
@@ -180,15 +198,7 @@
                             <div id="dashboard-content" class="" itemprop="review" itemscope >
 
                                 <div id="dashboard-state">
-                                    <!--                                    <div id="holder"></div>
-                                                                        <div id="score-regular" class="dashboard-score rating" itemprop="reviewRating" itemscope>
-                                                                            <div class="score-c generic-tooltip value simple-tooltip" data-placement="left" rel="tooltip" data-original-title="<p>The GlobusTracker is a dynamic grade on a 100-point scale that represents your Internet Marketing Effectiveness at a given time.</p><p>Improve your score by working on the red and orange criteria in your Review. <br />
-                                                                                 <br />
-                                                                                 Check the green criteria to find out how your score is being positively affected. Gray criteria are notable, but do not affect your score.</p>">
-                                                                                <span id="scoreValue"><span class="decimal"></span></span>
-                                                                            </div>
-                                                                            <span class="best hidden"><span class="value-title" title="5"/></span>
-                                                                        </div>            -->
+
                                 </div>
 
                                 <div id="dashboard-screenshot">
@@ -244,103 +254,10 @@
                             </div>
                         </div>
 
-                        <!--                        <div id="dashboard-footer">
-                        
-                                                    <div class="item">
-                                                        <a href="#" class="inline-modal-opener grey" >Embed </a>
-                                                        <div class="inline-modal">
-                                                            <div class="inner">
-                                                                <h3>Take a plan to unlock this feature</h3>
-                                                                <a href="" value="" data-type="optimize" data-plan="choise" class="start-trial button orange">
-                                                                    Start Your 7-Day Free Trial  </a>
-                                                            </div>
-                                                        </div>
-                                                        <span class="inline-modal-pointer-bg"></span>
-                                                        <span class="inline-modal-pointer"></span>    
-                                                    </div>
-                        
-                                                    <div class="item">
-                                                        <a href="#" class="inline-modal-opener grey" >
-                                                            Download as PDF      
-                                                        </a>
-                                                        <div class="inline-modal">
-                                                            <div class="inner">
-                                                                <h3>Take a plan to unlock this feature</h3>
-                                                                <a href="" value="" data-type="optimize" data-plan="choise" class="start-trial button orange">
-                                                                    Start Your 7-Day Free Trial          
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <span class="inline-modal-pointer-bg"></span>
-                                                        <span class="inline-modal-pointer"></span>    
-                                                    </div>
-                        
-                                                    <div class="item">
-                                                        <a href="#" class="inline-modal-opener grey" >
-                                                            Download as Slides      
-                                                        </a>
-                                                        <div class="inline-modal">
-                                                            <div class="inner">
-                                                                <h3>Take a plan to unlock this feature</h3>
-                                                                <a href="" value="" data-type="optimize" data-plan="choise" class="start-trial button orange">
-                                                                    Start Your 7-Day Free Trial          
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <span class="inline-modal-pointer-bg"></span>
-                                                        <span class="inline-modal-pointer"></span>    
-                                                    </div>
-                        
-                                                    <div class="item item-right item-link">
-                                                        <a href="#" class="inline-modal-opener" >
-                                                            Share<span class="fa fa-chevron-down"></span>
-                                                        </a>
-                                                        <div class="inline-modal">
-                                                            <div class="inner">
-                                                                <ul>
-                                                                    <li id="short-url">
-                                                                        <a href="#" id="short-label" >
-                                                                            <span class="fa fa-link fa-fw"></span>Get short URL
-                                                                        </a>
-                                                                        <pre id="short-val" class="hidden simple-tooltip" title="Copy the URL to share this review"></pre>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="facebook" href="" rel="nofollow" target="_blank">
-                                                                            <span class="fa fa-facebook fa-fw"></span>Share on Facebook
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="twitter" href="" rel="nofollow" target="_blank">
-                                                                            <span class="fa fa-twitter fa-fw"></span>Share on Twitter
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="googleplus" href="" rel="nofollow" target="_blank">
-                                                                            <span class="fa fa-google-plus fa-fw"></span>Share on Google+
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="linkedin" href="" rel="nofollow" target="_blank">
-                                                                            <span class="fa fa-linkedin fa-fw"></span>Share on LinkedIn
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <span class="inline-modal-pointer-bg"></span>
-                                                        <span class="inline-modal-pointer"></span>    
-                                                    </div>
-                                                </div>-->
+
 
                     </div>
-                    <!--                    <div id="report-priorities" class="module-lookalike">
-                                            <div class="module-content">
-                                                <h2>Top priorities for ${website} :</h2>
-                                                <div class="prio-list">
-                                                    <ol></ol>
-                                                </div>
-                                            </div>
-                                        </div>-->
+
                     <div id="report-content">
                         <div class="module-section" id="module-section-title-optimize">Optimize</div>
                         <div class="module" id="module-seo">
@@ -365,49 +282,15 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>URL</th>
-                                                                <!--                                                        <th>Pages</th>
-                                                                                                                        <th>Backlinks</th>
-                                                                                                                        <th>PR</th>
-                                                                                                                        <th>Score</th>-->
+
                                                             </tr>
                                                         </thead>
                                                         <tbody  class="tbody_font_size" >
                                                             <tr class="">
                                                                 <td itemprop="isRelatedTo"><a href="" target="_blank" id="relatedtable"></a></td>
-                                                                <!--                                                        <td>76k</td>
-                                                                                                                        <td>23k</td>
-                                                                                                                        <td>PR3</td>
-                                                                                                                        <td>70.0</td>-->
+
                                                             </tr>
 
-                                                            <!--                                                    <tr class="">
-                                                                                                                    <td><span data-shorturl="">http://restauranteossigi.com</span></td>
-                                                                                                                    <td>94k</td>
-                                                                                                                    <td>84</td>
-                                                                                                                    <td>-</td>
-                                                                                                                    <td>-</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="">
-                                                                                                                    <td><span data-shorturl="">http://vehicle-history.org</span></td>
-                                                                                                                    <td>141k</td>
-                                                                                                                    <td>23k</td>
-                                                                                                                    <td>-</td>
-                                                                                                                    <td>-</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="">
-                                                                                                                    <td><span data-shorturl="">http://restauranteossigi.es</span></td>
-                                                                                                                    <td>71k</td>
-                                                                                                                    <td>1k</td>
-                                                                                                                    <td>-</td>
-                                                                                                                    <td>-</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span data-shorturl="">http://reiff-beaufort.lu</span></td>
-                                                                                                                    <td>58k</td>
-                                                                                                                    <td>5</td>
-                                                                                                                    <td>-</td>
-                                                                                                                    <td>-</td>
-                                                                                                                </tr>-->
                                                         </tbody>
                                                     </table>
 
@@ -510,14 +393,15 @@
 
 
                                                 <div class="part table ">
-                                                    <table class="">
+                                                    <table class="" style="width: 100%;">
                                                         <thead>
                                                             <tr>
-                                                                <th>&nbsp; H1</th>
-                                                                <th>&nbsp; H2</th>
-                                                                <th>&nbsp; H3</th>
-                                                                <th>&nbsp; H4</th>
-                                                                <th>&nbsp; H5</th>
+                                                                <!--<th>&nbsp; H1</th>-->
+                                                                <th> H1</th>
+                                                                <th> H2</th>
+                                                                <th> H3</th>
+                                                                <th> H4</th>
+                                                                <th> H5</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody  class="tbody_font_size" >
@@ -538,85 +422,18 @@
                                                     <table class="no-header open" id="headingstable">
                                                         <tbody  class="tbody_font_size" >
                                                             <tr class="" id="h1elements">
-                                                                <!--<td id="h1elements"></td>-->
                                                             </tr>
-
                                                             <tr class="over-max-v" id="h2elements">
-                                                                <!--<td ></td>-->
                                                             </tr>
-
                                                             <tr class="over-max-v" id="h3elements">
-                                                                <!--<td id="h3elements"></td>-->
                                                             </tr>
-
                                                             <tr class="over-max-v" id="h4elements">
-                                                                <!--<td id="h4elements"></td>-->
                                                             </tr>
-
                                                             <tr class="over-max-v" id="h5elements">
-                                                                <!--<td id="h5elements"></td>-->
                                                             </tr>
-
-                                                            <!--                                                    <tr class="">
-                                                                                                                    <td><span class="bold">&lt;H1&gt;</span>  BEYOND SOCIAL MEDIA MANAGEMENT</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="">
-                                                                                                                    <td><span class="bold">&lt;H1&gt;</span>  ACROSS ALL SOCIAL CHANNELS</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="">
-                                                                                                                    <td><span class="bold">&lt;H1&gt;</span>  WHY PEOPLE LOVE SOCIOBOARD</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H1&gt;</span>  With Socioboard, engaging your followers is so easy, fun, and insightful now. Get started today!</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H2&gt;</span>  Our Features</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H2&gt;</span>  Get On Board to See What Our Social Media Marketing Suite Can Do for You</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H2&gt;</span>  ENGAGE YOUR FOLLOWERS EFFECTIVELY</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H2&gt;</span>  some reasons</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H3&gt;</span>  Socioboard offers you an advanced, easy, versatile, customizable and scalable open-source social media marketing tool to drive your brand to newer heights</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H3&gt;</span>  Socioboard makes it easy to keep tabs on social conversations and provides everything you need to efficiently engage your audience.</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H3&gt;</span>  Enjoy Socioboard risk-free for 30 days!</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Sign In</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Monitor</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Analysis</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Insights</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  Get User Guide</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  People are talking about your brand. Why not leverage it? Socioboard allows you to listen to, analyze and engage your followers in unusual ways across numerous social media accounts</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><span class="bold">&lt;H4&gt;</span>  GET IN TOUCH WITH US</td>
-                                                                                                                </tr>-->
                                                         </tbody>
                                                     </table>
-                                                    <!--                                            <div class="show-links">
-                                                                                                    <a href="#" class="show-more">Show more</a>
-                                                                                                    <a href="#" class="show-less">Show less</a>
-                                                                                                </div>-->
+
                                                 </div>
                                                 <a class="adjust showMore" href="#">Show More</a>
                                             </div></div>
@@ -651,215 +468,7 @@
                                     </div>
 
 
-                                    <!--                                <div id="criterium-keywords_cloud" class="criterium result-0 ">
-                                                                        <div class="criterium-head">
-                                                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
-                                                                                <span class="fa"></span>Keywords Cloud
-                                                                            </h3>
-                                                                        </div>
-                                                                        <div class="criterium-content">
-                                                                            <div class="part cloud ">
-                                                                                <ul class="cloud-container">
-                                                                                    <li><span class="number" id="keyword"></span></li>
-                                                                                                                                    <li>socioboard<span class="number">10</span></li>
-                                                                                                                                    <li>media<span class="number">7</span></li>
-                                                                                                                                    <li>tools<span class="number">5</span></li>
-                                                                                                                                    <li>learn<span class="number">4</span></li>
-                                                                                                                                    <li>easy<span class="number">3</span></li>
-                                                                                                                                    <li>advanced<span class="number">3</span></li>
-                                                                                                                                    <li>download<span class="number">3</span></li>
-                                                                                                                                    <li>engage<span class="number">3</span></li>
-                                                                                                                                    <li>followers<span class="number">3</span></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="criterium-quicktips"></div>
-                                                                        <div class="delimiter"></div>
-                                                                    </div>-->
 
-
-
-                                    <!--                                <div id="criterium-inpage_keywords" class="criterium result-1 ">
-                                                                        <div class="criterium-head">
-                                                                            <span class="crit-score-pond hidden">3.3632286995516</span>
-                                                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
-                                                                                <span class="fa"></span>Keywords Consistency
-                                                                            </h3>
-                                                                        </div>
-                                                                        <div class="criterium-content">
-                                                                            <div class="part table ">
-                                                                                <table class="">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th></th>
-                                                                                            <th>Keywords</th>
-                                                                                            <th>Freq</th>
-                                                                                            <th>Title</th>
-                                                                                            <th>Desc</th>
-                                                                                            <th>&lt;H&gt;</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody  class="tbody_font_size" >
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon good">Good</span></td>
-                                                                                            <td>social</td>
-                                                                                            <td>15</td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon good">Good</span></td>
-                                                                                            <td>socioboard</td>
-                                                                                            <td>10</td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon good">Good</span></td>
-                                                                                            <td>media</td>
-                                                                                            <td>7</td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon bad">Bad</span></td>
-                                                                                            <td>tools</td>
-                                                                                            <td>5</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon bad">Bad</span></td>
-                                                                                            <td>learn</td>
-                                                                                            <td>4</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            <div class="part table ">
-                                                                                <table class="">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th></th>
-                                                                                            <th>Keywords (2 words)</th>
-                                                                                            <th>Freq</th>
-                                                                                            <th>Title</th>
-                                                                                            <th>Desc</th>
-                                                                                            <th>&lt;H&gt;</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody  class="tbody_font_size" >
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon good">Good</span></td>
-                                                                                            <td>social media</td>
-                                                                                            <td>7</td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon average">Average</span></td>
-                                                                                            <td>social crm</td>
-                                                                                            <td>3</td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon bad">Bad</span></td>
-                                                                                            <td>helpdesk integration</td>
-                                                                                            <td>2</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon bad">Bad</span></td>
-                                                                                            <td>register social</td>
-                                                                                            <td>2</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon bad">Bad</span></td>
-                                                                                            <td>team collaboration</td>
-                                                                                            <td>2</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                    
-                                                                            <div class="part table ">
-                                                                                <table class="">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th></th>
-                                                                                            <th>Keywords (3 words)</th>
-                                                                                            <th>Freq</th>
-                                                                                            <th>Title</th>
-                                                                                            <th>Desc</th>
-                                                                                            <th>&lt;H&gt;</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody  class="tbody_font_size" >
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon bad">Bad</span></td>
-                                                                                            <td>advanced scheduling publishing</td>
-                                                                                            <td>2</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon bad">Bad</span></td>
-                                                                                            <td>download guide book</td>
-                                                                                            <td>2</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon average">Average</span></td>
-                                                                                            <td>social media marketing</td>
-                                                                                            <td>2</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon bad">Bad</span></td>
-                                                                                            <td>team collaboration tools</td>
-                                                                                            <td>2</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                        </tr>
-                                                                                        <tr class="">
-                                                                                            <td><span class="icon average">Average</span></td>
-                                                                                            <td>customizable scalable open-source</td>
-                                                                                            <td>2</td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon cross">NOK</span></td>
-                                                                                            <td><span class="icon check">OK</span></td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                    
-                                                                        </div>
-                                                                        <div class="criterium-quicktips">Be more consistent with your keywords</div>
-                                                                        <div class="delimiter"></div></div>-->
                                     <div id="criterium-images" class="criterium result-2 ">
                                         <div class="criterium-head">
                                             <span class="crit-score-pond hidden">0.48046124279308</span>
@@ -876,35 +485,21 @@
                                         <div id="Images">
                                             <div class="criterium-content more-less">
                                                 <div class="part text ">
-                                                    <!--                                            <p>We found <strong>14</strong> images on this web page.</p>
-                                                                                                <p><strong>9</strong> alt attributes are empty or missing.</p>-->
+
                                                 </div>
 
                                                 <div class="part list more-block" style="height: 125px; overflow: hidden;">
                                                     <table>
                                                         <tbody  class="tbody_font_size"  id="imagestable">
-                                                            <!--                                                <li class=""><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/google_icon.png</span></li>
-                                                                                                            <li class=""><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/fb_icon_lgn.png</span></li>
-                                                                                                            <li class=""><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/trail-butn.png</span></li>
-                                                                                                            <li class=""><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/slidegraph.png</span></li>
-                                                                                                            <li class="over-max"><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/trail-butn.png</span></li>
-                                                                                                            <li class="over-max"><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/phone-banner.png</span></li>
-                                                                                                            <li class="over-max"><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/img-1.png</span></li>
-                                                                                                            <li class="over-max"><span class="cropable-url">http://socioboard.com/Themes/Socioboard/Contents/img/signup-butn.png</span></li>-->
+
                                                         </tbody>
                                                     </table>
 
-                                                    <!--                                            <div class="show-links">
-                                                                                                    <a href="#" class="show-more">Show more</a>
-                                                                                                    <a href="#" class="show-less">Show less</a>
-                                                                                                </div>-->
                                                 </div>
                                                 <a class="adjust showMore" href="#">Show More</a>
                                             </div> </div>
                                         <div class="criterium-quicktips">Set a name for all your images</div>
                                         <div class="delimiter"></div></div>
-
-
 
                                     <div id="criterium-text_html_ratio" class="criterium result-3 ">
                                         <div class="criterium-head">
@@ -913,7 +508,6 @@
                                             <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Errors">
                                                 <span class="fa"></span>Text/HTML Ratio
                                             </h3>
-
 
                                         </div>
                                         <div id="set8Loader">
@@ -927,8 +521,6 @@
                                             </div></div>
                                         <div class="criterium-quicktips">Write additional content with more keywords</div>
                                         <div class="delimiter"></div></div>
-
-
 
                                     <div id="criterium-indexed_pages" class="criterium result-1 ">
                                         <div class="criterium-head">
@@ -1014,7 +606,6 @@
                                                 <span class="fa"></span>Google+ Publisher
                                             </h3>
 
-
                                         </div>
                                         <div id="set13Loader">
                                             <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
@@ -1034,7 +625,6 @@
                                                 <span class="fa"></span>Google&trade; Ranking
                                             </h3>
 
-
                                         </div>
                                         <div id="set14Loader">
                                             <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
@@ -1053,7 +643,6 @@
                                                 <span class="fa"></span>In-Page Links
                                             </h3>
 
-
                                         </div>
                                         <div id="set15Loader">
                                             <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
@@ -1063,29 +652,6 @@
                                                 <div class="part text ">
                                                     <p></p>
                                                 </div>
-
-
-                                                <!--                                        <div class="part pie ">
-                                                                                            <div class="chart-container pie-chart-container chartify-me">
-                                                                                                <ul class="value value-" title="External Links: NoFollow ">
-                                                                                                    <li></li>
-                                                                                                </ul>
-                                                                                                <ul class="value value-" title="External Links: Passing Juice">
-                                                                                                    <li></li>
-                                                                                                </ul>
-                                                                                                <ul class="value value-" title="Internal Links">
-                                                                                                    <li></li>
-                                                                                                </ul>
-                                                                                            </div>
-                                                                                        </div>-->
-
-
-
-
-
-
-
-
 
                                                 <div class="part table more-block" style="height: 125px; overflow: hidden;">
                                                     <table class="links-details">
@@ -1097,172 +663,10 @@
                                                         <!--</tr>-->
                                                         </thead>
                                                         <tbody  class="tbody_font_size"  id="inpagelinkstable">
-                                                            <!--                                                    <tr class="">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/img/ivon.ico" title="http://socioboard.com/Themes/Socioboard/Contents/img/ivon.ico">http://socioboard.com/Themes/Socioboard/Contents/img/ivon.ico</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/fonts.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/fonts.css">http://socioboard.com/Themes/Socioboard/Contents/css/fonts.css</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/bootstrap.min.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/bootstrap.min.css">http://socioboard.com/Themes/Socioboard/Contents/css/bootstrap.min.css</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/sb-admin-2.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/sb-admin-2.css">http://socioboard.com/Themes/Socioboard/Contents/css/sb-admin-2.css</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/stylish-portfolio.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/stylish-portfolio.css">http://socioboard.com/Themes/Socioboard/Contents/css/stylish-portfolio.css</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
-                                                            <!--                                                    <tr class="">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/font-awesome.min.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/font-awesome.min.css">http://socioboard.com/Themes/Socioboard/Contents/css/font-awesome.min.css</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/smoothDivScroll.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/smoothDivScroll.css">http://socioboard.com/Themes/Socioboard/Contents/css/smoothDivScroll.css</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/alertify.core.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/alertify.core.css">http://socioboard.com/Themes/Socioboard/Contents/css/alertify.core.css</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
-                                                            <!--                                                    <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Themes/Socioboard/Contents/css/alertify.default.css" title="http://socioboard.com/Themes/Socioboard/Contents/css/alertify.default.css">http://socioboard.com/Themes/Socioboard/Contents/css/alertify.default.css</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Index" title="http://socioboard.com/Index/Index">Image</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
-                                                            <!--                                                    <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Company" title="http://socioboard.com/Index/Company">Company</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Features" title="http://socioboard.com/Index/Features">Features</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/#" title="http://socioboard.com/#">Versions</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
-                                                            <!--                                                    <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.org/" title="http://socioboard.org/">Community</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Versions/Agency" title="http://socioboard.com/Versions/Agency">Agency</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Versions/Enterprise" title="http://socioboard.com/Versions/Enterprise">Enterprise</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
-                                                            <!--                                                    <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Pricing" title="http://socioboard.com/Index/Pricing">Pricing</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://wiki.socioboard.com/index.php/Main_Page" title="http://wiki.socioboard.com/index.php/Main_Page">Wiki</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://blog.socioboard.com/category/cases" title="http://blog.socioboard.com/category/cases">Cases</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
-                                                            <!--                                                    <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://blog.socioboard.com/" title="http://blog.socioboard.com/">Blogs</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/Download" title="http://socioboard.com/Index/Download">Download</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://socioboard.com/Index/contact" title="http://socioboard.com/Index/contact">Contact Us</a></td>
-                                                                                                                    <td>Internal Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
-                                                            <!--                                                    <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/ForgotPassword.aspx" title="http://www.socioboard.com/ForgotPassword.aspx">Click here to restore</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/Features.aspx#monitor" title="http://www.socioboard.com/Features.aspx#monitor">Learn More</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/Features.aspx#analyze" title="http://www.socioboard.com/Features.aspx#analyze">Learn More</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/Features.aspx#report" title="http://www.socioboard.com/Features.aspx#report">Learn More</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
-                                                            <!--<tr class="over-max">-->
-                                                            <!--                                                        <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.socioboard.com/Contents/common/Socioboard_User_Guide_1.0.2_Ver%207.pdf" title="http://www.socioboard.com/Contents/common/Socioboard_User_Guide_1.0.2_Ver%207.pdf">Download Guide Book</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.scrolltotop.com/" title="http://www.scrolltotop.com/">Scroll to Top Button</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.facebook.com/SocioBoard" title="https://www.facebook.com/SocioBoard">https://www.facebook.com/SocioBoard</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
-                                                            <!--                                                    <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://twitter.com/Socioboard" title="https://twitter.com/Socioboard">https://twitter.com/Socioboard</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://www.linkedin.com/company/socioboard" title="http://www.linkedin.com/company/socioboard">http://www.linkedin.com/company/socioboard</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>
-                                                                                                                <tr class="over-max">
-                                                                                                                    <td><a class="js-ext-link" rel="nofollow" target="_blank" href="ext://plus.google.com/s/socioboard" title="https://plus.google.com/s/socioboard">https://plus.google.com/s/socioboard</a></td>
-                                                                                                                    <td>External Links</td>
-                                                                                                                    <td>Passing Juice</td>
-                                                                                                                </tr>-->
+
                                                         </tbody>
                                                     </table>
-                                                    <!--                                            <div class="show-links">
-                                                                                                    <a href="#" class="show-more">Show more</a>
-                                                                                                    <a href="#" class="show-less">Show less</a>
-                                                                                                </div>-->
+
                                                 </div>
                                                 <a class="adjust showMore" href="#">Show More</a>
                                             </div></div>
@@ -1276,7 +680,6 @@
                                                 <span class="fa"></span>Broken Links
                                             </h3>
 
-
                                         </div>
                                         <div id="set16Loader">
                                             <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
@@ -1287,18 +690,18 @@
                                             </div>
 
                                         </div>
-                                        <div class="criterium-quicktips">Fix or Delete Broken Links</div>
-                                        <div class="delimiter"></div></div>
-                                    <div id="criterium-backlinks_counter" class="criterium result-1">
-                                        <div class="criterium-head">
-                                            <span class="crit-score-pond hidden">6.6794796793857</span>
-
-                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
-                                                <span class="fa"></span>Backlinks Counter
-                                            </h3>
-
-
-                                        </div>
+                                        <!--                                        <div class="criterium-quicktips">Fix or Delete Broken Links</div>
+                                                                                <div class="delimiter"></div></div>
+                                                                            <div id="criterium-backlinks_counter" class="criterium result-1">
+                                                                                <div class="criterium-head">
+                                                                                    <span class="crit-score-pond hidden">6.6794796793857</span>
+                                        
+                                                                                    <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                                                                        <span class="fa"></span>Backlinks Counter
+                                                                                    </h3>
+                                        
+                                        
+                                                                                </div>-->
                                         <div id="set17Loader">
                                             <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
                                         </div>
@@ -1548,11 +951,6 @@
                                         <div class="delimiter"></div>
                                     </div>
 
-
-
-
-
-
                                     <div id="criterium-blog" class="criterium result-1 ">
                                         <div class="criterium-head">
                                             <span class="crit-score-pond hidden">0.89686098654709</span>
@@ -1669,8 +1067,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
 
                             <!-- usability -->
                             <div class="module" id="module-usability">
@@ -2087,75 +1483,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--                                    <div class="criterium-content">
-                                                                                    <div class="part text ">
-                                                                                        <p itemprop="featureList">
-                                                                                            <a class="wooindex-bl" target="_blank" href="">
-                                                                                                <span class="aligned-right icon tech-handlebars" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/Handlebars.png')">Handlebars</span>
-                                                                                                JavaScript framework
-                                                                                            </a>
-                                                                                        </p>
-                                                                                        <p itemprop="featureList">
-                                                                                            <a class="wooindex-bl" target="_blank" href="">
-                                                                                                <span class="aligned-right icon tech-iis" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/IIS.png')">IIS</span> Web server
-                                                                                            </a>
-                                                                                        </p>
-                                                                                        <p itemprop="featureList">
-                                                                                            <a class="wooindex-bl" target="_blank" href="">
-                                                                                                <span class="aligned-right icon tech-jquery" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/jQuery.png')">jQuery</span> JavaScript framework
-                                                                                            </a>
-                                                                                        </p>
-                                                                                        <p itemprop="featureList">
-                                                                                            <a class="wooindex-bl" target="_blank" href="">
-                                                                                                <span class="aligned-right icon tech-jquery-ui" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/jQuery UI.png')">jQuery UI</span> JavaScript framework
-                                                                                            </a>
-                                                                                        </p>
-                                                                                        <p itemprop="featureList">
-                                                                                            <a class="wooindex-bl" target="_blank" href="">
-                                                                                                <span class="aligned-right icon tech-microsoft-asp.net" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/Microsoft ASP.NET.png')">Microsoft ASP.NET</span> Web framework
-                                                                                            </a>
-                                                                                        </p>
-                                                                                        <p itemprop="featureList">
-                                                                                            <a class="wooindex-bl" target="_blank" href="">
-                                                                                                <span class="aligned-right icon tech-twitter-bootstrap" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/Twitter Bootstrap.png')">Twitter Bootstrap</span> Web framework
-                                                                                            </a>
-                                                                                        </p>
-                                                                                        <p itemprop="featureList">
-                                                                                            <a class="wooindex-bl" target="_blank" href="">
-                                                                                                <span class="aligned-right icon tech-windows-server" style="background-image: url('http://static1.woorank.com/assets/img/css/tech/Windows Server.png')">Windows Server</span> Operating system
-                                                                                            </a>
-                                                                                        </p>
-                                                                                    </div>         
-                                                                                </div>-->
+
                                             <div class="criterium-quicktips"></div>
                                             <div class="delimiter"></div></div>
 
-
-                                        <!--                                        <div id="criterium-speed_tips" class="criterium result-2 ">
-                                                                                    <div class="criterium-head">
-                                                                                        <span class="crit-score-pond hidden">0.44843049327354</span>
-                                                                                        <span class="prio-score hidden">4</span>
-                                                                                        <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="To Improve">
-                                                                                            <span class="fa"></span>Speed Tips</h3>
-                                                                                    </div>
-                                                                                    <div id="set37Loader">
-                                                                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
-                                                                                    </div>
-                                                                                    <div class="criterium-content">
-                                                                                        <div class="part text ">
-                                                                                            <p>Watch out: your website?s speed could be slightly improved.</p>
-                                                                                        </div>
-                                                                                        <div class="part text ">
-                                                                                            <p><span class="icon grey-found"></span>Perfect, your server is using a caching method to speed up page display. </p>
-                                                                                            <p><span class="icon grey-found"></span>Perfect, your website doesn't use nested tables.</p>
-                                                                                            <p><span class="icon grey-missing"></span>Too bad, your website is using inline styles.</p>
-                                                                                            <p><span class="icon grey-missing"></span>Too bad, your website has too many CSS files (more than 4).</p>
-                                                                                            <p><span class="icon grey-missing"></span>Too bad, your website has too many JavaScript files (more than 7).</p>
-                                                                                            <p><span class="icon grey-found"></span>Perfect, your website takes advantage of <a rel="nofollow" href="http://en.wikipedia.org/wiki/Gzip" target="_blank">gzip</a>.</p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="criterium-quicktips"></div>
-                                                                                    <div class="delimiter"></div></div>-->
                                         <div id="criterium-analytics_technologies" class="criterium result-1 ">
                                             <div class="criterium-head">
                                                 <span class="crit-score-pond hidden">1.3452914798206</span>
@@ -2169,11 +1500,13 @@
                                             <div id="analytics">
                                                 <div class="criterium-content">
                                                     <div class="part text ">
-                                                        <p>
-                                                            <a class="wooindex-bl" target="_blank" href="https://index.woorank.com/en/reviews?technology=google-analytics">
-                                                                <span class="aligned-right icon tech-google-analytics" style="background-image:" id="analyticstable"></span>
-                                                            </a>
-                                                        </p>
+
+                                                        <table class="no-header">
+                                                            <tbody  class="tbody_font_size"  id="analyticstable">
+                                                            </tbody>
+                                                        </table>
+                                                        <p id="analytics"></p>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -2297,42 +1630,83 @@
                             <div class="module" id="module-social">
                                 <div class="module-content">
                                     <h2>Social</h2>
-                                    <!--<div id="criterium-social_impact" class="criterium result-1 ">-->
-                                    <!--                                        <div class="criterium-head">
-                                                                                <span class="crit-score-pond hidden">4.4843049327354</span>
-                                                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
-                                                                                    <span class="fa"></span>Social shareability</h3>
-                                                                            </div>-->
-                                    <!--<div class="criterium-content">-->
-                                    <!--                                            <div class="part text competitor-hide">
-                                                                                    <p itemprop="interactionCount">This website is very popular on Social Networks.</p>
-                                                                                    <p itemprop="interactionCount">
-                                                                                        <span class="big-right-aligned icon fb_likes">Facebook Likes</span>
-                                                                                        <span class="big-right-aligned-content"></span>
-                                                                                    </p>
-                                                                                    <p itemprop="interactionCount">
-                                                                                        <span class="big-right-aligned icon fb_shares">Facebook Shares</span>
-                                                                                        <span class="big-right-aligned-content">284</span>
-                                                                                    </p>
-                                                                                    <p itemprop="interactionCount">
-                                                                                        <span class="big-right-aligned icon fb_comm">Facebook Comments</span>
-                                                                                        <span class="big-right-aligned-content">86</span>
-                                                                                    </p>
-                                                                                    <p itemprop="interactionCount">
-                                                                                        <span class="big-right-aligned icon plus_one">Google&trade; +</span>
-                                                                                        <span class="big-right-aligned-content">99</span>
-                                                                                    </p>
-                                                                                    <p itemprop="interactionCount">
-                                                                                        <span class="big-right-aligned icon tw_bl">Twitter Backlinks</span>
-                                                                                        <span class="big-right-aligned-content">1124</span>
-                                                                                    </p>
-                                                                                </div>-->
-                                    <!--                                            <div class="part text competitor-to-process">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="criterium-quicktips">Promote your website on Social Media</div>
-                                                                            <div class="delimiter"></div></div>-->
 
+
+                                    <!-- Social Shareability -->
+                                    <div id="criterium-facebook_brand_page" class="criterium result-1 ">
+                                        <div class="criterium-head">
+                                            <span class="crit-score-pond hidden">1.3452914798206</span>
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed" style="margin-left: 13%;">
+                                                <span class="fa"></span>Social Shareability 
+                                            </h3>
+                                        </div>
+                                        <div id="socialshareability">
+                                            <div id="set58Loader">
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            </div>
+                                            <div id="socialShareabilitypage">
+                                                <div class="criterium-content">
+
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/alexa_16x16.png" alt=""/>
+                                                        <p>Alexa Rank</p>
+                                                        <p id="aLexaRank"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/facebook-shares.png" alt=""/>
+                                                        <p>Facebook Shares</p>
+                                                        <p id="facebookShareCount"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/facebook-likes.png" alt=""/>
+                                                        <p>Facebook Likes</p>
+                                                        <p id="facebookLikesCount"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/fbcmnt.png" alt=""/>
+                                                        <p>Facebook Comment</p>
+                                                        <p id="facebookComment"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/facebooktotal.png" alt=""/>
+                                                        <p>Facebook Total</p>
+                                                        <p id="facebookTotalCount"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/click_16x16.png" alt=""/>
+                                                        <p>Facebook Click</p>
+                                                        <p id="facebookClickCount"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/Comment-Box.jpg" alt=""/>
+                                                        <p>Facebook Comments Box</p>
+                                                        <p id="facebookCommentsBoxCount"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/linkedIn.png" alt=""/>
+                                                        <p>LinkedIn Count</p>
+                                                        <p id="linkedInCount"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/pinterest.png" alt=""/>
+                                                        <p>Pinterest Count</p>
+                                                        <p id="pinterestCount"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/twitter_b.png" alt=""/>
+                                                        <p>Twitter Count</p>
+                                                        <p id="twitterCounts"></p>
+                                                    </div>
+                                                    <div class="part text text-block fb-text-bloc">
+                                                        <img src="https://s3.amazonaws.com/images-globustracker/review/google-plus.png" alt=""/>
+                                                        <p>Google Plus Like</p>
+                                                        <p id="googlePlusLike"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="criterium-quicktips"></div>
+                                        <div class="delimiter"></div></div>
 
                                     <!-- twitter_brand_page -->
 
@@ -2340,7 +1714,7 @@
                                         <div class="criterium-head">
                                             <span class="crit-score-pond hidden">1.3452914798206</span>
 
-                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed" style="margin-left: 13%;">
                                                 <span class="fa"></span>Twitter Account
                                             </h3>
 
@@ -2413,7 +1787,7 @@
                                     <div id="criterium-facebook_brand_page" class="criterium result-1 ">
                                         <div class="criterium-head">
                                             <span class="crit-score-pond hidden">1.3452914798206</span>
-                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed">
+                                            <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Passed" style="margin-left: 13%;">
                                                 <span class="fa"></span>Facebook Page
                                             </h3>
                                         </div>
@@ -2479,7 +1853,7 @@
                                         <div class="criterium-head">
                                             <span class="crit-score-pond hidden">1.3574660633484</span>
 
-                                            <h3 class="simple-tooltip" data-placement="left" style="margin-left: 16%;" rel="tooltip" data-original-title="Passed">
+                                            <h3 class="simple-tooltip" data-placement="left" style="margin-left: 13%;" rel="tooltip" data-original-title="Passed">
                                                 <span class=""></span>Google+ Page
                                             </h3>
                                         </div>
@@ -2539,7 +1913,6 @@
                                                         <p id="googleTagline"></p>
                                                     </div>
 
-
                                                     <div class="part text text-block fb-text-bloc">
                                                         <p>Introduction</p>
                                                         <p id="googleIntroduction"></p>
@@ -2560,7 +1933,7 @@
                                         <div class="criterium-head">
                                             <span class="crit-score-pond hidden">1.3574660633484</span>
 
-                                            <h3 class="simple-tooltip" data-placement="left" style="margin-left: 16%;" rel="tooltip" data-original-title="Passed">
+                                            <h3 class="simple-tooltip" data-placement="left" style="margin-left: 13%;" rel="tooltip" data-original-title="Passed">
                                                 <span class=""></span>Linkedin
                                             </h3>
                                         </div>
@@ -2638,7 +2011,7 @@
                                         <div class="criterium-head">
                                             <span class="crit-score-pond hidden">1.3574660633484</span>
 
-                                            <h3 class="simple-tooltip" data-placement="left" style="margin-left: 16%;" rel="tooltip" data-original-title="Passed">
+                                            <h3 class="simple-tooltip" data-placement="left" style="margin-left: 13%;" rel="tooltip" data-original-title="Passed">
                                                 <span class=""></span>Pinterest
                                             </h3>
                                         </div>
@@ -2649,6 +2022,11 @@
                                             <div class="criterium-content">
                                                 <div class="part image cover-image">
                                                     <img src=""  alt="" id="pInterestImage" />
+                                                </div>
+
+                                                <div class="part text text-block fb-text-bloc">
+                                                    <p>Name</p>
+                                                    <p id="pInterestName"></p>
                                                 </div>
 
                                                 <div class="part text text-block fb-text-bloc">
@@ -2677,11 +2055,6 @@
                                                 </div>
 
                                                 <div class="part text text-block fb-text-bloc">
-                                                    <p>Name</p>
-                                                    <p id="pInterestName"></p>
-                                                </div>
-
-                                                <div class="part text text-block fb-text-bloc">
                                                     <p>Description</p>
                                                     <p id="pInterestDescription"></p>
                                                 </div>
@@ -2698,223 +2071,8 @@
                                         <div class="delimiter"></div></div>
 
                                 </div>
-
-
-
-
-
-                                <!--//***************************************************--> 
-
-                                <!--                                <div  id="criterium-linkedin" class="criterium result-1 ">
-                                                                    <div class="criterium-head">
-                                                                        <span class="crit-score-pond hidden">1.3574660633484</span>
-                                
-                                                                        <h3 class="simple-tooltip" data-placement="left" style="margin-left: 16%;" rel="tooltip" data-original-title="Passed">
-                                                                            <span class=""></span>Linkedin
-                                                                        </h3>
-                                                                    </div>
-                                                                    <div id="googleplus">
-                                                                        <div id="">
-                                                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
-                                                                        </div>
-                                                                        <div id="googlePage">
-                                                                            <div class="criterium-content">
-                                                                                <div class="part image cover-image">
-                                                                                    <img src=""  alt="" id="linkedImage" />
-                                                                                </div>
-                                                                                <div class="part text text-icon-block">
-                                                                                    <p>
-                                                                                        <span class="icon gp-plusonecount"></span>
-                                                                                    </p>
-                                                                                </div>
-                                                                                <div class="part text text-icon-block">
-                                                                                    <p><span class="icon gp-circledbycount"></span></p>
-                                                                                </div>
-                                
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Follower</p>
-                                                                                    <p id="linkedFollower"></p>
-                                                                                </div>
-                                
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Website</p>
-                                                                                    <p id="linkedWebsite"></p>
-                                                                                </div>
-                                
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Industry</p>
-                                                                                    <p id="linkedIndustry"></p>
-                                                                                </div>
-                                
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Type</p>
-                                                                                    <p id="linkedType"></p>
-                                                                                </div>
-                                
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Headquater</p>
-                                                                                    <p id="linkedHeadquater"></p>
-                                                                                </div>
-                                
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Company</p>
-                                                                                    <p id="linkedCompany"></p>
-                                                                                </div>
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Founded</p>
-                                                                                    <p id="linkedFounded"></p>
-                                                                                </div>
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Employee</p>
-                                                                                    <p id="linkedEmployee"></p>
-                                                                                </div>
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Description</p>
-                                                                                    <p id="linkedDescription"></p>
-                                                                                </div>
-                                                                                <div class="part text text-block fb-text-bloc">
-                                                                                    <p>Specialties</p>
-                                                                                    <p id="linkedSpecialties"></p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="criterium-advice-click"><span>?</span></div>
-                                                                    <div class="criterium-advice">
-                                                                        This page is your business listing in Google+. Being active in this social network is important for claiming your brand, influencing your search engine rankings and interacting with your network. You might also consider <a rel="nofollow" href="http://www.google.com/business/" target="_blank">managing your profile</a> with <a rel="" nofollow="" href="http://blog.woorank.com/2014/06/google-places-for-business-is-google-my-business/" target="_blank">Google My Business (formerly Google Places)</a>.
-                                
-                                                                    </div>
-                                
-                                                                    <div class="delimiter"></div></div>             -->
-
-                                <!--//*************************************************************-->                         
-
-
                             </div>
                         </div>
-                        <!--                        <div class="module" id="module-local_visibility">
-                                                    <div class="module-content">
-                                                        <h2>Local</h2>
-                                                        <div id="criterium-local_directories" class="criterium result-0 ">
-                                                            <div class="criterium-head">
-                        
-                                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
-                                                                    <span class="fa"></span>Local Directories
-                                                                </h3>
-                        
-                                                            </div>
-                                                            <div id="set47Loader">
-                                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
-                                                            </div>
-                                                            <div class="criterium-content">
-                        
-                                                                <div class="row">
-                                                                    <form class="no-advice-target val-set-form hidden val-set-googleplaces" method="post" action="/en/setrevdata/googleplaces">
-                                                                        <div>
-                                                                            <p>Add your Google My Business profile or <a href="www.google.be/MyBusiness">create one</a></p>
-                                                                        </div>
-                                                                        <div class="field-container field-container-googleplaces">
-                                                                            <div class="box-color">
-                                                                                <span class="fa fa-googleplaces"></span>
-                                                                            </div>
-                                                                            <input type="text" name="data" placeholder=" plus.google.com/+ProfileURL" />
-                                                                            <input type="hidden" name="pending-data" value="" />
-                                                                            <button class="grey" type="submit">Set</button>
-                                                                            <span class="svg-loader svg-loader-16"></span>
-                                                                            <input type="hidden" value="googleplaces" name="type">
-                                                                        </div>
-                                                                        <div class="error-msg"><p></p></div>
-                                                                    </form>
-                                                                    <p class="hidden wait-msg">
-                                                                        <span class="svg-loader svg-loader-16"></span>
-                                                                        Please wait...
-                                                                    </p>
-                                                                </div>
-                        
-                        
-                                                                <div class="directory-container row">
-                                                                    <div class="icon-Foursquare local-directory simple-tooltip" rel="tooltip" data-placement="left" data-original-title="Foursquare"></div>
-                        
-                                                                    <div class="business-notfound italic">
-                                                                        <p>Missing profile on Foursquare?</p>
-                                                                    </div>
-                                                                </div>
-                        
-                        
-                                                                <div class="row">
-                                                                    <form class="no-advice-target val-set-form hidden val-set-foursquare" method="post" action="/en/setrevdata/foursquare">
-                                                                        <div>
-                                                                            <p>Add your Foursquare page or <a href="http://business.foursquare.com/brands/">create one</a></p>
-                                                                        </div>
-                                                                        <div class="field-container field-container-foursquare">
-                                                                            <div class="box-color">
-                                                                                <span class="fa fa-foursquare"></span>
-                                                                            </div>
-                                                                            <input type="text" name="data" placeholder="foursquare.com/v/PageURL" />
-                                                                            <input type="hidden" name="pending-data" value="" />
-                                                                            <button class="grey" type="submit">Set</button>
-                                                                            <span class="svg-loader svg-loader-16"></span>
-                                                                            <input type="hidden" value="foursquare" name="type">
-                                                                        </div>
-                                                                        <div class="error-msg"><p></p></div>
-                                                                    </form>
-                                                                    <p class="hidden wait-msg">
-                                                                        <span class="svg-loader svg-loader-16"></span>
-                                                                        Please wait...
-                                                                    </p>
-                                                                </div>
-                        
-                        
-                                                                <div class="directory-container row">
-                                                                    <div class="icon-Yelp local-directory simple-tooltip" rel="tooltip" data-placement="left" data-original-title="Yelp"></div>
-                        
-                                                                    <div class="business-notfound italic">
-                                                                        <p>Missing profile on Yelp?</p>
-                                                                    </div>
-                                                                </div>
-                        
-                        
-                                                                <div class="row">
-                                                                    <form class="no-advice-target val-set-form hidden val-set-yelp" method="post" action="/en/setrevdata/yelp">
-                                                                        <div>
-                                                                            <p>Add your Yelp page or <a href="https://biz.yelp.com/">create one</a></p>
-                                                                        </div>
-                                                                        <div class="field-container field-container-yelp">
-                                                                            <div class="box-color">
-                                                                                <span class="fa fa-yelp"></span>
-                                                                            </div>
-                                                                            <input type="text" name="data" placeholder="yelp.com/biz/PageURL" />
-                                                                            <input type="hidden" name="pending-data" value="" />
-                                                                            <button class="grey" type="submit">Set</button>
-                                                                            <span class="svg-loader svg-loader-16"></span>
-                                                                            <input type="hidden" value="yelp" name="type">
-                                                                        </div>
-                                                                        <div class="error-msg"><p></p></div>
-                                                                    </form>
-                                                                    <p class="hidden wait-msg">
-                                                                        <span class="svg-loader svg-loader-16"></span>
-                                                                        Please wait...
-                                                                    </p>
-                                                                </div>
-                        
-                                                            </div>
-                                                            <div class="criterium-quicktips"></div>
-                                                            <div class="delimiter"></div></div>
-                        
-                        
-                        
-                                                        <div id="criterium-local_online_reviews" class="criterium result-0 hidden ">
-                                                            <div class="criterium-head">
-                                                                <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
-                                                                    <span class="fa"></span>Online Reviews</h3>
-                                                            </div>
-                                                            <div class="criterium-content">
-                                                            </div>
-                                                            <div class="criterium-quicktips"></div>
-                                                            <div class="delimiter"></div></div>
-                                                    </div>
-                                                </div>-->
-
 
                         <div class="module-section" id="module-section-title-measure">Measure</div>
                         <!--<div id="visitorsnew">-->
@@ -2993,25 +2151,18 @@
                                 <div id="criterium-visitors_loc" class="criterium result-0 ">
                                     <div class="criterium-head">
                                         <h3 class="simple-tooltip" data-placement="left" rel="tooltip" data-original-title="Low impact">
-                                            <span class="fa"></span>Visitors Localization</h3>
+                                            <span class="fa"></span>Server Localization</h3>
                                     </div>
                                     <div id="set50Loader">
                                         <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
                                     </div>
                                     <div id="VisitorsLocalization1">
                                         <div class="criterium-content" id="localozation">
-                                            <!--                                            <div class="part bar " >
-                                                                                            <div class="woomap" id="countryname1">
-                                                                                                <div class="country-info">
-                                                                                                    <div class="name">India</div>
-                                                                                                </div>
-                                                                                                <div class="country-info">
-                                                                                                    <div class="name">China</div>
-                                                                                                </div>
-                                            
-                                                                                            </div>
-                                                                                            <div id="map_canvas"></div>
-                                                                                        </div>-->
+                                            <div class="part bar " >
+
+                                                <div id="googleMap" style="width:500px; height:250px;"></div>
+
+                                            </div>
                                             <div class="part table ">
                                                 <table class="">
                                                     <thead  class="tbody_font_size">
@@ -3024,22 +2175,11 @@
                                                     </thead>
                                                     <tbody  class="tbody_font_size"  id="visitortable">
                                                     </tbody>
-                                                    <!--                                                <tbody  class="tbody_font_size" >
-                                                                                                        <tr class="">
-                                                                                                            <td><a class="wooindex-bl" target="_blank" href="https://index.woorank.com/en/reviews?country=in">India</a></td>
-                                                                                                            <td>socioboard.in</td>
-                                                                                                            <td>This domain is booked</td>
-                                                                                                            <td><span class="fa fa-lock"></span></td>
-                                                                                                        </tr>
-                                                                                                    </tbody>-->
                                                 </table>
                                             </div>    
                                         </div>
                                     </div>
-
                                 </div>
-
-
                             </div>
                             <div class="criterium-quicktips"></div>
                             <div class="delimiter"></div></div>
@@ -3061,50 +2201,259 @@
 
         <!--</div>-->
 
+        <!--        <script type="text/javascript">
+                    var Base64 = {
+                        // private property
+                        _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+                        // public method for encoding
+                        encode: function(input) {
+                            var output = "";
+                            var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+                            var i = 0;
+        
+                            input = Base64._utf8_encode(input);
+        
+                            while (i < input.length) {
+        
+                                chr1 = input.charCodeAt(i++);
+                                chr2 = input.charCodeAt(i++);
+                                chr3 = input.charCodeAt(i++);
+        
+                                enc1 = chr1 >> 2;
+                                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                                enc4 = chr3 & 63;
+        
+                                if (isNaN(chr2)) {
+                                    enc3 = enc4 = 64;
+                                } else if (isNaN(chr3)) {
+                                    enc4 = 64;
+                                }
+        
+                                output = output +
+                                        this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+                                        this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+        
+                            }
+        
+                            return output;
+                        },
+                        // public method for decoding
+                        decode: function(input) {
+                            var output = "";
+                            var chr1, chr2, chr3;
+                            var enc1, enc2, enc3, enc4;
+                            var i = 0;
+        
+                            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+        
+                            while (i < input.length) {
+        
+                                enc1 = this._keyStr.indexOf(input.charAt(i++));
+                                enc2 = this._keyStr.indexOf(input.charAt(i++));
+                                enc3 = this._keyStr.indexOf(input.charAt(i++));
+                                enc4 = this._keyStr.indexOf(input.charAt(i++));
+        
+                                chr1 = (enc1 << 2) | (enc2 >> 4);
+                                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                                chr3 = ((enc3 & 3) << 6) | enc4;
+        
+                                output = output + String.fromCharCode(chr1);
+        
+                                if (enc3 != 64) {
+                                    output = output + String.fromCharCode(chr2);
+                                }
+                                if (enc4 != 64) {
+                                    output = output + String.fromCharCode(chr3);
+                                }
+        
+                            }
+        
+                            output = Base64._utf8_decode(output);
+        
+                            return output;
+        
+                        },
+                        // private method for UTF-8 encoding
+                        _utf8_encode: function(string) {
+                            string = string.replace(/\r\n/g, "\n");
+                            var utftext = "";
+        
+                            for (var n = 0; n < string.length; n++) {
+        
+                                var c = string.charCodeAt(n);
+        
+                                if (c < 128) {
+                                    utftext += String.fromCharCode(c);
+                                }
+                                else if ((c > 127) && (c < 2048)) {
+                                    utftext += String.fromCharCode((c >> 6) | 192);
+                                    utftext += String.fromCharCode((c & 63) | 128);
+                                }
+                                else {
+                                    utftext += String.fromCharCode((c >> 12) | 224);
+                                    utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                                    utftext += String.fromCharCode((c & 63) | 128);
+                                }
+        
+                            }
+        
+                            return utftext;
+                        },
+                        // private method for UTF-8 decoding
+                        _utf8_decode: function(utftext) {
+                            var string = "";
+                            var i = 0;
+                            var c = c1 = c2 = 0;
+        
+                            while (i < utftext.length) {
+        
+                                c = utftext.charCodeAt(i);
+        
+                                if (c < 128) {
+                                    string += String.fromCharCode(c);
+                                    i++;
+                                }
+                                else if ((c > 191) && (c < 224)) {
+                                    c2 = utftext.charCodeAt(i + 1);
+                                    string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                                    i += 2;
+                                }
+                                else {
+                                    c2 = utftext.charCodeAt(i + 1);
+                                    c3 = utftext.charCodeAt(i + 2);
+                                    string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                                    i += 3;
+                                }
+        
+                            }
+        
+                            return string;
+                        }
+        
+                    };
+        
+        
+                </script>-->
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
-        <script type="text/javascript">
-            /*
-             var latitude;
-             var longitude;
-             
-             function initialize() {
-             alert("initialize");
-             var myLatlng = new google.maps.LatLng(latitude, longitude);
-             alert("initialize 2");
-             var mapOptions = {
-             zoom: 4,
-             center: myLatlng
-             };
-             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-             
-             var marker = new google.maps.Marker({
-             position: myLatlng,
-             map: map,
-             title: 'Hello World!'
-             });
-             }
-             
-             function mapBasic() {
-             new GMaps({
-             div: '#map_canvas',
-             lat: -12.043333,
-             lng: -77.028333
-             });
-             }
-             */
-            $(document).ready(function() {
+        <script  type='text/javascript'>
 
-                /*
-                 alert("HIIIIIIIIIIIIIII");
-                 $("#visitorsnew").hide();
-                 $("#facebook").hide();
-                 $("#googleplus").hide();
-                 $("#mobile").hide();
-                 $("#seo").hide();
-                 $("#technologies").hide();
-                 $("#localozation").hide();
-                 */
+                                    function onoff() {
+                                        if (document.getElementById("start_interval").checked) {
+                                            document.getElementById('start_interval').setAttribute("value", "1");
+                                        }
+                                    }
+                                    function WebsiteReview() {
+                                        var siteurl = $("#sitename").val();
+
+                                        siteurl = siteurl.replace("http://", "").replace("https://", "").replace("www.", "");
+                                        window.location.href = siteurl + ".htm";
+                                    }
+        </script>
+        <!--        <script
+                    src="http://maps.googleapis.com/maps/api/js">
+                </script>-->
+        <script type="text/javascript">
+
+            var timeout = 5000;
+            ajaxFunction();
+
+            function ajaxFunction() {
+                var sitename = document.getElementById('websearchurl').value;
+
+                $.getJSON(
+                        'databaseExist.action',
+                        {
+                            sitename: sitename
+                        },
+                function (output) {
+
+                    if (output.result === 0) {
+                        timeout = 65000;
+                    }
+                    setData();
+
+                });
+            }
+
+
+
+
+//            function ajaxFunction() {
+//
+//                var ajaxRequest;  // The variable that makes Ajax possible!
+//
+//                try {
+//                    // Opera 8.0+, Firefox, Safari
+//                    ajaxRequest = new XMLHttpRequest();
+//
+//                } catch (e) {
+//                    //                                    // Internet Explorer Browsers
+//                    try {
+//                        ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+//                    } catch (e) {
+//                        try {
+//                            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+//                        } catch (e) {
+//                            // Something went wrong
+//                            alert('Your browser broke!');
+//                        }
+//                    }
+//                }
+//
+//                // Create a function that will receive data 
+//                // sent from the server and will update
+//                // div section in the same page.
+//                ajaxRequest.onreadystatechange = function() {
+//                    if (ajaxRequest.readyState === 4) {
+//
+//                        var result = ajaxRequest.responseText.toString();
+//                        var output = JSON.parse(result);
+////                        console.log(output.result);
+//                        if (output.result === 0) {
+//                            timeout = 60000;
+//                        }
+//                        setData();
+//                    }
+//                };
+//                // Now get the value from user and pass it to
+//                // server script.
+//
+//                ajaxRequest.open("GET", "databaseExist.action?sitename=" + document.getElementById('websearchurl').value, false);
+//                ajaxRequest.send(null);
+//
+//            }
+
+            var lat = 0.0;
+            var long = 0.0;
+
+            function initialize()
+            {
+//                console.log('lat ' + lat);
+//                console.log('long ' + long);
+
+                var myCenter = new google.maps.LatLng(lat, long);
+                var mapProp = {
+                    center: myCenter,
+                    zoom: 5,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+                var marker = new google.maps.Marker({
+                    position: myCenter
+                });
+
+                marker.setMap(map);
+            }
+
+            var setvalue;
+
+            //  $(document).ready(function() {
+            function setData() {
+
                 $("#trafficEstimation1").hide();
                 $("#trafficRank1").hide();
                 $("#VisitorsLocalization1").hide();
@@ -3150,8 +2499,9 @@
                 $("#Title").hide();
                 $("#linkedinAccount").hide();
                 $("#PinterestAccount").hide();
+                $('#socialShareabilitypage').hide();
 
-                setTimeout(function() {
+                setvalue = setTimeout(function () {
                     //                    alert("-------1-------------");
                     var url = document.getElementById('websearchurl').value;
                     var imagessrnumber = 1;
@@ -3159,14 +2509,15 @@
                     //                    alert(url);
                     $.ajax({
                         type: 'POST',
+//                        url: '/globustracker/reviews/visitors/' + url + ".htm",
                         url: '/reviews/visitors/' + url + ".htm",
                         data: {websearchurl: url},
-                        beforeSend: function(xhr) {
+                        beforeSend: function (xhr) {
                             xhr.setRequestHeader("Accept", "application/json");
                             xhr.setRequestHeader("Content-Type", "application/json");
                         },
-                        success: function(responsejson) {
-                            console.log(responsejson);
+                        success: function (responsejson) {
+//                            console.log(responsejson);
                             $('#set1Loader').hide();
                             $('#set2Loader').hide();
                             $('#set3Loader').hide();
@@ -3224,6 +2575,7 @@
                             $('#set55Loader').hide();
                             $('#set56Loader').hide();
                             $('#set57Loader').hide();
+                            $('#set58Loader').hide();
 
                             $("#visitorsnew").show();
                             $("#facebook").show();
@@ -3277,79 +2629,97 @@
                             $("#Title").show();
                             $("#linkedinAccount").show();
                             $("#PinterestAccount").show();
+                            $("#socialshareability").show();
+                            $("#socialShareabilitypage").show();
 
-                            $.each(responsejson.imagedata, function(key, value) {
+                            $.each(responsejson.imagedata, function (key, value) {
 
                                 document.getElementById("imagestable").innerHTML = document.getElementById("imagestable").innerHTML + "<tr><td>" + imagessrnumber + "</td><td>" + value + "</td></tr>";
                                 imagessrnumber++;
                             });
-                            var type;
-                            $.each(responsejson.pagelinksdata, function(i, j) {
 
+
+
+                            $.each(responsejson.pagelinksdata, function (i, j) {
+                                var type;
                                 var title = (j.title);
                                 var title = title.substring(0, 5) + '..';
                                 var sample = "<tr><td>" + j.links + "</td><td>" + j.type + "</td><td title=" + j.title + ">" + title + "</td></tr>";
                                 $('#inpagelinkstable').append(sample);
                                 //                                }
-                                if (i.contains('type')) {
-                                    type = j;
-                                }
-                                if (!i.contains('type')) {
-                                    // var sample = "<tr><td>" + j + "</td><td>" + type + "</td><td>Title</td></tr>";
-                                    // $('#inpagelinkstable').append(sample);
-                                }
+//                                if (i.contains('type')) {
+//                                    type = j;
+//                                }
+//                                if (!i.contains('type')) {
+//                                    // var sample = "<tr><td>" + j + "</td><td>" + type + "</td><td>Title</td></tr>";
+//                                    // $('#inpagelinkstable').append(sample);
+//                                }
                             });
+
                             var relatednumber = 1;
-                            $.each(responsejson.relatedwebsite, function(key, value) {
+                            $.each(responsejson.relatedwebsite, function (key, value) {
 
                                 document.getElementById("relatedtable").innerHTML = document.getElementById("relatedtable").innerHTML + "<tr><td>" + relatednumber + "</td><td>" + value + "</td></tr>";
                                 relatednumber++;
                             });
-                            var tech;
-                            $.each(responsejson.technologydata, function(i, j) {
 
-                                if (i.contains('technologyused')) {
+                            var tech;
+                            $.each(responsejson.technologydata, function (i, j) {
+
+//                                if (i.contains('techUsed')) {
+//                                    var sample = "<tr><td>" + j + "</td><td>" + "</td><td></td></tr>";
+//                                    $('#technologytable').append(sample);
+//                                }
+                                if (i.indexOf('techUsed') !== -1) {
                                     var sample = "<tr><td>" + j + "</td><td>" + "</td><td></td></tr>";
                                     $('#technologytable').append(sample);
                                 }
 
-                                if (i.contains('analytics')) {
+                                if (i.indexOf('analytics') !== -1) {
                                     var sample1 = "<tr><td>" + j + "</td><td>" + "</td><td></td></tr>";
                                     $('#analyticstable').append(sample1);
                                 }
+
+//                                if (i.contains('analytics')) {
+//                                    var sample1 = "<tr><td>" + j + "</td><td>" + "</td><td></td></tr>";
+//                                    $('#analyticstable').append(sample1);
+//                                }
                             });
+
                             var visitorrank = 10000000;
                             var flag = 0;
-                            $.each(responsejson.visitorarray, function(i, j) {
+                            $.each(responsejson.visitorarray, function (i, j) {
 
-                                if (i.contains('type')) {
+//                                if (i.contains('type')) {
+//                                    type = j;
+//                                }
+
+                                if (i.indexOf('type') !== -1) {
                                     type = j;
                                 }
-                                if (!i.contains('type')) {
-                                    /*
-                                     if (flag === 0) {
-                                     alert('flag is 0')
-                                     $('#country-name').append(j.country);
-                                     flag = 1;
-                                     alert('flag is 1 '+j.country)
-                                     }
-                                     
-                                     var countryname = "<div class='country-info'><div class='name'>" + j.country + "</div></div>"
-                                     $('#countryname1').append(countryname);
-                                     */
+                                /*
+                                 if (!i.contains('type')) {
+                                 
+                                 var sample = "<tr><td>" + j.country + "</td><td>" + j.percent + "</td><td>" + j.rank + "</td></tr>";
+                                 $('#visitortable').append(sample);
+                                 
+                                 }
+                                 */
+                                if (!i.indexOf('type') !== -1) {
                                     var sample = "<tr><td>" + j.country + "</td><td>" + j.percent + "</td><td>" + j.rank + "</td></tr>";
                                     $('#visitortable').append(sample);
-
-
                                 }
+
                             });
+
                             var xmlnumber = 1;
-                            $.each(responsejson.xmldata, function(key, value) {
+                            $.each(responsejson.xmldata, function (key, value) {
 
                                 document.getElementById("xmltable").innerHTML = document.getElementById("xmltable").innerHTML + "<tr><td>" + xmlnumber + "</td><td>" + value + "</td></tr>";
                                 xmlnumber++;
                             });
-                            $.each(responsejson.headingcount, function(key, value) {
+
+                            $.each(responsejson.headingcount, function (key, value) {
 
                                 if (key === 'heading1') {
                                     $('#heading1').text(value);
@@ -3367,48 +2737,85 @@
                                     $('#heading5').html(value);
                                 }
                             });
-                            $.each(responsejson.headingelements, function(i, j) {
 
-                                if (i.contains('h1elements')) {
-                                    if (j.contains('h1')) {
+                            $.each(responsejson.headingelements, function (i, j) {
+                                /*
+                                 if (i.contains('h1elements')) {
+                                 if (j.contains('h1')) {
+                                 j = j.replace('h1', '');
+                                 }
+                                 $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H1&gt;</span>" + j + "</td></tr>");
+                                 }
+                                 */
+                                if (i.indexOf('h1elements') !== -1) {
+                                    if (j.indexOf('h1')) {
                                         j = j.replace('h1', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H1&gt;</span>" + j + "</td></tr>");
-                                    //                                   
                                 }
-                                if (i.contains('h2elements')) {
-                                    if (j.contains('h2')) {
+                                /*
+                                 if (i.contains('h2elements')) {
+                                 if (j.contains('h2')) {
+                                 j = j.replace('h2', '');
+                                 }
+                                 $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H2&gt;</span>" + j + "</td></tr>");
+                                 }
+                                 */
+                                if (i.indexOf('h2elements') !== -1) {
+                                    if (j.indexOf('h2')) {
                                         j = j.replace('h2', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H2&gt;</span>" + j + "</td></tr>");
-                                    //                                    $("#headingtable2").val("<td id=\"h2element\"><span class=\"bold\">&lt;h2&gt;</span></td><tr><td>" + "<span></span>" + j + "</td></td>");
                                 }
-                                if (i.contains('h3elements')) {
-                                    if (j.contains('h3')) {
+                                /*
+                                 if (i.contains('h3elements')) {
+                                 if (j.contains('h3')) {
+                                 j = j.replace('h3', '');
+                                 }
+                                 $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H3&gt;</span>" + j + "</td></tr>");
+                                 }
+                                 */
+                                if (i.indexOf('h3elements') !== -1) {
+                                    if (j.indexOf('h3')) {
                                         j = j.replace('h3', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H3&gt;</span>" + j + "</td></tr>");
-                                    //                                    $("#headingtable3").val("<td id=\"h3element\"><span class=\"bold\">&lt;h3&gt;</span></td><tr><td>" + "<span></span>" + j + "</td></td>");
                                 }
-                                if (i.contains('h4element')) {
-                                    if (j.contains('h4')) {
+
+                                /*
+                                 if (i.contains('h4element')) {
+                                 if (j.contains('h4')) {
+                                 j = j.replace('h4', '');
+                                 }
+                                 $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H4&gt;</span>" + j + "</td></tr>");
+                                 }
+                                 */
+                                if (i.indexOf('h4elements') !== -1) {
+                                    if (j.indexOf('h4')) {
                                         j = j.replace('h4', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H4&gt;</span>" + j + "</td></tr>");
-                                    //                                    $("#headingtable4").val("<td id=\"h4element\"><span class=\"bold\">&lt;h4&gt;</span></td><tr><td>" + "<span></span>" + j + "</td></td>");
                                 }
-                                if (i.contains('h5element')) {
-                                    if (j.contains('h5')) {
+
+                                /*
+                                 if (i.contains('h5element')) {
+                                 if (j.contains('h5')) {
+                                 j = j.replace('h5', '');
+                                 }
+                                 $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H5&gt;</span>" + j + "</td></tr>");
+                                 }
+                                 */
+                                if (i.indexOf('h5elements') !== -1) {
+                                    if (j.indexOf('h5')) {
                                         j = j.replace('h5', '');
                                     }
                                     $('.no-header.open').append("<tr class='over-max-v'><td>" + "<span>&lt;H5&gt;</span>" + j + "</td></tr>");
-                                    //                                    $("#headingtable5").val('<td id="h5element"><span class="bold">&lt;h5&gt;</span></td><tr><td><span></span>' + j + '</td></td>');
                                 }
                             });
 
-                            $.each(responsejson.visitmap, function(key, value) {
+                            $.each(responsejson.visitmap, function (key, value) {
 
-                                //                                alert(key, value);
+                                // alert(key, value);
 
                                 if (key === 'wwwresolve') {
                                     document.getElementById("wwwresolve").textContent = value;
@@ -3639,16 +3046,6 @@
                                  if (key === 'scoreValue') {
                                  document.getElementById("scoreValue").innerHTML = value;
                                  }
-                                 if (key === 'latitude') {
-                                 latitude = value + "";
-                                 alert("latitude " + latitude)
-                                 document.getElementById("latitude").textContent = value;
-                                 }
-                                 if (key === 'longitude') {
-                                 longitude = value + "";
-                                 alert("longitude " + longitude)
-                                 document.getElementById("longitude").textContent = value;
-                                 }
                                  */
 
                                 if (key === 'pInterestBoards') {
@@ -3708,83 +3105,129 @@
                                 if (key === 'linkedEmployee') {
                                     document.getElementById("linkedEmployee").textContent = value;
                                 }
-
+                                if (key === 'latitude') {
+                                    lat = value;
+                                    initialize();
+                                }
+                                if (key === 'longitude') {
+                                    long = value;
+                                }
+                                if (key === 'aLexaRank') {
+                                    document.getElementById("aLexaRank").textContent = value;
+                                }
+                                if (key === 'facebookShareCount') {
+                                    document.getElementById("facebookShareCount").textContent = value;
+                                }
+                                if (key === 'facebookLikesCount') {
+                                    document.getElementById("facebookLikesCount").textContent = value;
+                                }
+                                if (key === 'facebookComment') {
+                                    document.getElementById("facebookComment").textContent = value;
+                                }
+                                if (key === 'facebookTotalCount') {
+                                    document.getElementById("facebookTotalCount").textContent = value;
+                                }
+                                if (key === 'facebookClickCount') {
+                                    document.getElementById("facebookClickCount").textContent = value;
+                                }
+                                if (key === 'facebookCommentsBoxCount') {
+                                    document.getElementById("facebookCommentsBoxCount").textContent = value;
+                                }
+                                if (key === 'linkedInCount') {
+                                    document.getElementById("linkedInCount").textContent = value;
+                                }
+                                if (key === 'pinterestCount') {
+                                    document.getElementById("pinterestCount").textContent = value;
+                                }
+                                if (key === 'twitterCounts') {
+                                    document.getElementById("twitterCounts").textContent = value;
+                                }
+                                if (key === 'googlePlusLike') {
+                                    document.getElementById("googlePlusLike").textContent = value;
+                                }
                             });
-//                            google.maps.event.addDomListener(window, 'load', initialize);
-//                            initialize();
-//                            mapBasic();
                         }
                     });
-                }, 50000);
-            });
+                }, timeout);
+                google.maps.event.addDomListener(window, 'load', initialize);
+
+                //           });
+
+            }
+
+
+
             /* user defined variables */
-            var timeOnSlide = 2,
-                    // the time each image will remain static on the screen, measured in seconds
-                    timeBetweenSlides = 2,
-                    // the time taken to transition between images, measured in seconds
-
-                    // test if the browser supports animation, and if it needs a vendor prefix to do so
-                    animationstring = 'animation',
-                    animation = false,
-                    keyframeprefix = '',
-                    domPrefixes = 'Webkit Moz O Khtml'.split(' '),
-                    // array of possible vendor prefixes
-                    pfx = '',
-                    slidy = document.getElementById("slidy");
-            if (slidy.style.animationName !== undefined) {
-                animation = true;
-            }
-            // browser supports keyframe animation w/o prefixes
-
-            if (animation === false) {
-                for (var i = 0; i < domPrefixes.length; i++) {
-                    if (slidy.style[ domPrefixes[i] + 'AnimationName' ] !== undefined) {
-                        pfx = domPrefixes[ i ];
-                        animationstring = pfx + 'Animation';
-                        keyframeprefix = '-' + pfx.toLowerCase() + '-';
-                        animation = true;
-                        break;
-                    }
-                }
-            }
-
-            if (animation === false) {
-                // animate in JavaScript fallback
-            } else {
-                var images = slidy.getElementsByTagName("img"),
-                        firstImg = images[0],
-                        // get the first image inside the "slidy" element.
-                        imgWrap = firstImg.cloneNode(false); // copy it.
-                slidy.appendChild(imgWrap); // add the clone to the end of the images
-                var imgCount = images.length, // count the number of images in the slide, including the new cloned element
-                        totalTime = (timeOnSlide + timeBetweenSlides) * (imgCount - 1), // calculate the total length of the animation by multiplying the number of _actual_ images by the amount of time for both static display of each image and motion between them
-                        slideRatio = (timeOnSlide / totalTime) * 100, // determine the percentage of time an induvidual image is held static during the animation
-                        moveRatio = (timeBetweenSlides / totalTime) * 100, // determine the percentage of time for an individual movement
-                        basePercentage = 100 / imgCount, // work out how wide each image should be in the slidy, as a percentage.
-                        position = 0, // set the initial position of the slidy element
-                        css = document.createElement("style"); // start marking a new style sheet
-                css.type = "text/css";
-                css.innerHTML += "#slidy { text-align: left; margin: 0; font-size: 0; position: relative; width: " + (imgCount * 100) + "%;  }\n"; // set the width for the slidy container
-                css.innerHTML += "#slidy img { float: left; width: " + basePercentage + "%; }\n";
-                css.innerHTML += "@" + keyframeprefix + "keyframes slidy {\n";
-                for (i = 0; i < (imgCount - 1); i++) { // 
-                    position += slideRatio; // make the keyframe the position of the image
-                    css.innerHTML += position + "% { left: -" + (i * 100) + "%; }\n";
-                    position += moveRatio; // make the postion for the _next_ slide
-                    css.innerHTML += position + "% { left: -" + ((i + 1) * 100) + "%; }\n";
-                }
-                css.innerHTML += "}\n";
-                css.innerHTML += "#slidy { left: 0%; " + keyframeprefix + "transform: translate3d(0,0,0); " + keyframeprefix + "animation: " + totalTime + "s slidy infinite; }\n"; // call on the completed keyframe animation sequence
-                document.body.appendChild(css); // add the new stylesheet to the end of the document
-            }
+            /*
+             var timeOnSlide = 2,
+             // the time each image will remain static on the screen, measured in seconds
+             timeBetweenSlides = 2,
+             // the time taken to transition between images, measured in seconds
+             
+             // test if the browser supports animation, and if it needs a vendor prefix to do so
+             animationstring = 'animation',
+             animation = false,
+             keyframeprefix = '',
+             domPrefixes = 'Webkit Moz O Khtml'.split(' '),
+             // array of possible vendor prefixes
+             pfx = '',
+             slidy = document.getElementById("slidy");
+             if (slidy.style.animationName !== undefined) {
+             animation = true;
+             }
+             
+             
+             // browser supports keyframe animation w/o prefixes
+             
+             if (animation === false) {
+             for (var i = 0; i < domPrefixes.length; i++) {
+             if (slidy.style[ domPrefixes[i] + 'AnimationName' ] !== undefined) {
+             pfx = domPrefixes[ i ];
+             animationstring = pfx + 'Animation';
+             keyframeprefix = '-' + pfx.toLowerCase() + '-';
+             animation = true;
+             break;
+             }
+             }
+             }
+             
+             if (animation === false) {
+             // animate in JavaScript fallback
+             } else {
+             var images = slidy.getElementsByTagName("img"),
+             firstImg = images[0],
+             // get the first image inside the "slidy" element.
+             imgWrap = firstImg.cloneNode(false); // copy it.
+             slidy.appendChild(imgWrap); // add the clone to the end of the images
+             var imgCount = images.length, // count the number of images in the slide, including the new cloned element
+             totalTime = (timeOnSlide + timeBetweenSlides) * (imgCount - 1), // calculate the total length of the animation by multiplying the number of _actual_ images by the amount of time for both static display of each image and motion between them
+             slideRatio = (timeOnSlide / totalTime) * 100, // determine the percentage of time an induvidual image is held static during the animation
+             moveRatio = (timeBetweenSlides / totalTime) * 100, // determine the percentage of time for an individual movement
+             basePercentage = 100 / imgCount, // work out how wide each image should be in the slidy, as a percentage.
+             position = 0, // set the initial position of the slidy element
+             css = document.createElement("style"); // start marking a new style sheet
+             css.type = "text/css";
+             css.innerHTML += "#slidy { text-align: left; margin: 0; font-size: 0; position: relative; width: " + (imgCount * 100) + "%;  }\n"; // set the width for the slidy container
+             css.innerHTML += "#slidy img { float: left; width: " + basePercentage + "%; }\n";
+             css.innerHTML += "@" + keyframeprefix + "keyframes slidy {\n";
+             for (i = 0; i < (imgCount - 1); i++) { // 
+             position += slideRatio; // make the keyframe the position of the image
+             css.innerHTML += position + "% { left: -" + (i * 100) + "%; }\n";
+             position += moveRatio; // make the postion for the _next_ slide
+             css.innerHTML += position + "% { left: -" + ((i + 1) * 100) + "%; }\n";
+             }
+             css.innerHTML += "}\n";
+             css.innerHTML += "#slidy { left: 0%; " + keyframeprefix + "transform: translate3d(0,0,0); " + keyframeprefix + "animation: " + totalTime + "s slidy infinite; }\n"; // call on the completed keyframe animation sequence
+             document.body.appendChild(css); // add the new stylesheet to the end of the document
+             }
+             */
 
         </script>
-
         <script>
-            $(function() {
+            $(function () {
 
                 // The height of the content block when it's not expanded
-                var adjustheight = 125;
+                var adjustheight = 70;
                 // The "more" link text
                 var moreText = "Show  More";
                 // The "less" link text
@@ -3794,20 +3237,21 @@
                 // The section added to the bottom of the "more-less" div
                 $(".more-less").append('');
                 $("a.adjust").text(moreText);
-                $(".adjust").toggle(function() {
+                $(".adjust").toggle(function () {
                     $(this).parents("div:first").find(".more-block").css('height', 'auto').css('overflow', 'visible');
                     // Hide the [...] when expanded
                     $(this).parents("div:first").find("p.continued").css('display', 'none');
                     $(this).text(lessText);
-                }, function() {
+                }, function () {
                     $(this).parents("div:first").find(".more-block").css('height', adjustheight).css('overflow', 'hidden');
                     $(this).parents("div:first").find("p.continued").css('display', 'block');
                     $(this).text(moreText);
                 });
-            });</script>
+            });
+
+        </script>
 
         <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/jquery.min.js" ></script>
-        <!--< script type = "text/javascript" src = "https://s3.amazonaws.com/js-globustracker/review/jquery.min.js" ></script>-->
         <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/mc.min.js?crc=547697426" ></script>
         <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/piecon.min.js?crc=-1047366459" ></script>
         <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/charts.min.js" ></script>
@@ -3816,7 +3260,6 @@
         <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/moment.js" ></script>
         <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/review.min.js" ></script>
         <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/commons.min.js" ></script>  
-
 
     </body>
 </html>

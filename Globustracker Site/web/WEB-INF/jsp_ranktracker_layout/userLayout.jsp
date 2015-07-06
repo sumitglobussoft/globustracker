@@ -46,6 +46,11 @@
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
+        <!--<link rel="stylesheet" href="https://s3.amazonaws.com/css-globustracker/jquery.dataTables.css">-->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/jqueryui/dataTables.jqueryui.css">
+
+
     </head>
     <body class="">
         <!-- HEADER -->
@@ -152,6 +157,9 @@
                     </li>
                     <li>
                         <a href="video.action"><i class="fa fa-lg fa-fw fa-video-camera"></i> <span class="menu-item-parent">Video</span></a>
+                    </li>
+                    <li>
+                        <a href="youtubechecker.action"><i class="fa fa-lg fa-fw fa-youtube-square"></i> <span class="menu-item-parent">Youtube Bulk Checker</span></a>
                     </li>
                     <li>
                         <a href="alerts.action"><i class="fa fa-lg fa-fw fa-bell"></i> <span class="menu-item-parent">Alerts</span></a>
@@ -297,6 +305,35 @@
         <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 
         <![endif]-->
+
+
+        <!--<script src="https://s3.amazonaws.com/js-globustracker/jquery.js"></script>-->
+        <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+        <!--<script src="https://s3.amazonaws.com/js-globustracker/jquery.dataTables.js"></script>-->
+        <script>
+            $(document).ready(function() {          
+                //                var table = $('#example').DataTable( {
+                //                    "order": [[ 0, "asc" ]],      
+                //                    "scrollY": "500px",
+                //                    "scrollX": "100%",
+                //                    "scrollCollapse": true,
+                //                    "paging": false
+                //                } );             
+                //                new $.fn.dataTable.FixedColumns( table );
+                $("#tabs").tabs( {
+                    "activate": function(event, ui) {
+                        $( $.fn.dataTable.tables( true ) ).DataTable().columns.adjust();
+                    }
+                } );
+     
+                $('table.display').dataTable( {
+                    "scrollY": "500px",
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "jQueryUI": true
+                } );
+            } );
+        </script>
 
         <!-- Demo purpose only -->
         <script src="https://s3.amazonaws.com/js-globustracker/admin/demo.js"></script>

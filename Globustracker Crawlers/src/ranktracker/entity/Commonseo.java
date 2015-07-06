@@ -1,7 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package ranktracker.entity;
 
 import java.io.Serializable;
@@ -12,20 +14,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author GLB-131
+ * @author GLB-214
  */
 @Entity
 @Table(name = "commonseo")
-@XmlRootElement
 public class Commonseo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -123,6 +125,7 @@ public class Commonseo implements Serializable {
     private String robots;
     @Column(name = "takingAbout")
     private String takingAbout;
+    @Lob
     @Column(name = "title")
     private String title;
     @Column(name = "titleLength")
@@ -191,6 +194,51 @@ public class Commonseo implements Serializable {
     private String mobileLoadTime;
     @Column(name = "trafficEstimation")
     private String trafficEstimation;
+    @Column(name = "scoreValue")
+    private String scoreValue;
+    @Column(name = "pInterestBoards")
+    private String pInterestBoards;
+    @Column(name = "pInterestPins")
+    private String pInterestPins;
+    @Column(name = "pInterestLikes")
+    private String pInterestLikes;
+    @Column(name = "pInterestFollower")
+    private String pInterestFollower;
+    @Column(name = "pInterestFollowing")
+    private String pInterestFollowing;
+    @Column(name = "pInterestImage")
+    private String pInterestImage;
+    @Column(name = "pInterestName")
+    private String pInterestName;
+    @Column(name = "pInterestDescription")
+    private String pInterestDescription;
+    @Column(name = "linkedFollower")
+    private String linkedFollower;
+    @Column(name = "linkedImage")
+    private String linkedImage;
+    @Lob
+    @Column(name = "linkedDescription")
+    private String linkedDescription;
+    @Column(name = "linkedSpecialties")
+    private String linkedSpecialties;
+    @Column(name = "linkedWebsite")
+    private String linkedWebsite;
+    @Column(name = "linkedIndustry")
+    private String linkedIndustry;
+    @Column(name = "linkedType")
+    private String linkedType;
+    @Column(name = "linkedHeadquater")
+    private String linkedHeadquater;
+    @Column(name = "linkedCompany")
+    private String linkedCompany;
+    @Column(name = "linkedFounded")
+    private String linkedFounded;
+    @Column(name = "linkedEmployee")
+    private String linkedEmployee;
+    @Column(name = "latitude")
+    private String latitude;
+    @Column(name = "longitude")
+    private String longitude;
 
     public Commonseo() {
     }
@@ -796,29 +844,180 @@ public class Commonseo implements Serializable {
         this.trafficEstimation = trafficEstimation;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getScoreValue() {
+        return scoreValue;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Commonseo)) {
-            return false;
-        }
-        Commonseo other = (Commonseo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setScoreValue(String scoreValue) {
+        this.scoreValue = scoreValue;
     }
 
-    @Override
-    public String toString() {
-        return "ranktracker.entity.Commonseo[ id=" + id + " ]";
+    public String getPInterestBoards() {
+        return pInterestBoards;
+    }
+
+    public void setPInterestBoards(String pInterestBoards) {
+        this.pInterestBoards = pInterestBoards;
+    }
+
+    public String getPInterestPins() {
+        return pInterestPins;
+    }
+
+    public void setPInterestPins(String pInterestPins) {
+        this.pInterestPins = pInterestPins;
+    }
+
+    public String getPInterestLikes() {
+        return pInterestLikes;
+    }
+
+    public void setPInterestLikes(String pInterestLikes) {
+        this.pInterestLikes = pInterestLikes;
+    }
+
+    public String getPInterestFollower() {
+        return pInterestFollower;
+    }
+
+    public void setPInterestFollower(String pInterestFollower) {
+        this.pInterestFollower = pInterestFollower;
+    }
+
+    public String getPInterestFollowing() {
+        return pInterestFollowing;
+    }
+
+    public void setPInterestFollowing(String pInterestFollowing) {
+        this.pInterestFollowing = pInterestFollowing;
+    }
+
+    public String getPInterestImage() {
+        return pInterestImage;
+    }
+
+    public void setPInterestImage(String pInterestImage) {
+        this.pInterestImage = pInterestImage;
+    }
+
+    public String getPInterestName() {
+        return pInterestName;
+    }
+
+    public void setPInterestName(String pInterestName) {
+        this.pInterestName = pInterestName;
+    }
+
+    public String getPInterestDescription() {
+        return pInterestDescription;
+    }
+
+    public void setPInterestDescription(String pInterestDescription) {
+        this.pInterestDescription = pInterestDescription;
+    }
+
+    public String getLinkedFollower() {
+        return linkedFollower;
+    }
+
+    public void setLinkedFollower(String linkedFollower) {
+        this.linkedFollower = linkedFollower;
+    }
+
+    public String getLinkedImage() {
+        return linkedImage;
+    }
+
+    public void setLinkedImage(String linkedImage) {
+        this.linkedImage = linkedImage;
+    }
+
+    public String getLinkedDescription() {
+        return linkedDescription;
+    }
+
+    public void setLinkedDescription(String linkedDescription) {
+        this.linkedDescription = linkedDescription;
+    }
+
+    public String getLinkedSpecialties() {
+        return linkedSpecialties;
+    }
+
+    public void setLinkedSpecialties(String linkedSpecialties) {
+        this.linkedSpecialties = linkedSpecialties;
+    }
+
+    public String getLinkedWebsite() {
+        return linkedWebsite;
+    }
+
+    public void setLinkedWebsite(String linkedWebsite) {
+        this.linkedWebsite = linkedWebsite;
+    }
+
+    public String getLinkedIndustry() {
+        return linkedIndustry;
+    }
+
+    public void setLinkedIndustry(String linkedIndustry) {
+        this.linkedIndustry = linkedIndustry;
+    }
+
+    public String getLinkedType() {
+        return linkedType;
+    }
+
+    public void setLinkedType(String linkedType) {
+        this.linkedType = linkedType;
+    }
+
+    public String getLinkedHeadquater() {
+        return linkedHeadquater;
+    }
+
+    public void setLinkedHeadquater(String linkedHeadquater) {
+        this.linkedHeadquater = linkedHeadquater;
+    }
+
+    public String getLinkedCompany() {
+        return linkedCompany;
+    }
+
+    public void setLinkedCompany(String linkedCompany) {
+        this.linkedCompany = linkedCompany;
+    }
+
+    public String getLinkedFounded() {
+        return linkedFounded;
+    }
+
+    public void setLinkedFounded(String linkedFounded) {
+        this.linkedFounded = linkedFounded;
+    }
+
+    public String getLinkedEmployee() {
+        return linkedEmployee;
+    }
+
+    public void setLinkedEmployee(String linkedEmployee) {
+        this.linkedEmployee = linkedEmployee;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
     
 }

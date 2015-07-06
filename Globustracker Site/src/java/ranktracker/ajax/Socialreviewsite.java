@@ -14,9 +14,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- *This class is responsible of giving http request to crawler server
- * to crawl the data and put the data in database of site server
- * 
+ * This class is responsible of giving http request to crawler server to crawl
+ * the data and put the data in database of site server
+ *
  * @Laxmi Kiran Nallam
  */
 public class Socialreviewsite implements Runnable {
@@ -31,18 +31,20 @@ public class Socialreviewsite implements Runnable {
     @Override
     public void run() {
         try {
-            //http://50.116.17.193:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
-            
+            //http://Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
+
             Keywordsuggestion keysuggestion = appcontext.getBean("keywordsuggestion", Keywordsuggestion.class);
             URI newuri = new URIBuilder()
                     .setScheme("http")
-                    .setHost("50.116.17.193:8080")
+                  //.setHost("Ip Address:8080")
+//                    .setHost("Ip Address:8080")
+                    .setHost("Ip Address:8080")
                     .setPath("/Globuswooclonecrawler/Reviewsite")
                     .setParameter("websitename", websitename)
                     .build();
             System.out.println("newuri = " + newuri);
             keysuggestion.fetchXMLContent(newuri);
-        } catch (IOException |URISyntaxException ex) {
+        } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(Socialreviewsite.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -16,7 +16,7 @@ public class SaveData {
         try {
             if (con==null ){
                 Class.forName("com.mysql.jdbc.Driver");
-               con = DriverManager.getConnection("jdbc:mysql://173.255.209.86:3306/ranktracker", "root", "brandzter1234!@#$");
+               con = DriverManager.getConnection("jdbc:mysql://IP address:3306/databasename", "Username", "Password");
             }
         } catch (Exception e) {
             e.printStackTrace();

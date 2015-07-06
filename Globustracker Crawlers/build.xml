@@ -10,6 +10,16 @@
 <project name="BrandzterRankTrackerCrawler" default="default" basedir=".">
     <description>Builds, tests, and runs the project BrandzterRankTrackerCrawler.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <target name="-post-jar">
+        <mkdir dir="${dist.dir}/merged"/>
+        <jar destfile="${dist.dir}/merged/${ant.project.name}.jar">
+            <zipgroupfileset dir="dist" includes="**/*.jar" excludes="merged/"/>
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -51,8 +61,7 @@
       -init-macrodef-junit:     defines macro for junit execution
       -init-macrodef-debug:     defines macro for class debugging
       -init-macrodef-java:      defines macro for class execution
-      -do-jar-with-manifest:    JAR building (if you are using a manifest)
-      -do-jar-without-manifest: JAR building (if you are not using a manifest)
+      -do-jar:                  JAR building
       run:                      execution of project 
       -javadoc-build:           Javadoc generation
       test-report:              JUnit report generation

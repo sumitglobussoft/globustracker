@@ -64,18 +64,18 @@ public class KeywordsServiceImpl implements KeywordsService {
      * @return
      */
     @Override
-    public Object[] getSerpData(Integer campaignID, Integer customerId) {
+    public Object[] getSerpData(Integer campaignID,Integer customerId) {
 
         //calling the getKeywords and getCampaign method of KeywordsDaoImpl class
-        return new Object[]{objKeywordsDao.getSerpKeywords(campaignID, customerId), objKeywordsDao.getSocialSignalData(campaignID),
-            objCampaignsDao.getCampaign(campaignID, customerId), objKeywordsDao.getSeoDetails(campaignID, customerId)};
+        return new Object[]{objKeywordsDao.getSerpKeywords(campaignID), objKeywordsDao.getSocialSignalData(campaignID),
+            objCampaignsDao.getCampaign(campaignID, customerId), objKeywordsDao.getSeoDetails(campaignID)};
     }
 
     @Override
-    public Object[] getSerpDataLimited(Integer campaignID, Integer customerId, int initial) {
+    public Object[] getSerpDataLimited(Integer campaignID, int initial) {
         //calling the getKeywords and getCampaign method of KeywordsDaoImpl class
-        return new Object[]{objKeywordsDao.getSerpKeywords(campaignID, customerId),
-            objKeywordsDao.getSeoDetails(campaignID, customerId)};
+        return new Object[]{objKeywordsDao.getSerpKeywords(campaignID),
+            objKeywordsDao.getSeoDetails(campaignID)};
     }
 
     /**
@@ -86,7 +86,7 @@ public class KeywordsServiceImpl implements KeywordsService {
     @Override
     public Object[] getVideoData(Integer campaignID, Integer customerId) {
 
-        return new Object[]{objKeywordsDao.getVideoKeywords(campaignID, customerId),
+        return new Object[]{objKeywordsDao.getVideoKeywords(campaignID),
             objCampaignsDao.getCampaign(campaignID, customerId)};
     }
 

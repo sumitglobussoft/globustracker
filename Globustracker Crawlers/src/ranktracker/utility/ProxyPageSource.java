@@ -61,6 +61,9 @@ public class ProxyPageSource {
         } catch (Exception e) {
             l.error(e + "  " + e.getMessage() + " url " + urlToFetch);
         }
+        System.out.print("responseBodyMakeReq==");
+                System.out.println(responseBody);   
+                       
         return responseBody;
     }
 

@@ -25,8 +25,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "displaysettings")
-@NamedQueries({
-    @NamedQuery(name = "Displaysettings.findAll", query = "SELECT d FROM Displaysettings d")})
 public class Displaysettings implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

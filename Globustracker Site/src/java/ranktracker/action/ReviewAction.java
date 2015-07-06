@@ -9,14 +9,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.json.JSONException;
 import org.json.JSONObject;
+import ranktracker.dao.WebsiteReviewDao;
 import ranktracker.entity.Commonseo;
 import ranktracker.service.WebsiteReviewService;
 
@@ -31,7 +30,7 @@ public class ReviewAction extends ActionSupport {
      */
     private String websearchurl;
     /**
-     * 
+     *
      */
     private String jmessage;
     /**
@@ -39,7 +38,7 @@ public class ReviewAction extends ActionSupport {
      */
     private HttpServletRequest objRequest;
     /**
-     * 
+     *
      */
     private HttpServletResponse objResponse;
     /**
@@ -51,17 +50,46 @@ public class ReviewAction extends ActionSupport {
      */
     private HttpSession objSession;
     /**
-     * 
+     *
      */
-    private Map<String,String> visitmap;
+    private Map<String, String> visitmap;
     /**
-     * 
+     *
      */
     private WebsiteReviewService objWebsiteReview;
+
+    private WebsiteReviewDao objReviewDao;
+
+    public void checkExistency() throws IOException, JSONException {
+
+        objResponse = ServletActionContext.getResponse();//getting response object
+        PrintWriter out = objResponse.getWriter();
+
+        JSONObject result = new JSONObject();// declaring & creating the JSONObject
+
+        String sitename = ServletActionContext.getRequest().getParameter("sitename").toString();
+        System.out.println("------------ " + objReviewDao.isExists(sitename));
+        if (objReviewDao.isExists(sitename)) {
+            result.put("result", 1);
+        } else {
+            result.put("result", 0);
+        }
+        objResponse.setContentType("text");
+        objResponse.setHeader("Cache-Control", "no-cache");
+        out.write(result.toString());
+    }
+
+    public WebsiteReviewDao getObjReviewDao() {
+        return objReviewDao;
+    }
+
+    public void setObjReviewDao(WebsiteReviewDao objReviewDao) {
+        this.objReviewDao = objReviewDao;
+    }
+
     /**
-     * 
-     * @return
-     * @throws Exception 
+     *
+     * @return @throws Exception
      */
 //    @Override
 //    public String execute() throws Exception {
@@ -74,13 +102,12 @@ public class ReviewAction extends ActionSupport {
 //        websearchurl = objRequest.getParameter("websearchurl");
 //        System.out.println("----------------websearchurl = " + websearchurl);
 //        objSession.setAttribute("websearchurl", websearchurl);
-//        //http:// 54.183.182.139:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
+//        //http://Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
 ////        Thread social_thread = new Thread(new Socialreviewsite(websearchurl));
 ////        social_thread.start();
 //        return SUCCESS;
 //
 //    }
-
 //    @Action("getreviewhome/{websearchurl}")
 //    public String homereview() throws Exception {
 //        
@@ -91,12 +118,11 @@ public class ReviewAction extends ActionSupport {
 //        websearchurl = objRequest.getParameter("websearchurl");
 //        System.out.println("----------------websearchurl = " + websearchurl);
 //        objSession.setAttribute("websearchurl", websearchurl);
-//        //http:// 54.183.182.139:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
+//        //http:// Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
 ////        Thread social_thread = new Thread(new Socialreviewsite(websearchurl));
 ////        social_thread.start();
 //        return SUCCESS;
 //    }
-
 //    @Override
 //    public String execute() throws Exception{
 //        
@@ -125,7 +151,6 @@ public class ReviewAction extends ActionSupport {
 //        out.flush();        
 //        return SUCCESS;
 //    }
-    
 //    public String getVisitorLocalization() throws IOException{
 //        
 //        JSONObject json = new JSONObject();
@@ -139,9 +164,6 @@ public class ReviewAction extends ActionSupport {
 //         
 //        return SUCCESS;
 //    }
-            
-            
-            
     public String getWebsearchurl() {
         return websearchurl;
     }
@@ -166,11 +188,11 @@ public class ReviewAction extends ActionSupport {
         this.objSession = objSession;
     }
 
-    public Map<String,String> getVisitmap() {
+    public Map<String, String> getVisitmap() {
         return visitmap;
     }
 
-    public void setVisitmap(Map<String,String> visitmap) {
+    public void setVisitmap(Map<String, String> visitmap) {
         this.visitmap = visitmap;
     }
 
@@ -198,5 +220,4 @@ public class ReviewAction extends ActionSupport {
         this.jmessage = jmessage;
     }
 
-   
 }

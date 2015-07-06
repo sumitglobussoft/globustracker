@@ -85,7 +85,7 @@
                             <div class="col-md-9">
                                 <select class="form-control" id="plans" onclick="selectplan();">
                                     <option>Select Plan</option>
-                                    <option>FreeBeta</option>
+                                    <option>Free</option>
                                     <option>Newbie</option>
                                     <option>Individual</option>
                                     <option>Master</option>
@@ -146,8 +146,8 @@
             document.getElementById('keyword').setAttribute("value", "");
             document.getElementById('user').setAttribute("value", "");
         }
-        else if (document.getElementById('plans').value == 'FreeBeta') {
-            document.getElementById('plan').setAttribute("value", "FreeBeta");
+        else if (document.getElementById('plans').value == 'Free') {
+            document.getElementById('plan').setAttribute("value", "Free");
             document.getElementById('planId').setAttribute("value", "1");
             document.getElementById('amount').setAttribute("value", "0");
             document.getElementById('campaign').setAttribute("value", "1");

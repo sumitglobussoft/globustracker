@@ -82,6 +82,9 @@
         border-color: #d6e9c6;
         color: #3c763d;
     }
+    #header{
+        display: none;
+    }
     #header .pull-right {
         display: none;
     }
@@ -92,7 +95,14 @@
         margin-left: 0px;
     }
 </style>
-
+<header id="header">
+    <div id="logo-group">
+        <span id="logo"> <img src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" alt="SmartAdmin"> </span>
+    </div>
+    <div class="pull-right" style="margin-top: 7px">
+        <a class="btn btn-default" href="signOut.action">LogOut</a>
+    </div>
+</header>
 <div class="row">
     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
         <h1 class="page-title txt-color-blueDark">
@@ -351,7 +361,7 @@
     <a href="upgrade.action?itemName=Add50Keywords">
         <button type="button" class="col-md-offset-4 btn btn-info btn-lg text-align-center">Add 50 Keywords to any package for $5</button>
     </a>
-    
+
 </div>
 
 <script type="text/javascript">

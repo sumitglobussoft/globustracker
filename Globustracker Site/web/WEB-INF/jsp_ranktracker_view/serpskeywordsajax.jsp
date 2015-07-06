@@ -280,6 +280,7 @@
                                                             <tr>
                                                                 <th style="text-align: center;">Url <a href="javascript:drawComparisionChart('<s:property value="campaignID"/>','30','google');" id="google_comparision_chart"></a></th>
                                                                 <th style="text-align: center;">Keyword</th>
+                                                                <th style="text-align: center;">Search Engine</th>
                                                                 <th style="text-align: center;">Page Rank</th>
                                                                 <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/google_icon.png" style="border:none;" width="20" height="20" alt="" /></th>
                                                                 <th style="text-align: center;">Best Match Rank</th>
@@ -2073,6 +2074,7 @@
             htmlResult = htmlResult + "<tr>";
             htmlResult = htmlResult + "<td title='" + output.serpskeywords[i].Url + "'><a href='generateCrawledHistory.action?keywordId=" + output.serpskeywords[i].KeywordID + "' title='Google crawl history'><img src='https://s3.amazonaws.com/images_ranktracker/history.png' width='20' height='22' alt='' style='cursor:pointer;'  /></a>" + output.serpskeywords[i].Url + "</td>";
             htmlResult = htmlResult + "<td>" + output.serpskeywords[i].Keyword + "</td>";
+            htmlResult = htmlResult + "<td>" + output.serpskeywords[i].LinkGoogle + "</td>";
             htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].GooglePageRank + "</td>";
 
             if ((output.serpskeywords[i].RankGoogle !== 0) || (output.serpskeywords[i].GoogleUpdatedDate == '-')) {

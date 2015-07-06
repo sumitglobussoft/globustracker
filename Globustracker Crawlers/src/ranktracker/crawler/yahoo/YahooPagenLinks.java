@@ -124,25 +124,16 @@ public class YahooPagenLinks implements Callable<String> {
         // System.out.println("getRank");
         // System.out.println("url: " + url);
         // System.out.println("domain: " + domain);
-        String tempurl = url.replace("http://www.", "");
-        tempurl = tempurl.replace("https://www.", "");
-        tempurl = tempurl.replace("www.", "");
-        tempurl = tempurl.replace("http://", "");
-        tempurl = tempurl.replace("https://", "");
+        String tempurl = url.replace("https://", "").replace("http://", "").replace("www.", "");
         tempurl = tempurl.replace("/", "");
-
-        String tempdomain = domain.replace("http://www.", "");
-        tempdomain = tempdomain.replace("https://www.", "");
-        tempdomain = tempdomain.replace("www.", "");
-        tempdomain = tempdomain.replace("http://", "");
-        tempdomain = tempdomain.replace("https://", "");
-        tempdomain = tempdomain.replace("/", "");
+       
+        String tempdomain = domain.replace("/", "");
 
         if (tempurl.equalsIgnoreCase(tempdomain)) {
             // System.out.println("one");
             return true;
         } else if (!domain.contains("/")) {
-            if (new URL("http://" + url.replace("http://", "").replace("https://", "")).getHost().toString().contains(new URL("http://" + objSerpKeeywords.getUrl().replace("http://", "").replace("https://", "")).getHost().toString())) {
+            if (new URL("http://" + url.replace("http://", "").replace("https://", "").replace("www.", "")).getHost().toString().equalsIgnoreCase(new URL("http://" + domain).getHost().toString())) {
                 //System.out.println("two");
                 return true;
             }
@@ -152,8 +143,8 @@ public class YahooPagenLinks implements Callable<String> {
 
     public boolean findRanks(Document doc, int page) throws MalformedURLException {
 
-        Elements results = doc.select("div[id=web] ol li span[class*=url]");
-        
+       // Elements results = doc.select("div[id=web] ol li span[class*=url]");
+        Elements results = doc.select("div[id=web] ol li div[class=compTitle options-toggle] span[class]");
         System.out.println("-- PAGE : " + page);
         for (Element result : results) {
             try {
@@ -164,7 +155,7 @@ public class YahooPagenLinks implements Callable<String> {
                 System.out.println("        -- URL : " + url);
 
                 if (!bestMatchRankFound) {
-                    if (new URL(url).getHost().toString().contains(new URL("http://" + objSerpKeeywords.getUrl().replace("http://", "").replace("https://", "")).getHost().toString())) {
+                    if (new URL("http://" + url.replace("http://", "").replace("https://", "").replace("www.", "")).getHost().toString().equalsIgnoreCase(new URL("http://" + objSerpKeeywords.getUrl()).getHost().toString())) {
                         objSerpKeeywords.setBestMatchRankYahoo(counter);
                         bestMatchRankFound = true;
                         objSerpKeeywords.setBestMatchLinkYahoo(url);
@@ -208,26 +199,26 @@ public class YahooPagenLinks implements Callable<String> {
            // System.out.println("" + doc);
             findRanks(doc, 1);
 
-            if (!rankFound) {
-                String nextLink;
-                for (int i = 2; i < 26; i++) {
-                    try {
-                        nextLink = doc.select("a[id=pg-next]").first().attr("href");
-                        System.out.println("nextLink : " + nextLink);
-                        doc = Jsoup.parse(fetchSourcewithProx.fetchPageSourcefromClientGoogle(new URI(nextLink), "", 0, this.proxyList));
-                        if (findRanks(doc, i)) {
-                            break;
-                        }
-                    } catch (Exception ex) {
-                        System.out.println("EXCEPTION IN PAGINATION : " + ex);
-                    }
-                }
-            }
+//            if (!rankFound) {
+//                String nextLink;
+//                for (int i = 2; i < 26; i++) {
+//                    try {
+//                        nextLink = doc.select("a[id=pg-next]").first().attr("href");
+//                        System.out.println("nextLink : " + nextLink);
+//                        doc = Jsoup.parse(fetchSourcewithProx.fetchPageSourcefromClientGoogle(new URI(nextLink), "", 0, this.proxyList));
+//                        if (findRanks(doc, i)) {
+//                            break;
+//                        }
+//                    } catch (Exception ex) {
+//                        System.out.println("EXCEPTION IN PAGINATION : " + ex);
+//                    }
+//                }
+//            }
 
             System.out.println("bestMatchRankYahoo : " + objSerpKeeywords.getBestMatchRankYahoo());
             System.out.println("bestMatchLinkYahoo : " + objSerpKeeywords.getBestMatchLinkYahoo());
             System.out.println("rankYahoo : " + objSerpKeeywords.getRankYahoo());
-           objKeywordDao.saveResult(objSerpKeeywords.getKeywordID(), objSerpKeeywords.getRankYahoo(),objSerpKeeywords.getBestMatchRankYahoo(), objSerpKeeywords.getBestMatchLinkYahoo(), "yahoo.com");
+           objKeywordDao.saveResult(objSerpKeeywords.getKeywordID(), objSerpKeeywords.getRankYahoo(),objSerpKeeywords.getBestMatchRankYahoo(), objSerpKeeywords.getBestMatchLinkYahoo(), "yahoo.com",objSerpKeeywords.getKeyword(),objSerpKeeywords.getUrl());
         } catch (Exception run1) {
             Logger.getLogger(Yahoo_search.class.getName()).log(Level.SEVERE, null, run1);
             run1.printStackTrace();

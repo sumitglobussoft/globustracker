@@ -37,14 +37,14 @@ public interface KeywordsDao {
      * @param siteID
      * @return
      */
-    public List<Serpkeywords> getSerpKeywords(Integer siteID, Integer customerID);
+    public List<Serpkeywords> getSerpKeywords(Integer siteID);
     
     /**
      *
      * @param siteID
      * @return
      */
-    public List<Seokeyworddetails> getSeoDetails(Integer siteID, Integer customerID);
+    public List<Seokeyworddetails> getSeoDetails(Integer siteID);
 
     /**
      * The method adds new keyword records to database
@@ -136,7 +136,7 @@ public interface KeywordsDao {
      * @param campaignId
      * @return
      */
-    public List<Videokeywords> getVideoKeywords(Integer campaignId, Integer customerId);
+    public List<Videokeywords> getVideoKeywords(Integer campaignId);
 
     /**
      * The method deletes a keyword
