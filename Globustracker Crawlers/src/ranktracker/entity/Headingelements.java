@@ -11,11 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -28,7 +25,7 @@ public class Headingelements implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
-  
+    @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
     @Lob
@@ -46,7 +43,7 @@ public class Headingelements implements Serializable {
     @Lob
     @Column(name = "h5elements")
     private String h5elements;
-  
+    @Basic(optional = false)
     @Column(name = "url")
     private String url;
 

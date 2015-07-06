@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ranktracker.entity;
 
 import java.io.Serializable;
@@ -22,6 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "relatedwebsite")
 public class Relatedwebsite implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
@@ -70,5 +70,4 @@ public class Relatedwebsite implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
-    
 }

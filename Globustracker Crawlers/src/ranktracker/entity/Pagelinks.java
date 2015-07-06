@@ -7,11 +7,15 @@
 package ranktracker.entity;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +28,7 @@ public class Pagelinks implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
-    
+    @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
     @Lob
@@ -36,7 +40,7 @@ public class Pagelinks implements Serializable {
     @Lob
     @Column(name = "type")
     private String type;
-   
+    @Basic(optional = false)
     @Column(name = "url")
     private String url;
 
@@ -90,5 +94,12 @@ public class Pagelinks implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 }

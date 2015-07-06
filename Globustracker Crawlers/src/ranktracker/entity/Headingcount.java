@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author GLB-008
+ * @author GLB-214
  */
 @Entity
 @Table(name = "headingcount")
@@ -109,5 +109,6 @@ public class Headingcount implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
-    
+
+ 
 }

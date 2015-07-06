@@ -81,5 +81,4 @@ public class Technology implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
-    
 }

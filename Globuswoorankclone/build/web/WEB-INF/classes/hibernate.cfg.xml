@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>    
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/databasename</property>
+        <property name="hibernate.connection.username">username</property>
+        <property name="hibernate.connection.password">password</property>
+               
+        <mapping class="globuswoo.entity.Account"/>
+        <mapping class="globuswoo.entity.Alertsdata" />
+        <mapping class="globuswoo.entity.CampaignKeywords" />
+        <mapping class="globuswoo.entity.CampaignKeywordsPK" />
+        <mapping class="globuswoo.entity.Campaigns" />
+        <mapping class="globuswoo.entity.Commonseo" />
+        <mapping class="globuswoo.entity.Customers" />
+        <mapping class="globuswoo.entity.Displaysettings" />
+        <mapping class="globuswoo.entity.Globustrackerevents" />
+        <mapping class="globuswoo.entity.Headingcount" />
+        <mapping class="globuswoo.entity.Headingelements" />
+        <mapping class="globuswoo.entity.Image" />
+        <mapping class="globuswoo.entity.Mailhistory" />
+        <mapping class="globuswoo.entity.MasterEmail" />
+        <mapping class="globuswoo.entity.Monitor" />
+        <mapping class="globuswoo.entity.Pagelinks" />
+        <mapping class="globuswoo.entity.Payments" />
+        <mapping class="globuswoo.entity.Plans" />
+        <mapping class="globuswoo.entity.Relatedwebsite" />
+        <mapping class="globuswoo.entity.Reportfrequency" />
+        <mapping class="globuswoo.entity.Reseller" />
+        <mapping class="globuswoo.entity.Reviewsite" />
+        <mapping class="globuswoo.entity.Seokeyworddetails" />
+        <mapping class="globuswoo.entity.Serpkeywordgoal" /> 
+        <mapping class="globuswoo.entity.Serpkeywords" />
+        <mapping class="globuswoo.entity.Serpstrackhistory" />
+        <mapping class="globuswoo.entity.Site" />
+        <mapping class="globuswoo.entity.Socialreview" />
+        <mapping class="globuswoo.entity.Socialsignalurls" />
+        <mapping class="globuswoo.entity.Socialtrackhistory" />
+        <mapping class="globuswoo.entity.Technology" />
+        <mapping class="globuswoo.entity.Trackhistory" />
+        <mapping class="globuswoo.entity.Users" /> 
+        <mapping class="globuswoo.entity.Videokeywords" />
+        <mapping class="globuswoo.entity.Videotrackhistory" />
+        <mapping class="globuswoo.entity.Visitorarray" />
+        <mapping class="globuswoo.entity.Xmldata" />
+    </session-factory>
+</hibernate-configuration>
