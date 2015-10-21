@@ -346,27 +346,28 @@
                 <div class="row charts">
                     <div class="col-md-4">
                         <div class="chart first">
+                            
                             <div class="quantity">
                                 <span class="dollar">$</span>
-                                <span class="price">00</span>
+                                <span class="price">${listPlans.get(0).amount}</span>
                                 <span class="period">/month</span>
                             </div>
-                            <div class="plan-name">FREE</div>
+                            <div class="plan-name">${listPlans.get(0).name}</div>
                             <div class="specs">
                                 <div class="spec">
-                                    <span class="variable">1</span>
+                                    <span class="variable">${listPlans.get(0).campaigns}</span>
                                     Campaigns
                                 </div>
                                 <div class="spec">
-                                    <span class="variable">1</span>
+                                    <span class="variable">${listPlans.get(0).users}</span>
                                     Users
                                 </div>
                                 <div class="spec">
-                                    <span class="variable">20</span>
+                                    <span class="variable">${listPlans.get(0).keywords}</span>
                                     Keywords
                                 </div>
                             </div>
-                            <a class="btn-signup button-clear" href="sessionSaver.action?itemName=FreeBeta">
+                            <a class="btn-signup button-clear" href="sessionSaver.action?itemName=${listPlans.get(0).name}">
                                 <span>Try It For Free</span>
                             </a>
                         </div>
@@ -376,25 +377,25 @@
                             <div class="popular">Most popular</div>
                             <div class="quantity">
                                 <span class="dollar">$</span>
-                                <span class="price">59.99</span>
+                                <span class="price">${listPlans.get(4).amount}</span>
                                 <span class="period">/month</span>
                             </div>
-                            <div class="plan-name">Profesional</div>
+                            <div class="plan-name">${listPlans.get(4).name}</div>
                             <div class="specs">
                                 <div class="spec">
-                                    <span class="variable">50</span>
+                                    <span class="variable">${listPlans.get(4).campaigns}</span>
                                     Campaigns
                                 </div>
                                 <div class="spec">
-                                    <span class="variable">5</span>
+                                    <span class="variable">${listPlans.get(4).users}</span>
                                     Users
                                 </div>
                                 <div class="spec">
-                                    <span class="variable">1000</span>
+                                    <span class="variable">${listPlans.get(4).keywords}</span>
                                     Keywords
                                 </div>
                             </div>
-                            <a class="btn-signup button-clear" href="sessionSaver.action?itemName=Professional">
+                            <a class="btn-signup button-clear" href="sessionSaver.action?itemName=${listPlans.get(4).name}">
                                 <span>Register</span>
                             </a>
                         </div>
@@ -403,25 +404,25 @@
                         <div class="chart last">
                             <div class="quantity">
                                 <span class="dollar">$</span>
-                                <span class="price">799.99</span>
+                                <span class="price">${listPlans.get(7).amount}</span>
                                 <span class="period">/month</span>
                             </div>
-                            <div class="plan-name">Enterprise</div>
+                            <div class="plan-name">${listPlans.get(7).name}</div>
                             <div class="specs">
                                 <div class="spec">
-                                    <span class="variable">1500</span>
+                                    <span class="variable">${listPlans.get(7).campaigns}</span>
                                     Campaigns
                                 </div>
                                 <div class="spec">
-                                    <span class="variable">Unlimited</span>
+                                    <span class="variable">${listPlans.get(7).users}</span>
                                     Users
                                 </div>
                                 <div class="spec">
-                                    <span class="variable">30,000</span>
+                                    <span class="variable">${listPlans.get(7).keywords}</span>
                                     Keywords
                                 </div>
                             </div>
-                            <a class="btn-signup button-clear" href="sessionSaver.action?itemName=Enterprise">
+                            <a class="btn-signup button-clear" href="sessionSaver.action?itemName=${listPlans.get(7).name}">
                                 <span>Register</span>
                             </a>
                         </div>

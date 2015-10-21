@@ -6,7 +6,6 @@ package ranktracker.site.settings;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -17,8 +16,6 @@ import java.util.logging.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 import ranktracker.crawler.StartCrawler;
 import ranktracker.dao.KeywordsDao;
 import ranktracker.entity.Campaigns;

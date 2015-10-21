@@ -154,6 +154,7 @@
         <script src="https://s3.amazonaws.com/js-globustracker/assets/jquery-1.8.2.min.js"></script>
         <script src="https://s3.amazonaws.com/js-globustracker/assets/jquery-ui.min.js"></script>
         <script src="https://s3.amazonaws.com/js-globustracker/assets/bootstrap.min.js"></script>
+        <script src="../../views/js_ranktracker/jquery.validate.js" type="text/javascript"></script>
         <!--[if lt IE 9]>
                 <script src="assets/crossbrowserjs/html5shiv.js"></script>
                 <script src="assets/crossbrowserjs/respond.min.js"></script>

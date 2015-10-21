@@ -31,13 +31,9 @@ public class Socialreviewsite implements Runnable {
     @Override
     public void run() {
         try {
-            //http://Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
-
             Keywordsuggestion keysuggestion = appcontext.getBean("keywordsuggestion", Keywordsuggestion.class);
             URI newuri = new URIBuilder()
                     .setScheme("http")
-                  //.setHost("Ip Address:8080")
-//                    .setHost("Ip Address:8080")
                     .setHost("Ip Address:8080")
                     .setPath("/Globuswooclonecrawler/Reviewsite")
                     .setParameter("websitename", websitename)

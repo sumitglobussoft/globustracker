@@ -8,8 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- stylesheets -->
-        <link href="https://s3.amazonaws.com/css-globustracker/review/review.css" rel="stylesheet" type="text/css"  />
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/bootstrap.min.css">
+        <link href="views/css_ranktracker/review/review.css" rel="stylesheet" type="text/css"  />
+        <link rel="stylesheet" type="text/css" href="views/css_ranktracker/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
 
         <style>
@@ -28,9 +28,9 @@
         </style>
 
         <!-- javascript -->
-        <script src="https://s3.amazonaws.com/js-globustracker/jquery-1.11.1.min.js"></script>
+        <script src="views/js_ranktracker/jquery-1.11.1.min.js"></script>
 
-        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
+        <script src="views/js_ranktracker/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
@@ -203,7 +203,7 @@
 
                                 <div id="dashboard-screenshot">
                                     <div id="set51Loader">
-                                        <div style="text-align:center; display: block" ><img width="10" height="10" style="height: 7%; width: 20%; margin-top: 19%;" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        <div style="text-align:center; display: block" ><img width="10" height="10" style="height: 7%; width: 20%; margin-top: 19%;" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                     </div>
                                     <img src="" class="test" itemprop="image" alt="" width="202" height="114" id="dashboardImage"/>
                                     <div class="screen"></div>
@@ -273,7 +273,7 @@
                                         </div>
 
                                         <div id="set1Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="RelatedWebsite">
                                             <div class="criterium-content more-less">
@@ -309,7 +309,7 @@
                                             </h3>
                                         </div>
                                         <div id="set2Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="PageRank">
                                             <div class="criterium-content">
@@ -338,7 +338,7 @@
 
                                         </div>
                                         <div id="set3Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Title">
                                             <div class="criterium-content">
@@ -361,7 +361,7 @@
 
                                         </div>
                                         <div id="set4Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Description1">
                                             <div class="criterium-content">
@@ -386,7 +386,7 @@
 
                                         </div>
                                         <div id="set5Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Headings">
                                             <div class="criterium-content more-less">
@@ -450,7 +450,7 @@
                                             </div>
                                         </div>
                                         <div id="set6Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="MetaKeywords">
                                             <div class="criterium-content">
@@ -480,7 +480,7 @@
 
                                         </div>
                                         <div id="set7Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Images">
                                             <div class="criterium-content more-less">
@@ -511,7 +511,7 @@
 
                                         </div>
                                         <div id="set8Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="HTMLRatio">
                                             <div class="criterium-content">
@@ -531,7 +531,7 @@
                                             </h3>
                                         </div>
                                         <div id="set9Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="IndexedPages">
                                             <div class="criterium-content">
@@ -553,7 +553,7 @@
                                             </h3>
                                         </div>
                                         <div id="set10Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div class="criterium-content">
 
@@ -570,7 +570,7 @@
 
                                         </div>
                                         <div id="set11Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div class="criterium-content">
                                         </div>
@@ -586,7 +586,7 @@
 
                                         </div>
                                         <div id="set12Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="GooglePreview">
                                             <div class="criterium-content">
@@ -608,7 +608,7 @@
 
                                         </div>
                                         <div id="set13Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="GooglePublisher">
                                             <div class="criterium-content">
@@ -627,7 +627,7 @@
 
                                         </div>
                                         <div id="set14Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div class="criterium-content">
 
@@ -645,7 +645,7 @@
 
                                         </div>
                                         <div id="set15Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="pageLinks">
                                             <div class="criterium-content more-less">
@@ -682,7 +682,7 @@
 
                                         </div>
                                         <div id="set16Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div class="criterium-content">
                                             <div class="part text ">
@@ -703,7 +703,7 @@
                                         
                                                                                 </div>-->
                                         <div id="set17Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Backlinks">
                                             <div class="criterium-content">
@@ -729,7 +729,7 @@
 
                                         </div>
                                         <div id="set18Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Resolve">
                                             <div class="criterium-content">
@@ -750,7 +750,7 @@
                                             </h3>
                                         </div>
                                         <div id="set19Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Canonicalization">
                                             <div class="criterium-content">
@@ -770,7 +770,7 @@
                                             </h3>
                                         </div>
                                         <div id="set20Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Robots">
                                             <div class="criterium-content">
@@ -791,7 +791,7 @@
 
                                         </div>
                                         <div id="set21Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="XMLSitemap">
                                             <div class="criterium-content more-less">
@@ -817,7 +817,7 @@
 
                                         </div>
                                         <div id="set22Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Rewrite">
                                             <div class="criterium-content">
@@ -838,7 +838,7 @@
 
                                         </div>
                                         <div id="set23Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="UnderscoresUrl">
                                             <div class="criterium-content">
@@ -859,7 +859,7 @@
 
                                         </div>
                                         <div id="set24Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Flash">
                                             <div class="criterium-content">
@@ -880,7 +880,7 @@
 
                                         </div>
                                         <div id="set25Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="Frames">
                                             <div class="criterium-content">
@@ -899,7 +899,7 @@
 
                                         </div>
                                         <div id="set26Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="DomainRegistered">
                                             <div class="criterium-content">
@@ -918,7 +918,7 @@
                                             </h3>
                                         </div>
                                         <div id="set27Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="DoaminExpiration">
                                             <div class="criterium-content">
@@ -939,7 +939,7 @@
                                             </h3>
                                         </div>
                                         <div id="set28Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="DomainUpdated">
                                             <div class="criterium-content">
@@ -959,7 +959,7 @@
                                             </h3>
                                         </div>
                                         <div id="set29Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="blog">
                                             <div class="criterium-content">
@@ -983,20 +983,20 @@
                                                 </h3>
                                             </div>
                                             <div id="set30Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="mobileRendering">
                                                 <div class="criterium-content">
                                                     <div class="part image iphone-thumb">
                                                         <!--<img src="" itemprop="screenshot" alt="Your website on an iPhone" id="iphoneView"/>-->
                                                         <div id="set53Loader">
-                                                            <div style="text-align:center; display: block" ><img width="10" height="10" style="height: 30%; width: 30%; margin-top: 35%; margin-left: -7%;" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                            <div style="text-align:center; display: block" ><img width="10" height="10" style="height: 30%; width: 30%; margin-top: 35%; margin-left: -7%;" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                                         </div>
                                                         <img alt="" itemprop="screenshot" src="" id="iphoneView">
                                                     </div>
                                                     <div class="part image ipad-thumb">
                                                         <div id="set54Loader">
-                                                            <div style="text-align:center; display: block" ><img width="10" height="10" style="height: 30%; width: 30%; margin-top: 24%; margin-left: -3%;" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                            <div style="text-align:center; display: block" ><img width="10" height="10" style="height: 30%; width: 30%; margin-top: 24%; margin-left: -3%;" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                                         </div>
                                                         <img src="" itemprop="screenshot"  alt="" id="ipadView"/>
                                                     </div>
@@ -1014,7 +1014,7 @@
                                             </div>
 
                                             <div id="set31Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="mobileTime">
                                                 <div class="criterium-content">
@@ -1038,7 +1038,7 @@
 
                                             </div>
                                             <div id="set32Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="mobileOptimization">
                                                 <div class="criterium-content">
@@ -1079,7 +1079,7 @@
                                             </h3>
                                         </div>
                                         <div id="set33Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div class="criterium-content">
                                             <div class="part text ">
@@ -1154,7 +1154,7 @@
                                                 <p>Place the most important content <strong>above the fold line</strong>.</p>
                                             </div>
                                             <div id="set52Loader">
-                                                <div style="text-align:center; display: block" ><img width="10" height="10" style="width: 10%;margin-left: -42%; height: 10%; margin-top: 5%;" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="10" height="10" style="width: 10%;margin-left: -42%; height: 10%; margin-top: 5%;" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="usability">
                                                 <div class="part above-fold-wrapper">
@@ -1178,7 +1178,7 @@
                                             </h3>
                                         </div>
                                         <div id="set34Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div class="criterium-content">
                                             <div class="part text ">
@@ -1448,7 +1448,7 @@
 
                                             </div>
                                             <div id="set35Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="serverIP">
                                                 <div class="criterium-content">
@@ -1470,7 +1470,7 @@
                                                     <span class="fa"></span>Technologies</h3>
                                             </div>
                                             <div id="set36Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="technology">
                                                 <div class="criterium-content">
@@ -1495,7 +1495,7 @@
                                                 </h3>
                                             </div>
                                             <div id="set38Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="analytics">
                                                 <div class="criterium-content">
@@ -1521,7 +1521,7 @@
                                                     <span class="fa"></span>W3C Validity</h3>
                                             </div>
                                             <div id="set39Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="wcvalidity">
                                                 <div class="criterium-content">
@@ -1540,7 +1540,7 @@
                                                     <span class="fa"></span>Doctype</h3>
                                             </div>
                                             <div id="set40Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="doctype1">
                                                 <div class="criterium-content">
@@ -1560,7 +1560,7 @@
                                                     <span class="fa"></span>Encoding</h3>
                                             </div>
                                             <div id="set41Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="encoding1">
                                                 <div class="criterium-content">
@@ -1590,7 +1590,7 @@
                                                     <span class="fa"></span>Directory Browsing</h3>
                                             </div>
                                             <div id="set42Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="directoryBrowsing">
                                                 <div class="criterium-content">
@@ -1610,7 +1610,7 @@
                                                     <span class="fa"></span>Server Signature</h3>
                                             </div>
                                             <div id="set43Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="serverSignature">
                                                 <div class="criterium-content">
@@ -1642,7 +1642,7 @@
                                         </div>
                                         <div id="socialshareability">
                                             <div id="set58Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="socialShareabilitypage">
                                                 <div class="criterium-content">
@@ -1726,7 +1726,7 @@
                                             </div>
                                         </div>
                                         <div id="set44Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="twitterAccount">
                                             <div class="criterium-content">
@@ -1793,7 +1793,7 @@
                                         </div>
                                         <div id="facebook">
                                             <div id="set45Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="facebookPage">
                                                 <div class="criterium-content">
@@ -1859,7 +1859,7 @@
                                         </div>
                                         <div id="googleplus">
                                             <div id="set46Loader">
-                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                                <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                             </div>
                                             <div id="googlePage">
                                                 <div class="criterium-content">
@@ -1939,7 +1939,7 @@
                                         </div>
                                         <!--<div id="googleplus">-->
                                         <div id="set56Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="linkedinAccount">
                                             <div class="criterium-content">
@@ -2016,7 +2016,7 @@
                                             </h3>
                                         </div>
                                         <div id="set57Loader">
-                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                            <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                         </div>
                                         <div id="PinterestAccount">
                                             <div class="criterium-content">
@@ -2087,7 +2087,7 @@
                                     </div>
 
                                     <div id="set55Loader">
-                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                     </div>
                                     <div id="trafficEstimation1">
                                         <div class="criterium-content">
@@ -2112,7 +2112,7 @@
 
                                     </div>
                                     <div id="set48Loader">
-                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                     </div>
                                     <div id="trafficRank1">
                                         <div class="criterium-content">
@@ -2140,7 +2140,7 @@
                                             <span class="fa"></span>Adwords Traffic</h3>
                                     </div>
                                     <div id="set49Loader">
-                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                     </div>
                                     <div class="criterium-content">
                                     </div>
@@ -2154,7 +2154,7 @@
                                             <span class="fa"></span>Server Localization</h3>
                                     </div>
                                     <div id="set50Loader">
-                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="https://s3.amazonaws.com/images-globustracker/review/loader_image"/></div>
+                                        <div style="text-align:center; display: block" ><img width="50" height="50" src="views/images_ranktracker/review/loader_image.gif"/></div>
                                     </div>
                                     <div id="VisitorsLocalization1">
                                         <div class="criterium-content" id="localozation">
@@ -3251,15 +3251,15 @@
 
         </script>
 
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/jquery.min.js" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/mc.min.js?crc=547697426" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/piecon.min.js?crc=-1047366459" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/charts.min.js" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/mstch.min.js?crc=-1697587399" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/push.min.js?crc=-1546243989" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/moment.js" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/review.min.js" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/commons.min.js" ></script>  
+        <script type="text/javascript" src="views/js_ranktracker/review/jquery.min.js" ></script>
+        <script type="text/javascript" src="views/js_ranktracker/review/mc.min.js?crc=547697426" ></script>
+        <script type="text/javascript" src="views/js_ranktracker/review/piecon.min.js?crc=-1047366459" ></script>
+        <script type="text/javascript" src="views/js_ranktracker/review/charts.min.js" ></script>
+        <script type="text/javascript" src="views/js_ranktracker/review/mstch.min.js?crc=-1697587399" ></script>
+        <script type="text/javascript" src="views/js_ranktracker/review/push.min.js?crc=-1546243989" ></script>
+        <script type="text/javascript" src="views/js_ranktracker/review/moment.js" ></script>
+        <script type="text/javascript" src="views/js_ranktracker/review/review.min.js" ></script>
+        <script type="text/javascript" src="views/js_ranktracker/review/commons.min.js" ></script>  
 
     </body>
 </html>

@@ -45,6 +45,7 @@ public class Pinterest extends Thread {
         }
     }
 
+
     public void setBusinessUrl(Commonseo data, String complete_url) throws IOException {
 
         try {

@@ -16,7 +16,7 @@ import ranktracker.entity.Plans;
  * @author Sushant Gupta <sushant@globussoft.com>
  */
 public class PaymentServiceImpl implements PaymentService {
-    
+
     static Logger l = Logger.getLogger(PaymentServiceImpl.class.getName());
     /**
      * objPaymentDAO The database layer object variable for PaymentDAO object
@@ -26,7 +26,6 @@ public class PaymentServiceImpl implements PaymentService {
     //This object name 'objPaymentDAO' should be same as declared bean in 'beans.xml' for ranktracker.dao.PaymentDaoImpl class
     //then we have to generate getter and setter method for objPaymentDAO object.
     //by doing so, spring container initialize the objPaymentDAO object.
-    
     /**
      * The method saves a payment record
      *
@@ -84,4 +83,26 @@ public class PaymentServiceImpl implements PaymentService {
         //calling the getPlans method of PaymentDAOImpl class
         return objPaymentDAO.getPlans(planName);
     }
+
+    @Override
+    public List<Plans> getAllPlansDetails() {
+        return objPaymentDAO.getAllPlansDetails();
+
     }
+
+    @Override
+    public Plans insertPlansDetails(Plans objPlansDetails) {
+        return objPaymentDAO.insertPlansDetails(objPlansDetails);
+
+    }
+
+    @Override
+    public void updatePlansDetails(Plans objPlansDetails) {
+        objPaymentDAO.updatePlansDetails(objPlansDetails);
+    }
+
+    @Override
+    public Plans getCustomerPlanID(int customerID) {
+        return objPaymentDAO.getCustomerPlanID(customerID);
+    }
+}

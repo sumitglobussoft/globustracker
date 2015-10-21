@@ -104,34 +104,14 @@ public class PRGenerator extends Thread {
             objKeywordDao.saveGooglePageRank(keywordID, Integer.parseInt(result));
 
         }
-
-//     String result = "";
-//       HashGenerationJE jenkinsHash = new HashGenerationJE();
-//	long hash = jenkinsHash.hash(("info:" + domain).getBytes());
-//        //Append a 6 in front of the hashing value.
-//	String url = "http://toolbarqueries.google.com/tbr?client=navclient-auto&hl=en&"
-//	   + "ch=6" + hash + "&ie=UTF-8&oe=UTF-8&features=Rank&q=info:" + domain;
-// 
-//	try {
-//		
-//		String input=fetchGooglePageRank(url);
-//	        // What Google returned? Example : Rank_1:1:9, PR = 9
-//		System.out.println(input);
-//
-//		result = input.substring(input.lastIndexOf(":") + 1);
-//                objKeywordDao.saveGooglePageRank(keywordId, Integer.parseInt(result));
-//	} catch (IOException | NumberFormatException e) {
-//		System.out.println(e.getMessage());
-//                objKeywordDao.saveGooglePageRank(keywordId, 0);
-//    }
     }
 
     public String fetchGooglePageRank(String pageurl) throws IOException {
         CredentialsProvider credsprovider = new BasicCredentialsProvider();
         credsprovider.setCredentials(
-                new AuthScope("IP Address", 111),
-                new UsernamePasswordCredentials("Username", "Password"));
-        HttpHost proxy = new HttpHost("Ip Address", 111);
+                new AuthScope("IPAddress", 1678),
+                new UsernamePasswordCredentials("username", "password"));
+        HttpHost proxy = new HttpHost("IPAddress", 1678);
         String userAgent = UserAgents.getRandomUserAgent();
         CloseableHttpClient httpclient = HttpClients.custom()
                 .setDefaultCredentialsProvider(credsprovider)

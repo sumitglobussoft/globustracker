@@ -32,65 +32,92 @@ public class WoorankDaoImpl implements WoorankDao {
     public void insertCommonseo(Commonseo objcommonseo) {
 
 //        getSession().save(objcommonseo);
-        session.beginTransaction();
-        session.save(objcommonseo);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(objcommonseo);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void insertHeading(Headingcount objheadingcount) {
-        session.beginTransaction();
-        session.save(objheadingcount);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(objheadingcount);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void insertHeadingElement(Headingelements objHeadingelements) {
-        session.beginTransaction();
-        session.save(objHeadingelements);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(objHeadingelements);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void insertPageLinks(Pagelinks objPagelinks) {
-        session.beginTransaction();
-        session.save(objPagelinks);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(objPagelinks);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void insertImage(Image objImage) {
-        session.beginTransaction();
-        session.save(objImage);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(objImage);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void insertRelatedWebsite(Relatedwebsite objRelatedwebsite) {
-        session.beginTransaction();
-        session.save(objRelatedwebsite);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(objRelatedwebsite);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void insertTechnology(Technology objTechnology) {
-        session.beginTransaction();
-        session.save(objTechnology);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(objTechnology);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void insertVisitor(Visitorarray objVisitorarray) {
-        session.beginTransaction();
-        session.save(objVisitorarray);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(objVisitorarray);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void insertXmlData(Xmldata objXmldata) {
-        session.beginTransaction();
-        session.save(objXmldata);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(objXmldata);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -333,7 +360,7 @@ public class WoorankDaoImpl implements WoorankDao {
             commonseo.setLinkedInCount(linkedInCount);
             commonseo.setPinterestCount(pinterestCount);
             commonseo.setTwitterCounts(twitterCounts);
-            
+
             session.update(commonseo);
             //            tx.commit();
         } catch (HibernateException e) {

@@ -25,7 +25,7 @@
                             <td style="width: 0px;">&nbsp; </td>
                             <td style="">
                                 <a target="_blank" href="http://www.globustracker.com">
-                                    <img alt="GlobusTracker" src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
+                                    <img alt="GlobusTracker" src="views/images_ranktracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
                                 </a>
                             </td>
                             <td style="width:5%">&nbsp; </td>
@@ -91,7 +91,7 @@
                             <td style="width:5%"> &nbsp;</td>
                             <td>
                                 <a target="_blank" href="http://www.globustracker.com">
-                                    <img alt="GlobusTracker" src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
+                                    <img alt="GlobusTracker" src="views/images_ranktracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
                                 </a>
                             </td>
                             <td style="width:5%"> &nbsp;</td>
@@ -155,7 +155,7 @@
                             <td style="width:5%"> &nbsp;</td>
                             <td>
                                 <a target="_blank" href="http://www.globustracker.com">
-                                    <img alt="GlobusTracker" src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
+                                    <img alt="GlobusTracker" src="views/images_ranktracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
                                 </a>
                             </td>
                             <td style="width:5%"> &nbsp;</td>
@@ -218,7 +218,7 @@
                             <td style="width:5%">&nbsp; </td>
                             <td>
                                 <a target="_blank" href="http://www.globustracker.com">
-                                    <img alt="GlobusTracker" src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
+                                    <img alt="GlobusTracker" src="views/images_ranktracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
                                 </a>
                             </td>
                             <td style="width:5%">&nbsp; </td>
@@ -281,7 +281,7 @@
                             <td style="width:5%"> &nbsp;</td>
                             <td>
                                 <a target="_blank" href="http://www.globustracker.com">
-                                    <img alt="GlobusTracker" src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
+                                    <img alt="GlobusTracker" src="views/images_ranktracker/Globustracker-logo-present.png" style="width:30%;margin-left:-1%;margin-top:.7%;">
                                 </a>
                             </td>
                             <td style="width:5%">&nbsp; </td>

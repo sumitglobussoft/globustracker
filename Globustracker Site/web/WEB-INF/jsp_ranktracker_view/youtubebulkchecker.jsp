@@ -88,11 +88,11 @@
     </section>
 </div>
 
-<script src="https://s3.amazonaws.com/js-globustracker/excellentexport.js"></script>
-
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="views/js_ranktracker/excellentexport.js" type="text/javascript"></script>
+<script src="views/js_ranktracker/bootstrap-filestyle.min.js" type="text/javascript"></script>
 
-<script src="https://s3.amazonaws.com/js-globustracker/bootstrap-filestyle.min.js"></script>
+
 
 <script>
     $(":file").filestyle({buttonName: "btn-primary"});

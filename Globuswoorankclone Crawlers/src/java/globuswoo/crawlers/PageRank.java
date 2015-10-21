@@ -20,6 +20,7 @@ public class PageRank {
 
     public String result = "";
 
+    
     public void disp() {
         System.out.println("Page Rank : " + result);
             }

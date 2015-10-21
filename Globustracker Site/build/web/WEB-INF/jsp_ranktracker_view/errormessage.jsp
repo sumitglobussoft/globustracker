@@ -8,14 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- stylesheets -->
-        <link href="https://s3.amazonaws.com/css-globustracker/review/review.css" rel="stylesheet" type="text/css"  />
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
-
+        <link href="views/css_ranktracker/review/review.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+         
         <!-- javascript -->
-        <script src="https://s3.amazonaws.com/js-globustracker/jquery-1.11.1.min.js"></script>
-
-        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
+        <script src="views/js_ranktracker/jquery-1.11.1.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/bootstrap.min.js" type="text/javascript"></script>
 
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -41,7 +40,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="home.action" class="navbar-brand"> <img src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" class="img-responsive" style="width: 200px;"></a>
+                    <a href="home.action" class="navbar-brand"> <img src="" alt="GlobusTracker" class="img-responsive" style="width: 200px;"></a>
                 </div>
                 <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                     <ul class="nav navbar-nav navbar-right">
@@ -105,15 +104,15 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/jquery.min.js" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/mc.min.js?crc=547697426" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/piecon.min.js?crc=-1047366459" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/charts.min.js" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/mstch.min.js?crc=-1697587399" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/push.min.js?crc=-1546243989" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/moment.js" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/review.min.js" ></script>
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/review/commons.min.js" ></script>  
-
+        <script src="views/js_ranktracker/review/review.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/review/mc.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/review/piecon.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/review/charts.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/review/mstch.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/review/push.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/review/moment.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/review/review.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/review/commons.min.js" type="text/javascript"></script>
+        
     </body>
 </html>

@@ -7,6 +7,13 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/databasename</property>
         <property name="hibernate.connection.username">username</property>
         <property name="hibernate.connection.password">password</property>
+        
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">300</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        
         <mapping class="ranktracker.entity.Commonseo" />
         <mapping class="ranktracker.entity.Relatedwebsite" />
         <mapping class="ranktracker.entity.Headingcount" />
@@ -16,5 +23,11 @@
         <mapping class="ranktracker.entity.Technology" />
         <mapping class="ranktracker.entity.Visitorarray" />
         <mapping class="ranktracker.entity.Pagelinks" />
+        <mapping class="ranktracker.entity.Webmastergraph" />
+        <mapping class="ranktracker.entity.Webmasterquery" />
+        <mapping class="ranktracker.entity.Webmasterurl" />
+        <mapping class="ranktracker.entity.Webmastersitemap" />
+        <mapping class="ranktracker.entity.Webmastercrawlerrorscount" />
+        <mapping class="ranktracker.entity.Webmastercrawlerrorssamples" />
     </session-factory>
 </hibernate-configuration>

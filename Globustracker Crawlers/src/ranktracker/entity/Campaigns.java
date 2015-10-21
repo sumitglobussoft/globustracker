@@ -68,6 +68,17 @@ public class Campaigns implements Serializable {
     private String companyURLLink;
     @Column(name = "CompanyLogoLink")
     private String companyLogoLink;
+    @Column(name = "RankBelow5")
+    private Integer rankBelow5;
+    @Column(name = "RankBelow10")
+    private Integer rankBelow10;
+    @Column(name = "RankBelow20")
+    private Integer rankBelow20;
+    @Column(name = "RankBelow30")
+    private Integer rankBelow30;
+    @Column(name = "RankBelow100")
+    private Integer rankBelow100;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "campaignID")
     private Collection<Seokeyworddetails> seokeyworddetailsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "campaigns")
@@ -255,6 +266,48 @@ public class Campaigns implements Serializable {
     public void setCustomerID(Customers customerID) {
         this.customerID = customerID;
     }
+
+    public Integer getRankBelow5() {
+        return rankBelow5;
+    }
+
+    public void setRankBelow5(Integer rankBelow5) {
+        this.rankBelow5 = rankBelow5;
+    }
+
+    public Integer getRankBelow10() {
+        return rankBelow10;
+    }
+
+    public void setRankBelow10(Integer rankBelow10) {
+        this.rankBelow10 = rankBelow10;
+    }
+
+    public Integer getRankBelow20() {
+        return rankBelow20;
+    }
+
+    public void setRankBelow20(Integer rankBelow20) {
+        this.rankBelow20 = rankBelow20;
+    }
+
+    public Integer getRankBelow30() {
+        return rankBelow30;
+    }
+
+    public void setRankBelow30(Integer rankBelow30) {
+        this.rankBelow30 = rankBelow30;
+    }
+
+    public Integer getRankBelow100() {
+        return rankBelow100;
+    }
+
+    public void setRankBelow100(Integer rankBelow100) {
+        this.rankBelow100 = rankBelow100;
+    }
+    
+    
 
     @Override
     public int hashCode() {

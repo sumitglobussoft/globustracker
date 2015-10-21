@@ -16,7 +16,6 @@ import java.util.Random;
  * @author user
  */
 // note:  This code uses UserAgentsGoogle.txt, UserAgentsYahoo.txt & UserAgentsBing.txt which should be placed in directory ranktracker_crawler_google
-// beside to crawlerRunningParameter.properties file in server
 public class UserAgents {
 
     public static String getRandomUserAgent() {

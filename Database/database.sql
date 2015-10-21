@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 06, 2015 at 01:42 PM
+-- Generation Time: Oct 21, 2015 at 03:52 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `globustracker`
+-- Database: `dummydata`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `alertsdata` (
   `TrackDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`AlertID`),
   KEY `CustomerID` (`CustomerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=90024 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=94622 ;
 
 -- --------------------------------------------------------
 
@@ -76,9 +76,14 @@ CREATE TABLE IF NOT EXISTS `campaigns` (
   `CompanyName` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CompanyURLLink` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CompanyLogoLink` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RankBelow5` int(11) DEFAULT '0',
+  `RankBelow10` int(11) DEFAULT '0',
+  `RankBelow20` int(11) DEFAULT '0',
+  `RankBelow30` int(11) DEFAULT '0',
+  `RankBelow100` int(11) DEFAULT '0',
   PRIMARY KEY (`CampaignID`),
   KEY `CustomerID` (`CustomerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=76 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=87 ;
 
 -- --------------------------------------------------------
 
@@ -195,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `commonseo` (
   `twitterCounts` varchar(20) DEFAULT NULL,
   `googlePlusLike` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 -- --------------------------------------------------------
 
@@ -242,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `CompanyLogoLink` varchar(200) COLLATE utf8_unicode_ci DEFAULT '0',
   `CompanyDescription` varchar(500) COLLATE utf8_unicode_ci DEFAULT '0',
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=70 ;
 
 -- --------------------------------------------------------
 
@@ -298,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `headingcount` (
   `heading5` varchar(255) DEFAULT NULL,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 -- --------------------------------------------------------
 
@@ -315,7 +320,7 @@ CREATE TABLE IF NOT EXISTS `headingelements` (
   `h5elements` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 -- --------------------------------------------------------
 
@@ -328,7 +333,22 @@ CREATE TABLE IF NOT EXISTS `image` (
   `src` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `iprecords`
+--
+
+CREATE TABLE IF NOT EXISTS `iprecords` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ipAddress` varchar(15) NOT NULL,
+  `domainName` varchar(25) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -375,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `pagelinks` (
   `type` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 -- --------------------------------------------------------
 
@@ -429,23 +449,14 @@ CREATE TABLE IF NOT EXISTS `plans` (
   `Campaigns` int(11) NOT NULL,
   `Keywords` int(11) NOT NULL,
   `Users` int(11) NOT NULL,
+  `GoogleAnalytics` int(11) NOT NULL,
+  `KeywordResearch` int(11) NOT NULL,
+  `Webmastertools` int(11) NOT NULL,
+  `WebsiteReview` int(11) NOT NULL,
+  `AccurateLocalRanking` int(11) NOT NULL,
+  `LinkAnalysis` int(11) NOT NULL,
   PRIMARY KEY (`PlanID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
-
---
--- Dumping data for table `plans`
---
-
-INSERT INTO `plans` (`PlanID`, `Name`, `Amount`, `Currency`, `Campaigns`, `Keywords`, `Users`) VALUES
-(1, 'FreeBeta', 0, 'USD', 1, 20, 1),
-(2, 'Newbie', 10, 'USD', 5, 100, 1),
-(3, 'Individual', 20, 'USD', 10, 200, 1),
-(4, 'Master', 35, 'USD', 30, 500, 3),
-(5, 'Professional', 60, 'USD', 50, 1000, 5),
-(6, 'Agency', 150, 'USD', 250, 5000, 10),
-(7, 'Reseller', 300, 'USD', 500, 10000, 10000),
-(8, 'Enterprise', 800, 'USD', 1500, 30000, 10000),
-(9, 'Add50Keywords', 5, 'USD', 0, 50, 0);
 
 -- --------------------------------------------------------
 
@@ -482,7 +493,7 @@ CREATE TABLE IF NOT EXISTS `relatedwebsite` (
   `relatedLinks` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 -- --------------------------------------------------------
 
@@ -627,10 +638,16 @@ CREATE TABLE IF NOT EXISTS `serpkeywords` (
   `GoogleUpdatedDate` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `YahooUpdateDate` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `BingUpdateDate` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RankGoogleRefresherDate` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RankYahooRefresherDate` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RankBingRefresherDate` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Visibility` int(2) NOT NULL DEFAULT '1',
+  `StartGoogle` int(11) NOT NULL DEFAULT '0',
+  `StartYahoo` int(11) NOT NULL DEFAULT '0',
+  `StartBing` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`KeywordID`),
   KEY `CampaignID` (`CampaignID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=645 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=899 ;
 
 -- --------------------------------------------------------
 
@@ -742,7 +759,7 @@ CREATE TABLE IF NOT EXISTS `technology` (
   `techUsed` text,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 -- --------------------------------------------------------
 
@@ -797,7 +814,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `token` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`UserID`),
   KEY `FK__customers` (`CustomerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=55 ;
 
 -- --------------------------------------------------------
 
@@ -863,7 +880,108 @@ CREATE TABLE IF NOT EXISTS `visitorarray` (
   `rank` varchar(255) DEFAULT NULL,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webmastercrawlerrorscount`
+--
+
+CREATE TABLE IF NOT EXISTS `webmastercrawlerrorscount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `siteurl` varchar(500) NOT NULL,
+  `platform` varchar(200) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `count` bigint(20) NOT NULL,
+  `datestring` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webmastercrawlerrorssamples`
+--
+
+CREATE TABLE IF NOT EXISTS `webmastercrawlerrorssamples` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `siteurl` varchar(500) NOT NULL,
+  `pageurl` varchar(500) NOT NULL,
+  `lastcrawled` date NOT NULL,
+  `firstdetected` date NOT NULL,
+  `responsecode` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webmastergraph`
+--
+
+CREATE TABLE IF NOT EXISTS `webmastergraph` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `clicks` double NOT NULL,
+  `date` date NOT NULL,
+  `siteurl` varchar(500) CHARACTER SET utf8 NOT NULL,
+  `ctr` double NOT NULL,
+  `impression` double NOT NULL,
+  `position` double NOT NULL,
+  `datestring` varchar(10) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webmasterquery`
+--
+
+CREATE TABLE IF NOT EXISTS `webmasterquery` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `siteurl` varchar(500) CHARACTER SET utf8 NOT NULL,
+  `query` varchar(500) CHARACTER SET utf8 NOT NULL,
+  `clicks` double NOT NULL,
+  `impression` double NOT NULL,
+  `ctr` double NOT NULL,
+  `position` double NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webmastersitemap`
+--
+
+CREATE TABLE IF NOT EXISTS `webmastersitemap` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `siteurl` varchar(500) CHARACTER SET utf8 NOT NULL,
+  `indexed` bigint(11) NOT NULL,
+  `submitted` bigint(11) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `path` varchar(200) NOT NULL,
+  `lastsubmitteddate` date NOT NULL,
+  `typemap` varchar(20) NOT NULL,
+  `lastdownloadeddate` date NOT NULL,
+  `errors` bigint(11) NOT NULL,
+  `warning` bigint(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webmasterurl`
+--
+
+CREATE TABLE IF NOT EXISTS `webmasterurl` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customerId` int(11) NOT NULL,
+  `url` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=109 ;
 
 -- --------------------------------------------------------
 
@@ -876,7 +994,7 @@ CREATE TABLE IF NOT EXISTS `xmldata` (
   `url` varchar(255) NOT NULL,
   `xmlfiles` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Constraints for dumped tables

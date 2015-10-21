@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <html lang="en-us">
     <head>
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
@@ -158,6 +159,74 @@
                     <li>
                         <a href="video.action"><i class="fa fa-lg fa-fw fa-video-camera"></i> <span class="menu-item-parent">Video</span></a>
                     </li>
+                    <c:if test="${userPlanObj.googleAnalytics ==1}">
+                        <li class="">
+                            <a title="GoogleAnalytics" href="javascript:;"><i class="fa fa-lg fa-fw fa-line-chart"></i> <span class="menu-item-parent">Google Analytics</span></a>
+                            <ul>
+                                <li>
+                                    <a href="googleAnalytics.action">Google Analytics Overview</a>
+                                </li>
+                                <li>
+                                    <a href="googleAcquisition.action">Acquisition</a>
+                                </li>
+                                <li>
+                                    <a href="googleBrowserMobile.action">Browser And Mobile Details</a>
+                                </li>
+                                <li>
+                                    <a href="googleSiteSpeed.action">Site Speed</a>
+                                </li>
+
+                            </ul>   
+                        </li>
+                    </c:if>
+                    <c:if test="${userPlanObj.keywordResearch ==1}">
+                        <li>
+                            <a href="keywordResearch.action"><i class="fa fa-lg fa-fw fa-file-text"></i> <span class="menu-item-parent">Keyword Research</span></a>
+                        </li>
+                    </c:if>
+                    <!--                    <li>
+                                            <a href="webmasterdata.htm"><i class="fa fa-lg fa-fw fa-file-text"></i> <span class="menu-item-parent">Webmaster Tools</span></a>
+                                        </li>-->
+                   <c:if test="${userPlanObj.webmastertools ==1}">
+                        <li class="">
+                            <a title="WebMaster" href="javascript:;"><i class="fa fa-lg fa-fw fa-file-text"></i> <span class="menu-item-parent">Webmaster Tools</span></a>
+                            <ul>
+                                <li>
+                                    <a href="webmasterdata.action">WebMaster Overview</a>
+                                </li>
+                                <li>
+                                    <a href="PageSpeedAnalysis.action">Page Speed Analysis</a>
+                                </li>
+                                <li>
+                                    <a href="MobileUsability.action">Mobile Usability</a>
+                                </li>
+                                <li>
+                                    <a href="StructuredData.action">Structured Data</a>
+                                </li>
+                                <li>
+                                    <a href="robotChecker.action">Robot Checker</a>
+                                </li>
+                            </ul>   
+                        </li>
+                    </c:if>
+                    <c:if test="${userPlanObj.accurateLocalRanking ==1}">
+                        <li>
+                            <a href="accurateRanking.action"><i class="fa fa-lg fa-fw fa-file-archive-o"></i> <span class="menu-item-parent">Accurate Local Ranking</span></a>
+                        </li>
+                    </c:if>
+                    <c:if test="${userPlanObj.linkAnalysis ==1}">
+                        <li>
+                            <a href="linkAnalysis.action"><i class="fa fa-lg fa-fw fa-list"></i> <span class="menu-item-parent">Link Analysis</span></a>
+                        </li>
+                    </c:if>
+
+                    <!--                     <li>
+                                            <a href="PageSpeedAnalysis.action"><i class="fa fa-lg fa-fw fa-file-o"></i> <span class="menu-item-parent">Page Speed Analysis</span></a>
+                                        </li>
+                                         <li>
+                                            <a href="MobileUsability.action"><i class="fa fa-lg fa-fw fa-file-audio-o"></i> <span class="menu-item-parent">Mobile Usability</span></a>
+                                        </li>-->
+
                     <li>
                         <a href="youtubechecker.action"><i class="fa fa-lg fa-fw fa-youtube-square"></i> <span class="menu-item-parent">Youtube Bulk Checker</span></a>
                     </li>
@@ -251,17 +320,19 @@
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="https://s3.amazonaws.com/js-globustracker/highcharts.js"></script>
+        <script src="https://s3.amazonaws.com/js-globustracker/exporting.js"></script>
         <script>
-            if (!window.jQuery) {
-                document.write('<script src="https://s3.amazonaws.com/js-globustracker/admin/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                                        if (!window.jQuery) {
+                                            document.write('<script src="https://s3.amazonaws.com/js-globustracker/admin/libs/jquery-2.0.2.min.js"><\/script>');
+                                        }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="https://s3.amazonaws.com/js-globustracker/admin/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                                        if (!window.jQuery.ui) {
+                                            document.write('<script src="https://s3.amazonaws.com/js-globustracker/admin/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                        }
         </script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
@@ -311,28 +382,28 @@
         <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
         <!--<script src="https://s3.amazonaws.com/js-globustracker/jquery.dataTables.js"></script>-->
         <script>
-            $(document).ready(function() {          
-                //                var table = $('#example').DataTable( {
-                //                    "order": [[ 0, "asc" ]],      
-                //                    "scrollY": "500px",
-                //                    "scrollX": "100%",
-                //                    "scrollCollapse": true,
-                //                    "paging": false
-                //                } );             
-                //                new $.fn.dataTable.FixedColumns( table );
-                $("#tabs").tabs( {
-                    "activate": function(event, ui) {
-                        $( $.fn.dataTable.tables( true ) ).DataTable().columns.adjust();
-                    }
-                } );
-     
-                $('table.display').dataTable( {
-                    "scrollY": "500px",
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "jQueryUI": true
-                } );
-            } );
+                                        $(document).ready(function () {
+                                            //                var table = $('#example').DataTable( {
+                                            //                    "order": [[ 0, "asc" ]],      
+                                            //                    "scrollY": "500px",
+                                            //                    "scrollX": "100%",
+                                            //                    "scrollCollapse": true,
+                                            //                    "paging": false
+                                            //                } );             
+                                            //                new $.fn.dataTable.FixedColumns( table );
+                                            $("#tabs").tabs({
+                                                "activate": function (event, ui) {
+                                                    $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+                                                }
+                                            });
+
+                                            $('table.display').dataTable({
+                                                "scrollY": "500px",
+                                                "scrollCollapse": true,
+                                                "paging": false,
+                                                "jQueryUI": true
+                                            });
+                                        });
         </script>
 
         <!-- Demo purpose only -->
@@ -342,14 +413,14 @@
         <script src="https://s3.amazonaws.com/js-globustracker/admin/app.js"></script>
 
         <script type="text/javascript">
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-            pageSetUp();
+                                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                        pageSetUp();
 
-            // PAGE RELATED SCRIPTS
+                                        // PAGE RELATED SCRIPTS
         </script>
 
         <script>
-            $(document).ready(function()
+            $(document).ready(function ()
             {
                 $("#fade_away").fadeOut(5000);
                 $("#fade_away1").fadeOut(5000);
@@ -360,7 +431,7 @@
             var _glc = _glc || [];
             _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDgsSBXVzZXJzGMKCkH0M');
             var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' :
-                'http://my.clickdesk.com/clickdesk-ui/browser/');
+                    'http://my.clickdesk.com/clickdesk-ui/browser/');
             var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
             var glcspt = document.createElement('script');
             glcspt.type = 'text/javascript';

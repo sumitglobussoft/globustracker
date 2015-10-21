@@ -357,4 +357,19 @@ public class KeywordsServiceImpl implements KeywordsService {
 
         return objKeywordsDao.getKeywordName(keywordID);
     }
+
+    @Override
+    public int refreshGoogleKeyword(Integer keywordId) {
+        return objKeywordsDao.refreshGoogleKeyword(keywordId);
+    }
+
+    @Override
+    public int refreshYahooKeyword(Integer keywordId) {
+        return objKeywordsDao.refreshYahooKeyword(keywordId);
+    }
+
+    @Override
+    public int refreshBingKeyword(Integer keywordId) {
+        return objKeywordsDao.refreshBingKeyword(keywordId);
+    }
 }

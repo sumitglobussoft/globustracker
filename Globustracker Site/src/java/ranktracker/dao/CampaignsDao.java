@@ -3,6 +3,8 @@ package ranktracker.dao;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ranktracker.entity.Campaigns;
 import ranktracker.entity.Serpkeywords;
 import ranktracker.entity.Videokeywords;
@@ -152,4 +154,10 @@ public interface CampaignsDao {
     public List<Campaigns> getEcomCampaigns(Integer customerId);
     
     public List<EcomtrackerForm> getEcomComparisons(Collection<Serpkeywords> lstSerpkeywords);
+        
+    public List<Campaigns> getAllCampaigns();
+    
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void SaveAllCampaigns(Campaigns objGetAllCampaign);
+
 }

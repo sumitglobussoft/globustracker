@@ -42,7 +42,7 @@ public class Google_plus extends Thread {
             String url = "https://plus.google.com/+" + Name + "/about";
 //            System.out.println("URL" + url);
             URL = "" + url;
-            Document doc1 = Jsoup.parse(Crawler.fetchGooglePageRank(url));
+            Document doc1 = Jsoup.parse(Crawler.fetchGooglePageRankWithProxy(url));
 
             //**********************Code For Image*****************************************
             try {

@@ -243,4 +243,13 @@ public interface KeywordsService {
 
     public Object[] getSerpDataLimited(Integer campaignId, int initial);
     
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int refreshGoogleKeyword(Integer keywordId);
+    
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int refreshYahooKeyword(Integer keywordId);
+    
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int refreshBingKeyword(Integer keywordId);
+    
 }

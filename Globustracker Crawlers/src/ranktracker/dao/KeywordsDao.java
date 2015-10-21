@@ -157,17 +157,16 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
         }
         return lstvideokeywords;
     }
-    
-     @Transactional(propagation = Propagation.REQUIRED)
-     public List<Commonseo> getAllCommonseoUrls(){
-         List<Commonseo> lstCommonseo = getHibernateTemplate().find("from Commonseo");
-         return lstCommonseo;
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public List<Commonseo> getAllCommonseoUrls() {
+        List<Commonseo> lstCommonseo = getHibernateTemplate().find("from Commonseo");
+        return lstCommonseo;
     }
-     
+
     /*
      * @method getTrackIdRange() : read the start track id and end track id from trackhistory table
      */
-
     public Integer[] getTrackIdRange(List<Serpkeywords> lstKeywords) {
         int startTrackId = 0;
         int endTrackId = 0;
@@ -262,13 +261,13 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
         List<Serpkeywords> lstKeywords = getHibernateTemplate().find("from Serpkeywords "
                 + "where Visibility=1");
 
-        List<Serpkeywords> keywordList=new ArrayList<>();
-        
+        List<Serpkeywords> keywordList = new ArrayList<>();
+
         for (int i = 1; i <= lstKeywords.size(); i++) {
-            if(i>=sKeywordID&&i<=eKeywordID){
-                keywordList.add(lstKeywords.get(i-1));
+            if (i >= sKeywordID && i <= eKeywordID) {
+                keywordList.add(lstKeywords.get(i - 1));
             }
-            
+
         }
 
         return keywordList;
@@ -335,13 +334,16 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
      * serpstrackhistory table
      *
      * @param keywordId
+     * @param startRank
      * @param webRank
      * @param bestMatchRank
      * @param bestMatchLink
      * @param link
+     * @param Keyword
+     * @param URL
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public void saveResult(Integer keywordId, Integer webRank, Integer bestMatchRank,
+    public void saveResult(Integer keywordId, Integer startRank, Integer webRank, Integer bestMatchRank,
             String bestMatchLink, String link, String Keyword, String URL) {
 
         try {
@@ -355,7 +357,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
             getHibernateTemplate().save(serpstrackhst);
             updateAlertsRank(keywordId, link, webRank);
 
-            updateUserKeywords(keywordId, webRank, bestMatchRank, bestMatchLink, link, Keyword, URL);
+            updateUserKeywords(keywordId, startRank, webRank, bestMatchRank, bestMatchLink, link, Keyword, URL);
 
         } catch (HibernateException e) {
             System.out.println("HibernateException in KeywordsDao " + e);
@@ -455,6 +457,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
     /**
      *
      * @param keywordId
+     * @param startRank
      * @param webRank
      * @param bestMatchRank
      * @param bestMatchLink
@@ -463,7 +466,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
      * @param URL
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public void updateUserKeywords(Integer keywordId, Integer webRank, Integer bestMatchRank,
+    public void updateUserKeywords(Integer keywordId, Integer startRank, Integer webRank, Integer bestMatchRank,
             String bestMatchLink, String link, String Keyword, String URL) {
         String query = null;
         Serpkeywords serpkeys = (Serpkeywords) getSession().get(Serpkeywords.class, keywordId);
@@ -485,9 +488,6 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
 //                            + "bestMatchLinkGoogle = ?, rankGoogleDayChange = ?, rankGoogleWeekChange =?,"
 //                            + "rankGoogleMonthChange = ?, googleUpdatedDate= ? where keywordID = ?";
 
-                    query = "update Serpkeywords set rankGoogle = ?,bestMatchRankGoogle = ?,"
-                            + "bestMatchLinkGoogle = ?, rankGoogleDayChange = ?, rankGoogleWeekChange =?,"
-                            + "rankGoogleMonthChange = ?, googleUpdatedDate= ? where keywordID = ?";
                     if (!serpkeys.getGoogleUpdatedDate().equals("-")) {
                         weekrankgoogle = getWeekRank(keywordId, "google.com");
                         weekrankg = (weekrankgoogle == 0) ? 0 : weekrankgoogle - webRank;
@@ -499,14 +499,21 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
                     } else if (lastgooglewebrank != 0 && webRank == 0) {
                         webRank = lastgooglewebrank;
                     }
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeGoogle, weekrankg, monthrankg, new Date().toString(), keywordId});
+                    if (!serpkeys.getRankGoogleRefresherDate().equals("-")) {
+                        query = "update Serpkeywords set startGoogle = ?,rankGoogle = ?,bestMatchRankGoogle = ?,"
+                                + "bestMatchLinkGoogle = ?, rankGoogleDayChange = ?, rankGoogleWeekChange =?,"
+                                + "rankGoogleMonthChange = ?, googleUpdatedDate= ? where keywordID = ?";
+                        getHibernateTemplate().bulkUpdate(query, new Object[]{startRank, webRank, bestMatchRank, bestMatchLink, dayChangeGoogle, weekrankg, monthrankg, new Date().toString(), keywordId});
+                    } else {
+                        query = "update Serpkeywords set startGoogle = ?,rankGoogle = ?,bestMatchRankGoogle = ?,"
+                                + "bestMatchLinkGoogle = ?, rankGoogleDayChange = ?, rankGoogleWeekChange =?,"
+                                + "rankGoogleMonthChange = ?, googleUpdatedDate= ?, rankGoogleRefresherDate = ? where keywordID = ?";
+                        getHibernateTemplate().bulkUpdate(query, new Object[]{startRank, webRank, bestMatchRank, bestMatchLink, dayChangeGoogle, weekrankg, monthrankg, new Date().toString(), new Date().toString(), keywordId});
+                    }
+
                     break;
                 case "yahoo.com":
                 case "yahoo":
-                    query = "update Serpkeywords set rankYahoo = ?,bestMatchRankYahoo = ?,"
-                            + "bestMatchLinkYahoo = ?, rankYahooDayChange = ?, rankYahooWeekChange = ?,"
-                            + "rankYahooMonthChange = ?, yahooUpdateDate= ? where Keyword  = ? and Url = ?";
-
                     if (!serpkeys.getYahooUpdateDate().equals("-")) {
                         weekrankyahoo = getWeekRank(keywordId, "yahoo.com");
                         weekranky = weekrankyahoo == 0 ? 0 : weekrankyahoo - webRank;
@@ -518,13 +525,21 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
                     } else if (lastyahoowebrank != 0 && webRank == 0) {
                         webRank = lastyahoowebrank;
                     }
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeYahoo, weekranky, monthranky, new Date().toString(), Keyword, URL});
+                    if (!serpkeys.getRankYahooRefresherDate().equals("-")) {
+                        query = "update Serpkeywords set startYahoo = ?,rankYahoo = ?,bestMatchRankYahoo = ?,"
+                                + "bestMatchLinkYahoo = ?, rankYahooDayChange = ?, rankYahooWeekChange = ?,"
+                                + "rankYahooMonthChange = ?, yahooUpdateDate= ? where Keyword  = ? and Url = ?";
+                        getHibernateTemplate().bulkUpdate(query, new Object[]{startRank, webRank, bestMatchRank, bestMatchLink, dayChangeYahoo, weekranky, monthranky, new Date().toString(), Keyword, URL});
+                    } else {
+                        query = "update Serpkeywords set startYahoo = ?,rankYahoo = ?,bestMatchRankYahoo = ?,"
+                                + "bestMatchLinkYahoo = ?, rankYahooDayChange = ?, rankYahooWeekChange = ?,"
+                                + "rankYahooMonthChange = ?, yahooUpdateDate= ?, rankYahooRefresherDate = ? where Keyword  = ? and Url = ?";
+                        getHibernateTemplate().bulkUpdate(query, new Object[]{startRank, webRank, bestMatchRank, bestMatchLink, dayChangeYahoo, weekranky, monthranky, new Date().toString(), new Date().toString(), Keyword, URL});
+                    }
+
                     break;
                 case "bing.com":
                 case "bing":
-                    query = "update Serpkeywords set rankBing = ?,bestMatchRankBing = ?,"
-                            + "bestMatchLinkBing = ?, rankBingDayChange = ?, rankBingWeekChange = ?,"
-                            + "rankBingMonthChange = ?, bingUpdateDate= ? where Keyword  = ? and Url = ?";
                     if (!serpkeys.getBingUpdateDate().equals("-")) {
                         weekrankbing = getWeekRank(keywordId, "bing.com");
                         weekrankb = weekrankbing == 0 ? 0 : weekrankbing - webRank;
@@ -536,7 +551,17 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
                     } else if (lastbingwebrank != 0 && webRank == 0) {
                         webRank = lastbingwebrank;
                     }
-                    getHibernateTemplate().bulkUpdate(query, new Object[]{webRank, bestMatchRank, bestMatchLink, dayChangeBing, weekrankb, monthrankb, new Date().toString(), Keyword, URL});
+                    if (!serpkeys.getRankBingRefresherDate().equals("-")) {
+                        query = "update Serpkeywords set startBing = ?,rankBing = ?,bestMatchRankBing = ?,"
+                                + "bestMatchLinkBing = ?, rankBingDayChange = ?, rankBingWeekChange = ?,"
+                                + "rankBingMonthChange = ?, bingUpdateDate= ? where Keyword  = ? and Url = ?";
+                        getHibernateTemplate().bulkUpdate(query, new Object[]{startRank, webRank, bestMatchRank, bestMatchLink, dayChangeBing, weekrankb, monthrankb, new Date().toString(), Keyword, URL});
+                    } else {
+                        query = "update Serpkeywords set startBing = ?,rankBing = ?,bestMatchRankBing = ?,"
+                                + "bestMatchLinkBing = ?, rankBingDayChange = ?, rankBingWeekChange = ?,"
+                                + "rankBingMonthChange = ?, bingUpdateDate= ?, rankBingRefresherDate = ? where Keyword  = ? and Url = ?";
+                        getHibernateTemplate().bulkUpdate(query, new Object[]{startRank, webRank, bestMatchRank, bestMatchLink, dayChangeBing, weekrankb, monthrankb, new Date().toString(), new Date().toString(), Keyword, URL});
+                    }
                     break;
             }
         } catch (DataAccessException e) {
@@ -1724,8 +1749,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
     public List<Serpkeywords> getNewSerpList() {
         List<Serpkeywords> lstKeywords = new ArrayList();
         try {
-            //String query = "from Serpkeywords where RankGoogle = 0";
-            String query = "from Serpkeywords where GoogleUpdatedDate = '-' or YahooUpdateDate ='-' or BingUpdateDate='-'";
+            String query = "from Serpkeywords where (GoogleUpdatedDate = '-' or YahooUpdateDate ='-' or BingUpdateDate='-' or RankGoogleRefresherDate='-' or RankYahooRefresherDate='-' or RankBingRefresherDate='-') and Visibility ='1'";
             lstKeywords = getHibernateTemplate().find(query);
         } catch (DataAccessException e) {
             l.debug(e + " " + e.getMessage());
@@ -1737,8 +1761,7 @@ public class KeywordsDao extends CustomHibernateDaoSupport {
     public List<Serpkeywords> getNewSerpListForAll() {
         List<Serpkeywords> lstKeywords = new ArrayList();
         try {
-            //String query = "from Serpkeywords where RankGoogle = 0";
-            String query = "from Serpkeywords where GoogleUpdatedDate = '-' or YahooUpdateDate ='-' or BingUpdateDate='-' group by CampaignID,Url,Keyword";
+            String query = "from Serpkeywords where (GoogleUpdatedDate = '-' or YahooUpdateDate ='-' or BingUpdateDate='-') and Visibility ='1' group by CampaignID,Url,Keyword";
             lstKeywords = getHibernateTemplate().find(query);
         } catch (DataAccessException e) {
             l.debug(e + " " + e.getMessage());

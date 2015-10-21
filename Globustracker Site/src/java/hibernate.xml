@@ -77,6 +77,12 @@
                 <value>ranktracker.entity.Visitorarray</value>
                 <value>ranktracker.entity.Xmldata</value>
                 <value>ranktracker.entity.Paymenthistory</value>
+                <value>ranktracker.entity.Webmastergraph</value>
+                <value>ranktracker.entity.Webmasterquery</value>
+                <value>ranktracker.entity.Webmasterurl</value>
+                <value>ranktracker.entity.Webmastersitemap</value>
+                <value>ranktracker.entity.Webmastercrawlerrorscount</value>
+                <value>ranktracker.entity.Webmastercrawlerrorssamples</value>
             </list>
         </property>
 

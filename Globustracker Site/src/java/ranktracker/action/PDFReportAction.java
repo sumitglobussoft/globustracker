@@ -68,15 +68,15 @@ public class PDFReportAction extends HibernateDaoSupport {
     /**
      * url The database url
      */
-    public static String url = "jdbc:mysql://localhost:3306/globustrackernewdb";
+    public static String url = "jdbc:mysql://localhost:3306/databasename";
     /**
      * username The database username
      */
-    public static String username = "brandzter";
+    public static String username = "username";
     /**
      * password The database password
      */
-    public static String password = "B#45dZT3Rmysql";
+    public static String password = "password";
     /**
      * conn The JDBC Connection object
      */

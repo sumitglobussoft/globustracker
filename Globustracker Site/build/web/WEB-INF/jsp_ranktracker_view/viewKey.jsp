@@ -1,5 +1,4 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 <div class="row">
     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
         <h1 class="page-title txt-color-blueDark">
@@ -340,10 +339,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Chart !</h4>
+                    <h4 class="modal-title">
+                        <div class="row">
+                            <div class="col-md-3">
+                                Chart
+                            </div>
+                            <div class="col-md-8">
+                                <span>KEYWORD : </span>
+                                <span id="keywordname">KEYWORD</span>
+                                 <s:property value="keyword" />
+                            </div>
+                        </div>
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <div id="chartBlock">
+                        
                     </div> 	
                 </div>
                 <div class="modal-footer">
@@ -529,7 +540,7 @@
                 },
                 series: eval(jMap.dataMap.sbData)
             });
-
+         $('#keywordname').html(jMap.dataMap.keyword);
         });
     }
 </script>

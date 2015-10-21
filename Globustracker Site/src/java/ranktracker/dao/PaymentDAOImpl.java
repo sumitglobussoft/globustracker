@@ -120,4 +120,73 @@ public class PaymentDAOImpl extends HibernateDaoSupport implements PaymentDAO {
 
     }
 
+    @Override
+    public List<Plans> getAllPlansDetails() {
+
+        //forming the hqlQuery to select plan object for planName
+        String hqlQuery = "from Plans";
+
+        //invoking getSession() method to create Query object for <hqlQuery>
+        Query objQuery = getSession().createQuery(hqlQuery);
+
+        List<Plans> lstPlans = objQuery.list();
+        System.out.println("--------");
+        //now returning list of plans object
+        return lstPlans;
+    }
+
+    @Override
+    public Plans insertPlansDetails(Plans objPlansDetails) {
+
+        getSession().saveOrUpdate(objPlansDetails);
+
+        return objPlansDetails;
+
+    }
+
+    @Override
+    public void updatePlansDetails(Plans objPlansDetails) {
+
+        Plans objPlans = (Plans) getSession().get(Plans.class, objPlansDetails.getPlanID());
+
+        objPlans.setName(objPlansDetails.getName());
+        objPlans.setAmount(objPlansDetails.getAmount());
+        objPlans.setCurrency(objPlansDetails.getCurrency());
+        objPlans.setCampaigns(objPlansDetails.getCampaigns());
+        objPlans.setKeywords(objPlansDetails.getKeywords());
+        objPlans.setUsers(objPlansDetails.getUsers());
+        objPlans.setGoogleAnalytics(objPlansDetails.getGoogleAnalytics());
+        objPlans.setKeywordResearch(objPlansDetails.getKeywordResearch());
+        objPlans.setWebmastertools(objPlansDetails.getWebmastertools());
+        objPlans.setWebsiteReview(objPlansDetails.getWebsiteReview());
+        objPlans.setAccurateLocalRanking(objPlansDetails.getAccurateLocalRanking());
+        objPlans.setLinkAnalysis(objPlansDetails.getLinkAnalysis());
+
+        getSession().update(objPlans);
+
+    }
+
+    @Override
+    public Plans getCustomerPlanID(int customerID) {
+
+        Payments objPayments = new Payments();
+        try {
+
+            Criteria objCriteria = getSession().createCriteria(Payments.class);
+
+            objCriteria.add(Restrictions.eq("customerID.customerID", customerID));
+
+            List<Payments> lstUsers = objCriteria.list();
+
+            objPayments = lstUsers.get(0);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("EXCEPTION IN FETCHING PAYEMENT : " + ex);
+        }
+
+        return objPayments.getPlanID();
+
+    }
+
 }

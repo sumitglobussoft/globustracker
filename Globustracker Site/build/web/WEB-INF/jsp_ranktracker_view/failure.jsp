@@ -9,18 +9,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- stylesheets -->
-
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/font-awesome.css">
-
+        <link href="views/css_ranktracker/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/font-awesome.css" rel="stylesheet" type="text/css"/>
         <!-- stylesheets -->
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/compiled/theme.css">
+        <link href="views/css_ranktracker/compiled/theme.css" rel="stylesheet" type="text/css"/>
 
         <!-- javascript -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/vendor/sketch.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/theme.js"></script>
+        <script src="views/js_ranktracker/bootstrap.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/vendor/sketch.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/theme.js" type="text/javascript"></script>
 
         <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

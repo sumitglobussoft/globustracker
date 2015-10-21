@@ -1,4 +1,5 @@
 <%@taglib  uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
     <li><a href="admin.action">&lt;&lt; &nbsp; Back to admin page</a></li>
@@ -85,14 +86,10 @@
                             <div class="col-md-9">
                                 <select class="form-control" id="plans" onclick="selectplan();">
                                     <option>Select Plan</option>
-                                    <option>Free</option>
-                                    <option>Newbie</option>
-                                    <option>Individual</option>
-                                    <option>Master</option>
-                                    <option>Professional</option>
-                                    <option>Agency</option>
-                                    <option>Reseller</option>
-                                    <option>Enterprise</option>
+                                    <c:forEach items="${listPlans}" var="plans">
+                                        <option>${plans.name}</option>
+                                    </c:forEach>
+
                                 </select> <br />
                             </div>
                             <div class="col-md-3" style="margin-top: 1%;">
@@ -117,8 +114,44 @@
                                 <label class="control-label">Users</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="user" id="user" readonly="true" />
-                            </div>                        
+                                <input type="text" class="form-control" name="user" id="user" readonly="true" /> <br />
+                            </div>
+                            <div class="col-md-3" style="margin-top: 1%;">
+                                <label class="control-label">GoogleAnalytics</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="googleAnalytics" id="googleAnalytics" readonly="true" /> <br />
+                            </div> 
+                            <div class="col-md-3" style="margin-top: 1%;">
+                                <label class="control-label">KeywordResearch</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="keywordResearch" id="keywordResearch" readonly="true" /> <br />
+                            </div> 
+                            <div class="col-md-3" style="margin-top: 1%;">
+                                <label class="control-label">Webmastertools</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="webmastertools" id="webmastertools" readonly="true" /> <br />
+                            </div> 
+                            <div class="col-md-3" style="margin-top: 1%;">
+                                <label class="control-label">WebsiteReview</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="websiteReview" id="websiteReview" readonly="true" /> <br />
+                            </div> 
+                            <div class="col-md-3" style="margin-top: 1%;">
+                                <label class="control-label">AccurateLocalRanking</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="accurateLocalRanking" id="accurateLocalRanking" readonly="true" /> <br />
+                            </div> 
+                            <div class="col-md-3" style="margin-top: 1%;">
+                                <label class="control-label">LinkAnalysis</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="linkAnalysis" id="linkAnalysis" readonly="true" />
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -137,7 +170,7 @@
     {
         var customer = document.getElementById('custId');
         customer.setAttribute("value", document.getElementById('cust').textContent);
-                
+
         if (document.getElementById('plans').value == 'Select Plan') {
             document.getElementById('plan').setAttribute("value", "");
             document.getElementById('planId').setAttribute("value", "");
@@ -145,73 +178,35 @@
             document.getElementById('campaign').setAttribute("value", "");
             document.getElementById('keyword').setAttribute("value", "");
             document.getElementById('user').setAttribute("value", "");
+            document.getElementById('googleAnalytics').setAttribute("value", "");
+            document.getElementById('keywordResearch').setAttribute("value", "");
+            document.getElementById('webmastertools').setAttribute("value", "");
+            document.getElementById('websiteReview').setAttribute("value", "");
+            document.getElementById('accurateLocalRanking').setAttribute("value", "");
+            document.getElementById('linkAnalysis').setAttribute("value", "");
         }
-        else if (document.getElementById('plans').value == 'Free') {
-            document.getElementById('plan').setAttribute("value", "Free");
-            document.getElementById('planId').setAttribute("value", "1");
-            document.getElementById('amount').setAttribute("value", "0");
-            document.getElementById('campaign').setAttribute("value", "1");
-            document.getElementById('keyword').setAttribute("value", "20");
-            document.getElementById('user').setAttribute("value", "1");
-        }
-        else if (document.getElementById('plans').value == 'Newbie') {
-            document.getElementById('plan').setAttribute("value", "Newbie");
-            document.getElementById('planId').setAttribute("value", "2");
-            document.getElementById('amount').setAttribute("value", "1");
-            document.getElementById('campaign').setAttribute("value", "5");
-            document.getElementById('keyword').setAttribute("value", "100");
-            document.getElementById('user').setAttribute("value", "1");
-        }
-        else if (document.getElementById('plans').value == 'Individual') {
-            document.getElementById('plan').setAttribute("value", "Individual");
-            document.getElementById('planId').setAttribute("value", "3");
-            document.getElementById('amount').setAttribute("value", "1");
-            document.getElementById('campaign').setAttribute("value", "10");
-            document.getElementById('keyword').setAttribute("value", "200");
-            document.getElementById('user').setAttribute("value", "1");
-        }
-        else if (document.getElementById('plans').value == 'Master') {
-            document.getElementById('plan').setAttribute("value", "Master");
-            document.getElementById('planId').setAttribute("value", "4");
-            document.getElementById('amount').setAttribute("value", "1");
-            document.getElementById('campaign').setAttribute("value", "30");
-            document.getElementById('keyword').setAttribute("value", "500");
-            document.getElementById('user').setAttribute("value", "3");
-        }
-        else if (document.getElementById('plans').value == 'Professional') {
-            document.getElementById('plan').setAttribute("value", "Professional");
-            document.getElementById('planId').setAttribute("value", "5");
-            document.getElementById('amount').setAttribute("value", "1");
-            document.getElementById('campaign').setAttribute("value", "50");
-            document.getElementById('keyword').setAttribute("value", "1000");
-            document.getElementById('user').setAttribute("value", "5");
-        }
-        else if (document.getElementById('plans').value == 'Agency') {
-            document.getElementById('plan').setAttribute("value", "Agency");
-            document.getElementById('planId').setAttribute("value", "6");
-            document.getElementById('amount').setAttribute("value", "1");
-            document.getElementById('campaign').setAttribute("value", "250");
-            document.getElementById('keyword').setAttribute("value", "5000");
-            document.getElementById('user').setAttribute("value", "10");
-        }
-        else if (document.getElementById('plans').value == 'Reseller') {
-            document.getElementById('plan').setAttribute("value", "Reseller");
-            document.getElementById('planId').setAttribute("value", "7");
-            document.getElementById('amount').setAttribute("value", "1");
-            document.getElementById('campaign').setAttribute("value", "500");
-            document.getElementById('keyword').setAttribute("value", "10000");
-            document.getElementById('user').setAttribute("value", "5000");
-        }
-        else if (document.getElementById('plans').value == 'Enterprise') {
-            document.getElementById('plan').setAttribute("value", "Enterprise");
-            document.getElementById('planId').setAttribute("value", "8");
-            document.getElementById('amount').setAttribute("value", "1");
-            document.getElementById('campaign').setAttribute("value", "1500");
-            document.getElementById('keyword').setAttribute("value", "30000");
-            document.getElementById('user').setAttribute("value", "10000");
+        else {
+    <c:forEach items="${listPlans}" var="plans">
+            if (document.getElementById('plans').value === '${plans.name}') {
+
+                document.getElementById('plan').setAttribute("value", '${plans.name}');
+                document.getElementById('planId').setAttribute("value", '${plans.planID}');
+                document.getElementById('amount').setAttribute("value", '${plans.amount}');
+                document.getElementById('campaign').setAttribute("value", '${plans.campaigns}');
+                document.getElementById('keyword').setAttribute("value", '${plans.keywords}');
+                document.getElementById('user').setAttribute("value", '${plans.users}');
+                document.getElementById('googleAnalytics').setAttribute("value", '${plans.googleAnalytics}');
+                document.getElementById('keywordResearch').setAttribute("value", '${plans.keywordResearch}');
+                document.getElementById('webmastertools').setAttribute("value", '${plans.webmastertools}');
+                document.getElementById('websiteReview').setAttribute("value", '${plans.websiteReview}');
+                document.getElementById('accurateLocalRanking').setAttribute("value", '${plans.accurateLocalRanking}');
+                document.getElementById('linkAnalysis').setAttribute("value", '${plans.linkAnalysis}');
+            }
+
+    </c:forEach>
         }
     }
-    
+
     function validate()
     {
         if (document.getElementById('plan').value == '') {

@@ -84,7 +84,7 @@ public class RedditSignifier extends Thread {
         url = "http://www.reddit.com/api/info.json?url=" + url;
         String source = "";
         try {
-            source = objProxyPageSource.makeRequest(url, "");
+            source = objProxyPageSource.makeRequest(url);
             if (!source.contains("ups")) {
                 if (url.endsWith("/")) {
                     try {
@@ -94,7 +94,7 @@ public class RedditSignifier extends Thread {
                 } else {
                     url = url + "/";
                 }
-                source = objProxyPageSource.makeRequest(url, "");
+                source = objProxyPageSource.makeRequest(url);
             }
         } catch (Exception e) {
             l.debug(e + "  " + e.getMessage() + " Exception come for url " + url);

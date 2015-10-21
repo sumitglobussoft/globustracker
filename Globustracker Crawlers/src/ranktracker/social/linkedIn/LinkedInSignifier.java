@@ -82,7 +82,7 @@ public class LinkedInSignifier extends Thread {
         String source = "";
         try {
             //source = objProxyPageSource.getSource(iCount, url, objProxyDao, "", "");
-            source = objProxyPageSource.makeRequest(url, "");
+            source = objProxyPageSource.makeRequest(url);
         } catch (Exception e) {
             l.debug(e + "  " + e.getMessage() + " Exception come for url " + url);
             e.printStackTrace();

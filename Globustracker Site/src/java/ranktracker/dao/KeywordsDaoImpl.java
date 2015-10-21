@@ -236,6 +236,9 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                     objKeyword.setGoogleUpdatedDate("-");
                     objKeyword.setYahooUpdateDate("-");
                     objKeyword.setBingUpdateDate("-");
+                    objKeyword.setRankGoogleRefresherDate("na");
+                    objKeyword.setRankYahooRefresherDate("na");
+                    objKeyword.setRankBingRefresherDate("na");
                     objKeyword.setVisibility(1);
 
                     objCampaigns.getSerpkeywordsCollection().add(objKeyword);
@@ -319,6 +322,9 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
                         objKeyword.setGoogleUpdatedDate("-");
                         objKeyword.setYahooUpdateDate("-");
                         objKeyword.setBingUpdateDate("-");
+                        objKeyword.setRankGoogleRefresherDate("na");
+                        objKeyword.setRankYahooRefresherDate("na");
+                        objKeyword.setRankBingRefresherDate("na");
                         objKeyword.setVisibility(1);
                         objCampaigns.getSerpkeywordsCollection().add(objKeyword);
                         //invoking getSession method to save <objCampaigns> object
@@ -1074,8 +1080,8 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
      * @throws IOException
      */
     public int insertIntoSeoDetails(Object keywrd, Integer customerID, Integer keyid, Campaigns objCampaigns) throws IOException {
-        //Enter the Key XXXXXXXXXXXXXXXXXXXXXXX for Semrush Api
-        String keysem = "XXXXXXXXXXXXXXXXXXXXXXX";
+        String keysem = "648ec3d46dbd48fb4a469dd08a6d2c41";
+        //String keysem = "XXXXXXXXXXXXXXXXXXXXXXX";
         String keyword1 = keywrd.toString();
         String keyword = keyword1.replaceAll(" ", "+");
 
@@ -1468,5 +1474,111 @@ public class KeywordsDaoImpl extends HibernateDaoSupport implements KeywordsDao 
         } catch (DataAccessResourceFailureException | IllegalStateException | HibernateException ex) {
             l.error(ex + "  " + ex.getMessage());
         }
+    }
+
+    @Override
+    public int refreshGoogleKeyword(Integer keywordId) {
+        Serpkeywords objSerpkeywords = (Serpkeywords) getSession().get(Serpkeywords.class, keywordId);
+        System.out.println("keywordId ===================== " + keywordId);
+
+        Criteria objCriteria = getSession().createCriteria(Serpkeywords.class);
+
+        objCriteria.add(Restrictions.eq("keywordID", keywordId));
+
+        System.out.println("***************************************");
+
+        String currentDate[] = (new Date()).toString().split(" ");
+        String refreshStatus[] = objSerpkeywords.getRankGoogleRefresherDate().split(" ");
+        if ("-".equals(objSerpkeywords.getRankGoogleRefresherDate())) {
+            if (currentDate[0].equalsIgnoreCase(refreshStatus[0])) {
+                if (currentDate[1].equalsIgnoreCase(refreshStatus[1])) {
+
+                    if (currentDate[2].equalsIgnoreCase(refreshStatus[2])) {
+
+                        if (currentDate[5].equalsIgnoreCase(refreshStatus[5])) {
+
+                            return 0;
+                        }
+                    }
+                }
+            }
+        } else {
+            objSerpkeywords.setRankGoogleRefresherDate("-");
+            getSession().update(objSerpkeywords);
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public int refreshYahooKeyword(Integer keywordId) {
+        Serpkeywords objSerpkeywords = (Serpkeywords) getSession().get(Serpkeywords.class, keywordId);
+        System.out.println("keywordId ===================== " + keywordId);
+
+        Criteria objCriteria = getSession().createCriteria(Serpkeywords.class);
+
+        objCriteria.add(Restrictions.eq("keywordID", keywordId));
+
+        System.out.println("***************************************");
+
+        String currentDate[] = (new Date()).toString().split(" ");
+        String refreshStatus[] = objSerpkeywords.getRankYahooRefresherDate().split(" ");
+
+        if ("-".equals(objSerpkeywords.getRankYahooRefresherDate())) {
+            if (currentDate[0].equalsIgnoreCase(refreshStatus[0])) {
+                if (currentDate[1].equalsIgnoreCase(refreshStatus[1])) {
+
+                    if (currentDate[2].equalsIgnoreCase(refreshStatus[2])) {
+
+                        if (currentDate[5].equalsIgnoreCase(refreshStatus[5])) {
+
+                            return 0;
+                        }
+                    }
+                }
+            }
+        } else {
+            objSerpkeywords.setRankYahooRefresherDate("-");
+            getSession().update(objSerpkeywords);
+            return 1;
+        }
+
+        return 0;
+    }
+
+    @Override
+    public int refreshBingKeyword(Integer keywordId) {
+        Serpkeywords objSerpkeywords = (Serpkeywords) getSession().get(Serpkeywords.class, keywordId);
+        System.out.println("keywordId ===================== " + keywordId);
+
+        Criteria objCriteria = getSession().createCriteria(Serpkeywords.class);
+
+        objCriteria.add(Restrictions.eq("keywordID", keywordId));
+
+        System.out.println("***************************************");
+
+        String currentDate[] = (new Date()).toString().split(" ");
+        String refreshStatus[] = objSerpkeywords.getRankBingRefresherDate().split(" ");
+
+        if ("-".equals(objSerpkeywords.getRankBingRefresherDate())) {
+            if (currentDate[0].equalsIgnoreCase(refreshStatus[0])) {
+                if (currentDate[1].equalsIgnoreCase(refreshStatus[1])) {
+
+                    if (currentDate[2].equalsIgnoreCase(refreshStatus[2])) {
+
+                        if (currentDate[5].equalsIgnoreCase(refreshStatus[5])) {
+
+                            return 0;
+                        }
+                    }
+                }
+            }
+        } else {
+            objSerpkeywords.setRankBingRefresherDate("-");
+            getSession().update(objSerpkeywords);
+            return 1;
+        }
+
+        return 0;
     }
 }

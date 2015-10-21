@@ -13,15 +13,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">	
         <title>Best Rank Tracker | SERP Tracker | YouTube Rank Tracker | Social Signals Tracker</title>
         <meta name="author" content="Globussoft">
-        <link rel="shortcut icon" href="https://s3.amazonaws.com/images_ranktracker/GlobustrackerIcon.png" />
+        <link rel="shortcut icon" href="views/images_ranktracker/GlobustrackerIcon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- stylesheets -->
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/theme.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/animate.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/font-awesome.css">
-        <style>
+        <link href="views/css_ranktracker/theme.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/font-awesome.css" rel="stylesheet" type="text/css"/>
+        
+      <style>
             .confirm {
                 color: #fff;
                 margin-top: 9%;
@@ -45,7 +46,7 @@
             <div class="row header">
                 <div class="col-md-12">
                     <h3 class="logo">
-                        <a href="home.action"><img class="img-responsive img_mid" src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png"></a>
+                        <a href="home.action"><img class="img-responsive img_mid" src="" alt="GlobusTracker"></a>
                     </h3>
                     <div class="confirm">
                         <h3 class="highlight-h3">Thank You for Sign Up</h3><br/>
@@ -63,7 +64,6 @@
 
         <!-- JavaScript -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
-
+        <script src="views/js_ranktracker/bootstrap.min.js" type="text/javascript"></script>
     </body>
 </html>

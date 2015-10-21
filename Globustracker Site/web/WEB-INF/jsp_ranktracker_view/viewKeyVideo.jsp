@@ -167,10 +167,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center;">Keyword</th>
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/youtubeicon.png"  style="border:none;" width="24" height="24" alt="" /></th>
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/dailymotion_24.png" style="border:none;" width="24" height="24" alt=""/></th>
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/vimeo_logo.JPG" style="border:none;" width="24" height="24" alt="" /></th> 
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/metacafe_logo.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/youtubeicon.png"  style="border:none;" width="24" height="24" alt="" /></th>
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/dailymotion_24.png" style="border:none;" width="24" height="24" alt=""/></th>
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/vimeo_logo.JPG" style="border:none;" width="24" height="24" alt="" /></th> 
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/metacafe_logo.png" style="border:none;" width="24" height="24" alt="" /></th>
                                                         <th style="text-align: center;">Chart</th>
                                                     </tr>
                                                 </thead>

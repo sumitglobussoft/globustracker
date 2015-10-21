@@ -120,7 +120,7 @@ public class WebsiteReview {
         }
         return new ModelAndView("review");
 
-        //http:// Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
+        //http:// 54.183.182.139:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
     }
 
     /*
@@ -147,7 +147,7 @@ public class WebsiteReview {
      return new ModelAndView("errormessage");
      }
 
-     //http:// Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
+     //http:// 54.183.182.139:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
      //        Thread social_thread = new Thread(new Socialreviewsite(sitename));
      //        social_thread.start();
      //        return new ModelAndView("review");

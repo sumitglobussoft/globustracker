@@ -21,7 +21,7 @@ import ranktracker.social.twitter.TwitterSignifier;
  */
 public class ThreadCreator_signifier extends Thread {
 
-    static Logger l = Logger.getLogger(ThreadCreator_google.class.getName());
+    static Logger l = Logger.getLogger(ThreadCreator_signifier.class.getName());
     /**
      * lstKeywords The working list of Keywords objects
      */
@@ -59,10 +59,8 @@ public class ThreadCreator_signifier extends Thread {
      * Constructor to set all the variables
      *
      * @param crawlername
-     * @param setDomains
-     * @param lstKeywords
+	 * @param lstUrls
      * @param appContext
-     * @param iCount
      *
      */
     public ThreadCreator_signifier(String crawlername, List<Socialsignalurls> lstUrls, ApplicationContext appContext) {
