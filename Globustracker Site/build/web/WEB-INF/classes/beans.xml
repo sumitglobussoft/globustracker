@@ -28,6 +28,7 @@
     <bean id="objPaymentService" class="ranktracker.service.PaymentServiceImpl"/>
     <bean id="objMailService" class="ranktracker.service.MailServiceImpl" />
     <bean id="objWebsiteReview" class="ranktracker.service.WebsiteReviewServiceImpl" />
+    <bean id="objWebmasterService" class="ranktracker.service.WebmasterServiceImpl" />
     
     <!-- defining all the dao beans -->
     <bean id="objCampaignsDao" class="ranktracker.dao.CampaignsDaoImpl" />
@@ -36,6 +37,7 @@
     <bean id="objKeywordsDao" class="ranktracker.dao.KeywordsDaoImpl" />
     <bean id="objPaymentDAO" class="ranktracker.dao.PaymentDAOImpl" />
     <bean id="objReviewDao" class="ranktracker.dao.WebsiteReviewDaoImpl"/>
+    <bean id="objWebmasterDao" class="ranktracker.dao.WebmasterDaoImpl"/>
     
     <bean id="keywordsuggestion" class="ranktracker.ajax.Keywordsuggestion"/>
     <!-- defining bean for ranktracker.mail.SendMail class -->

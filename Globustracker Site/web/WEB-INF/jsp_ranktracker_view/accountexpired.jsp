@@ -17,11 +17,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- stylesheets -->
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/theme.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/animate.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/admin/smartadmin-production.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/font-awesome.css">
+        <link href="views/css_ranktracker/theme.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/admin/smartadmin-production.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/font-awesome.css" rel="stylesheet" type="text/css"/>
         <style>
             .confirm {
                 color: #fff;
@@ -74,7 +74,7 @@
 
         <header id="header">
             <div id="logo-group">
-                <span id="logo"><img src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" alt="SmartAdmin"> </span>           
+                <span id="logo"><img src="" alt="GlobusTracker"> </span>           
             </div>
             <div class="pull-right" style="margin-top: 7px">
                 <a class="btn btn-default" href="signOut.action">LogOut</a>
@@ -100,7 +100,7 @@
 
         <!-- JavaScript -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
+        <script src="views/js_ranktracker/bootstrap.min.js" type="text/javascript"></script>
 
     </body>
 </html>

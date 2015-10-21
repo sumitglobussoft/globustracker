@@ -119,47 +119,15 @@ public class WebsiteReview {
 
         }
         return new ModelAndView("review");
-
-        //http:// Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
     }
 
-    /*
-     @RequestMapping(value = "/site/{sitename}", method = RequestMethod.GET)
-     public ModelAndView homereview(@PathVariable String sitename, ModelMap model, HttpServletRequest request, HttpSession session) {
-
-     System.out.println("+++++++++++++++++++++++++++++++  ");
-     System.out.println("name = " + sitename);
-     model.addAttribute("website", sitename);
-     try {
-
-     //            Commonseo objcommonseo = (new WoorankDaoImpl().getCommonSeoDetails("http://www." + sitename));
-     //            if (objcommonseo.getUrl().length() < 2) {
-     //                return new ModelAndView("errormessage");
-     //            } else {
-     Thread social_thread = new Thread(new Socialreviewsite(sitename));
-     synchronized (this) { //changes
-     social_thread.start();
-     }
-     return new ModelAndView("review");
-     //            }
-
-     } catch (Exception e) {
-     return new ModelAndView("errormessage");
-     }
-
-     //http:// Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
-     //        Thread social_thread = new Thread(new Socialreviewsite(sitename));
-     //        social_thread.start();
-     //        return new ModelAndView("review");
-     }
-     */
     @RequestMapping(value = "/visitors/{sitename}", method = RequestMethod.POST)
     @ResponseBody
     public String getCommonsdata(@PathVariable String sitename, HttpServletResponse objResponse) throws IOException {
 
         System.out.println("sitename = " + sitename);
         JSONObject json = new JSONObject();
-//        ModelAndView model = new ModelAndView("/WEB-INF/jsp_ranktracker_view/review.jsp");
+
         visitmap = objWebsiteReview.getCommonsDetails(sitename);
         headingcount = objWebsiteReview.getHeadingcount(sitename);
         headingelements = objWebsiteReview.getHeadingelement(sitename);
@@ -170,10 +138,6 @@ public class WebsiteReview {
         visitorarray = objWebsiteReview.getVisitorarray(sitename);
         xmldata = objWebsiteReview.getXmldata(sitename);
 
-//        model.addObject("jmessage", "Received");
-//        model.addObject("visitmap", visitmap);
-//        MappingJacksonHttpMessageConverter jsonConverter = new MappingJacksonHttpMessageConverter();
-//        MediaType jsonMimeType = MediaType.APPLICATION_JSON;
         try {
 
             PrintWriter pw = objResponse.getWriter();
@@ -191,7 +155,7 @@ public class WebsiteReview {
             json.put("xmldata", xmldata);
             pw.print(json);
             pw.flush();
-//            jsonConverter.write(json, jsonMimeType, new ServletServerHttpResponse(objResponse));
+
         } catch (JSONException ex) {
             ex.printStackTrace();
 //            Logger.getLogger(ReviewAction.class.getName()).log(Level.SEVERE, null, ex);

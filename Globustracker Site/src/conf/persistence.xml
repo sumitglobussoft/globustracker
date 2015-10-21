@@ -30,9 +30,10 @@
     <class>ranktracker.wooclone.Commonseo</class>
     <class>ranktracker.entity.Paymenthistory</class>
     <class>ranktracker.entity.Commonseo</class>
+    <class>ranktracker.entity.Campaigns</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/databasename"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ranktracker"/>
       <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

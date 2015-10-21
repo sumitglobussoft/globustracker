@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ranktracker.entity;
 
 import java.io.Serializable;
@@ -27,6 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "serpkeywords")
 public class Serpkeywords implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,6 +105,12 @@ public class Serpkeywords implements Serializable {
     private String yahooUpdateDate;
     @Column(name = "BingUpdateDate")
     private String bingUpdateDate;
+    @Column(name = "RankGoogleRefresherDate")
+    private String rankGoogleRefresherDate;
+    @Column(name = "RankYahooRefresherDate")
+    private String rankYahooRefresherDate;
+    @Column(name = "RankBingRefresherDate")
+    private String rankBingRefresherDate;
     @Basic(optional = false)
     @Column(name = "Visibility")
     private int visibility;
@@ -113,6 +119,13 @@ public class Serpkeywords implements Serializable {
     @JoinColumn(name = "CampaignID", referencedColumnName = "CampaignID")
     @ManyToOne(optional = false)
     private Campaigns campaignID;
+
+    @Column(name = "StartGoogle")
+    private int startGoogle;
+    @Column(name = "StartYahoo")
+    private int startYahoo;
+    @Column(name = "StartBing")
+    private int startBing;
 
     public Serpkeywords() {
     }
@@ -386,6 +399,30 @@ public class Serpkeywords implements Serializable {
         this.campaignID = campaignID;
     }
 
+    public int getStartGoogle() {
+        return startGoogle;
+    }
+
+    public void setStartGoogle(int startGoogle) {
+        this.startGoogle = startGoogle;
+    }
+
+    public int getStartYahoo() {
+        return startYahoo;
+    }
+
+    public void setStartYahoo(int startYahoo) {
+        this.startYahoo = startYahoo;
+    }
+
+    public int getStartBing() {
+        return startBing;
+    }
+
+    public void setStartBing(int startBing) {
+        this.startBing = startBing;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -410,5 +447,29 @@ public class Serpkeywords implements Serializable {
     public String toString() {
         return "ranktracker.entity.Serpkeywords[ keywordID=" + keywordID + " ]";
     }
-    
+
+    public String getRankGoogleRefresherDate() {
+        return rankGoogleRefresherDate;
+    }
+
+    public void setRankGoogleRefresherDate(String rankGoogleRefresherDate) {
+        this.rankGoogleRefresherDate = rankGoogleRefresherDate;
+    }
+
+    public String getRankYahooRefresherDate() {
+        return rankYahooRefresherDate;
+    }
+
+    public void setRankYahooRefresherDate(String rankYahooRefresherDate) {
+        this.rankYahooRefresherDate = rankYahooRefresherDate;
+    }
+
+    public String getRankBingRefresherDate() {
+        return rankBingRefresherDate;
+    }
+
+    public void setRankBingRefresherDate(String rankBingRefresherDate) {
+        this.rankBingRefresherDate = rankBingRefresherDate;
+    }
+
 }

@@ -92,10 +92,11 @@ public class FacebookSignifier extends Thread {
         Integer[] result = new Integer[2];
         result[0] = 0;
         result[1] = 0;
-        url = "http://api.ak.facebook.com/restserver.php?v=1.0&method=links.getStats&format=json&callback=fb_sharepro_render&urls=" + url;
+//        url = "http://api.ak.facebook.com/restserver.php?v=1.0&method=links.getStats&format=json&callback=fb_sharepro_render&urls=" + url;
+        url = "http://api.facebook.com/restserver.php?format=json&method=links.getStats&urls=" + url;
         String source = "";
         try {
-            source = objProxyPageSource.makeRequest(url, "");
+            source = objProxyPageSource.makeRequest(url);
         } catch (Exception e) {
             l.debug(e + "  " + e.getMessage() + " Exception come for url " + url);
             e.printStackTrace();
@@ -136,7 +137,7 @@ public class FacebookSignifier extends Thread {
                 url = url + "/";
             }
             try {
-                source = objProxyPageSource.makeRequest(url, "");
+                source = objProxyPageSource.makeRequest(url);
             } catch (Exception e) {
                 l.debug(e + "  " + e.getMessage() + " Exception come for url " + url);
                 e.printStackTrace();

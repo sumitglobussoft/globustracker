@@ -42,6 +42,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.NodeList;
@@ -50,6 +51,7 @@ public class Crawler {
 
     public static String fetchGooglePageRank(String url) throws IOException {
         {
+           
             try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
                 HttpGet httpget = new HttpGet(url);
                 //System.out.println("Executing request " + httpget.getRequestLine());
@@ -67,7 +69,9 @@ public class Crawler {
                         }
                     }
                 };
-                String respBody = httpclient.execute(httpget, responseHandler);
+                
+                    String respBody = httpclient.execute(httpget, responseHandler);
+               
                 //System.out.println(httpclient.execute(httpget, responseHandler).getBytes());
                 return respBody;
             }
@@ -75,13 +79,14 @@ public class Crawler {
 
     }
    
+
     public static String fetchGooglePageRankWithProxy(String pageurl) throws IOException {
         CredentialsProvider credsprovider = new BasicCredentialsProvider();
         int portNo = generateRandomPort();
         credsprovider.setCredentials(
-                new AuthScope("Ip Address", portNo),
-                new UsernamePasswordCredentials("Username", "Password"));
-        HttpHost proxy = new HttpHost("Ip Address", portNo);
+                new AuthScope("IP Address", portNo),
+                new UsernamePasswordCredentials("username", "password"));
+        HttpHost proxy = new HttpHost("IP Address", portNo);
         // String userAgent = UserAgents.getRandomUserAgent();
         CloseableHttpClient httpclient = HttpClients.custom()
                 .setDefaultCredentialsProvider(credsprovider)
@@ -201,7 +206,7 @@ public class Crawler {
     public static void main(String[] args) throws Exception {
 
         Crawler rp = new Crawler();
-        rp.getDetails("linkedin.com");
+        rp.getDetails("globustracker.com");
 
     }
 
@@ -452,48 +457,36 @@ public class Crawler {
         }
 
         try {
-            Document doc1 = Jsoup.parse(Crawler.fetchGooglePageRankWithProxy("http://graph.facebook.com/" + facebook_name));
 
-            JSONObject obj = new JSONObject(doc1.text());
+            String url1 = "https://graph.facebook.com/" + facebook_name + "?access_token=CAANGZCSfBfk0BAMWQuyJsKTspZB1ms7PILEPyYuQ1ZClJ9CUgX8MOJcSE6bEkYGlsSXxPe0T3gqkMLNm2NpRFuipGWqZBtuKAlXZAIR5nhGACl2GYjpNxyYkN6nonWED9MwK3uDVbXOfZAJceu3vzuJCQm4NZBb7fZBOKOuC2o7zAv7Dj2Y0VGsFMrjZBbL0aVzMZD";
+            JSONObject obj = new JSONObject(new GetRequestHandler().doGetRequest(new URL(url1)));
 
             try {
                 facebookImage = obj.getJSONObject("cover").getString("source");
-                System.out.println("9. Facebookimage : " + facebookImage);
+                System.out.println("4. facebook_image " + facebookImage);
             } catch (Exception e) {
             }
 
             try {
                 facebook_about = obj.getString("about");
-                System.out.println("10. About : " + facebook_about);
+                System.out.println("8. facebook_about" + facebook_about);
             } catch (Exception e) {
             }
 
-            String temp[] = doc1.text().split(",");
             try {
-                for (int i = 0; i < temp.length; i++) {
-                    if (temp[i].contains("likes")) {
-                        String tempo[] = temp[i].split(":");
-                        facebookLikes = tempo[1];
-                        System.out.println("11. Facebooklikes " + facebookLikes);
-                    }
-
-                }
+                Object facebooklikes = obj.get("likes");
+                facebookLikes = facebooklikes.toString();
+                System.out.println("9. Facebook likes : " + facebookLikes);
             } catch (Exception e) {
             }
 
-            temp = doc1.text().split("\"");
             try {
-                for (int i = 0; i < temp.length; i++) {
-                    if (temp[i].contains("talking_about_count")) {
-                        talking_about_count = talking_about_count + temp[i + 1];
-                        talking_about_count = talking_about_count.replace("\\", "");
-                        System.out.println("12. Takingabout " + talking_about_count);
-                        break;
-                    }
-
-                }
+                Object talkingaboutcount = obj.get("talking_about_count");
+                talking_about_count = talkingaboutcount.toString();
+                System.out.println("10. talking_about_count : " + talking_about_count);
             } catch (Exception e) {
             }
+
         } catch (Exception a) {
             System.out.println("" + a);
         }
@@ -621,7 +614,7 @@ public class Crawler {
         // Code for w3validity, encoding and doctype
         ArrayList<String> wDE = new ArrayList<>();
         String urlTemp;
-        urlTemp = "http://validator.w3.org/check?uri=" + complete_url;
+        urlTemp = "https://validator.w3.org/check?uri=" + complete_url + "&doctype=XHTML+1.1&ss=1&outline=1&sp=1&noatt=1";
         try {
             Document doc3 = Jsoup.parse(Crawler.fetchGooglePageRank(urlTemp));
             Elements el1 = doc3.select("form tbody tr");
@@ -947,70 +940,52 @@ public class Crawler {
 
         try {
 
-            String facebookurl = "http://api.ak.facebook.com/restserver.php?v=1.0&method=links.getStats&format=json&callback=fb_sharepro_render&urls="
+            String facebookurl = "http://api.facebook.com/restserver.php?format=json&method=links.getStats&urls="
                     + complete_url;
-            String response = null;
-            response = new GetRequestHandler().doGetRequest(new URL(facebookurl));
-            // System.out.println("facebook Details Response : " + response);
+
+            JSONArray resultdata = new JSONArray(new GetRequestHandler().doGetRequest(new URL(facebookurl)));
+            JSONObject json = resultdata.getJSONObject(0);
+
             try {
-                Pattern pattern = Pattern.compile("share_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebookShareCount = matcher.group(1).replace("\":", "").trim();
-                    System.out.println("54. Facebook Share Count        : " + facebookShareCount);
-                }
+                Object facebook_click_count_no = json.get("click_count");
+                facebookClickCount = json.get("click_count").toString();
+                System.out.println("click_count : " + facebookClickCount);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("like_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebookLikesCount = matcher.group(1).replace("\":", "").trim();
-                    System.out.println("55. Facebook Likes Count        : " + facebookLikesCount);
-                }
+                Object facebook_comment_count_no = json.get("comment_count");
+                facebookComment = json.get("comment_count").toString();
+                System.out.println("comment_count : " + facebookComment);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("comment_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebookComment = matcher.group(1).replace("\":", "").trim();
-                    System.out.println("56. Facebook Comment Count      : " + facebookComment);
-                }
+                Object commentsbox_count_no = json.get("commentsbox_count");
+                facebookCommentsBoxCount = json.get("commentsbox_count").toString();
+                System.out.println("commentsbox_count : " + facebookCommentsBoxCount);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("total_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebookTotalCount = matcher.group(1).replace("\":", "").trim();
-                    System.out.println("57. Facebook Total Count        : " + facebookTotalCount);
-                }
+                Object facebook_like_count_no = json.get("like_count");
+                facebookLikesCount = json.get("like_count").toString();
+                System.out.println("like_count : " + facebookLikesCount);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("click_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebookClickCount = matcher.group(1).replace("\":", "").trim();
-                    System.out.println("58. Facebook Click Count        : " + facebookClickCount);
-                }
+                Object facebook_share_count_no = json.get("share_count");
+                facebookShareCount = json.get("share_count").toString();
+                System.out.println("share_count : " + facebookShareCount);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("commentsbox_count(.*?)}");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebookCommentsBoxCount = matcher.group(1).replace("\":", "");
-                    System.out.println("59. Facebook comments Box count : " + facebookCommentsBoxCount);
-                }
+                Object facebook_total_count_no = json.get("total_count");
+                facebookTotalCount = json.get("total_count").toString();
+                System.out.println("total_count : " + facebookTotalCount);
             } catch (Exception e) {
-                System.out.println(e);
             }
 
         } catch (Exception e) {
@@ -1219,11 +1194,13 @@ public class Crawler {
             Document doc = Jsoup.parse(Crawler.fetchGooglePageRankWithProxy(urlKeyword));
             Elements el1 = doc.select("div[id=ires] li[class=g]");
             for (Element itr : el1) {
-                Elements el2 = itr.select("h3[class=r]");
-                links = el2.select("a").attr("href") + "";
-                links = links.substring(links.indexOf("http"), links.indexOf("&"));
-                relatedLinks = relatedLinks + links + "#";
+                String url1 = itr.select("a").first().attr("href").replace("/url?q=", "");
+                String links1 = new URL(url1).getHost();
+                System.out.println(" Links " + links1);
+                relatedLinks = relatedLinks + links1 + "#";
+                System.out.println("" + relatedLinks);
             }
+
             objRelatedwebsite.setRelatedLinks(relatedLinks);
             objwoorankdao.updateRelatedwebsite(complete_url, relatedLinks);
         } catch (IOException e) {
@@ -1239,7 +1216,7 @@ public class Crawler {
         try {
 
             int frmIndex = 0, tmp = 0, scriptStopper = 0;
-            Document Doc = Jsoup.parse(Crawler.fetchGooglePageRankWithProxy("http://builtwith.com/" + complete_url.replace("http://", "").replace("https://", "").replace("www.", "")));
+            Document Doc = Jsoup.parse(Crawler.fetchGooglePageRank("http://builtwith.com/" + complete_url.replace("http://", "").replace("https://", "").replace("www.", "")));
             Elements el1 = Doc.select("div[class=span8] div");
             Elements elExtrated = new Elements();
             for (Element itr : el1) {

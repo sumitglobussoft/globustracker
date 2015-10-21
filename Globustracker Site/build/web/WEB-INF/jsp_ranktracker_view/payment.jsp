@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -8,10 +9,10 @@
         <link rel="shortcut icon" href="https://s3.amazonaws.com/images_ranktracker/GlobustrackerIcon.png" />
 
         <!-- stylesheets -->
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/theme.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/animate.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/custom.css">
+        <link href="views/css_ranktracker/theme.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/custom.css" rel="stylesheet" type="text/css"/>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
         <style>
@@ -21,16 +22,18 @@
             ul {
                 margin-bottom: 0;
             }
+            .professional, .personal, .business, .master {
+                min-height: 670px !important;
+            }
         </style>
 
         <!-- javascript -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="views/js_ranktracker/bootstrap.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/theme.js" type="text/javascript"></script>     
+        <link href="views/css_ranktracker/main.css" rel="stylesheet" type="text/css"/>
+        <script src="views/js_ranktracker/main.js" type="text/javascript"></script>
 
-        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/theme.js"></script>
-
-        <link rel="stylesheet" href="https://s3.amazonaws.com/css-globustracker/main.css">
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/main.js"></script>
         <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -44,7 +47,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="home.action" class="navbar-brand"><img src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png"  class="img-responsive" style="width: 200px;"></a>
+                    <a href="home.action" class="navbar-brand"><img src="views/images_ranktracker/Globustracker-logo-present.png" alt="GlobusTracker" class="img-responsive" style="width: 200px;"></a>
                 </div>
                 <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                     <ul class="nav navbar-nav  navbar-right">
@@ -101,187 +104,256 @@
                     <!-- PRICING-TABLE CONTAINER -->
                     <div class="pricing-table group">
                         <h1 class="heading">PRICING PLANS</h1>
-                        <p>These are the 8 plans that includes a pretty basic one</p>
+
+                        <p>These are the 10 plans that includes a pretty basic one</p>
                         <div class="row">
                             <!-- PERSONAL -->
-                            <div class="block personal fl col-md-3">
-                                <h2 class="title">Free</h2>
-                                <!-- CONTENT -->
-                                <div class="content">
-                                    <p class="price">
-                                        <sup>$</sup>
-                                        <span>0.00</span>
-                                        <sub>/mon.</sub>
-                                    </p>
-                                </div><!-- /CONTENT -->
-                                <!-- FEATURES -->
-                                <ul class="features" style="border: #2c968f 1px solid; border-bottom: 0; border-top: 0;">
-                                    <li><span class="fa fa-cog"></span>1  Campaign</li>
-                                    <li><span class="fa fa-star"></span>1  User</li>
-                                    <li><span class="fa fa-dashboard"></span>20  Keywords </li>
-                                </ul><!-- /FEATURES -->
-                                <!-- PT-FOOTER -->
-                                <div class="pt-footer">
-                                    <a class="btn btn-0" href="sessionSaver.action?itemName=FreeBeta">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
-                                </div><!-- /PT-FOOTER -->
-                            </div><!-- /PERSONAL -->
-                            <!-- PROFESSIONAL -->
-                            <div class="block professional fl col-md-3">
-                                <h2 class="title">Newbie</h2>
-                                <!-- CONTENT -->
-                                <div class="content">
-                                    <p class="price">
-                                        <sup>$</sup>
-                                        <span>9.99</span>
-                                        <sub>/mon.</sub>
-                                    </p>
-                                </div><!-- /CONTENT -->
-                                <!-- FEATURES -->
-                                <ul class="features" style="border: #2e596a 1px solid; border-bottom: 0; border-top: 0;">
-                                    <li><span class="fa fa-cog"></span>5  Campaigns</li>
-                                    <li><span class="fa fa-star"></span>1  User</li>
-                                    <li><span class="fa fa-dashboard"></span>100  Keywords </li>
-                                </ul><!-- /FEATURES -->
-                                <!-- PT-FOOTER -->
-                                <div class="pt-footer">
-                                    <a class="btn btn-0" href="sessionSaver.action?itemName=Newbie">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
-                                </div><!-- /PT-FOOTER -->
-                            </div><!-- /PROFESSIONAL -->
-                            <!-- BUSINESS -->
-                            <div class="block business fl col-md-3">
-                                <h2 class="title">Individual</h2>
-                                <!-- CONTENT -->
-                                <div class="content">
-                                    <p class="price">
-                                        <sup>$</sup>
-                                        <span>19.99</span>
-                                        <sub>/mon.</sub>
-                                    </p>
-                                </div><!-- /CONTENT -->
-                                <!-- FEATURES -->
-                                <ul class="features" style="border: #5f4234 1px solid; border-bottom: 0; border-top: 0;">
-                                    <li><span class="fa fa-cog"></span>10  Campaigns</li>
-                                    <li><span class="fa fa-star"></span>1  User</li>
-                                    <li><span class="fa fa-dashboard"></span>200  Keywords </li>
-                                </ul><!-- /FEATURES -->
-                                <!-- PT-FOOTER -->
-                                <div class="pt-footer">
-                                    <a class="btn btn-0" href="sessionSaver.action?itemName=Individual">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
-                                </div><!-- /PT-FOOTER -->
-                            </div><!-- /BUSINESS -->
-                            <!-- MASTER -->
-                            <div class="block master fl col-md-3">
-                                <h2 class="title">Master</h2>
-                                <!-- CONTENT -->
-                                <div class="content">
-                                    <p class="price">
-                                        <sup>$</sup>
-                                        <span>34.99</span>
-                                        <sub>/mon.</sub>
-                                    </p>
-                                </div><!-- /CONTENT -->
-                                <!-- FEATURES -->
-                                <ul class="features" style="border: #504E4E 1px solid; border-bottom: 0; border-top: 0;">
-                                    <li><span class="fa fa-cog"></span>30  Campaigns</li>
-                                    <li><span class="fa fa-star"></span>3  Users</li>
-                                    <li><span class="fa fa-dashboard"></span>300  Keywords </li>
-                                </ul><!-- /FEATURES -->
-                                <!-- PT-FOOTER -->
-                                <div class="pt-footer">
-                                    <a class="btn btn-0" href="sessionSaver.action?itemName=Master">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
-                                </div><!-- /PT-FOOTER -->
-                            </div><!-- /PERSONAL -->
-                        </div>
+                            <c:set var="counter" value="0"/>
+                            <c:forEach items="${listPlans}" var="plans">
+                                <c:set var="counter" value="${counter+1}"/>
+                            <!--<h1>${listPlans.get(0).planID}</h1>-->
+                                <c:if test="${counter%4 ==1}">
 
-                        <div class="row" style="margin-top: 5%;">
-                            <!-- PERSONAL -->
-                            <div class="block personal fl col-md-3">
-                                <h2 class="title">Professional</h2>
-                                <!-- CONTENT -->
-                                <div class="content">
-                                    <p class="price">
-                                        <sup>$</sup>
-                                        <span>59.99</span>
-                                        <sub>/mon.</sub>
-                                    </p>
-                                </div><!-- /CONTENT -->
-                                <!-- FEATURES -->
-                                <ul class="features" style="border: #2c968f 1px solid; border-bottom: 0; border-top: 0;">
-                                    <li><span class="fa fa-cog"></span>50  Campaigns</li>
-                                    <li><span class="fa fa-star"></span>5  Users</li>
-                                    <li><span class="fa fa-dashboard"></span>1000  Keywords </li>
-                                </ul><!-- /FEATURES -->
-                                <!-- PT-FOOTER -->
-                                <div class="pt-footer">
-                                    <a class="btn btn-0" href="sessionSaver.action?itemName=Professional">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
-                                </div><!-- /PT-FOOTER -->
-                            </div><!-- /PERSONAL -->
-                            <!-- PROFESSIONAL -->
-                            <div class="block professional fl col-md-3">
-                                <h2 class="title">Agency</h2>
-                                <!-- CONTENT -->
-                                <div class="content">
-                                    <p class="price">
-                                        <sup>$</sup>
-                                        <span>149.99</span>
-                                        <sub>/mon.</sub>
-                                    </p>
-                                </div><!-- /CONTENT -->
-                                <!-- FEATURES -->
-                                <ul class="features" style="border: #2e596a 1px solid; border-bottom: 0; border-top: 0;">
-                                    <li><span class="fa fa-cog"></span>250  Campaigns</li>
-                                    <li><span class="fa fa-star"></span>10  Users</li>
-                                    <li><span class="fa fa-dashboard"></span>5000  Keywords </li>
-                                </ul><!-- /FEATURES -->
-                                <!-- PT-FOOTER -->
-                                <div class="pt-footer">
-                                    <a class="btn btn-0" href="sessionSaver.action?itemName=Agency">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
-                                </div><!-- /PT-FOOTER -->
-                            </div><!-- /PROFESSIONAL -->
-                            <!-- BUSINESS -->
-                            <div class="block business fl col-md-3">
-                                <h2 class="title">Reseller</h2>
-                                <!-- CONTENT -->
-                                <div class="content">
-                                    <p class="price">
-                                        <sup>$</sup>
-                                        <span>299.99</span>
-                                        <sub>/mon.</sub>
-                                    </p>
-                                </div><!-- /CONTENT -->
-                                <!-- FEATURES -->
-                                <ul class="features" style="border: #5f4234 1px solid; border-bottom: 0; border-top: 0;">
-                                    <li><span class="fa fa-cog"></span>500  Campaigns</li>
-                                    <li><span class="fa fa-star"></span>Unlimited  Users</li>
-                                    <li><span class="fa fa-dashboard"></span>10000  Keywords </li>
-                                </ul><!-- /FEATURES -->
-                                <!-- PT-FOOTER -->
-                                <div class="pt-footer">
-                                    <a class="btn btn-0" href="sessionSaver.action?itemName=Reseller">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
-                                </div><!-- /PT-FOOTER -->
-                            </div><!-- /BUSINESS -->
-                            <!-- MASTER -->
-                            <div class="block master fl col-md-3">
-                                <h2 class="title">Enterprise</h2>
-                                <!-- CONTENT -->
-                                <div class="content">
-                                    <p class="price">
-                                        <sup>$</sup>
-                                        <span>799.99</span>
-                                        <sub>/mon.</sub>
-                                    </p>
-                                </div><!-- /CONTENT -->
-                                <!-- FEATURES -->
-                                <ul class="features" style="border: #504E4E 1px solid; border-bottom: 0; border-top: 0;">
-                                    <li><span class="fa fa-cog"></span>1500  Campaigns</li>
-                                    <li><span class="fa fa-star"></span>Unlimited  Users</li>
-                                    <li><span class="fa fa-dashboard"></span>30000  Keywords </li>
-                                </ul><!-- /FEATURES -->
-                                <!-- PT-FOOTER -->
-                                <div class="pt-footer">
-                                    <a class="btn btn-0" href="sessionSaver.action?itemName=Enterprise">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
-                                </div><!-- /PT-FOOTER -->
-                            </div><!-- /PERSONAL -->
+                                    <div class="block personal fl col-md-3">
+                                        <h2 class="title">${plans.name}</h2>
+                                        <!-- CONTENT -->
+                                        <div class="content">
+                                            <p class="price">
+                                                <sup>$</sup>
+                                                <span>${plans.amount}</span>
+                                                <sub>/mon.</sub>
+                                            </p>
+                                        </div><!-- /CONTENT -->
+                                        <!-- FEATURES -->
+                                        <ul class="features" style="border: #2c968f 1px solid; border-bottom: 0; border-top: 0;">
+                                            <li><span class="fa fa-check text-success"></span>${plans.campaigns} Campaigns</li>
+                                            <li><span class="fa fa-check text-success"></span>${plans.users} Users</li>
+                                            <li><span class="fa fa-check text-success"></span>${plans.keywords}  Keywords </li>
+                                                <c:if test="${plans.googleAnalytics ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Google Analytics</li>
+                                                </c:if>
+                                                <c:if test="${plans.googleAnalytics ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Google Analytics</li>
+                                                </c:if>
+                                                <c:if test="${plans.keywordResearch ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Keyword Research</li>
+                                                </c:if>
+                                                <c:if test="${plans.keywordResearch ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Keyword Research</li>
+                                                </c:if>
+                                                <c:if test="${plans.webmastertools ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Webmaster Tool</li>
+                                                </c:if>
+                                                <c:if test="${plans.webmastertools ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Webmaster Tool</li>
+                                                </c:if>
+                                                <c:if test="${plans.websiteReview ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Website Review</li>
+                                                </c:if>
+                                                <c:if test="${plans.websiteReview ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Website Review</li>
+                                                </c:if>
+                                                <c:if test="${plans.accurateLocalRanking ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Accurate Local Ranking</li>
+                                                </c:if>
+                                                <c:if test="${plans.accurateLocalRanking ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Accurate Local Ranking</li>
+                                                </c:if>
+                                                <c:if test="${plans.linkAnalysis ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Link Analysis</li>
+                                                </c:if>
+                                                <c:if test="${plans.linkAnalysis ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Link Analysis</li>
+                                                </c:if>
+                                        </ul><!-- /FEATURES -->
+                                        <!-- PT-FOOTER -->
+                                        <div class="pt-footer">
+                                            <a class="btn btn-0" href="sessionSaver.action?itemName=${plans.name}">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
+                                        </div><!-- /PT-FOOTER -->
+                                    </div>
+                                </c:if>
+                                <c:if test="${counter%4 ==2}">
+
+                                    <div class="block professional fl col-md-3">
+                                        <h2 class="title">${plans.name}</h2>
+                                        <!-- CONTENT -->
+                                        <div class="content">
+                                            <p class="price">
+                                                <sup>$</sup>
+                                                <span>${plans.amount}</span>
+                                                <sub>/mon.</sub>
+                                            </p>
+                                        </div><!-- /CONTENT -->
+                                        <!-- FEATURES -->
+                                        <ul class="features" style="border: #2c968f 1px solid; border-bottom: 0; border-top: 0;">
+                                            <li><span class="fa fa-check text-success"></span>${plans.campaigns} Campaigns</li>
+                                            <li><span class="fa fa-check text-success"></span>${plans.users} Users</li>
+                                            <li><span class="fa fa-check text-success"></span>${plans.keywords}  Keywords </li>
+                                                <c:if test="${plans.googleAnalytics ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Google Analytics</li>
+                                                </c:if>
+                                                <c:if test="${plans.googleAnalytics ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Google Analytics</li>
+                                                </c:if>
+                                                <c:if test="${plans.keywordResearch ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Keyword Research</li>
+                                                </c:if>
+                                                <c:if test="${plans.keywordResearch ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Keyword Research</li>
+                                                </c:if>
+                                                <c:if test="${plans.webmastertools ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Webmaster Tool</li>
+                                                </c:if>
+                                                <c:if test="${plans.webmastertools ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Webmaster Tool</li>
+                                                </c:if>
+                                                <c:if test="${plans.websiteReview ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Website Review</li>
+                                                </c:if>
+                                                <c:if test="${plans.websiteReview ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Website Review</li>
+                                                </c:if>
+                                                <c:if test="${plans.accurateLocalRanking ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Accurate Local Ranking</li>
+                                                </c:if>
+                                                <c:if test="${plans.accurateLocalRanking ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Accurate Local Ranking</li>
+                                                </c:if>
+                                                <c:if test="${plans.linkAnalysis ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Link Analysis</li>
+                                                </c:if>
+                                                <c:if test="${plans.linkAnalysis ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Link Analysis</li>
+                                                </c:if>
+
+                                        </ul><!-- /FEATURES -->
+                                        <!-- PT-FOOTER -->
+                                        <div class="pt-footer">
+                                            <a class="btn btn-0" href="sessionSaver.action?itemName=${plans.name}">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
+                                        </div><!-- /PT-FOOTER -->
+                                    </div>
+                                </c:if>
+                                <c:if test="${counter%4 ==3}">
+
+                                    <div class="block business fl col-md-3">
+                                        <h2 class="title">${plans.name}</h2>
+                                        <!-- CONTENT -->
+                                        <div class="content">
+                                            <p class="price">
+                                                <sup>$</sup>
+                                                <span>${plans.amount}</span>
+                                                <sub>/mon.</sub>
+                                            </p>
+                                        </div><!-- /CONTENT -->
+                                        <!-- FEATURES -->
+                                        <ul class="features" style="border: #2c968f 1px solid; border-bottom: 0; border-top: 0;">
+                                            <li><span class="fa fa-check text-success"></span>${plans.campaigns} Campaigns</li>
+                                            <li><span class="fa fa-check text-success"></span>${plans.users} Users</li>
+                                            <li><span class="fa fa-check text-success"></span>${plans.keywords}  Keywords </li>
+                                                <c:if test="${plans.googleAnalytics ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Google Analytics</li>
+                                                </c:if>
+                                                <c:if test="${plans.googleAnalytics ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Google Analytics</li>
+                                                </c:if>
+                                                <c:if test="${plans.keywordResearch ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Keyword Research</li>
+                                                </c:if>
+                                                <c:if test="${plans.keywordResearch ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Keyword Research</li>
+                                                </c:if>
+                                                <c:if test="${plans.webmastertools ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Webmaster Tool</li>
+                                                </c:if>
+                                                <c:if test="${plans.webmastertools ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Webmaster Tool</li>
+                                                </c:if>
+                                                <c:if test="${plans.websiteReview ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Website Review</li>
+                                                </c:if>
+                                                <c:if test="${plans.websiteReview ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Website Review</li>
+                                                </c:if>
+                                                <c:if test="${plans.accurateLocalRanking ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Accurate Local Ranking</li>
+                                                </c:if>
+                                                <c:if test="${plans.accurateLocalRanking ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Accurate Local Ranking</li>
+                                                </c:if>
+                                                <c:if test="${plans.linkAnalysis ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Link Analysis</li>
+                                                </c:if>
+                                                <c:if test="${plans.linkAnalysis ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Link Analysis</li>
+                                                </c:if>
+                                        </ul><!-- /FEATURES -->
+                                        <!-- PT-FOOTER -->
+                                        <div class="pt-footer">
+                                            <a class="btn btn-0" href="sessionSaver.action?itemName=${plans.name}">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
+                                        </div><!-- /PT-FOOTER -->
+                                    </div>
+                                </c:if>
+                                <c:if test="${counter%4 ==0}">
+
+                                    <div class="block master fl col-md-3">
+                                        <h2 class="title">${plans.name}</h2>
+                                        <!-- CONTENT -->
+                                        <div class="content">
+                                            <p class="price">
+                                                <sup>$</sup>
+                                                <span>${plans.amount}</span>
+                                                <sub>/mon.</sub>
+                                            </p>
+                                        </div><!-- /CONTENT -->
+                                        <!-- FEATURES -->
+                                        <ul class="features" style="border: #2c968f 1px solid; border-bottom: 0; border-top: 0;">
+                                            <li><span class="fa fa-check text-success"></span>${plans.campaigns} Campaigns</li>
+                                            <li><span class="fa fa-check text-success"></span>${plans.users} Users</li>
+                                            <li><span class="fa fa-check text-success"></span>${plans.keywords}  Keywords </li>
+                                                <c:if test="${plans.googleAnalytics ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Google Analytics</li>
+                                                </c:if>
+                                                <c:if test="${plans.googleAnalytics ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Google Analytics</li>
+                                                </c:if>
+                                                <c:if test="${plans.keywordResearch ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Keyword Research</li>
+                                                </c:if>
+                                                <c:if test="${plans.keywordResearch ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Keyword Research</li>
+                                                </c:if>
+                                                <c:if test="${plans.webmastertools ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Webmaster Tool</li>
+                                                </c:if>
+                                                <c:if test="${plans.webmastertools ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Webmaster Tool</li>
+                                                </c:if>
+                                                <c:if test="${plans.websiteReview ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Website Review</li>
+                                                </c:if>
+                                                <c:if test="${plans.websiteReview ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Website Review</li>
+                                                </c:if>
+                                                <c:if test="${plans.accurateLocalRanking ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Accurate Local Ranking</li>
+                                                </c:if>
+                                                <c:if test="${plans.accurateLocalRanking ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Accurate Local Ranking</li>
+                                                </c:if>
+                                                <c:if test="${plans.linkAnalysis ==1}">
+                                                <li><span class="fa fa-check text-success"></span>Link Analysis</li>
+                                                </c:if>
+                                                <c:if test="${plans.linkAnalysis ==0}">
+                                                <li><span class="fa fa-times text-danger"></span>Link Analysis</li>
+                                                </c:if>
+                                        </ul><!-- /FEATURES -->
+                                        <!-- PT-FOOTER -->
+                                        <div class="pt-footer">
+                                            <a class="btn btn-0" href="sessionSaver.action?itemName=${plans.name}">&nbsp;&nbsp; Register &nbsp;&nbsp;</a>
+                                        </div><!-- /PT-FOOTER -->
+                                    </div>
+                                </c:if>
+                            </c:forEach>                                                      
                         </div>
                     </div><!-- /PRICING-TABLE -->
                 </div>
@@ -300,7 +372,7 @@
             var _glc = _glc || [];
             _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDgsSBXVzZXJzGMKCkH0M');
             var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' :
-                'http://my.clickdesk.com/clickdesk-ui/browser/');
+                    'http://my.clickdesk.com/clickdesk-ui/browser/');
             var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
             var glcspt = document.createElement('script');
             glcspt.type = 'text/javascript';

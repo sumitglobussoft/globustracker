@@ -42,7 +42,7 @@
         <!-- configuring global results for error and signin -->
         <global-results>
             <result name="error">/WEB-INF/jsp_ranktracker_view/failure.jsp</result>
-            <result name="login">/WEB-INF/jsp_ranktracker_view/signIn.jsp</result>
+            <result name="login">/WEB-INF/jsp_ranktracker_view/login.jsp</result>
             <result name="renewal">/WEB-INF/jsp_ranktracker_view/accountexpired.jsp</result>
         </global-results>
 
@@ -61,7 +61,7 @@
         -->
         <action name="signUpSubmit" class="ranktracker.action.SignUpSubmitAction" method="execute">            
             <result name="success" type="redirect">/paymentPaypal.action</result>
-            <result name="input">/WEB-INF/jsp_ranktracker_view/newSignUp.jsp</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/register.jsp</result>
             <result name="CONTINUE" type="redirect">/paymentCoupon.action</result>
             <result name="done">/WEB-INF/jsp_ranktracker_view/success.jsp</result>
         </action>
@@ -97,7 +97,7 @@
         </action>
         
         <action name="sessionSaver" class="ranktracker.action.SessionSaverAction" method="execute">
-            <result name="success">/WEB-INF/jsp_ranktracker_view/newSignUp.jsp</result>
+            <result name="success">/WEB-INF/jsp_ranktracker_view/register.jsp</result>
         </action>
         
         <action name="accountCreated" class="ranktracker.action.AccountCreatedAction" method="execute">
@@ -109,8 +109,8 @@
         </action>
         
         <action name="forgotPasswordSubmit" class="ranktracker.action.ForgotPasswordAction" method="execute">    
-            <result name="success">/WEB-INF/jsp_ranktracker_view/forgotPassword.jsp</result>
-            <result name="input">/WEB-INF/jsp_ranktracker_view/forgotPassword.jsp</result>
+            <result name="success">/WEB-INF/jsp_ranktracker_view/forgotpasswordpage.jsp</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/forgotpasswordpage.jsp</result>
         </action>
         
         <action name="adminsigninform" class="ranktracker.action.SignInSubmitAction" method="adminLoginIn">            
@@ -124,7 +124,7 @@
         </action>
         
         <action name="logInSubmit" class="ranktracker.action.SignInSubmitAction" method="executeLogin">     
-            <result name="input">/WEB-INF/jsp_ranktracker_view/signIn.jsp</result>
+            <result name="input">/WEB-INF/jsp_ranktracker_view/login.jsp</result>
             <result name="renewal">/WEB-INF/jsp_ranktracker_view/accountexpired.jsp</result>       
             <result name="success" type="redirect">/campaigns.action</result>    
         </action>
@@ -135,6 +135,7 @@
         
         <action name="campaigns" class="ranktracker.action.CampaignsAction" method="execute">            
             <result name="success" type="tiles">campaigns</result>
+            <result name="exception" type="redirect">campaigns.action</result>
         </action>
                 
         <action name="admin" class="ranktracker.action.Adminaction" method="execute">            
@@ -156,7 +157,8 @@
         
         <action name="serps" class="ranktracker.action.SerpsTrackAction" method="execute">  
             <result name="success" type="tiles">serps</result>    
-            <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>        
+            <result name="input">/WEB-INF/jsp_ranktracker_view/home.jsp</result>  
+            <result name="exception" type="redirect">campaigns.action</result>       
         </action>
        
         <action name="video" class="ranktracker.action.VideoTrackAction" method="execute">            
@@ -367,11 +369,11 @@
         
         <action name="signIn" class="ranktracker.action.PageLinkAction" method="signIn">    
             <result name="login" type="redirect">/campaigns.action</result>        
-            <result name="success">/WEB-INF/jsp_ranktracker_view/signIn.jsp</result>
+            <result name="success">/WEB-INF/jsp_ranktracker_view/login.jsp</result>
         </action>
         
         <action name="signUp" class="ranktracker.action.PageLinkAction" method="signUp">            
-            <result name="success">/WEB-INF/jsp_ranktracker_view/newSignUp.jsp</result>
+            <result name="success">/WEB-INF/jsp_ranktracker_view/register.jsp</result>
         </action>
         
         <action name="report" class="ranktracker.action.ReportAction" method="execute">            
@@ -383,7 +385,7 @@
         </action>
         
         <action name="forgotPassword" class="ranktracker.action.PageLinkAction" method="forgotPassword">    
-            <result name="success">/WEB-INF/jsp_ranktracker_view/forgotPassword.jsp</result>
+            <result name="success">/WEB-INF/jsp_ranktracker_view/forgotpasswordpage.jsp</result>
         </action>
                 
         <action name="cancelPayment" class="ranktracker.action.PageLinkAction" method="paymentInfoSubmit">                   
@@ -425,6 +427,169 @@
         
         <action name="youtubechecker" class="ranktracker.action.PageLinkAction" method="youtubechecker">  
             <result name="success" type="tiles">youtubechecker</result>
+        </action>
+        
+        <!--Service for Keyword Research-->
+        <action name="getkeywords" class="ranktracker.action.KeywordResearchAction" method="getResults">            
+        </action>
+        
+        <action name="googleAnalytics" class="ranktracker.action.PageLinkAction" method="googleAnalytics">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">googleAnalytics</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <action name="googleAcquisition" class="ranktracker.action.PageLinkAction" method="googleAcquisition">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">googleAcquisition</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <action name="keywordResearch" class="ranktracker.action.PageLinkAction" method="keywordResearch">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">keywordResearch</result>
+            <result name="failure" type="redirect">upgradeOption.action</result>
+        </action>
+        
+        <action name="googleBrowserMobile" class="ranktracker.action.PageLinkAction" method="googleBrowserMobile">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">googleBrowserMobile</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <action name="googleSiteSpeed" class="ranktracker.action.PageLinkAction" method="googleSiteSpeed">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">googleSiteSpeed</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <action name="googleAdwords" class="ranktracker.action.PageLinkAction" method="googleAdwords">  
+            <result name="success" type="tiles">googleAdwords</result>
+        </action>
+        
+        <action name="googleSocials" class="ranktracker.action.PageLinkAction" method="googleSocials">  
+            <result name="success" type="tiles">googleSocials</result>
+        </action>
+        
+        <action name="searchanalytics" class="ranktracker.action.PageLinkAction" method="searchanalytics">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">searchanalytics</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <action name="PageSpeedAnalysis" class="ranktracker.action.PageLinkAction" method="pageSpeedAnalysis">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">PageSpeedAnalysis</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <action name="MobileUsability" class="ranktracker.action.PageLinkAction" method="mobileUsability">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">MobileUsability</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <action name="robotChecker" class="ranktracker.action.PageLinkAction" method="getRobotsChecker">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">RobotChecker</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <action name="StructuredData" class="ranktracker.action.PageLinkAction" method="getStructureData">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">StructuredData</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <!--getPageSpeedAnalysisResults service-->
+        <action name="getpagespeedresults" class="ranktracker.action.PageSpeedAnalysisAction" method="getPageSpeedAnalysisResults">            
+        </action>
+        
+        <!--getPageMobileUsability service-->
+        <action name="getpagemobileusability" class="ranktracker.action.PageSpeedAnalysisAction" method="getPageMobileUsability">            
+        </action>
+        
+        <!--getPlacesList service-->
+        <action name="getplaceslist" class="ranktracker.action.AccurateLocalRankingAction" method="getPlacesList">            
+        </action>
+        
+        <action name="accurateRanking" class="ranktracker.action.PageLinkAction" method="getAccurateLocalRankingPage">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">AccurateLocalRanking</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <!--getStructuredDataResults service-->
+        <action name="getstructureddata" class="ranktracker.action.StructuredData" method="getStructuredDataResults">  
+        </action>
+        
+        <!--getRobotFile service-->
+        <action name="getRobotFile" class="ranktracker.action.RobotCheckerAction" method="getRobotFile">            
+        </action>
+        
+        <!--checkUrlAllowance service-->
+        <action name="checkUrlAllowance" class="ranktracker.action.RobotCheckerAction" method="checkUrlAllowance">            
+        </action>
+        
+        <action name="linkAnalysis" class="ranktracker.action.PageLinkAction" method="getLinkAnalysis">  
+            <result name="login" type="redirect">signIn.action</result>
+            <result name="success" type="tiles">LinkAnalysis</result>
+            <result name="failure" type="redirect">upgradeOption.action</result> 
+        </action>
+        
+        <!--getLinkAnalysisData service-->
+        <action name="getLinkAnalysisData" class="ranktracker.action.LinkAnalysisAction" method="getLinkAnalysisData">            
+        </action>
+        
+        <!--webmasterdata service of webmaster tools features-->
+        <action name="webmasterdata" class="ranktracker.action.WebmastersAction" method="webmaster">            
+        </action>
+        
+        <!--oauth2callback service and redirecting to searchanalytics.action of webmaster tools features-->
+        <action name="oauth2callback" class="ranktracker.action.WebmastersAction" method="signupAccessCode">      
+            <result name="success" type="redirect">searchanalytics.action</result> 
+        </action>
+        
+        <!--refreshdata service of webmaster tools features-->
+        <action name="refreshdata" class="ranktracker.action.WebmastersAction" method="refreshData">            
+        </action>
+        
+        <!--sitedata service of webmaster tools features-->
+        <action name="sitedata" class="ranktracker.action.WebmastersAction" method="webmasterSiteGraphData">            
+        </action>
+        
+        <!--sitemapdata service of webmaster tools features-->
+        <action name="sitemapdata" class="ranktracker.action.WebmastersAction" method="webmasterSiteMapData">            
+        </action>
+        
+        <!--crawlerrorcountdata service of webmaster tools features-->
+        <action name="crawlerrorcountdata" class="ranktracker.action.WebmastersAction" method="webmasterCrawlErrorCountData">            
+        </action>
+        
+        <!--crawlerrorsamplesdata service of webmaster tools features-->
+        <action name="crawlerrorsamplesdata" class="ranktracker.action.WebmastersAction" method="webmasterCrawlErrorSamplesData">            
+        </action>
+        
+        <!--updateKeywordRankCount service of SERP Campaign dashboard "keywords up" features-->
+        <action name="updateKeywordRankCount" class="ranktracker.action.CampaignsAction" method="updateKeywordRankCount">            
+        </action>
+        
+        <!--featuresdetails service of getting the listPlans of details and redirecting to package.jsp page--> 
+        <action name="featuresdetails" class="ranktracker.action.PageLinkAction" method="adminPanelFeaturesListDetails">            
+            <result name="success" type="tiles">packageDetails</result>    
+            <result name="input">/WEB-INF/jsp_ranktracker_view/adminlog.jsp</result>  
+        </action>
+        
+        <!--getfeatures service of getting the plan details-->
+        <action name="getfeatures" class="ranktracker.action.PageLinkAction" method="insertPackageDetails">            
+        </action>
+         
+        <!--updateFeatureDetails service of updating the plan details-->
+        <action name="updateFeatureDetails" class="ranktracker.action.PageLinkAction" method="updateFeatureDetails">            
+        </action>
+        
+        <!--getStructuredToolsDetails service of getting the structured data details-->
+        <action name="getStructuredToolsDetails" class="ranktracker.action.StructuredTools" method="structuredValidatorTools">            
         </action>
         
     </package>
@@ -617,10 +782,34 @@
             </result>
         </action>
         
-        <action name="refreshSerpsCampaign" class="ranktracker.action.SerpsTrackAction" method="refreshSerpsCampaign">
+        <action name="refreshSerpsCampaign" class="ranktracker.action.RefreshKeywordRanking" method="refreshSerpsCampaign">
             <result type="json" >
                 <param name="excludeProperties">
                     objCampaignsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="refreshSerpsGoogleKeyword" class="ranktracker.action.RefreshKeywordRanking" method="refreshSerpsGoogleKeyword">
+            <result type="json" >
+                <param name="includeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="refreshSerpsYahooKeyword" class="ranktracker.action.RefreshKeywordRanking" method="refreshSerpsYahooKeyword">
+            <result type="json" >
+                <param name="includeProperties">
+                    objKeywordsService
+                </param>
+            </result>
+        </action>
+        
+        <action name="refreshSerpsBingKeyword" class="ranktracker.action.RefreshKeywordRanking" method="refreshSerpsBingKeyword">
+            <result type="json" >
+                <param name="includeProperties">
+                    objKeywordsService
                 </param>
             </result>
         </action>

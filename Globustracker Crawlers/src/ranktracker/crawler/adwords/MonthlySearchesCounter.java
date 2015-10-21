@@ -78,8 +78,8 @@ public class MonthlySearchesCounter implements Runnable {
         Map<String, Integer> mapMonthlySearchesCounter = new HashMap<String, Integer>(0);
 
         driver.get("https://accounts.google.com/");
-        driver.findElement(By.id("Email")).sendKeys("omkaravishal@gmail.com");
-        driver.findElement(By.id("Passwd")).sendKeys("omkaraVishal1");
+        driver.findElement(By.id("Email")).sendKeys("xxxxxxxxxxxxxx");
+        driver.findElement(By.id("Passwd")).sendKeys("xxxxxxxxxxxxx");
         driver.findElement(By.id("signIn")).click();
 
         int count1 = 0;

@@ -56,7 +56,8 @@ public class Keywordsuggestion {
                     .setParameter("q", filter)
                     .build();
             reply = fetchXMLContent(googlesearch);
-
+            System.out.println("reply:::::"+reply);
+                    
         } catch (IOException ex) {
             Logger.getLogger(Keywordsuggestion.class.getName()).log(Level.SEVERE, null, ex);
             return reply;

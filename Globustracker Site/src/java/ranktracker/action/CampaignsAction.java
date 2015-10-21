@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.scheduling.annotation.Scheduled;
+import ranktracker.dao.CampaignsDao;
 import ranktracker.entity.Campaigns;
 import ranktracker.entity.Displaysettings;
 import ranktracker.entity.Serpkeywords;
@@ -96,6 +98,14 @@ public class CampaignsAction extends ActionSupport {
      */
     private RankComparision rankComparision;
 
+    private List<Serpkeywords> lstUpdatedKeywords;
+
+    private List<Videokeywords> lstvideoUpdatedKeywords;
+
+    private CampaignsDao objCampaignsDao;
+
+    private List<Campaigns> objCampaigns;
+
     /**
      * The method retrieves campaigns based on customer id
      *
@@ -113,27 +123,32 @@ public class CampaignsAction extends ActionSupport {
 
         //checking for 'customerID' attribute in session
         if (objSession.getAttribute("customerID") != null) {
-            
-            System.out.println("activationPeriod "+objSession.getAttribute("activationPeriod").toString());
-            if (objSession.getAttribute("activationPeriod").toString().equals("0")) {                
+
+            System.out.println("activationPeriod " + objSession.getAttribute("activationPeriod").toString());
+            if (objSession.getAttribute("activationPeriod").toString().equals("0")) {
                 return "renewal";
             }
             //reading the 'customerID' from session and type casting it to integer
             String sCustomerID = objSession.getAttribute("customerID").toString();
             Integer customerID = Integer.parseInt(sCustomerID);
 
-            //invoking the getData() method of CampaignsServiceImpl
-            Object[] dataObject = objCampaignsService.getData(customerID);
+            try {
+
+                //invoking the getData() method of CampaignsServiceImpl
+                Object[] dataObject = objCampaignsService.getData(customerID);
 
             //retrieving theb list of keywords data from dataObject
 //            lstKeywordData = (List<Integer>) dataObject[0];
-            //now retrieving the active keyword count and allowed keyword count
+                //now retrieving the active keyword count and allowed keyword count
 //            activeKeywordsCount = lstKeywordData.get(0);
 //            allowedKeywordsCount = lstKeywordData.get(1);
-            //retrieving the list of campaigns
-            lstCampaigns = (List<Campaigns>) dataObject[1];
-            lstKeywords = objCampaignsService.getRankData(customerID);
-            lstKeywordsvideo = objCampaignsService.getRankDataVideo(customerID);
+                //retrieving the list of campaigns
+                lstCampaigns = (List<Campaigns>) dataObject[1];
+                lstKeywords = objCampaignsService.getRankData(customerID);
+                lstKeywordsvideo = objCampaignsService.getRankDataVideo(customerID);
+            } catch (Exception e) {
+                return "exception";
+            }
             int count5 = 0;
             int count10 = 0;
             int count20 = 0;
@@ -192,6 +207,50 @@ public class CampaignsAction extends ActionSupport {
             rankComparision.setKeywordsRankBelow30(count30);
             rankComparision.setKeywordsRankBelow100(count100);
             rankComparision.setTotalkeywords(keywordcount);
+
+            //******************Code Written By Nitesh Shah from line 205 to 240*******        
+            int previouskeywordsRankBelow5 = 0;
+            int previouskeywordsRankBelow10 = 0;
+            int previouskeywordsRankBelow20 = 0;
+            int previouskeywordsRankBelow30 = 0;
+            int previouskeywordsRankBelow100 = 0;
+
+            try {
+                objCampaigns = objCampaignsDao.getCampaigns(customerID);
+                if (objCampaigns.size() > 0) {
+                    for (Campaigns objCampaign : objCampaigns) {
+                        try {
+                            previouskeywordsRankBelow5 = previouskeywordsRankBelow5 + objCampaign.getRankBelow5();
+                            previouskeywordsRankBelow10 = previouskeywordsRankBelow10 + objCampaign.getRankBelow10();
+                            previouskeywordsRankBelow20 = previouskeywordsRankBelow20 + objCampaign.getRankBelow20();
+                            previouskeywordsRankBelow30 = previouskeywordsRankBelow30 + objCampaign.getRankBelow30();
+                            previouskeywordsRankBelow100 = previouskeywordsRankBelow100 + objCampaign.getRankBelow100();
+
+                            int keywordsRankBelow5Count = (count5) - (previouskeywordsRankBelow5);
+                            int KeywordsRankBelow10Count = (count10) - (previouskeywordsRankBelow5);
+                            int KeywordsRankBelow20Count = (count20) - (previouskeywordsRankBelow20);
+                            int KeywordsRankBelow30Count = (count30) - (previouskeywordsRankBelow30);
+                            int KeywordsRankBelow100Count = (count100) - (previouskeywordsRankBelow100);
+
+                            rankComparision.setPreviouskeywordsRankBelow5(previouskeywordsRankBelow5);
+                            rankComparision.setPreviouskeywordsRankBelow10(previouskeywordsRankBelow5);
+                            rankComparision.setPreviouskeywordsRankBelow20(previouskeywordsRankBelow20);
+                            rankComparision.setPreviouskeywordsRankBelow30(previouskeywordsRankBelow30);
+                            rankComparision.setPreviouskeywordsRankBelow100(previouskeywordsRankBelow100);
+
+                            rankComparision.setCurrentkeywordsRankBelow5(keywordsRankBelow5Count);
+                            rankComparision.setCurrentkeywordsRankBelow10(KeywordsRankBelow10Count);
+                            rankComparision.setCurrentkeywordsRankBelow20(KeywordsRankBelow20Count);
+                            rankComparision.setCurrentkeywordsRankBelow30(KeywordsRankBelow30Count);
+                            rankComparision.setCurrentkeywordsRankBelow100(KeywordsRankBelow100Count);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             try {
                 customerId = Integer.parseInt(objSession.getAttribute("customerID").toString());
@@ -419,6 +478,102 @@ public class CampaignsAction extends ActionSupport {
     }
 
     /**
+     * The method sends scheduled reports
+     */
+    @Scheduled(cron = "* */30 * * * ?")
+    public void updateKeywordRankCount() {
+
+        try {
+
+            List<Campaigns> objlstCampaigns = objCampaignsDao.getAllCampaigns();
+
+            for (Campaigns objGetAllCampaign : objlstCampaigns) {
+
+                Integer campaignId2 = objGetAllCampaign.getCampaignID();
+                Integer customerId2 = objGetAllCampaign.getCustomerID().getCustomerID();
+                Object[] dataObject = objKeywordsService.getSerpData(campaignId2, customerId2);
+                Object[] dataObjectVideo = objKeywordsService.getVideoData(campaignId2, customerId2);
+                try {
+                    if ((dataObject != null) && (dataObject.length > 0) && (dataObjectVideo != null) && (dataObjectVideo.length > 0)) {
+                        lstUpdatedKeywords = (List<Serpkeywords>) dataObject[0];
+                        lstvideoUpdatedKeywords = (List<Videokeywords>) dataObjectVideo[0];
+                        int keyrank;
+                        int count5 = 0;
+                        int count10 = 0;
+                        int count20 = 0;
+                        int count30 = 0;
+                        int count100 = 0;
+                        if (!lstUpdatedKeywords.isEmpty()) {
+                            Iterator itr = lstUpdatedKeywords.iterator();
+                            while (itr.hasNext()) {
+                                Serpkeywords keys = (Serpkeywords) itr.next();
+                                keyrank = keys.getRankGoogle();
+                                System.out.println("Google Rank : " + keyrank);
+                                if (keyrank <= 5 & keyrank != 0) {
+                                    count5++;
+                                }
+                                if (keyrank <= 10 & keyrank != 0) {
+                                    count10++;
+                                }
+                                if (keyrank <= 20 & keyrank != 0) {
+                                    count20++;
+                                }
+                                if (keyrank <= 30 & keyrank != 0) {
+                                    count30++;
+                                }
+                                if (keyrank <= 100 & keyrank != 0) {
+                                    count100++;
+                                }
+                            }
+                        }
+
+                        if (!lstvideoUpdatedKeywords.isEmpty()) {
+                            Iterator itr1 = lstvideoUpdatedKeywords.iterator();
+                            while (itr1.hasNext()) {
+                                Videokeywords keys2 = (Videokeywords) itr1.next();
+                                keyrank = keys2.getRankYoutube();
+                                System.out.println("Youtube Rank : " + keyrank);
+                                if (keyrank <= 5 & keyrank != 0) {
+                                    count5++;
+                                }
+                                if (keyrank <= 10 & keyrank != 0) {
+                                    count10++;
+                                }
+                                if (keyrank <= 20 & keyrank != 0) {
+                                    count20++;
+                                }
+                                if (keyrank <= 30 & keyrank != 0) {
+                                    count30++;
+                                }
+                                if (keyrank <= 100 & keyrank != 0) {
+                                    count100++;
+                                }
+                            }
+                        }
+
+                        objGetAllCampaign.setRankBelow5(count5);
+                        objGetAllCampaign.setRankBelow10(count10);
+                        objGetAllCampaign.setRankBelow20(count20);
+                        objGetAllCampaign.setRankBelow30(count30);
+                        objGetAllCampaign.setRankBelow100(count100);
+
+                        System.out.println("--------5--------- " + objGetAllCampaign.getRankBelow5());
+                        System.out.println("--------10---------" + objGetAllCampaign.getRankBelow10());
+                        System.out.println("--------20---------" + objGetAllCampaign.getRankBelow20());
+                        System.out.println("--------30---------" + objGetAllCampaign.getRankBelow30());
+                        System.out.println("--------100--------" + objGetAllCampaign.getRankBelow100());
+
+                        objCampaignsDao.SaveAllCampaigns(objGetAllCampaign);
+                    }
+
+                } catch (Exception e) {
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    /**
      *
      * @return objKeywordsService
      */
@@ -585,4 +740,21 @@ public class CampaignsAction extends ActionSupport {
     public void setLstKeywords(List<Serpkeywords> lstKeywords) {
         this.lstKeywords = lstKeywords;
     }
+
+    public CampaignsDao getObjCampaignsDao() {
+        return objCampaignsDao;
+    }
+
+    public void setObjCampaignsDao(CampaignsDao objCampaignsDao) {
+        this.objCampaignsDao = objCampaignsDao;
+    }
+
+    public List<Campaigns> getObjCampaigns() {
+        return objCampaigns;
+    }
+
+    public void setObjCampaigns(List<Campaigns> objCampaigns) {
+        this.objCampaigns = objCampaigns;
+    }
+
 }

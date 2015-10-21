@@ -34,6 +34,11 @@
     #keypopup td:hover {
         background: none repeat scroll 0 0 #ccc;
     }
+
+    td, th {
+        font-size: 12px;
+        vertical-align: middle !important;
+    }
 </style>
 
 <div class="row">
@@ -97,50 +102,50 @@
 
                                             <div class="col-md-offset-1 col-sm-2">
 
-                                                <div class="well well-sm bg-color-teal txt-color-white text-center">
+                                                <div class="well well-sm bg-color-teal txt-color-white text-center" style="min-height: 142px;">
                                                     <h5>Top 5</h5>
                                                     <code><s:property value="keywordsRankBelow5" />/<s:property value="totalkeywords" /></code>
-                                                    <h5>vs: 0 change: +</h5>
+                                                    <h5>vs: <s:property value="previouskeywordsRankBelow5" /> change: <s:property value="currentkeywordsRankBelow5" /></h5>
                                                 </div>
 
                                             </div>
 
                                             <div class="col-sm-2">
 
-                                                <div class="well well-sm bg-color-pinkDark txt-color-white text-center">
+                                                <div class="well well-sm bg-color-pinkDark txt-color-white text-center" style="min-height: 142px;">
                                                     <h5>Top 10</h5>
                                                     <code><s:property value="keywordsRankBelow10" />/<s:property value="totalkeywords" /></code>
-                                                    <h5>vs: 0 change: +</h5>
+                                                    <h5>vs: <s:property value="previouskeywordsRankBelow10" /> change: <s:property value="currentkeywordsRankBelow10" /></h5>
                                                 </div>
 
                                             </div>
 
                                             <div class="col-sm-2">
 
-                                                <div class="well well-sm text-center">
+                                                <div class="well well-sm text-center" style="min-height: 142px;">
                                                     <h5>Top 20</h5>
                                                     <code><s:property value="keywordsRankBelow20" />/<s:property value="totalkeywords" /></code>
-                                                    <h5>vs: 0 change: +</h5>
+                                                    <h5>vs: <s:property value="previouskeywordsRankBelow20" /> change: <s:property value="currentkeywordsRankBelow20" /></h5>
                                                 </div>
 
                                             </div>
 
                                             <div class="col-sm-2">
 
-                                                <div class="well well-sm bg-color-pinkDark txt-color-white text-center">
+                                                <div class="well well-sm bg-color-pinkDark txt-color-white text-center" style="min-height: 142px;">
                                                     <h5>Top 30</h5>
                                                     <code><s:property value="keywordsRankBelow30" />/<s:property value="totalkeywords" /></code>
-                                                    <h5>vs: 0 change: +</h5>
+                                                    <h5>vs: <s:property value="previouskeywordsRankBelow30" /> change: <s:property value="currentkeywordsRankBelow30" /></h5>
                                                 </div>
 
                                             </div>
 
                                             <div class="col-sm-2">
 
-                                                <div class="well well-sm bg-color-teal txt-color-white text-center">
+                                                <div class="well well-sm bg-color-teal txt-color-white text-center" style="min-height: 142px;">
                                                     <h5>Top 100</h5>
                                                     <code><s:property value="keywordsRankBelow100" />/<s:property value="totalkeywords" /></code>
-                                                    <h5>vs: 0 change: +</h5>
+                                                    <h5>vs: <s:property value="previouskeywordsRankBelow100" /> change: <s:property value="currentkeywordsRankBelow100" /></h5>
                                                 </div>
 
                                             </div>
@@ -227,10 +232,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center;">Keyword</th>
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/youtubeicon.png"  style="border:none;" width="24" height="24" alt="" /></th>
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/dailymotion_24.png" style="border:none;" width="24" height="24" alt=""/></th>
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/vimeo_logo.JPG" style="border:none;" width="24" height="24" alt="" /></th> 
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/metacafe_logo.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/youtubeicon.png"  style="border:none;" width="24" height="24" alt="" /></th>
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/dailymotion_24.png" style="border:none;" width="24" height="24" alt=""/></th>
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/vimeo_logo.JPG" style="border:none;" width="24" height="24" alt="" /></th> 
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/metacafe_logo.png" style="border:none;" width="24" height="24" alt="" /></th>
                                                         <th style="text-align: center;">Chart</th>
                                                         <th style="text-align: center;">Edit</th>                                                
                                                         <th style="text-align: center;">Delete</th>   
@@ -262,7 +267,7 @@
                                                             <s:else >
                                                                 <td style="text-align: center;">N/A</td>
                                                             </s:else>
-                                                            <td title="<s:property value="metacafeURL" />"><s:property value="metacafeURL" /></td>
+                                                            <td title="<s:property value="metacafeURL" />" style="word-break: break-word;"><s:property value="metacafeURL" /></td>
                                                             <s:if test="%{rankMetacafe!=501 }">
                                                                 <td style="text-align: center;"><s:property value="rankMetacafe" /></td>
                                                             </s:if>
@@ -586,460 +591,462 @@
 <script type='text/javascript' src='/dwr/engine.js'></script>
 <script type='text/javascript' src='/dwr/interface/Keywordsuggestion.js'></script>
 <script type="text/javascript">
-    function filterChanged() {
-        if (document.getElementById("checkbox").checked) {
-            dwr.util.removeAllRows("peoplebody");
-            var addkeywords = dwr.util.getValue("videokeyword");
-            if (addkeywords.length === 0) {
-                dwr.util.removeAllRows("peoplebody");
-            } else {
-                Keywordsuggestion.getMatchingforKeywords(addkeywords, fillTable);
-            }
-        }
-        else {
-            dwr.util.removeAllRows("peoplebody");
-        }
-    }
-    function fillTable(people) {
-        var addkeywords = dwr.util.getValue("videokeyword");
-        var filtered = [];
-        dwr.util.removeAllRows("peoplebody");
-        for (i = 0; i < people.length; i++) {
-            filtered.push(people[i]);
-        }
-        if (filtered.length !== 0) {
-            dwr.util.addRows("peoplebody", filtered, [
-                function(element) {
-                    return element;
-                }
-            ], {escapeHtml: false});
-        }
-    }
-    function filterChangeds() {
-        if (document.getElementById("checkboxs").checked) {
-            dwr.util.removeAllRows("peoplebodys");
-            var addkeywords = dwr.util.getValue("videokeywords");
-            if (addkeywords.length === 0) {
-                dwr.util.removeAllRows("peoplebodys");
-            } else {
-                Keywordsuggestion.getMatchingforKeywords(addkeywords, fillTables);
-            }
-        }
-        else {
-            dwr.util.removeAllRows("peoplebodys");
-        }
-    }
-    function fillTables(people) {
-        var addkeywords = dwr.util.getValue("videokeywords");
-        var pattern = new RegExp("(" + addkeywords + ")", "i");
-        var filtered = [];
-        dwr.util.removeAllRows("peoplebodys");
-        for (i = 0; i < people.length; i++) {
-            filtered.push(people[i]);
-        }
-        if (filtered.length !== 0) {
-            dwr.util.addRows("peoplebodys", filtered, [
-                function(element) {
-                    return  element;
-                }
-            ], {escapeHtml: false});
-        }
-    }
-    function editfilterChanged() {
-        if (document.getElementById("editcheckbox").checked) {
+                            function filterChanged() {
+                                if (document.getElementById("checkbox").checked) {
+                                    dwr.util.removeAllRows("peoplebody");
+                                    var addkeywords = dwr.util.getValue("videokeyword");
+                                    if (addkeywords.length === 0) {
+                                        dwr.util.removeAllRows("peoplebody");
+                                    } else {
+                                        Keywordsuggestion.getMatchingforKeywords(addkeywords, fillTable);
+                                    }
+                                }
+                                else {
+                                    dwr.util.removeAllRows("peoplebody");
+                                }
+                            }
+                            function fillTable(people) {
+                                var addkeywords = dwr.util.getValue("videokeyword");
+                                var filtered = [];
+                                dwr.util.removeAllRows("peoplebody");
+                                for (i = 0; i < people.length; i++) {
+                                    filtered.push(people[i]);
+                                }
+                                if (filtered.length !== 0) {
+                                    dwr.util.addRows("peoplebody", filtered, [
+                                        function (element) {
+                                            return element;
+                                        }
+                                    ], {escapeHtml: false});
+                                }
+                            }
+                            function filterChangeds() {
+                                if (document.getElementById("checkboxs").checked) {
+                                    dwr.util.removeAllRows("peoplebodys");
+                                    var addkeywords = dwr.util.getValue("videokeywords");
+                                    if (addkeywords.length === 0) {
+                                        dwr.util.removeAllRows("peoplebodys");
+                                    } else {
+                                        Keywordsuggestion.getMatchingforKeywords(addkeywords, fillTables);
+                                    }
+                                }
+                                else {
+                                    dwr.util.removeAllRows("peoplebodys");
+                                }
+                            }
+                            function fillTables(people) {
+                                var addkeywords = dwr.util.getValue("videokeywords");
+                                var pattern = new RegExp("(" + addkeywords + ")", "i");
+                                var filtered = [];
+                                dwr.util.removeAllRows("peoplebodys");
+                                for (i = 0; i < people.length; i++) {
+                                    filtered.push(people[i]);
+                                }
+                                if (filtered.length !== 0) {
+                                    dwr.util.addRows("peoplebodys", filtered, [
+                                        function (element) {
+                                            return  element;
+                                        }
+                                    ], {escapeHtml: false});
+                                }
+                            }
+                            function editfilterChanged() {
+                                if (document.getElementById("editcheckbox").checked) {
 
-            var addkeywords = dwr.util.getValue("editkeyword");
-            if (addkeywords.length === 0) {
-                dwr.util.removeAllRows("editpeoplebody");
-            } else {
-                Keywordsuggestion.getMatchingforKeywords(addkeywords, editfillTable);
-            }
-        }
-        else {
-            dwr.util.removeAllRows("editpeoplebody");
-        }
-    }
-    function editfillTable(people) {
-        var addkeywords = dwr.util.getValue("editkeyword");
-        var filtered = [];
-        dwr.util.removeAllRows("editpeoplebody");
-        for (i = 0; i < people.length; i++) {
-            filtered.push(people[i]);
-        }
-        if (filtered.length !== 0) {
-            dwr.util.addRows("editpeoplebody", filtered, [
-                function(element) {
-                    return element;
-                }
-            ], {escapeHtml: false});
-        }
-    }
-    function getEventTarget(e) {
-        e = e || window.event;
-        return e.target || e.srcElement;
-    }
-    var ul = document.getElementById('peoplebody');
-    ul.onclick = function(event) {
-        var target = getEventTarget(event);
-        document.getElementById("videokeyword").value = target.innerHTML;
-        dwr.util.removeAllRows("peoplebody");
-    };
-    var ul1 = document.getElementById('peoplebodys');
-    ul1.onclick = function(event) {
-        var target = getEventTarget(event);
-        var addkeywords = dwr.util.getValue("videokeywords");
-        var res = [];
-        res = addkeywords.split("\n");
-        var lst = [];
-        for (i = 0; i < ((res.length) - 1); i++) {
-            lst.push(res[i]);
-        }
-        var old = lst.toString();
-        while (old.indexOf(',') != -1) {
-            old = old.replace(',', '\n');
-        }
-        if (lst == "")
-        {
-            document.getElementById("videokeywords").value = target.innerHTML;
-            dwr.util.removeAllRows("peoplebodys");
-        }
-        else {
-            document.getElementById("videokeywords").value = old + "\n" + target.innerHTML;
-            dwr.util.removeAllRows("peoplebodys");
-        }
-        dwr.util.removeAllRows("peoplebodys");
-    };
-    var editul = document.getElementById('editpeoplebody');
-    editul.onclick = function(event) {
-        var target = getEventTarget(event);
-        document.getElementById("editkeyword").value = target.innerHTML;
-        dwr.util.removeAllRows("editpeoplebody");
-    };
+                                    var addkeywords = dwr.util.getValue("editkeyword");
+                                    if (addkeywords.length === 0) {
+                                        dwr.util.removeAllRows("editpeoplebody");
+                                    } else {
+                                        Keywordsuggestion.getMatchingforKeywords(addkeywords, editfillTable);
+                                    }
+                                }
+                                else {
+                                    dwr.util.removeAllRows("editpeoplebody");
+                                }
+                            }
+                            function editfillTable(people) {
+                                var addkeywords = dwr.util.getValue("editkeyword");
+                                var filtered = [];
+                                dwr.util.removeAllRows("editpeoplebody");
+                                for (i = 0; i < people.length; i++) {
+                                    filtered.push(people[i]);
+                                }
+                                if (filtered.length !== 0) {
+                                    dwr.util.addRows("editpeoplebody", filtered, [
+                                        function (element) {
+                                            return element;
+                                        }
+                                    ], {escapeHtml: false});
+                                }
+                            }
+                            function getEventTarget(e) {
+                                e = e || window.event;
+                                return e.target || e.srcElement;
+                            }
+                            var ul = document.getElementById('peoplebody');
+                            ul.onclick = function (event) {
+                                var target = getEventTarget(event);
+                                document.getElementById("videokeyword").value = target.innerHTML;
+                                dwr.util.removeAllRows("peoplebody");
+                            };
+                            var ul1 = document.getElementById('peoplebodys');
+                            ul1.onclick = function (event) {
+                                var target = getEventTarget(event);
+                                var addkeywords = dwr.util.getValue("videokeywords");
+                                var res = [];
+                                res = addkeywords.split("\n");
+                                var lst = [];
+                                for (i = 0; i < ((res.length) - 1); i++) {
+                                    lst.push(res[i]);
+                                }
+                                var old = lst.toString();
+                                while (old.indexOf(',') != -1) {
+                                    old = old.replace(',', '\n');
+                                }
+                                if (lst == "")
+                                {
+                                    document.getElementById("videokeywords").value = target.innerHTML;
+                                    dwr.util.removeAllRows("peoplebodys");
+                                }
+                                else {
+                                    document.getElementById("videokeywords").value = old + "\n" + target.innerHTML;
+                                    dwr.util.removeAllRows("peoplebodys");
+                                }
+                                dwr.util.removeAllRows("peoplebodys");
+                            };
+                            var editul = document.getElementById('editpeoplebody');
+                            editul.onclick = function (event) {
+                                var target = getEventTarget(event);
+                                document.getElementById("editkeyword").value = target.innerHTML;
+                                dwr.util.removeAllRows("editpeoplebody");
+                            };
 </script>
 <!--script for keyword suggestion-->
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="https://s3.amazonaws.com/js_ranktracker/highcharts.js"></script> 
 <script src="https://s3.amazonaws.com/js_ranktracker/exporting.js"></script>
+
+
 <script type="text/javascript">
-    var opened = "0";
-    function drawVideoChart(keywordId, range) {
-        var jString = "{\"keywordId\":\"" + keywordId + "\" , \"range\":\"" + range + "\"}";
-        var chart;
-        $.getJSON(
-        'ajax/getVideoChartData.action',
-        {
-            jString: jString
-        },
-        function(jMap) {
-            chart = new Highcharts.Chart({
-                chart: {
-                    renderTo: 'chartBlock',
-                    type: 'column',
-                    marginRight: 130,
-                    marginBottom: 25,
-                    width: 1100,
-                    height: 200
-                },
-                title: jMap.dataMap.title,
-                subtitle: {
-                    text: '',
-                    x: -20
-                },
-                credits: {
-                    enabled: false
-                    //                    text: 'globustracker.com',
-                    //                    href: 'http://www.globustracker.com/'
-                },
-                xAxis: {
-                    categories:
-                        eval(jMap.dataMap.category),
-                    //                        ['View Count', 'Like Count' ,  'DisLike Count',  'Comment Count ',  'Daily View Count'  ],
-                    labels: {
-                        x: 3,
-                        style: {
-                            fontSize: '13px',
-                            fontFamily: 'Verdana, sans-serif',
-                            //  color: "black",
-                            color: "{point.color}",
-                            fontWeight: 'bold'
-                        }
-                    }//, offset: -16
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'View Count'
-                    }
-                },
-                tooltip: {
-                    pointFormat: '<b>{point.y}</b>'
-                },
-                legend: {
-                    enabled: false
-                },
-                series: eval(jMap.dataMap.sbData)
-            });
+                            var opened = "0";
+                            function drawVideoChart(keywordId, range) {
+                                var jString = "{\"keywordId\":\"" + keywordId + "\" , \"range\":\"" + range + "\"}";
+                                var chart;
+                                $.getJSON(
+                                        'ajax/getVideoChartData.action',
+                                        {
+                                            jString: jString
+                                        },
+                                function (jMap) {
+                                    chart = new Highcharts.Chart({
+                                        chart: {
+                                            renderTo: 'chartBlock',
+                                            type: 'column',
+                                            marginRight: 130,
+                                            marginBottom: 25,
+                                            width: 1100,
+                                            height: 200
+                                        },
+                                        title: jMap.dataMap.title,
+                                        subtitle: {
+                                            text: '',
+                                            x: -20
+                                        },
+                                        credits: {
+                                            enabled: false
+                                                    //                    text: 'globustracker.com',
+                                                    //                    href: 'http://www.globustracker.com/'
+                                        },
+                                        xAxis: {
+                                            categories:
+                                                    eval(jMap.dataMap.category),
+                                            //                        ['View Count', 'Like Count' ,  'DisLike Count',  'Comment Count ',  'Daily View Count'  ],
+                                            labels: {
+                                                x: 3,
+                                                style: {
+                                                    fontSize: '13px',
+                                                    fontFamily: 'Verdana, sans-serif',
+                                                    //  color: "black",
+                                                    color: "{point.color}",
+                                                    fontWeight: 'bold'
+                                                }
+                                            }//, offset: -16
+                                        },
+                                        yAxis: {
+                                            min: 0,
+                                            title: {
+                                                text: 'View Count'
+                                            }
+                                        },
+                                        tooltip: {
+                                            pointFormat: '<b>{point.y}</b>'
+                                        },
+                                        legend: {
+                                            enabled: false
+                                        },
+                                        series: eval(jMap.dataMap.sbData)
+                                    });
 
-        });
-    }
+                                });
+                            }
 
-    var alertMes = "";
-    function addVideoKeyword() {
-        var keyword = document.addForm.videokeyword.value;
-        var youtubeurl = document.addForm.youtubeurl.value;
-        var vimeourl = document.addForm.vimeourl.value;
-        var metacafeurl = document.addForm.metacafeurl.value;
-        var dailymotionurl = document.addForm.dailymotionurl.value;
-        var filter = new RegExp('(http|ftp|https)://[a-z0-9\-_]+(\.[a-z0-9\-_]+)+([a-z0-9\-\.,@\?^=%&;:/~\+#]*[a-z0-9\-@\?^=%&;/~\+#])?', 'i');
+                            var alertMes = "";
+                            function addVideoKeyword() {
+                                var keyword = document.addForm.videokeyword.value;
+                                var youtubeurl = document.addForm.youtubeurl.value;
+                                var vimeourl = document.addForm.vimeourl.value;
+                                var metacafeurl = document.addForm.metacafeurl.value;
+                                var dailymotionurl = document.addForm.dailymotionurl.value;
+                                var filter = new RegExp('(http|ftp|https)://[a-z0-9\-_]+(\.[a-z0-9\-_]+)+([a-z0-9\-\.,@\?^=%&;:/~\+#]*[a-z0-9\-@\?^=%&;/~\+#])?', 'i');
 
-        if ($("#videokeyword").val().trim().length === 0) {
-            alert("Please enter Keyword");
-            return false;
-        }
-        if (youtubeurl === '' && vimeourl === '' && metacafeurl === '' && dailymotionurl === '') {
-            alert("Please provide atleast one Url");
-            return false;
-        }
-        if (youtubeurl !== '')
-        {
-            var y = youtubeurl.search("youtube.com");
-            if (!filter.test(youtubeurl) || y === -1)
-            {
-                alert('Please provide a valid YoutubeUrl');
-                return false;
-            }
-        }
-        if (vimeourl !== '')
-        {
-            var v = vimeourl.search("vimeo.com");
-            if (!filter.test(vimeourl) || v === -1)
-            {
-                alert('Please provide a valid VimeoUrl');
-                return false;
-            }
-        }
-        if (dailymotionurl !== '')
-        {
-            var d = dailymotionurl.search("dailymotion.com");
-            if (!filter.test(dailymotionurl) || d === -1)
-            {
-                alert('Please provide a valid DailymotionUrl');
-                return false;
-            }
-        }
-        if (metacafeurl !== '')
-        {
-            var m = metacafeurl.search("metacafe.com");
-            if (!filter.test(metacafeurl) || m === -1)
-            {
-                alert('Please provide a valid MetacafeUrl');
-                return false;
-            }
-        }
-        $.post(
-        'ajax/addVideoKeyword.action',
-        {
-            arrKeywords: keyword,
-            youtubeurl: youtubeurl,
-            vimeourl: vimeourl,
-            metacafeurl: metacafeurl,
-            dailymotionurl: dailymotionurl
-        },
-        function(jMessage) {
-            alertMes = jMessage.message;
-            window.location = "videokeywords.action";
-        },
-        'json');
-    }
+                                if ($("#videokeyword").val().trim().length === 0) {
+                                    alert("Please enter Keyword");
+                                    return false;
+                                }
+                                if (youtubeurl === '' && vimeourl === '' && metacafeurl === '' && dailymotionurl === '') {
+                                    alert("Please provide atleast one Url");
+                                    return false;
+                                }
+                                if (youtubeurl !== '')
+                                {
+                                    var y = youtubeurl.search("youtube.com");
+                                    if (!filter.test(youtubeurl) || y === -1)
+                                    {
+                                        alert('Please provide a valid YoutubeUrl');
+                                        return false;
+                                    }
+                                }
+                                if (vimeourl !== '')
+                                {
+                                    var v = vimeourl.search("vimeo.com");
+                                    if (!filter.test(vimeourl) || v === -1)
+                                    {
+                                        alert('Please provide a valid VimeoUrl');
+                                        return false;
+                                    }
+                                }
+                                if (dailymotionurl !== '')
+                                {
+                                    var d = dailymotionurl.search("dailymotion.com");
+                                    if (!filter.test(dailymotionurl) || d === -1)
+                                    {
+                                        alert('Please provide a valid DailymotionUrl');
+                                        return false;
+                                    }
+                                }
+                                if (metacafeurl !== '')
+                                {
+                                    var m = metacafeurl.search("metacafe.com");
+                                    if (!filter.test(metacafeurl) || m === -1)
+                                    {
+                                        alert('Please provide a valid MetacafeUrl');
+                                        return false;
+                                    }
+                                }
+                                $.post(
+                                        'ajax/addVideoKeyword.action',
+                                        {
+                                            arrKeywords: keyword,
+                                            youtubeurl: youtubeurl,
+                                            vimeourl: vimeourl,
+                                            metacafeurl: metacafeurl,
+                                            dailymotionurl: dailymotionurl
+                                        },
+                                function (jMessage) {
+                                    alertMes = jMessage.message;
+                                    window.location = "videokeywords.action";
+                                },
+                                        'json');
+                            }
 
-    function addVideoKeywords() {
-        var keywords = document.addForm2.videokeywords.value;
-        var youtubeurl = document.addForm2.youtubeurls.value;
-        var vimeourl = document.addForm2.vimeourls.value;
-        var metacafeurl = document.addForm2.metacafeurls.value;
-        var dailymotionurl = document.addForm2.dailymotionurls.value;
-        var filter = new RegExp('(http|ftp|https)://[a-z0-9\-_]+(\.[a-z0-9\-_]+)+([a-z0-9\-\.,@\?^=%&;:/~\+#]*[a-z0-9\-@\?^=%&;/~\+#])?', 'i');
+                            function addVideoKeywords() {
+                                var keywords = document.addForm2.videokeywords.value;
+                                var youtubeurl = document.addForm2.youtubeurls.value;
+                                var vimeourl = document.addForm2.vimeourls.value;
+                                var metacafeurl = document.addForm2.metacafeurls.value;
+                                var dailymotionurl = document.addForm2.dailymotionurls.value;
+                                var filter = new RegExp('(http|ftp|https)://[a-z0-9\-_]+(\.[a-z0-9\-_]+)+([a-z0-9\-\.,@\?^=%&;:/~\+#]*[a-z0-9\-@\?^=%&;/~\+#])?', 'i');
 
-        if ($("#videokeywords").val().trim().length === 0) {
-            alert("Please enter Keyword");
-            return false;
-        }
-        if (youtubeurl === '' && vimeourl === '' && metacafeurl === '' && dailymotionurl === '') {
-            alert("Please provide atleast one Url");
-            return false;
-        }
-        if (youtubeurl !== '')
-        {
-            var y = youtubeurl.search("youtube.com");
-            if (!filter.test(youtubeurl) || y === -1)
-            {
-                alert('Please provide a valid YoutubeUrl');
-                return false;
-            }
-        }
-        if (vimeourl !== '')
-        {
-            var v = vimeourl.search("vimeo.com");
-            if (!filter.test(vimeourl) || v === -1)
-            {
-                alert('Please provide a valid VimeoUrl');
-                return false;
-            }
-        }
-        if (dailymotionurl !== '')
-        {
-            var d = dailymotionurl.search("dailymotion.com");
-            if (!filter.test(dailymotionurl) || d === -1)
-            {
-                alert('Please provide a valid DailymotionUrl');
-                return false;
-            }
-        }
-        if (metacafeurl !== '')
-        {
-            var m = metacafeurl.search("metacafe.com");
-            if (!filter.test(metacafeurl) || m === -1)
-            {
-                alert('Please provide a valid MetacafeUrl');
-                return false;
-            }
-        }
-        $.post(
-        'ajax/addVideoKeyword.action',
-        {
-            arrKeywords: keywords,
-            youtubeurl: youtubeurl,
-            vimeourl: vimeourl,
-            metacafeurl: metacafeurl,
-            dailymotionurl: dailymotionurl
-        },
-        function(jMessage) {
-            alertMes = jMessage.message;
-            window.location = "videokeywords.action";
-        },
-        'json');
-    }
+                                if ($("#videokeywords").val().trim().length === 0) {
+                                    alert("Please enter Keyword");
+                                    return false;
+                                }
+                                if (youtubeurl === '' && vimeourl === '' && metacafeurl === '' && dailymotionurl === '') {
+                                    alert("Please provide atleast one Url");
+                                    return false;
+                                }
+                                if (youtubeurl !== '')
+                                {
+                                    var y = youtubeurl.search("youtube.com");
+                                    if (!filter.test(youtubeurl) || y === -1)
+                                    {
+                                        alert('Please provide a valid YoutubeUrl');
+                                        return false;
+                                    }
+                                }
+                                if (vimeourl !== '')
+                                {
+                                    var v = vimeourl.search("vimeo.com");
+                                    if (!filter.test(vimeourl) || v === -1)
+                                    {
+                                        alert('Please provide a valid VimeoUrl');
+                                        return false;
+                                    }
+                                }
+                                if (dailymotionurl !== '')
+                                {
+                                    var d = dailymotionurl.search("dailymotion.com");
+                                    if (!filter.test(dailymotionurl) || d === -1)
+                                    {
+                                        alert('Please provide a valid DailymotionUrl');
+                                        return false;
+                                    }
+                                }
+                                if (metacafeurl !== '')
+                                {
+                                    var m = metacafeurl.search("metacafe.com");
+                                    if (!filter.test(metacafeurl) || m === -1)
+                                    {
+                                        alert('Please provide a valid MetacafeUrl');
+                                        return false;
+                                    }
+                                }
+                                $.post(
+                                        'ajax/addVideoKeyword.action',
+                                        {
+                                            arrKeywords: keywords,
+                                            youtubeurl: youtubeurl,
+                                            vimeourl: vimeourl,
+                                            metacafeurl: metacafeurl,
+                                            dailymotionurl: dailymotionurl
+                                        },
+                                function (jMessage) {
+                                    alertMes = jMessage.message;
+                                    window.location = "videokeywords.action";
+                                },
+                                        'json');
+                            }
 
-    function editKeyword(keywordId, youtubeurl, dailymotionurl, vimeourl, metacafeurl, keyword) {
+                            function editKeyword(keywordId, youtubeurl, dailymotionurl, vimeourl, metacafeurl, keyword) {
 
-        try {
-            if (youtubeurl !== '')
-            {
-                youtubeurl = "http://www." + youtubeurl;
-            }
-            if (dailymotionurl !== '')
-            {
-                dailymotionurl = "http://www." + dailymotionurl;
-            }
-            if (vimeourl !== '')
-            {
-                vimeourl = "http://www." + vimeourl;
-            }
-            if (metacafeurl !== '')
-            {
-                metacafeurl = "http://www." + metacafeurl;
-            }
-            document.editForm.keywordId.value = keywordId;
-            document.editForm.youtubeurl.value = youtubeurl;
-            document.editForm.dailymotionurl.value = dailymotionurl;
-            document.editForm.vimeourl.value = vimeourl;
-            document.editForm.metacafeurl.value = metacafeurl;
-            document.editForm.editkeyword.value = keyword;
-        } catch (e)
-        {
-            alert(e);
-        }
-    }
+                                try {
+                                    if (youtubeurl !== '')
+                                    {
+                                        youtubeurl = "http://www." + youtubeurl;
+                                    }
+                                    if (dailymotionurl !== '')
+                                    {
+                                        dailymotionurl = "http://www." + dailymotionurl;
+                                    }
+                                    if (vimeourl !== '')
+                                    {
+                                        vimeourl = "http://www." + vimeourl;
+                                    }
+                                    if (metacafeurl !== '')
+                                    {
+                                        metacafeurl = "http://www." + metacafeurl;
+                                    }
+                                    document.editForm.keywordId.value = keywordId;
+                                    document.editForm.youtubeurl.value = youtubeurl;
+                                    document.editForm.dailymotionurl.value = dailymotionurl;
+                                    document.editForm.vimeourl.value = vimeourl;
+                                    document.editForm.metacafeurl.value = metacafeurl;
+                                    document.editForm.editkeyword.value = keyword;
+                                } catch (e)
+                                {
+                                    alert(e);
+                                }
+                            }
 
-    function editVideoKeyword() {
-        var keywordId = document.editForm.keywordId.value;
-        var youtubeurl = document.editForm.youtubeurl.value;
-        var dailymotionurl = document.editForm.dailymotionurl.value;
-        var vimeourl = document.editForm.vimeourl.value;
-        var metacafeurl = document.editForm.metacafeurl.value;
-        var keyword = document.editForm.editkeyword.value;
-        var filter = new RegExp('(http|ftp|https)://[a-z0-9\-_]+(\.[a-z0-9\-_]+)+([a-z0-9\-\.,@\?^=%&;:/~\+#]*[a-z0-9\-@\?^=%&;/~\+#])?', 'i');
+                            function editVideoKeyword() {
+                                var keywordId = document.editForm.keywordId.value;
+                                var youtubeurl = document.editForm.youtubeurl.value;
+                                var dailymotionurl = document.editForm.dailymotionurl.value;
+                                var vimeourl = document.editForm.vimeourl.value;
+                                var metacafeurl = document.editForm.metacafeurl.value;
+                                var keyword = document.editForm.editkeyword.value;
+                                var filter = new RegExp('(http|ftp|https)://[a-z0-9\-_]+(\.[a-z0-9\-_]+)+([a-z0-9\-\.,@\?^=%&;:/~\+#]*[a-z0-9\-@\?^=%&;/~\+#])?', 'i');
 
-        if ($("#editkeyword").val().trim().length === 0) {
-            alert("Please enter Keyword");
-            return false;
-        }
+                                if ($("#editkeyword").val().trim().length === 0) {
+                                    alert("Please enter Keyword");
+                                    return false;
+                                }
 
-        if (youtubeurl === '' && vimeourl === '' && metacafeurl === '' && dailymotionurl === '') {
-            alert("Please provide atleast one Url");
-            return false;
-        }
-        if (youtubeurl !== '')
-        {
-            var y = youtubeurl.search("youtube.com");
-            if (!filter.test(youtubeurl) || y === -1)
-            {
-                alert('Please provide a valid YoutubeUrl');
-                return false;
-            }
-        }
-        if (vimeourl !== '')
-        {
-            var v = vimeourl.search("vimeo.com");
-            if (!filter.test(vimeourl) || v === -1)
-            {
-                alert('Please provide a valid VimeoUrl');
-                return false;
-            }
-        }
-        if (dailymotionurl !== '')
-        {
-            var d = dailymotionurl.search("dailymotion.com");
-            if (!filter.test(dailymotionurl) || d === -1)
-            {
-                alert('Please provide a valid DailymotionUrl');
-                return false;
-            }
-        }
-        if (metacafeurl !== '')
-        {
-            var m = metacafeurl.search("metacafe.com");
-            if (!filter.test(metacafeurl) || m === -1)
-            {
-                alert('Please provide a valid MetacafeUrl');
-                return false;
-            }
-        }
-        $.post(
-        'ajax/editVideoKeyword.action',
-        {
-            keywordId: keywordId,
-            arrKeywords: keyword,
-            youtubeurl: youtubeurl,
-            dailymotionurl: dailymotionurl,
-            vimeourl: vimeourl,
-            metacafeurl: metacafeurl
-        },
-        function(jMessage) {
-            alertMes = jMessage.message;
-            window.location = "videokeywords.action";
-        },
-        'json');
-    }
+                                if (youtubeurl === '' && vimeourl === '' && metacafeurl === '' && dailymotionurl === '') {
+                                    alert("Please provide atleast one Url");
+                                    return false;
+                                }
+                                if (youtubeurl !== '')
+                                {
+                                    var y = youtubeurl.search("youtube.com");
+                                    if (!filter.test(youtubeurl) || y === -1)
+                                    {
+                                        alert('Please provide a valid YoutubeUrl');
+                                        return false;
+                                    }
+                                }
+                                if (vimeourl !== '')
+                                {
+                                    var v = vimeourl.search("vimeo.com");
+                                    if (!filter.test(vimeourl) || v === -1)
+                                    {
+                                        alert('Please provide a valid VimeoUrl');
+                                        return false;
+                                    }
+                                }
+                                if (dailymotionurl !== '')
+                                {
+                                    var d = dailymotionurl.search("dailymotion.com");
+                                    if (!filter.test(dailymotionurl) || d === -1)
+                                    {
+                                        alert('Please provide a valid DailymotionUrl');
+                                        return false;
+                                    }
+                                }
+                                if (metacafeurl !== '')
+                                {
+                                    var m = metacafeurl.search("metacafe.com");
+                                    if (!filter.test(metacafeurl) || m === -1)
+                                    {
+                                        alert('Please provide a valid MetacafeUrl');
+                                        return false;
+                                    }
+                                }
+                                $.post(
+                                        'ajax/editVideoKeyword.action',
+                                        {
+                                            keywordId: keywordId,
+                                            arrKeywords: keyword,
+                                            youtubeurl: youtubeurl,
+                                            dailymotionurl: dailymotionurl,
+                                            vimeourl: vimeourl,
+                                            metacafeurl: metacafeurl
+                                        },
+                                function (jMessage) {
+                                    alertMes = jMessage.message;
+                                    window.location = "videokeywords.action";
+                                },
+                                        'json');
+                            }
 
-    function deleteKeyword(keywordId)
-    {
-        document.deleteForm.videoKeywordId.value = keywordId;
-    }
+                            function deleteKeyword(keywordId)
+                            {
+                                document.deleteForm.videoKeywordId.value = keywordId;
+                            }
 
-    function deleteVideoKeyword() {
-        var jString = document.deleteForm.videoKeywordId.value;
-        $.post(
-        'ajax/deleteVideoKeyword.action',
-        {
-            jString: jString
-        },
-        function(jMessage) {
-            alertMes = jMessage.message;
-            window.location = "videokeywords.action";
-        },
-        'json');
-    }
+                            function deleteVideoKeyword() {
+                                var jString = document.deleteForm.videoKeywordId.value;
+                                $.post(
+                                        'ajax/deleteVideoKeyword.action',
+                                        {
+                                            jString: jString
+                                        },
+                                function (jMessage) {
+                                    alertMes = jMessage.message;
+                                    window.location = "videokeywords.action";
+                                },
+                                        'json');
+                            }
 
 </script>

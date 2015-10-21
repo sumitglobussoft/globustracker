@@ -1,4 +1,3 @@
-
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 
 <%
@@ -88,7 +87,7 @@
     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
         <h1 class="page-title txt-color-blueDark">
             <i class="fa-fw fa fa-bolt"></i>
-            GlobusTracker 
+            RankTracker 
             <span>>
                 Pricing 
             </span>
@@ -101,286 +100,372 @@
         <div class="well well-light">
 
             <div class="row">
+                <c:set var="counter" value="0"/>
+                <c:forEach items="${listPlans}" var="plans">
+                    <c:if test="${plans.keywords!=50}">
+                        <c:set var="counter" value="${counter+1}"/>
+                        <!--counter is used for determining the color of the item. there are 4 colors so %4 is used-->
+                        <c:if test="${counter%4 ==1}"> 
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="panel panel-success pricing-big">
 
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="panel panel-success pricing-big">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                            ${plans.name}
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body no-padding text-align-center">
+                                        <div class="the-price">
+                                            <c:if test="${plans.amount>0}">
+                                                <h1>
+                                                    $<span class="subscript">${plans.amount}</span>
+                                                </h1>
+                                            </c:if>
+                                            <c:if test="${plans.amount==0}">
+                                                <h1>
+                                                    <strong>FREE</strong>
+                                                </h1>
+                                            </c:if>
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Light version
-                            </h3>
-                        </div>
-                        <div class="panel-body no-padding text-align-center">
-                            <div class="the-price">
-                                <h1>
-                                    <strong>FREE</strong>
-                                </h1>
-                            </div>
-                            <div class="price-features">
-                                <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong> 1</strong> Campaigns</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 1</strong> Users</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 20</strong> Keywords</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                        </div>
+                                        <div class="price-features">
+                                            <ul class="list-unstyled text-left">
+                                                <li><i class="fa fa-check text-success"></i><strong>${plans.campaigns}</strong> Campaigns</li>
+                                                <li><i class="fa fa-check text-success"></i><strong> ${plans.users}</strong> Users</li>
+                                                <li><i class="fa fa-check text-success"></i><strong> ${plans.keywords}</strong> Keywords</li>
+                                                        <c:if test="${plans.googleAnalytics ==1}">
+                                                    <li><span class="fa fa-check text-success"></span>  Google Analytics</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.googleAnalytics ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span>  Google Analytics</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.keywordResearch ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Keyword Research</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.keywordResearch ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Keyword Research</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.webmastertools ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Webmaster Tool</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.webmastertools ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Webmaster Tool</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.websiteReview ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Website Review</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.websiteReview ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Website Review</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.accurateLocalRanking ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Accurate Local Ranking</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.accurateLocalRanking ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Accurate Local Ranking</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.linkAnalysis ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Link Analysis</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.linkAnalysis ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Link Analysis</li>
+                                                    </c:if>
 
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="panel panel-teal pricing-big">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <c:if test="${plans.amount>0}">
+                                        <!--Upgrade and downgrade is decide on the no.of campaigns. The condition is checked below. 
+                                        If the no. of campaigns is morethan campaign in users plan then it says upgrade. 
+                                        Else it says downgrade. In the campaigns are equal, it checks the planID. 
+                                        If plan id is same it says Current plan. Else Upgrade-->
+                                        <div class="panel-footer text-align-center">
+                                            <c:if test="${pageScope.campaignsCount!=plans.campaigns&&pageScope.campaignsCount<plans.campaigns}">
+                                                <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Upgrade</a>
+                                            </c:if>
+                                            <c:if test="${pageScope.campaignsCount!=plans.campaigns&&pageScope.campaignsCount>plans.campaigns}">
+                                                <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Downgrade</a>
+                                            </c:if>
+                                            <c:if test="${pageScope.campaignsCount==plans.campaigns}">
+                                                <c:if test="${custPlanID==plans.planID}">
+                                                    <div class="btn btn-primary1 btn-block">Current Plan</div>
+                                                </c:if>
+                                                <c:if test="${custPlanID!=plans.planID}">
+                                                    <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Upgrade</a>
+                                                </c:if>
+                                            </c:if>   
+                                        </div>
+                                    </c:if>
+                                </div>
+                            </div>
+                        </c:if>
+                        <c:if test="${counter%4 ==2}">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="panel panel-teal pricing-big">
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Newbie
-                            </h3>
-                        </div>
-                        <div class="panel-body no-padding text-align-center">
-                            <div class="the-price">
-                                <h1>
-                                    $9<span class="subscript">.99</span>
-                                </h1>
-                            </div>
-                            <div class="price-features">
-                                <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong> 5</strong> Campaigns</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 1</strong> Users</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 100</strong> Keywords</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-align-center">
-                            <c:if test="${pageScope.campaignsCount!=5&&pageScope.campaignsCount<5}">
-                                <a href="upgrade.action?itemName=Newbie" class="btn btn-primary btn-block" role="button">Upgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount!=5&&pageScope.campaignsCount>5}">
-                                <a href="upgrade.action?itemName=Newbie" class="btn btn-primary btn-block" role="button">Downgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount==5}">
-                                <div class="btn btn-primary1 btn-block">Current Plan</div>
-                            </c:if>   
-                        </div>
-                    </div>
-                </div>
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                            ${plans.name}
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body no-padding text-align-center">
+                                        <div class="the-price">
+                                            <c:if test="${plans.amount>0}">
+                                                <h1>
+                                                    $<span class="subscript">${plans.amount}</span>
+                                                </h1>
+                                            </c:if>
+                                            <c:if test="${plans.amount==0}">
+                                                <h1>
+                                                    <strong>FREE</strong>
+                                                </h1>
+                                            </c:if>
 
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="panel panel-primary pricing-big">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Individual
-                            </h3>
-                        </div>
-                        <div class="panel-body no-padding text-align-center">
-                            <div class="the-price">
-                                <h1>
-                                    $19<span class="subscript">.99</span>
-                                </h1>
-                            </div>
-                            <div class="price-features">
-                                <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong> 10</strong> Campaigns</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 1</strong> Users</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 200</strong> Keywords</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-align-center">
-                            <c:if test="${pageScope.campaignsCount!=10&&pageScope.campaignsCount<10}">
-                                <a href="upgrade.action?itemName=Individual" class="btn btn-primary btn-block" role="button">Upgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount!=10&&pageScope.campaignsCount>10}">
-                                <a href="upgrade.action?itemName=Individual" class="btn btn-primary btn-block" role="button">Downgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount==10}">
-                                <div class="btn btn-primary1 btn-block">Current Plan</div>
-                            </c:if> 
-                        </div>
-                    </div>
-                </div>
+                                        </div>
+                                        <div class="price-features">
+                                            <ul class="list-unstyled text-left">
+                                                <li><i class="fa fa-check text-success"></i><strong>${plans.campaigns}</strong> Campaigns</li>
+                                                <li><i class="fa fa-check text-success"></i><strong> ${plans.users}</strong> Users</li>
+                                                <li><i class="fa fa-check text-success"></i><strong> ${plans.keywords}</strong> Keywords</li>
+                                                        <c:if test="${plans.googleAnalytics ==1}">
+                                                    <li><span class="fa fa-check text-success"></span>  Google Analytics</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.googleAnalytics ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span>  Google Analytics</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.keywordResearch ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Keyword Research</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.keywordResearch ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Keyword Research</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.webmastertools ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Webmaster Tool</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.webmastertools ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Webmaster Tool</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.websiteReview ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Website Review</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.websiteReview ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Website Review</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.accurateLocalRanking ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Accurate Local Ranking</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.accurateLocalRanking ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Accurate Local Ranking</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.linkAnalysis ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Link Analysis</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.linkAnalysis ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Link Analysis</li>
+                                                    </c:if>
 
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="panel panel-darken pricing-big">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Master
-                            </h3>
-                        </div>
-                        <div class="panel-body no-padding text-align-center">
-                            <div class="the-price">
-                                <h1>
-                                    $34<span class="subscript">.99</span>
-                                </h1>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <c:if test="${plans.amount>0}">
+                                        <div class="panel-footer text-align-center">
+                                            <c:if test="${pageScope.campaignsCount!=plans.campaigns&&pageScope.campaignsCount<plans.campaigns}">
+                                                <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Upgrade</a>
+                                            </c:if>
+                                            <c:if test="${pageScope.campaignsCount!=plans.campaigns&&pageScope.campaignsCount>plans.campaigns}">
+                                                <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Downgrade</a>
+                                            </c:if>
+                                            <c:if test="${pageScope.campaignsCount==plans.campaigns}">
+                                                <c:if test="${custPlanID==plans.planID}">
+                                                    <div class="btn btn-primary1 btn-block">Current Plan</div>
+                                                </c:if>
+                                                <c:if test="${custPlanID!=plans.planID}">
+                                                    <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Upgrade</a>
+                                                </c:if>
+                                            </c:if>   
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                            <div class="price-features">
-                                <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong> 30</strong> Campaigns</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 3</strong> Users</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 500</strong> Keywords</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-align-center">
-                            <c:if test="${pageScope.campaignsCount!=30&&pageScope.campaignsCount<30}">
-                                <a href="upgrade.action?itemName=Master" class="btn btn-primary btn-block" role="button">Upgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount!=30&&pageScope.campaignsCount>30}">
-                                <a href="upgrade.action?itemName=Master" class="btn btn-primary btn-block" role="button">Downgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount==30}">
-                                <div class="btn btn-primary1 btn-block">Current Plan</div>
-                            </c:if> 
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </c:if>
+                        <c:if test="${counter%4 ==3}">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="panel panel-primary pricing-big">
 
-            <hr>
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                            ${plans.name}
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body no-padding text-align-center">
+                                        <div class="the-price">
+                                            <c:if test="${plans.amount>0}">
+                                                <h1>
+                                                    $<span class="subscript">${plans.amount}</span>
+                                                </h1>
+                                            </c:if>
+                                            <c:if test="${plans.amount==0}">
+                                                <h1>
+                                                    <strong>FREE</strong>
+                                                </h1>
+                                            </c:if>
 
-            <div class="row">
+                                        </div>
+                                        <div class="price-features">
+                                            <ul class="list-unstyled text-left">
+                                                <li><i class="fa fa-check text-success"></i><strong>${plans.campaigns}</strong> Campaigns</li>
+                                                <li><i class="fa fa-check text-success"></i><strong> ${plans.users}</strong> Users</li>
+                                                <li><i class="fa fa-check text-success"></i><strong> ${plans.keywords}</strong> Keywords</li>
+                                                        <c:if test="${plans.googleAnalytics ==1}">
+                                                    <li><span class="fa fa-check text-success"></span>  Google Analytics</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.googleAnalytics ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span>  Google Analytics</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.keywordResearch ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Keyword Research</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.keywordResearch ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Keyword Research</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.webmastertools ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Webmaster Tool</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.webmastertools ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Webmaster Tool</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.websiteReview ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Website Review</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.websiteReview ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Website Review</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.accurateLocalRanking ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Accurate Local Ranking</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.accurateLocalRanking ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Accurate Local Ranking</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.linkAnalysis ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Link Analysis</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.linkAnalysis ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Link Analysis</li>
+                                                    </c:if>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <c:if test="${plans.amount>0}">
+                                        <div class="panel-footer text-align-center">
+                                            <c:if test="${pageScope.campaignsCount!=plans.campaigns&&pageScope.campaignsCount<plans.campaigns}">
+                                                <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Upgrade</a>
+                                            </c:if>
+                                            <c:if test="${pageScope.campaignsCount!=plans.campaigns&&pageScope.campaignsCount>plans.campaigns}">
+                                                <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Downgrade</a>
+                                            </c:if>
+                                            <c:if test="${pageScope.campaignsCount==plans.campaigns}">
+                                                <c:if test="${custPlanID==plans.planID}">
+                                                    <div class="btn btn-primary1 btn-block">Current Plan</div>
+                                                </c:if>
+                                                <c:if test="${custPlanID!=plans.planID}">
+                                                    <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Upgrade</a>
+                                                </c:if>
+                                            </c:if>   
+                                        </div>
+                                    </c:if>
+                                </div>
+                            </div>
+                        </c:if>
+                        <c:if test="${counter%4 ==0}">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="panel panel-darken pricing-big">
 
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="panel panel-success pricing-big">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                            ${plans.name}
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body no-padding text-align-center">
+                                        <div class="the-price">
+                                            <c:if test="${plans.amount>0}">
+                                                <h1>
+                                                    $<span class="subscript">${plans.amount}</span>
+                                                </h1>
+                                            </c:if>
+                                            <c:if test="${plans.amount==0}">
+                                                <h1>
+                                                    <strong>FREE</strong>
+                                                </h1>
+                                            </c:if>
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Professional
-                            </h3>
-                        </div>
-                        <div class="panel-body no-padding text-align-center">
-                            <div class="the-price">
-                                <h1>
-                                    $59<span class="subscript">.99</span>
-                                </h1>
-                            </div>
-                            <div class="price-features">
-                                <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong> 50</strong> Campaigns</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 5</strong> Users</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 1000</strong> Keywords</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-align-center">
-                            <c:if test="${pageScope.campaignsCount!=50&&pageScope.campaignsCount<50}">
-                                <a href="upgrade.action?itemName=Professional" class="btn btn-primary btn-block" role="button">Upgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount!=50&&pageScope.campaignsCount>50}">
-                                <a href="upgrade.action?itemName=Professional" class="btn btn-primary btn-block" role="button">Downgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount==50}">
-                                <div class="btn btn-primary1 btn-block">Current Plan</div>
-                            </c:if> 
-                        </div>
-                    </div>
-                </div>
+                                        </div>
+                                        <div class="price-features">
+                                            <ul class="list-unstyled text-left">
+                                                <li><i class="fa fa-check text-success"></i><strong>${plans.campaigns}</strong> Campaigns</li>
+                                                <li><i class="fa fa-check text-success"></i><strong> ${plans.users}</strong> Users</li>
+                                                <li><i class="fa fa-check text-success"></i><strong> ${plans.keywords}</strong> Keywords</li>
+                                                        <c:if test="${plans.googleAnalytics ==1}">
+                                                    <li><span class="fa fa-check text-success"></span>  Google Analytics</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.googleAnalytics ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span>  Google Analytics</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.keywordResearch ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Keyword Research</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.keywordResearch ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Keyword Research</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.webmastertools ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Webmaster Tool</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.webmastertools ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Webmaster Tool</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.websiteReview ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Website Review</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.websiteReview ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Website Review</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.accurateLocalRanking ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Accurate Local Ranking</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.accurateLocalRanking ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Accurate Local Ranking</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.linkAnalysis ==1}">
+                                                    <li><span class="fa fa-check text-success"></span> Link Analysis</li>
+                                                    </c:if>
+                                                    <c:if test="${plans.linkAnalysis ==0}">
+                                                    <li><span class="fa fa-times text-danger"></span> Link Analysis</li>
+                                                    </c:if>
 
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="panel panel-teal pricing-big">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Agency
-                            </h3>
-                        </div>
-                        <div class="panel-body no-padding text-align-center">
-                            <div class="the-price">
-                                <h1>
-                                    $149<span class="subscript">.99</span>
-                                </h1>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <c:if test="${plans.amount>0}">
+                                        <div class="panel-footer text-align-center">
+                                            <c:if test="${pageScope.campaignsCount!=plans.campaigns&&pageScope.campaignsCount<plans.campaigns}">
+                                                <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Upgrade</a>
+                                            </c:if>
+                                            <c:if test="${pageScope.campaignsCount!=plans.campaigns&&pageScope.campaignsCount>plans.campaigns}">
+                                                <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Downgrade</a>
+                                            </c:if>
+                                            <c:if test="${pageScope.campaignsCount==plans.campaigns}">
+                                                <c:if test="${custPlanID==plans.planID}">
+                                                    <div class="btn btn-primary1 btn-block">Current Plan</div>
+                                                </c:if>
+                                                <c:if test="${custPlanID!=plans.planID}">
+                                                    <a href="upgrade.action?itemName=${plans.name}" class="btn btn-primary btn-block" role="button">Upgrade</a>
+                                                </c:if>
+                                            </c:if>   
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                            <div class="price-features">
-                                <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong> 250</strong> Campaigns</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 10</strong> Users</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 5000</strong> Keywords</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-align-center">
-                            <c:if test="${pageScope.campaignsCount!=250&&pageScope.campaignsCount<250}">
-                                <a href="upgrade.action?itemName=Agency" class="btn btn-primary btn-block" role="button">Upgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount!=250&&pageScope.campaignsCount>250}">
-                                <a href="upgrade.action?itemName=Agency" class="btn btn-primary btn-block" role="button">Downgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount==250}">
-                                <div class="btn btn-primary1 btn-block">Current Plan</div>
-                            </c:if> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="panel panel-primary pricing-big">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Reseller
-                            </h3>
-                        </div>
-                        <div class="panel-body no-padding text-align-center">
-                            <div class="the-price">
-                                <h1>
-                                    $299<span class="subscript">.99</span>
-                                </h1>
-                            </div>
-                            <div class="price-features">
-                                <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong> 500</strong> Campaigns</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> Unlimited</strong> Users</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 10,000</strong> Keywords</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-align-center">
-                            <c:if test="${pageScope.campaignsCount!=500&&pageScope.campaignsCount<500}">
-                                <a href="upgrade.action?itemName=Reseller" class="btn btn-primary btn-block" role="button">Upgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount!=500&&pageScope.campaignsCount>500}">
-                                <a href="upgrade.action?itemName=Reseller" class="btn btn-primary btn-block" role="button">Downgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount==500}">
-                                <div class="btn btn-primary1 btn-block">Current Plan</div>
-                            </c:if> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="panel panel-darken pricing-big">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Enterprise
-                            </h3>
-                        </div>
-                        <div class="panel-body no-padding text-align-center">
-                            <div class="the-price">
-                                <h1>
-                                    $799<span class="subscript">.99</span>
-                                </h1>
-                            </div>
-                            <div class="price-features">
-                                <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong> 1500</strong> Campaigns</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> Unlimited</strong> Users</li>
-                                    <li><i class="fa fa-check text-success"></i><strong> 30,000</strong> Keywords</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-align-center">
-                            <c:if test="${pageScope.campaignsCount!=1500&&pageScope.campaignsCount<500}">
-                                <a href="upgrade.action?itemName=Enterprise" class="btn btn-primary btn-block" role="button">Upgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount!=1500&&pageScope.campaignsCount>500}">
-                                <a href="upgrade.action?itemName=Enterprise" class="btn btn-primary btn-block" role="button">Downgrade</a>
-                            </c:if>
-                            <c:if test="${pageScope.campaignsCount==1500}">
-                                <div class="btn btn-primary1 btn-block">Current Plan</div>
-                            </c:if> 
-                        </div>
-                    </div>
-                </div>		    	
+                        </c:if>
+                    </c:if>
+                </c:forEach>
             </div>
         </div>
     </div>

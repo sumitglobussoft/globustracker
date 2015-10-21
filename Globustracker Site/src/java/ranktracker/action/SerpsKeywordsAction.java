@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ranktracker.dao.CampaignsDao;
+import ranktracker.entity.Campaigns;
 import ranktracker.entity.Displaysettings;
 import ranktracker.entity.Seokeyworddetails;
 import ranktracker.entity.Serpkeywords;
@@ -142,6 +144,10 @@ public class SerpsKeywordsAction extends ActionSupport {
      */
     private RankComparision rankComparision;
 
+    private CampaignsDao objCampaignsDao;
+
+    private Campaigns objCampaigns;
+
     /**
      * The method retrieves tempKeywords based on campaign id
      *
@@ -217,6 +223,29 @@ public class SerpsKeywordsAction extends ActionSupport {
                     rankComparision.setKeywordsRankBelow30(count30);
                     rankComparision.setKeywordsRankBelow100(count100);
                     rankComparision.setTotalkeywords(keywordcount);
+                    
+     //******************Code Written By Nitesh Shah from line 229 to 250*******                 
+
+                    objCampaigns = objCampaignsDao.getCampaignObj(campaignId);
+
+                    int keywordsRankBelow5Count = (count5) - (objCampaigns.getRankBelow5());
+                    int KeywordsRankBelow10Count = (count10) - (objCampaigns.getRankBelow10());
+                    int KeywordsRankBelow20Count = (count20) - (objCampaigns.getRankBelow20());
+                    int KeywordsRankBelow30Count = (count30) - (objCampaigns.getRankBelow30());
+                    int KeywordsRankBelow100Count = (count100) - (objCampaigns.getRankBelow100());
+
+                    rankComparision.setPreviouskeywordsRankBelow5(objCampaigns.getRankBelow5());
+                    rankComparision.setPreviouskeywordsRankBelow10(objCampaigns.getRankBelow10());
+                    rankComparision.setPreviouskeywordsRankBelow20(objCampaigns.getRankBelow20());
+                    rankComparision.setPreviouskeywordsRankBelow30(objCampaigns.getRankBelow30());
+                    rankComparision.setPreviouskeywordsRankBelow100(objCampaigns.getRankBelow100());
+
+                    rankComparision.setCurrentkeywordsRankBelow5(keywordsRankBelow5Count);
+                    rankComparision.setCurrentkeywordsRankBelow10(KeywordsRankBelow10Count);
+                    rankComparision.setCurrentkeywordsRankBelow20(KeywordsRankBelow20Count);
+                    rankComparision.setCurrentkeywordsRankBelow30(KeywordsRankBelow30Count);
+                    rankComparision.setCurrentkeywordsRankBelow100(KeywordsRankBelow100Count);
+
                 }
 
                 campaignName = dataObject[2].toString();
@@ -348,7 +377,9 @@ public class SerpsKeywordsAction extends ActionSupport {
                                     keyword.put("YahooUpdateDate", updatedKeywords.getYahooUpdateDate());
                                     keyword.put("BingUpdateDate", updatedKeywords.getBingUpdateDate());
                                     keyword.put("Visibility", updatedKeywords.getVisibility());
-
+                                    keyword.put("StartGoogle", updatedKeywords.getStartGoogle());
+                                    keyword.put("StartBing", updatedKeywords.getStartBing());
+                                    keyword.put("StartYahoo", updatedKeywords.getStartYahoo());
                                     //adding this single JSON object to main JSON array of serp keywords
                                     serpkeywordArray.put(keyword);
                                 }
@@ -977,6 +1008,22 @@ public class SerpsKeywordsAction extends ActionSupport {
 
     public void setObjResponse(HttpServletResponse objResponse) {
         this.objResponse = objResponse;
+    }
+
+    public CampaignsDao getObjCampaignsDao() {
+        return objCampaignsDao;
+    }
+
+    public void setObjCampaignsDao(CampaignsDao objCampaignsDao) {
+        this.objCampaignsDao = objCampaignsDao;
+    }
+
+    public Campaigns getObjCampaigns() {
+        return objCampaigns;
+    }
+
+    public void setObjCampaigns(Campaigns objCampaigns) {
+        this.objCampaigns = objCampaigns;
     }
 
 }

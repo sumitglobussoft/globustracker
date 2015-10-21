@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ranktracker.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "plans")
 public class Plans implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,8 +46,24 @@ public class Plans implements Serializable {
     @Basic(optional = false)
     @Column(name = "Users")
     private int users;
-    @OneToMany(mappedBy = "planID")
-    private Collection<Payments> paymentsCollection;
+    @Basic(optional = false)
+    @Column(name = "GoogleAnalytics")
+    private int googleAnalytics;
+    @Basic(optional = false)
+    @Column(name = "KeywordResearch")
+    private int keywordResearch;
+    @Basic(optional = false)
+    @Column(name = "Webmastertools")
+    private int webmastertools;
+    @Basic(optional = false)
+    @Column(name = "WebsiteReview")
+    private int websiteReview;
+    @Basic(optional = false)
+    @Column(name = "AccurateLocalRanking")
+    private int accurateLocalRanking;
+    @Basic(optional = false)
+    @Column(name = "LinkAnalysis")
+    private int linkAnalysis;
 
     public Plans() {
     }
@@ -58,7 +72,7 @@ public class Plans implements Serializable {
         this.planID = planID;
     }
 
-    public Plans(Integer planID, String name, int amount, String currency, int campaigns, int keywords, int users) {
+    public Plans(Integer planID, String name, int amount, String currency, int campaigns, int keywords, int users, int googleAnalytics, int keywordResearch, int webmastertools, int websiteReview, int accurateLocalRanking, int linkAnalysis) {
         this.planID = planID;
         this.name = name;
         this.amount = amount;
@@ -66,6 +80,12 @@ public class Plans implements Serializable {
         this.campaigns = campaigns;
         this.keywords = keywords;
         this.users = users;
+        this.googleAnalytics = googleAnalytics;
+        this.keywordResearch = keywordResearch;
+        this.webmastertools = webmastertools;
+        this.websiteReview = websiteReview;
+        this.accurateLocalRanking = accurateLocalRanking;
+        this.linkAnalysis = linkAnalysis;
     }
 
     public Integer getPlanID() {
@@ -124,37 +144,51 @@ public class Plans implements Serializable {
         this.users = users;
     }
 
-    public Collection<Payments> getPaymentsCollection() {
-        return paymentsCollection;
+    public int getGoogleAnalytics() {
+        return googleAnalytics;
     }
 
-    public void setPaymentsCollection(Collection<Payments> paymentsCollection) {
-        this.paymentsCollection = paymentsCollection;
+    public void setGoogleAnalytics(int googleAnalytics) {
+        this.googleAnalytics = googleAnalytics;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (planID != null ? planID.hashCode() : 0);
-        return hash;
+    public int getKeywordResearch() {
+        return keywordResearch;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Plans)) {
-            return false;
-        }
-        Plans other = (Plans) object;
-        if ((this.planID == null && other.planID != null) || (this.planID != null && !this.planID.equals(other.planID))) {
-            return false;
-        }
-        return true;
+    public void setKeywordResearch(int keywordResearch) {
+        this.keywordResearch = keywordResearch;
     }
 
-    @Override
-    public String toString() {
-        return "ranktracker.entity.Plans[ planID=" + planID + " ]";
+    public int getWebmastertools() {
+        return webmastertools;
     }
-    
+
+    public void setWebmastertools(int webmastertools) {
+        this.webmastertools = webmastertools;
+    }
+
+    public int getWebsiteReview() {
+        return websiteReview;
+    }
+
+    public void setWebsiteReview(int websiteReview) {
+        this.websiteReview = websiteReview;
+    }
+
+    public int getAccurateLocalRanking() {
+        return accurateLocalRanking;
+    }
+
+    public void setAccurateLocalRanking(int accurateLocalRanking) {
+        this.accurateLocalRanking = accurateLocalRanking;
+    }
+
+    public int getLinkAnalysis() {
+        return linkAnalysis;
+    }
+
+    public void setLinkAnalysis(int linkAnalysis) {
+        this.linkAnalysis = linkAnalysis;
+    }
 }

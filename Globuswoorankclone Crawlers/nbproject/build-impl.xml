@@ -1047,6 +1047,12 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.signpost-commonshttp4-1.2.1.2.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.dropbox-core-sdk-1.7.7.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jackson-core-2.2.4.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.lib-CopyLibs}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.lib-eclipselink}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.lib-eclipselinkmodelgen}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.lib-ejb3-persistence}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.lib-hibernate-support}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.lib-javaee-endorsed-api-6.0}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
@@ -1076,6 +1082,12 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.signpost-commonshttp4-1.2.1.2.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.dropbox-core-sdk-1.7.7.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.jackson-core-2.2.4.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.lib-CopyLibs}" todir="${build.web.dir}/WEB-INF/classes"/>
+        <copyfiles files="${file.reference.lib-eclipselink}" todir="${build.web.dir}/WEB-INF/classes"/>
+        <copyfiles files="${file.reference.lib-eclipselinkmodelgen}" todir="${build.web.dir}/WEB-INF/classes"/>
+        <copyfiles files="${file.reference.lib-ejb3-persistence}" todir="${build.web.dir}/WEB-INF/classes"/>
+        <copyfiles files="${file.reference.lib-hibernate-support}" todir="${build.web.dir}/WEB-INF/classes"/>
+        <copyfiles files="${file.reference.lib-javaee-endorsed-api-6.0}" todir="${build.web.dir}/WEB-INF/classes"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>

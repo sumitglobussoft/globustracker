@@ -11,6 +11,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
+import ranktracker.dao.CampaignsDao;
+import ranktracker.entity.Campaigns;
 import ranktracker.entity.Serpkeywords;
 import ranktracker.entity.Videokeywords;
 import ranktracker.form.RankComparision;
@@ -117,6 +119,10 @@ public class VideoKeywordsAction extends ActionSupport {
      */
     private RankComparision rankComparision;
 
+    private CampaignsDao objCampaignsDao;
+
+    private Campaigns objCampaigns;
+
     /**
      * The method retrieves tempKeywords based on campaign id
      *
@@ -190,6 +196,29 @@ public class VideoKeywordsAction extends ActionSupport {
                     rankComparision.setKeywordsRankBelow30(count30);
                     rankComparision.setKeywordsRankBelow100(count100);
                     rankComparision.setTotalkeywords(keywordcount);
+
+     //******************Code Written By Nitesh Shah from line 202 to 222******* 
+                    
+                    objCampaigns = objCampaignsDao.getCampaignObj(campaignId);
+
+                    int keywordsRankBelow5Count = (count5) - (objCampaigns.getRankBelow5());
+                    int KeywordsRankBelow10Count = (count10) - (objCampaigns.getRankBelow10());
+                    int KeywordsRankBelow20Count = (count20) - (objCampaigns.getRankBelow20());
+                    int KeywordsRankBelow30Count = (count30) - (objCampaigns.getRankBelow30());
+                    int KeywordsRankBelow100Count = (count100) - (objCampaigns.getRankBelow100());
+
+                    rankComparision.setPreviouskeywordsRankBelow5(objCampaigns.getRankBelow5());
+                    rankComparision.setPreviouskeywordsRankBelow10(objCampaigns.getRankBelow10());
+                    rankComparision.setPreviouskeywordsRankBelow20(objCampaigns.getRankBelow20());
+                    rankComparision.setPreviouskeywordsRankBelow30(objCampaigns.getRankBelow30());
+                    rankComparision.setPreviouskeywordsRankBelow100(objCampaigns.getRankBelow100());
+
+                    rankComparision.setCurrentkeywordsRankBelow5(keywordsRankBelow5Count);
+                    rankComparision.setCurrentkeywordsRankBelow10(KeywordsRankBelow10Count);
+                    rankComparision.setCurrentkeywordsRankBelow20(KeywordsRankBelow20Count);
+                    rankComparision.setCurrentkeywordsRankBelow30(KeywordsRankBelow30Count);
+                    rankComparision.setCurrentkeywordsRankBelow100(KeywordsRankBelow100Count);
+
                 }
                 if (objSession.getAttribute("message") != null) {
                     addActionMessage(objSession.getAttribute("message").toString());
@@ -691,5 +720,21 @@ public class VideoKeywordsAction extends ActionSupport {
 
     public void setRankComparision(RankComparision rankComparision) {
         this.rankComparision = rankComparision;
+    }
+
+    public CampaignsDao getObjCampaignsDao() {
+        return objCampaignsDao;
+    }
+
+    public void setObjCampaignsDao(CampaignsDao objCampaignsDao) {
+        this.objCampaignsDao = objCampaignsDao;
+    }
+
+    public Campaigns getObjCampaigns() {
+        return objCampaigns;
+    }
+
+    public void setObjCampaigns(Campaigns objCampaigns) {
+        this.objCampaigns = objCampaigns;
     }
 }

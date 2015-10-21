@@ -10,7 +10,9 @@
     }
 </style>
 <!-- begin page-header -->
-<h1 class="page-header">WELCOME <span class="text-danger">Admin</span></h1>
+<h1 class="page-header">WELCOME <span class="text-danger">Admin</span>
+    <a href="featuresdetails.action" class="btn btn-primary pull-right">Add/Edit Packages</a>
+</h1>
 <%
     Date date = new Date();
     out.print("<h4 class=\"heading glyphicons calendar\"><i></i>" + date.toString() + "</h4>");

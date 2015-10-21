@@ -3,14 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
-            <url>web/WEB-INF/jsp_ranktracker_view/failure.jsp</url>
-            <bookmark id="1">
-                <name/>
-                <line>1</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
             <url>web/WEB-INF/jsp_ranktracker_view/home.jsp</url>
             <bookmark id="2">
                 <name/>
@@ -18,10 +10,16 @@
                 <key/>
             </bookmark>
         </file>
+        <file>
+            <url>web/WEB-INF/jsp_ranktracker_view/failure.jsp</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/GlobustrackerNewUI/Githhub%20Globustracker%20Code/Github%20Crawler%20code/globustracker/Globustracker%20Site/src/java/ranktracker/dao/WebsiteReviewDaoImpl.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -9,23 +9,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- stylesheets -->
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/theme.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/animate.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/brankic.css">
+        
+        <link href="views/css_ranktracker/theme.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/brankic.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
-        <!--<link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/font-awesome.css">-->
-        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/switch.css">
+         <!--<link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/css-globustracker/font-awesome.css">-->
+         <link href="views/css_ranktracker/switch.css" rel="stylesheet" type="text/css"/>
 
         <!-- javascript -->
-        <script src="https://s3.amazonaws.com/js-globustracker/jquery-1.11.1.min.js"></script>
-
-        <script src="https://s3.amazonaws.com/js-globustracker/bootstrap.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/theme.js"></script>
-
-        <link rel="stylesheet" href="https://s3.amazonaws.com/css-globustracker/main.css">
-        <script type="text/javascript" src="https://s3.amazonaws.com/js-globustracker/main.js"></script>
-
+    
+        <script src="views/js_ranktracker/jquery-1.11.1.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/bootstrap.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/theme.js" type="text/javascript"></script>
+        <link href="views/css_ranktracker/main.css" rel="stylesheet" type="text/css"/>
+        <script src="views/js_ranktracker/main.js" type="text/javascript"></script>
+        
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -50,7 +50,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="home.action" class="navbar-brand"><img src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" class="img-responsive" style="width: 200px;"></a>
+                    <a href="home.action" class="navbar-brand"><img src="views/images_ranktracker/Globustracker-logo-present.png" alt="GlobusTracker" class="img-responsive" style="width: 200px;"></a>
                 </div>
                 <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                     <ul class="nav navbar-nav navbar-right">

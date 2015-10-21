@@ -4,22 +4,14 @@
  */
 package ranktracker.crawler.vimeo;
 
-import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,7 +20,6 @@ import org.jsoup.select.Elements;
 import ranktracker.dao.KeywordsDao;
 import ranktracker.entity.ProxyData;
 import ranktracker.entity.Videokeywords;
-import ranktracker.utility.FetchPageBodySource;
 import ranktracker.utility.FetchPagewithClientAthentication;
 import ranktracker.utility.Vimeo_search;
 
@@ -50,18 +41,16 @@ public class VimeoPagenLinks implements Callable<String> {
     int vimeorank;
     String vimeourl;
     FetchPagewithClientAthentication fetchSourcewithAuthentication;
-    FetchPageBodySource fetchsource;
     Videokeywords videokeywords;
     List<ProxyData> proxyList;
 
-    public VimeoPagenLinks(List<Videokeywords> lstVideokeywords, KeywordsDao objKeywordDao, String vimUrl, String vimKeyword, Integer vimKeywordId, FetchPagewithClientAthentication fetchSourcewithAuthentication, FetchPageBodySource fetchsource, Videokeywords videokeywords, List<ProxyData> proxyList) {
+    public VimeoPagenLinks(List<Videokeywords> lstVideokeywords, KeywordsDao objKeywordDao, String vimUrl, String vimKeyword, Integer vimKeywordId, FetchPagewithClientAthentication fetchSourcewithAuthentication, Videokeywords videokeywords, List<ProxyData> proxyList) {
         this.lstVideokeywords = lstVideokeywords;
         this.objKeywordDao = objKeywordDao;
         this.vimUrl = vimUrl;
         this.vimKeyword = vimKeyword;
         this.vimKeywordId = vimKeywordId;
         this.fetchSourcewithAuthentication = fetchSourcewithAuthentication;
-        this.fetchsource = fetchsource;
         this.videokeywords = videokeywords;
         this.proxyList = proxyList;
     }

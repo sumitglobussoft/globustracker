@@ -250,4 +250,10 @@ public interface KeywordsDao {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteUrl(Integer urlID, Integer campaignID);
+    
+    public int refreshGoogleKeyword(Integer keywordId);
+    
+    public int refreshYahooKeyword(Integer keywordId);
+    
+    public int refreshBingKeyword(Integer keywordId);
 }

@@ -6,7 +6,7 @@
 <link href="https://s3.amazonaws.com/css_ranktracker/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
 <!--link rel="stylesheet" href="https://s3.amazonaws.com/css_ranktracker/serpkeypopup.css"/-->
 <style type="text/css">
-    <%@include  file="../css_ranktracker/serpkeypopup.css" %>
+    <%@include  file="views/css_ranktracker/serpkeypopup.css" %>
     .close_btn
     {
         width: 16px;

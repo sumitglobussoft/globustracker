@@ -6,18 +6,12 @@ package ranktracker.utility;
 
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
 import ranktracker.crawler.bing.BingPagenLinks;
@@ -56,23 +50,23 @@ public class Bing_search implements Runnable {
 
             //Wed Jan 07 13:45:08 IST 2015
             //Fri Jan 02 13:40:06 IST 2015
-            if (currentDate[0].equalsIgnoreCase(endDate[0])) {
-                if (currentDate[1].equalsIgnoreCase(endDate[1])) {
+            if (!"-".equals(serpkeyword.getRankBingRefresherDate())) {
+                if (currentDate[0].equalsIgnoreCase(endDate[0])) {
+                    if (currentDate[1].equalsIgnoreCase(endDate[1])) {
 
-                    if (currentDate[2].equalsIgnoreCase(endDate[2])) {
+                        if (currentDate[2].equalsIgnoreCase(endDate[2])) {
 
-                        if (currentDate[5].equalsIgnoreCase(endDate[5])) {
+                            if (currentDate[5].equalsIgnoreCase(endDate[5])) {
 
-                            System.out.println("SAME TIME : " + serpkeyword.getKeyword() + " [" + serpkeyword.getKeywordID() + "]");
-                            return true;
+                                System.out.println("SAME TIME : " + serpkeyword.getKeyword() + " [" + serpkeyword.getKeywordID() + "]");
+                                return true;
+                            }
                         }
                     }
                 }
             }
-
         } catch (Exception s) {
             System.out.println("" + s);
-
         }
         return false;
     }
@@ -89,7 +83,7 @@ public class Bing_search implements Runnable {
         ExecutorService executor = Executors.newFixedThreadPool(10);
         Iterator bingitr = lstKeywords.iterator();
         int i = 0;
-        List<ProxyData> proxylist=objProxyDao.getProxyList();
+        List<ProxyData> proxylist = objProxyDao.getProxyList();
         while (bingitr.hasNext()) {
             i++;
             try {
@@ -97,13 +91,7 @@ public class Bing_search implements Runnable {
                 if (checkForRecentUpdatedKeyword(objKeyword)) {
                     continue;
                 }
-//                bnUrl = objKeyword.getUrl();
-//                bnKeyword = objKeyword.getKeyword();
-//                bnKeywordID = objKeyword.getKeywordID();
-                //  Runnable worker = new BingPagenLinks(bnUrl, bnKeyword, bnKeywordID, appContext);
-                // executor.execute(worker);
-                executor.submit(new BingPagenLinks(objKeyword, appContext, i,proxylist));
-
+                executor.submit(new BingPagenLinks(objKeyword, appContext, i, proxylist));
             } catch (Exception ex) {
                 java.util.logging.Logger.getLogger(Bing_search.class.getName()).log(Level.SEVERE, null, ex);
                 ex.printStackTrace();
@@ -115,51 +103,5 @@ public class Bing_search implements Runnable {
         } catch (InterruptedException ex) {
             java.util.logging.Logger.getLogger(Bing_search.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public Queue<String> getBingMainLinks(String str, String keyword) {
-        Queue<String> mainlinks = new LinkedList<>();
-        try {
-            Document doc = Jsoup.parse(str, "UTF-8");
-            Element links = doc.getElementById("b_results");
-            Elements nlinks = links.select("li[class=b_algo] h2 a[href]");
-            for (Element el2 : nlinks) {
-                String golinks = el2.attr("abs:href");
-                System.out.println(golinks);
-                mainlinks.add(golinks);
-            }
-            System.out.println("-------------------------------");
-        } catch (Exception e) {
-            System.out.println("Exception Occured in " + keyword);
-        }
-        return mainlinks;
-    }
-
-    public Queue<String> getBingPageinationLinks(String str) {
-        Queue<String> pagenlinks = new LinkedList<>();
-        try {
-            Document doc = Jsoup.parse(str, "UTF-8");
-            Element links = doc.getElementById("b_results");
-            Elements nlinks = links.select("li[class=b_pag] nav ul li a[href]");
-            for (Element el2 : nlinks) {
-                String golinks = el2.attr("href");
-                System.out.println(golinks);
-                pagenlinks.add(golinks);
-            }
-            int pagenlinksize = pagenlinks.size();
-            Iterator itr = pagenlinks.iterator();
-            int c = 0;
-            while (itr.hasNext()) {
-                String o = itr.next().toString();
-                c++;
-                if (pagenlinksize == c) {
-                    pagenlinks.remove(o);
-                }
-            }
-            System.out.println("Pagen Links size --------------" + pagenlinks.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return pagenlinks;
     }
 }

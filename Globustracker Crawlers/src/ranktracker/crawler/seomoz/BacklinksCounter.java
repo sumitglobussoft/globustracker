@@ -80,8 +80,8 @@ public class BacklinksCounter implements Runnable {
             l.debug(e + "  " + e.getMessage());
             e.printStackTrace();
         }
-        String accessID = "Enter the AccessID for SeoMoz";
-        String secretKey = "Enter the SecretKey for SeoMoz";
+        String accessID = "xxxxxxxxxxxxxxxxxxxxxxxxxx";
+        String secretKey = "xxxxxxxxxxxxxxxxxxxxxxxxx";
         Authenticator authenticator = new Authenticator();
         authenticator.setAccessID(accessID);
         authenticator.setSecretKey(secretKey);
@@ -219,8 +219,8 @@ public class BacklinksCounter implements Runnable {
             l.debug(e + "  " + e.getMessage());
             e.printStackTrace();
         }
-        String accessID = "Enter the accessID for SeoMoz";
-        String secretKey = "Enter the secretKey for SeoMoz";
+        String accessID = "xxxxxxxxxxxxxxxxxxxxxxx";
+        String secretKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx";
         Authenticator authenticator = new Authenticator();
         authenticator.setAccessID(accessID);
         authenticator.setSecretKey(secretKey);
@@ -263,8 +263,8 @@ public class BacklinksCounter implements Runnable {
 
     private int getDAvalue(String domainName) {
         domainName = domainName.substring(0, domainName.indexOf("/"));
-        String accessID = "Enter the accessID for SeoMoz";
-        String secretKey = "Enter the secretKey for SeoMoz";
+        String accessID = "xxxxxxxxxxxxxxxxxxxxxxxxx";
+        String secretKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
         Authenticator authenticator = new Authenticator();
         authenticator.setAccessID(accessID);
         authenticator.setSecretKey(secretKey);

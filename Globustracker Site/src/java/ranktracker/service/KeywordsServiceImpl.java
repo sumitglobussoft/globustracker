@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import ranktracker.dao.CampaignsDao;
 import ranktracker.dao.KeywordsDao;
+import ranktracker.dao.KeywordsDaoImpl;
 import ranktracker.entity.Displaysettings;
 import ranktracker.entity.Globustrackerevents;
 import ranktracker.entity.Serpkeywordgoal;
@@ -356,5 +357,23 @@ public class KeywordsServiceImpl implements KeywordsService {
     public String getKeywordName(Integer keywordID) {
 
         return objKeywordsDao.getKeywordName(keywordID);
+    }
+
+    @Override
+    public int refreshGoogleKeyword(Integer keywordId) {
+		KeywordsDao dao = new KeywordsDaoImpl();
+        return dao.refreshGoogleKeyword(keywordId);
+    }
+
+    @Override
+    public int refreshYahooKeyword(Integer keywordId) {
+		KeywordsDao dao = new KeywordsDaoImpl();
+        return dao.refreshYahooKeyword(keywordId);
+    }
+
+    @Override
+    public int refreshBingKeyword(Integer keywordId) {
+		KeywordsDao dao = new KeywordsDaoImpl();
+        return dao.refreshBingKeyword(keywordId);
     }
 }

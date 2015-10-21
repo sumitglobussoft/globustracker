@@ -42,7 +42,7 @@ import ranktracker.entity.ProxyData;
 @Repository("fetchSourcewithAuthentication")
 public class FetchPagewithClientAthentication {
 
-    static Logger l = Logger.getLogger(FetchPageHttpClient.class.getName());
+    static Logger l = Logger.getLogger(FetchPagewithClientAthentication.class.getName());
 
     /**
      * method to get source page from search engine using

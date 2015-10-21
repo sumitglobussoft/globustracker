@@ -15,6 +15,7 @@ import ranktracker.dao.PaymentDAO;
 import ranktracker.entity.Customers;
 import ranktracker.entity.Payments;
 import ranktracker.entity.Plans;
+import ranktracker.service.PaymentService;
 
 /**
  *
@@ -26,6 +27,10 @@ public class UpgradeAction extends ActionSupport {
     HttpSession objSession;
 
     private PaymentDAO objPaymentDAO;
+
+    private List<Plans> listPlans;
+
+    private PaymentService objPaymentService;
 
     @Override
     public String execute() throws Exception {
@@ -53,6 +58,16 @@ public class UpgradeAction extends ActionSupport {
             if (objSession.getAttribute("activationPeriod").toString().equals("0")) {
                 return "renewal";
             }
+
+            Integer customerId = Integer.parseInt(objSession.getAttribute("customerID").toString());
+            //get the plan ID of the customer from Payments table according to his customerID
+            int custPlanID = objPaymentService.getCustomerPlanID(customerId).getPlanID();
+
+            //get list of plans from Plans Table
+            listPlans = objPaymentService.getAllPlansDetails();
+            objSession.setAttribute("listPlans", listPlans);
+            objSession.setAttribute("custPlanID", custPlanID);
+
             return "success";
         } else {
             //if session attribute 'customerID' is null then return result parameter as 'LOGIN'
@@ -100,7 +115,7 @@ public class UpgradeAction extends ActionSupport {
             objSession.setAttribute("allowedKeywordCount", objCustomers.getAllowedKeywordCount());
             objSession.setAttribute("allowedCampaignCount", objCustomers.getAllowedCampaignsCount());
             objSession.setAttribute("activationPeriod", 1);
-            
+
             return "success";
 
         } catch (Exception ex) {
@@ -117,4 +132,11 @@ public class UpgradeAction extends ActionSupport {
         this.objPaymentDAO = objPaymentDAO;
     }
 
+    public PaymentService getObjPaymentService() {
+        return objPaymentService;
+    }
+
+    public void setObjPaymentService(PaymentService objPaymentService) {
+        this.objPaymentService = objPaymentService;
+    }
 }

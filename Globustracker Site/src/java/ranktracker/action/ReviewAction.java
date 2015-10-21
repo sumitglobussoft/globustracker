@@ -102,7 +102,7 @@ public class ReviewAction extends ActionSupport {
 //        websearchurl = objRequest.getParameter("websearchurl");
 //        System.out.println("----------------websearchurl = " + websearchurl);
 //        objSession.setAttribute("websearchurl", websearchurl);
-//        //http://Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
+//        //http:// 54.183.182.139:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
 ////        Thread social_thread = new Thread(new Socialreviewsite(websearchurl));
 ////        social_thread.start();
 //        return SUCCESS;
@@ -118,7 +118,7 @@ public class ReviewAction extends ActionSupport {
 //        websearchurl = objRequest.getParameter("websearchurl");
 //        System.out.println("----------------websearchurl = " + websearchurl);
 //        objSession.setAttribute("websearchurl", websearchurl);
-//        //http:// Ip Address:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
+//        //http:// 54.183.182.139:8080/Globuswooclonecrawler/Reviewsite?websitename=india.gov.in
 ////        Thread social_thread = new Thread(new Socialreviewsite(websearchurl));
 ////        social_thread.start();
 //        return SUCCESS;

@@ -57,12 +57,7 @@ public class TwitterSignifier extends Thread {
     /**
      * Constructor to set all the variables
      *
-     * @param iCount
-     * @param setDomains
-     * @param lstKeywords
      * @param appContext
-     * @param startTrackId
-     * @param endtrackId
      *
      */
     public TwitterSignifier(List<Socialsignalurls> lstUrls, ApplicationContext appContext) {
@@ -90,7 +85,7 @@ public class TwitterSignifier extends Thread {
         String source = "";
         try {
             //source = objProxyPageSource.getSource(iCount, url, objProxyDao, "", "");
-            source = objProxyPageSource.makeRequest(url, "");
+            source = objProxyPageSource.makeRequest(url);
         } catch (Exception e) {
             l.debug(e + "  " + e.getMessage() + " Exception come for url " + url);
             e.printStackTrace();

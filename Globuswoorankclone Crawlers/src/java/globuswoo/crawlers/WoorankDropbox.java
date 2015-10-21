@@ -25,10 +25,8 @@ public class WoorankDropbox {
     public String ipadView = "NA";
     public String dashboardImage = "NA";
     public String usabilityImage = "NA";
-    //Enter the xxxxxxxxxxxxxxxxxxx Drop box App key 
-    private static final String DROP_BOX_APP_KEY = "xxxxxxxxxxxxxxxxxxx";
-    //Enter the xxxxxxxxxxxxxxxxxxx Drop box App Secret
-    private static final String DROP_BOX_APP_SECRET = "xxxxxxxxxxxxxxxxx";
+    private static final String DROP_BOX_APP_KEY = "xxxxxxxxxxxxxxxxxxxxxx";
+    private static final String DROP_BOX_APP_SECRET = "xxxxxxxxxxxxxxxxxxxxx";
     static DbxClient dbxClient;
     static DbxRequestConfig dbxRequestConfig = new DbxRequestConfig(
             "JavaDropboxTutorial/1.0", Locale.getDefault().toString());
@@ -36,7 +34,7 @@ public class WoorankDropbox {
     public static DbxClient authDropbox(String dropBoxAppKey, String dropBoxAppSecret)
             throws IOException, DbxException {
 
-        String authAccessToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        String authAccessToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
         dbxClient = new DbxClient(dbxRequestConfig, authAccessToken);
         System.out.println("Dropbox Account Name: "
                 + dbxClient.getAccountInfo().displayName);

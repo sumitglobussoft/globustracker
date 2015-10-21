@@ -17,28 +17,21 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.auth.AuthScope;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.context.ApplicationContext;
 import ranktracker.dao.KeywordsDao;
 import ranktracker.dao.ProxyDao;
 import ranktracker.entity.ProxyData;
 import ranktracker.entity.Videokeywords;
-import ranktracker.utility.FetchPageBodySource;
 import ranktracker.utility.FetchPagewithClientAthentication;
 import ranktracker.utility.UserAgents;
 import ranktracker.utility.VideoViewStatisticsThread;
@@ -287,9 +280,9 @@ public class YoutubeStatistics extends Thread {
         int portNo = generateRandomPort();
         CredentialsProvider credsprovider = new BasicCredentialsProvider();
         credsprovider.setCredentials(
-                new AuthScope("Ip Address", portNo),
-                new UsernamePasswordCredentials("Username", "Password"));
-        HttpHost proxy = new HttpHost("Ip Address", portNo);
+                new AuthScope("195.154.161.103", portNo),
+                new UsernamePasswordCredentials("mongoose", "Fjh30fi"));
+        HttpHost proxy = new HttpHost("195.154.161.103", portNo);
         String userAgent = UserAgents.getRandomUserAgent();
         CloseableHttpClient httpclient = HttpClients.custom()
                 .setDefaultCredentialsProvider(credsprovider)

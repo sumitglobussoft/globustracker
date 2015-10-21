@@ -207,6 +207,11 @@ public class CampaignsDaoImpl extends HibernateDaoSupport implements CampaignsDa
                 objCampaign.setReportEmailID("");
                 objCampaign.setReportFrequency(1);
                 objCampaign.setVisibility(1);
+                objCampaign.setRankBelow5(0);
+                objCampaign.setRankBelow10(0);
+                objCampaign.setRankBelow20(0);
+                objCampaign.setRankBelow30(0);
+                objCampaign.setRankBelow100(0);
 
                 //using the fnvhash value to generate view key
                 objCampaign.setViewKey(objFNVHash.fnv1_32((objUser.getLoginID() + campaignName).getBytes()).toString(32));
@@ -393,14 +398,14 @@ public class CampaignsDaoImpl extends HibernateDaoSupport implements CampaignsDa
                 if (!"".equals(campaigns.getReportEmailID())) {
                     if (campaigns.getMailSentOn().before(todayDate)) {
                         lstCampaigns.add(campaigns);
-                      //  System.out.println(lstCampaigns);
+                        //  System.out.println(lstCampaigns);
                     }
                 }
             }
             Iterator ittr = lstCampaigns.iterator();
             while (ittr.hasNext()) {
                 Campaigns ca = (Campaigns) ittr.next();
-             //   System.out.println("----------->" + ca.getReportEmailID());
+                //   System.out.println("----------->" + ca.getReportEmailID());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -551,6 +556,11 @@ public class CampaignsDaoImpl extends HibernateDaoSupport implements CampaignsDa
                 objCampaign.setCampaignType("video");
                 objCampaign.setReportFrequency(1);
                 objCampaign.setVisibility(1);
+                objCampaign.setRankBelow5(0);
+                objCampaign.setRankBelow10(0);
+                objCampaign.setRankBelow20(0);
+                objCampaign.setRankBelow30(0);
+                objCampaign.setRankBelow100(0);
 
                 //using the fnvhash value to generate view key
                 objCampaign.setViewKey(objFNVHash.fnv1_32((objUser.getLoginID() + campaignName).getBytes()).toString(32));
@@ -772,4 +782,43 @@ public class CampaignsDaoImpl extends HibernateDaoSupport implements CampaignsDa
         }
         return lstEcomDetails;
     }
+
+    /*
+     * @Author Nitesh Shah
+     * This getAllCampaigns() method for getting all the campaign list from campaigns table.
+     */
+    public List<Campaigns> getAllCampaigns() {
+        List<Campaigns> objCampaigns = new ArrayList<>();
+        String hqlquery = "from Campaigns where visibility = 1";
+        try {
+            objCampaigns = getHibernateTemplate().find(hqlquery);
+
+        } catch (Exception ex) {
+            l.error(ex + "  " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return objCampaigns;
+    }
+
+    /*
+     * @Author Nitesh Shah
+     * This SaveAllCampaigns() method for saving the keywords of particular campaign whose rank is below5, below10, below20, below30, below100 in campaign table.
+     */
+    @Override
+    public void SaveAllCampaigns(Campaigns objGetAllCampaign) {
+
+        try {
+            Campaigns objCampaigns = (Campaigns) getSession().get(Campaigns.class, objGetAllCampaign.getCampaignID());
+            objCampaigns.setRankBelow5(objGetAllCampaign.getRankBelow5());
+            objCampaigns.setRankBelow10(objGetAllCampaign.getRankBelow10());
+            objCampaigns.setRankBelow20(objGetAllCampaign.getRankBelow20());
+            objCampaigns.setRankBelow30(objGetAllCampaign.getRankBelow30());
+            objCampaigns.setRankBelow100(objGetAllCampaign.getRankBelow100());
+            getSession().update(objCampaigns);
+        } catch (DataAccessResourceFailureException | IllegalStateException | HibernateException ex) {
+            l.error(ex + "  " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
 }

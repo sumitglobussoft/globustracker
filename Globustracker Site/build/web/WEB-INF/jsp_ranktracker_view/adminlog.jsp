@@ -12,10 +12,10 @@
         <meta name="author" content="Globussoft">
         <link rel="shortcut icon" href="https://s3.amazonaws.com/images_ranktracker/GlobustrackerIcon.png" />
         <!-- ================== BEGIN BASE CSS STYLE ================== -->
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <link href="https://s3.amazonaws.com/css-globustracker/assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="https://s3.amazonaws.com/css-globustracker/assets/css/style.min.css" rel="stylesheet" />
-        <link href="https://s3.amazonaws.com/css-globustracker/assets/css/custom.css" rel="stylesheet" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />        
+        <link href="views/css_ranktracker/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/assets/css/style.min.css" rel="stylesheet" type="text/css"/>
+        <link href="views/css_ranktracker/assets/css/custom.css" rel="stylesheet" type="text/css"/>
 
         <!-- ================== END BASE CSS STYLE ================== -->
 
@@ -32,7 +32,7 @@
             <div class="container">
                 <div class="login-container" style="margin-bottom:0;">
                     <br>
-                    <img src="https://s3.amazonaws.com/images-globustracker/Globustracker-logo-present.png" style="height: 30px">
+                    <img src="" alt="GlobusTracker" style="height: 30px">
                     <br><h4>ADMIN</h4>
                     <br>
                     <div id="fade_away1" style="margin-left: -25px; color:#FF0000;">
@@ -56,9 +56,11 @@
         <!-- end page container -->
 
         <!-- ================== BEGIN BASE JS ================== -->
-        <script src="https://s3.amazonaws.com/js-globustracker/assets/jquery-1.8.2.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/assets/jquery-ui.min.js"></script>
-        <script src="https://s3.amazonaws.com/js-globustracker/assets/bootstrap.min.js"></script>
+        
+        <script src="views/js_ranktracker/assets/jquery-1.8.2.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/assets/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="views/js_ranktracker/assets/bootstrap.min.js" type="text/javascript"></script>
+        
         <!--[if lt IE 9]>
                 <script src="assets/crossbrowserjs/html5shiv.js"></script>
                 <script src="assets/crossbrowserjs/respond.min.js"></script>
@@ -68,7 +70,8 @@
 
         <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 
-        <script src="https://s3.amazonaws.com/js-globustracker/assets/apps.min.js"></script>
+        <!--<script src="https://s3.amazonaws.com/js-globustracker/assets/apps.min.js"></script>-->
+        <script src="views/js_ranktracker/assets/apps.min.js" type="text/javascript"></script>
         <!-- ================== END PAGE LEVEL JS ================== -->
         <script>
             $(document).ready(function() {

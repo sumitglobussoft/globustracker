@@ -20,6 +20,10 @@
         <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/adminAccount.jsp" />
     </definition>
     
+     <definition name="packageDetails" extends="adminUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/package.jsp" />
+    </definition>
+    
     <!--definition for 'baseUser.definition' 
       setting the title
       setting the body : to be load at the running time
@@ -89,6 +93,62 @@
     <definition name="youtubechecker" extends="baseUser.definition">        
         <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/youtubebulkchecker.jsp" />
     </definition> 
+    
+    <definition name="googleAnalytics" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/googleanalytics.jsp" />
+    </definition> 
+    
+     <definition name="googleAcquisition" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/googleacquisition.jsp" />
+    </definition> 
+    
+    <definition name="keywordResearch" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/keywordresearch.jsp" />
+    </definition> 
+    
+    <definition name="googleBrowserMobile" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/googlebrowsermobile.jsp" />
+    </definition> 
+    
+    <definition name="googleSiteSpeed" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/googlesitespeed.jsp" />
+    </definition> 
+    
+    <definition name="googleAdwords" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/googleadwords.jsp" />
+    </definition> 
+    
+    <definition name="googleSocials" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/googlesocials.jsp" />
+    </definition> 
+    
+    <definition name="searchanalytics" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/searchanalytics.jsp" />
+    </definition> 
+    
+     <definition name="PageSpeedAnalysis" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/pagespeed.jsp" />
+    </definition> 
+    
+     <definition name="StructuredData" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/strucuturedata.jsp" />
+    </definition> 
+    
+    <definition name="RobotChecker" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/robotchecker.jsp" />
+    </definition>  
+    
+    <definition name="MobileUsability" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/mobileusability.jsp" />
+    </definition> 
+    
+     <definition name="AccurateLocalRanking" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/accurateranking.jsp" />
+    </definition>  
+    
+    <definition name="LinkAnalysis" extends="baseUser.definition">        
+        <put-attribute name="body" value="/WEB-INF/jsp_ranktracker_view/linkanalysis.jsp" />
+    </definition>  
     
     <!--definition for 'viewLayout.definition' 
      setting the title

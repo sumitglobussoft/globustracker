@@ -12,11 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import ranktracker.dao.PaymentDAO;
-import ranktracker.dao.PaymentDAOImpl;
 import ranktracker.entity.Customers;
+import ranktracker.entity.Plans;
 import ranktracker.entity.Users;
 import ranktracker.form.SignInForm;
 import ranktracker.service.CustomerService;
+import ranktracker.service.PaymentService;
 
 /**
  * Action layer class for actions initiated for signin module
@@ -52,6 +53,8 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
     private Users objUser;
 
     private PaymentDAO objPaymentDAO;
+
+    private PaymentService objPaymentService;
 
     /**
      * The method validates login credentials
@@ -134,74 +137,87 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
 
     public String executeLogin() throws Exception {
 
-        int activationPeriod = 1;
-        //initializing http request object
-        objRequest = ServletActionContext.getRequest();
+        try {
 
-        //initializing http session object
-        objSession = objRequest.getSession();
+            int activationPeriod = 1;
+            //initializing http request object
+            objRequest = ServletActionContext.getRequest();
 
-        //now invoking the isValidLogin method of CustomerServiceimpl class to validate the username and password
-        objUser = objCustomerService.isValidLogin(objSignInForm.getUserName(), objSignInForm.getPassword());
-        System.out.println("Username : " + objSignInForm.getUserName());
-        System.out.println("Password : " + objSignInForm.getPassword());
-        if (objUser != null) {
-            int usertype = objUser.getUserType();
-            if (usertype != 10) {
+            //initializing http session object
+            objSession = objRequest.getSession();
 
-                objCustomer = objUser.getCustomerID();
+            //now invoking the isValidLogin method of CustomerServiceimpl class to validate the username and password
+            objUser = objCustomerService.isValidLogin(objSignInForm.getUserName(), objSignInForm.getPassword());
+            System.out.println("Username : " + objSignInForm.getUserName());
+            System.out.println("Password : " + objSignInForm.getPassword());
+            if (objUser != null) {
+                int usertype = objUser.getUserType();
+                if (usertype != 10) {
 
-                String paymentMessage = "welcome";
+                    objCustomer = objUser.getCustomerID();
 
-                try {
+                    String paymentMessage = "welcome";
 
-                    Date enddate = objPaymentDAO.getPaymentEndingDate(objCustomer.getCustomerID());
+                    try {
+
+                        Date enddate = objPaymentDAO.getPaymentEndingDate(objCustomer.getCustomerID());
 
 //              
-                    Date currentDate = new Date();
-                    //System.out.println("==== end date : " + enddate);
+                        Date currentDate = new Date();
+                        //System.out.println("==== end date : " + enddate);
 
-                    long diff = enddate.getTime() - currentDate.getTime();
-                    diff = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-                    //System.out.println("Difference is : " + diff);
-                    if (diff > 0L) {
+                        long diff = enddate.getTime() - currentDate.getTime();
+                        diff = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                        //System.out.println("Difference is : " + diff);
+                        if (diff > 0L) {
 
-                        paymentMessage = "Only " + diff + " days left in activation period. Your Activation will end on " + enddate;
-                    } else {
-                        paymentMessage = "Your activation period has been expired on";
-                        activationPeriod = 0;
+                            paymentMessage = "Only " + diff + " days left in activation period. Your Activation will end on " + enddate;
+                        } else {
+                            paymentMessage = "Your activation period has been expired on";
+                            activationPeriod = 0;
+                        }
+
+                    } catch (Exception es) {
+                        System.out.println("EXCEPTION IS : " + es);
+                        // objSession.setAttribute("paymentMessage","EXCEPTION IS : "+es);
+
                     }
 
-                } catch (Exception es) {
-                    System.out.println("EXCEPTION IS : " + es);
-                    // objSession.setAttribute("paymentMessage","EXCEPTION IS : "+es);
+                    objSession.setAttribute("notification", 0);
+                    objSession.setAttribute("paymentMessage", paymentMessage);
+                    objSession.setAttribute("activationPeriod", activationPeriod);
 
+                    objSession.setAttribute("customerID", objCustomer.getCustomerID());
+                    objSession.setAttribute("customerName", objCustomer.getFirstName() + " " + objCustomer.getLastName());
+                    objSession.setAttribute("userID", objUser.getUserID());
+                    objRequest.setAttribute("highlight", "Sites");
+                    objSession.setAttribute("allowedKeywordCount", objCustomer.getAllowedKeywordCount());
+                    objSession.setAttribute("allowedCampaignCount", objCustomer.getAllowedCampaignsCount());
+                    objSession.setAttribute("objCustomer", objCustomer);
+                    objSession.setAttribute("userType", objUser.getUserType());
+                    System.out.println("UserType : " + objSession.getAttribute("userType"));
+
+                    if (activationPeriod == 0) {
+                        return "renewal";
+                    }
+
+                    //get the plan ID of the customer from Payments table according to his customerID
+                    Plans userPlanObj = objPaymentService.getCustomerPlanID(objCustomer.getCustomerID());
+
+                    System.out.println("-------------" + userPlanObj);
+
+                    objSession.setAttribute("userPlanObj", userPlanObj);
+
+                    return SUCCESS;
+                } else {
+                    addActionError("Admin User should login through Admin panel");
                 }
-
-                objSession.setAttribute("notification", 0);
-                objSession.setAttribute("paymentMessage", paymentMessage);
-                objSession.setAttribute("activationPeriod", activationPeriod);
-
-                objSession.setAttribute("customerID", objCustomer.getCustomerID());
-                objSession.setAttribute("customerName", objCustomer.getFirstName() + " " + objCustomer.getLastName());
-                objSession.setAttribute("userID", objUser.getUserID());
-                objRequest.setAttribute("highlight", "Sites");
-                objSession.setAttribute("allowedKeywordCount", objCustomer.getAllowedKeywordCount());
-                objSession.setAttribute("allowedCampaignCount", objCustomer.getAllowedCampaignsCount());
-                objSession.setAttribute("objCustomer", objCustomer);
-                objSession.setAttribute("userType", objUser.getUserType());
-                System.out.println("UserType : " + objSession.getAttribute("userType"));
-
-                if (activationPeriod == 0) {
-                    return "renewal";
-                }
-
-                return SUCCESS;
             } else {
-                addActionError("Admin User should login through Admin panel");
+                addActionError("Either EmailID or Password is Incorrect");
             }
-        } else {
-            addActionError("Either EmailID or Password is Incorrect");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return INPUT;
     }
@@ -303,5 +319,13 @@ public class SignInSubmitAction extends ActionSupport implements ModelDriven<Sig
 
     public void setObjPaymentDAO(PaymentDAO objPaymentDAO) {
         this.objPaymentDAO = objPaymentDAO;
+    }
+
+    public PaymentService getObjPaymentService() {
+        return objPaymentService;
+    }
+
+    public void setObjPaymentService(PaymentService objPaymentService) {
+        this.objPaymentService = objPaymentService;
     }
 }

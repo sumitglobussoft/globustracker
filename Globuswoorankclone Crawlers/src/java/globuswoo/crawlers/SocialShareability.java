@@ -18,13 +18,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.jsoup.nodes.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * @author : Nitesh Shah 
- * Email id : niteshshah@globussoft.com
+ * @author : Nitesh Shah Email id : niteshshah@globussoft.com
  */
 public class SocialShareability {
 
@@ -81,66 +82,111 @@ public class SocialShareability {
 
         try {
 
-            String facebookurl = "http://api.ak.facebook.com/restserver.php?v=1.0&method=links.getStats&format=json&callback=fb_sharepro_render&urls="
-                    + complete_url;
-            String response = null;
-            response = new GetRequestHandler().doGetRequest(new URL(facebookurl));
+            //            String response = null;
+//            response = new GetRequestHandler().doGetRequest(new URL(facebookurl));
             // System.out.println("facebook Details Response : " + response);
+            String facebookurl = "http://api.facebook.com/restserver.php?format=json&method=links.getStats&urls="
+                    + complete_url;
+
+            JSONArray result = new JSONArray(new GetRequestHandler().doGetRequest(new URL(facebookurl)));
+            JSONObject json = result.getJSONObject(0);
+
             try {
-                Pattern pattern = Pattern.compile("share_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebook_share_count = matcher.group(1).replace("\":", "").trim();
-                }
+                Object facebook_click_count_no = json.get("click_count");
+                facebook_click_count = json.get("click_count").toString();
+                System.out.println("click_count : " + facebook_click_count);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("like_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebook_like_count = matcher.group(1).replace("\":", "").trim();
-                }
+                Object facebook_comment_count_no = json.get("comment_count");
+                facebook_comment_count = json.get("comment_count").toString();
+                System.out.println("comment_count : " + facebook_comment_count);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("comment_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebook_comment_count = matcher.group(1).replace("\":", "").trim();
-                }
+                Object commentsbox_count_no = json.get("commentsbox_count");
+                facebook_commentsbox_count = json.get("commentsbox_count").toString();
+                System.out.println("commentsbox_count : " + facebook_commentsbox_count);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("total_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebook_total_count = matcher.group(1).replace("\":", "").trim();
-                }
+                Object facebook_like_count_no = json.get("like_count");
+                facebook_like_count = json.get("like_count").toString();
+                System.out.println("like_count : " + facebook_like_count);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("click_count(.*?),");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebook_click_count = matcher.group(1).replace("\":", "").trim();
-                }
+                Object facebook_share_count_no = json.get("share_count");
+                facebook_share_count = json.get("share_count").toString();
+                System.out.println("share_count : " + facebook_share_count);
             } catch (Exception e) {
             }
 
             try {
-                Pattern pattern = Pattern.compile("commentsbox_count(.*?)}");
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    facebook_commentsbox_count = matcher.group(1).replace("\":", "");
-                }
+                Object facebook_total_count_no = json.get("total_count");
+                facebook_total_count = json.get("total_count").toString();
+                System.out.println("total_count : " + facebook_total_count);
             } catch (Exception e) {
-                System.out.println(e);
             }
 
+//            try {
+//                Pattern pattern = Pattern.compile("share_count(.*?),");
+//                Matcher matcher = pattern.matcher(response);
+//                if (matcher.find()) {
+//                    facebook_share_count = matcher.group(1).replace("\":", "").trim();
+//                }
+//            } catch (Exception e) {
+//            }
+//
+//            try {
+//                Pattern pattern = Pattern.compile("like_count(.*?),");
+//                Matcher matcher = pattern.matcher(response);
+//                if (matcher.find()) {
+//                    facebook_like_count = matcher.group(1).replace("\":", "").trim();
+//                }
+//            } catch (Exception e) {
+//            }
+//
+//            try {
+//                Pattern pattern = Pattern.compile("comment_count(.*?),");
+//                Matcher matcher = pattern.matcher(response);
+//                if (matcher.find()) {
+//                    facebook_comment_count = matcher.group(1).replace("\":", "").trim();
+//                }
+//            } catch (Exception e) {
+//            }
+//
+//            try {
+//                Pattern pattern = Pattern.compile("total_count(.*?),");
+//                Matcher matcher = pattern.matcher(response);
+//                if (matcher.find()) {
+//                    facebook_total_count = matcher.group(1).replace("\":", "").trim();
+//                }
+//            } catch (Exception e) {
+//            }
+//
+//            try {
+//                Pattern pattern = Pattern.compile("click_count(.*?),");
+//                Matcher matcher = pattern.matcher(response);
+//                if (matcher.find()) {
+//                    facebook_click_count = matcher.group(1).replace("\":", "").trim();
+//                }
+//            } catch (Exception e) {
+//            }
+//
+//            try {
+//                Pattern pattern = Pattern.compile("commentsbox_count(.*?)}");
+//                Matcher matcher = pattern.matcher(response);
+//                if (matcher.find()) {
+//                    facebook_commentsbox_count = matcher.group(1).replace("\":", "");
+//                }
+//            } catch (Exception e) {
+//                System.out.println(e);
+//            }
         } catch (Exception e) {
         }
 

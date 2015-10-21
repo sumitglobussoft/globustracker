@@ -84,14 +84,14 @@ public class StumbleSignifier extends Thread {
         try {
             String source = "";
             String temp_publicid = "";
-            source = objProxyPageSource.makeRequest(url, "");
+            source = objProxyPageSource.makeRequest(url);
             //source = objProxyPageSource.getSource(iCount, url, objProxyDao, "", "");
             Pattern pattern = Pattern.compile("publicid(.*?),");
             Matcher matcher = pattern.matcher(source);
             if (matcher.find()) {
                 temp_publicid = matcher.group(1).replace("\":", "").replace("\"", "").trim();
                 stumbleUrl = "http://www.stumbleupon.com/content/" + temp_publicid;
-                String objsource = objProxyPageSource.makeRequest(stumbleUrl, "");
+                String objsource = objProxyPageSource.makeRequest(stumbleUrl);
                 Pattern pattern1 = Pattern.compile("<mark class=\"nav-tertiary-count\">(.*?)</mark>");
                 Matcher matcher1 = pattern1.matcher(objsource);
                 if (matcher1.find()) {

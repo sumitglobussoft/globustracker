@@ -1,5 +1,4 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 <div class="row">
     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
         <h1 class="page-title txt-color-blueDark">
@@ -57,7 +56,7 @@
                                             <div class="well well-sm bg-color-teal txt-color-white text-center">
                                                 <h5>Top 5</h5>
                                                 <code><s:property value="keywordsRankBelow5" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow5" /> change: <s:property value="currentkeywordsRankBelow5" /></h5>
                                             </div>
 
                                         </div>
@@ -67,7 +66,7 @@
                                             <div class="well well-sm bg-color-pinkDark txt-color-white text-center">
                                                 <h5>Top 10</h5>
                                                 <code><s:property value="keywordsRankBelow10" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow10" /> change: <s:property value="currentkeywordsRankBelow10" /></h5>
                                             </div>
 
                                         </div>
@@ -77,7 +76,7 @@
                                             <div class="well well-sm text-center">
                                                 <h5>Top 20</h5>
                                                 <code><s:property value="keywordsRankBelow20" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow20" /> change: <s:property value="currentkeywordsRankBelow20" /></h5>
                                             </div>
 
                                         </div>
@@ -87,7 +86,7 @@
                                             <div class="well well-sm bg-color-pinkDark txt-color-white text-center">
                                                 <h5>Top 30</h5>
                                                 <code><s:property value="keywordsRankBelow30" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow30" /> change: <s:property value="currentkeywordsRankBelow30" /></h5>
                                             </div>
 
                                         </div>
@@ -97,7 +96,7 @@
                                             <div class="well well-sm bg-color-teal txt-color-white text-center">
                                                 <h5>Top 100</h5>
                                                 <code><s:property value="keywordsRankBelow100" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow100" /> change: <s:property value="currentkeywordsRankBelow100" /></h5>
                                             </div>
 
                                         </div>
@@ -203,11 +202,13 @@
                                                         <th style="text-align: center;">Url <a href="javascript:drawComparisionChart('<s:property value="campaignID"/>','30','google');" id="google_comparision_chart"></a></th>
                                                         <th style="text-align: center;">Keyword</th>
                                                         <th style="text-align: center;">Page Rank</th>
-                                                        <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/google_icon.png" style="border:none;" width="20" height="20" alt="" /></th>
+                                                        <th style="text-align: center;">Start</th>
+                                                        <th style="text-align: center;"><img src="views/images_ranktracker/google_icon.png" style="border:none;" width="20" height="20" alt="" /></th>
                                                         <th style="text-align: center;">Best Match Rank</th>
                                                         <th style="text-align: center;">Day</th>
                                                         <th style="text-align: center;">Week</th>
                                                         <th style="text-align: center;">Month</th>
+                                                        <th style="text-align: center;">Life</th>
                                                         <th style="text-align: center;">Last Updated</th>
                                                         <th style="text-align: center;">Chart</th>
                                                     </tr>
@@ -224,11 +225,13 @@
                                                     <tr>
                                                         <th style="text-align: center;">Url</th>
                                                         <th style="text-align: center;">Keyword</th>
-                                                        <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/yahooicon.png" width="20" height="20" alt="" /></th>
+                                                        <th style="text-align: center;">Start</th>
+                                                        <th style="text-align: center;"><img src="views/images_ranktracker/yahooicon.png" width="20" height="20" alt="" /></th>
                                                         <th style="text-align: center;">Best Match Rank</th>
                                                         <th style="text-align: center;">Day</th>
                                                         <th style="text-align: center;">Week</th>
                                                         <th style="text-align: center;">Month</th>
+                                                        <th style="text-align: center;">Life</th>
                                                         <th style="text-align: center;">Last Updated</th>
                                                         <th style="text-align: center;">Chart</th>
                                                     </tr>
@@ -245,11 +248,13 @@
                                                     <tr>
                                                         <th style="text-align: center;">Url</th>
                                                         <th style="text-align: center;">Keyword</th>
-                                                        <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/bingicon.png" width="20" height="20" alt="" /></th>
+                                                        <th style="text-align: center;">Start</th>
+                                                        <th style="text-align: center;"><img src="views/images_ranktracker/bingicon.png" width="20" height="20" alt="" /></th>
                                                         <th style="text-align: center;">Best Match Rank</th>
                                                         <th style="text-align: center;">Day</th>
                                                         <th style="text-align: center;">Week</th>                                                       
-                                                        <th style="text-align: center;">Month</th>                                                      
+                                                        <th style="text-align: center;">Month</th>    
+                                                        <th style="text-align: center;">Life</th>
                                                         <th style="text-align: center;">Last Updated</th>
                                                         <th style="text-align: center;">Chart</th>
                                                     </tr>
@@ -292,14 +297,14 @@
                                     <thead>
                                         <tr>
                                             <th style="text-align: center;">Url</th>
-                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/fb_likes.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/fb_share.png" style="border:none;" width="70" height="24" alt="" /></th>
-                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/twt_count.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/pintrest.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/google_plus.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/linkedin.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/reddit.png" style="border:none;" width="24" height="24" alt="" /></th>
-                                            <th style="text-align: center;"><img src="https://s3.amazonaws.com/images_ranktracker/stumbleupon.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                            <th style="text-align: center;"><img src="views/images_ranktracker/fb_likes.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                            <th style="text-align: center;"><img src="views/images_ranktracker/fb_share.png" style="border:none;" width="70" height="24" alt="" /></th>
+                                            <th style="text-align: center;"><img src="views/images_ranktracker/twt_count.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                            <th style="text-align: center;"><img src="views/images_ranktracker/pintrest.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                            <th style="text-align: center;"><img src="views/images_ranktracker/google_plus.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                            <th style="text-align: center;"><img src="views/images_ranktracker/linkedin.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                            <th style="text-align: center;"><img src="views/images_ranktracker/reddit.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                            <th style="text-align: center;"><img src="views/images_ranktracker/stumbleupon.png" style="border:none;" width="24" height="24" alt="" /></th>
                                             <th style="text-align: center;">Chart</th>                                                
                                         </tr>
                                     </thead>
@@ -340,10 +345,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Chart !</h4>
+                    <h4 class="modal-title">
+                        <div class="row">
+                            <div class="col-md-3">
+                                Chart
+                            </div>
+                            <div class="col-md-8">
+                                <span>KEYWORD : </span>
+                                <span id="keywordname"></span>
+                                <s:property value="keyword" />
+                            </div>
+                        </div>
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <div id="chartBlock">
+
                     </div> 	
                 </div>
                 <div class="modal-footer">
@@ -394,7 +411,7 @@
                 {
                     jString: jString
                 },
-        function(jMap) {
+        function (jMap) {
             chart = new Highcharts.Chart({
                 chart: {
                     renderTo: 'socialChartBlock',
@@ -459,7 +476,7 @@
                 {
                     jString: jString
                 },
-        function(jMap) {
+        function (jMap) {
             chart = new Highcharts.Chart({
                 chart: {
                     renderTo: 'chartBlock',
@@ -529,7 +546,7 @@
                 },
                 series: eval(jMap.dataMap.sbData)
             });
-
+            $('#keywordname').html(jMap.dataMap.keyword);
         });
     }
 </script>
@@ -571,7 +588,7 @@
         // Create a function that will receive data 
         // sent from the server and will update
         // div section in the same page.
-        ajaxRequest.onreadystatechange = function() {
+        ajaxRequest.onreadystatechange = function () {
             if (ajaxRequest.readyState == 4) {
                 //var ajaxDisplay = document.getElementById('ajaxDiv');
                 //alert("hiii"+ajaxRequest.responseText)
@@ -596,13 +613,13 @@
     var counter = 0;
 
     var scrollvalue = 0;
-    $(window).scroll(function() {
+    $(window).scroll(function () {
 
 
         if ($(window).scrollTop() > scrollvalue) {
             counter++;
         }
-        scrollvalue=$(window).scrollTop();
+        scrollvalue = $(window).scrollTop();
         console.log(counter);
         if (counter % 50 === 0)
         {
@@ -630,6 +647,7 @@
             htmlResult = htmlResult + "<td title='" + output.serpskeywords[i].Url + "'><a href='generateCrawledHistory.action?keywordId=" + output.serpskeywords[i].KeywordID + "' title='Google crawl history'><img src='https://s3.amazonaws.com/images_ranktracker/history.png' width='20' height='22' alt='' style='cursor:pointer;'  /></a>" + output.serpskeywords[i].Url + "</td>";
             htmlResult = htmlResult + "<td>" + output.serpskeywords[i].Keyword + "</td>";
             htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].GooglePageRank + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].StartGoogle + "</td>";
 
             if ((output.serpskeywords[i].RankGoogle !== 0) || (output.serpskeywords[i].GoogleUpdatedDate == '-')) {
                 htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankGoogle + "</td>";
@@ -680,6 +698,18 @@
             }
             htmlResult = htmlResult + "</td>";
 
+            var life = output.serpskeywords[i].StartGoogle - output.serpskeywords[i].RankGoogle;
+
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + Math.abs(life) + "";
+
+            if (life < 0) {
+                htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+            }
+            else if (life > 0) {
+                htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+            }
+            htmlResult = htmlResult + "</td>";
+
 
             htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].GoogleUpdatedDate + "</td>";
             htmlResult = htmlResult + "<td style='text-align: center;'><a href=\"javascript:drawChart(" + output.serpskeywords[i].KeywordID + ",30);\" id='google_chart' title='Chart'><i class='fa fa-2x fa-bar-chart-o' data-toggle='modal' data-target='#chartmodal'></i></a></td>";
@@ -701,6 +731,7 @@
             htmlResult = htmlResult + "<tr>";
             htmlResult = htmlResult + "<td title='" + output.serpskeywords[i].Url + "'>" + output.serpskeywords[i].Url + "</td>";
             htmlResult = htmlResult + "<td>" + output.serpskeywords[i].Keyword + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].StartYahoo + "</td>";
 
             if ((output.serpskeywords[i].RankYahoo !== 0) || (output.serpskeywords[i].YahooUpdateDate == '-')) {
                 htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankYahoo + "</td>";
@@ -751,6 +782,17 @@
             }
             htmlResult = htmlResult + "</td>";
 
+            var life = output.serpskeywords[i].StartYahoo - output.serpskeywords[i].RankYahoo;
+
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + Math.abs(life) + "";
+
+            if (life < 0) {
+                htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+            }
+            else if (life > 0) {
+                htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+            }
+            htmlResult = htmlResult + "</td>";
 
             htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].YahooUpdateDate + "</td>";
             htmlResult = htmlResult + "<td style='text-align: center;'><a href=\"javascript:drawChart(" + output.serpskeywords[i].KeywordID + ",30);\" id='yahoo_chart' title='Chart'><i class='fa fa-2x fa-bar-chart-o' data-toggle='modal' data-target='#chartmodal'></i></a></td>";
@@ -772,6 +814,7 @@
             htmlResult = htmlResult + "<tr>";
             htmlResult = htmlResult + "<td title='" + output.serpskeywords[i].Url + "'>" + output.serpskeywords[i].Url + "</td>";
             htmlResult = htmlResult + "<td>" + output.serpskeywords[i].Keyword + "</td>";
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].StartBing + "</td>";
 
             if ((output.serpskeywords[i].RankBing !== 0) || (output.serpskeywords[i].BingUpdateDate == '-')) {
                 htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].RankBing + "</td>";
@@ -822,6 +865,17 @@
             }
             htmlResult = htmlResult + "</td>";
 
+            var life = output.serpskeywords[i].StartBing - output.serpskeywords[i].RankBing;
+
+            htmlResult = htmlResult + "<td style='text-align: center;'>" + Math.abs(life) + "";
+
+            if (life < 0) {
+                htmlResult = htmlResult + "<i class='fa fa-arrow-down fa-1x fa-fw txt-color-red'></i>";
+            }
+            else if (life > 0) {
+                htmlResult = htmlResult + "<i class='fa fa-arrow-up fa-1x fa-fw txt-color-green'></i>";
+            }
+            htmlResult = htmlResult + "</td>";
 
             htmlResult = htmlResult + "<td style='text-align: center;'>" + output.serpskeywords[i].BingUpdateDate + "</td>";
             htmlResult = htmlResult + "<td style='text-align: center;'><a href=\"javascript:drawChart(" + output.serpskeywords[i].KeywordID + ",30);\" id='bing_chart' title='Chart'><i class='fa fa-2x fa-bar-chart-o' data-toggle='modal' data-target='#chartmodal'></i></a></td>";

@@ -21,7 +21,9 @@ import ranktracker.entity.Users;
 import ranktracker.form.SettingsForm;
 import ranktracker.mail.SendMail;
 import ranktracker.service.CustomerService;
+import ranktracker.service.PaymentService;
 import ranktracker.service.SettingsService;
+import ranktracker.entity.Plans;
 
 /**
  * Action layer class for actions initiated for settings module
@@ -109,6 +111,15 @@ public class SettingsAction extends ActionSupport {
      * useremail object
      */
     private String useremail;
+    /**
+     * objPaymentService The service layer object variable for PaymentService
+     * object
+     */
+    private PaymentService objPaymentService;
+    /**
+     * objPlans object
+     */
+    private List<Plans> listPlans;
     /**
      * userpassword object
      */
@@ -233,7 +244,7 @@ public class SettingsAction extends ActionSupport {
                 } else {
 
                     //sending mail on password change
-                    objSendMail.execute(3, objUser,"");
+                    objSendMail.execute(3, objUser, "");
                     message = "Successfully Updated your Password";
                     objHttpSession.setAttribute("message", message);
 
@@ -281,7 +292,7 @@ public class SettingsAction extends ActionSupport {
                 } else {
 
                     //sending mail on password change
-                    objSendMail.execute(3, objUser,"");
+                    objSendMail.execute(3, objUser, "");
                     message = "Successfully Updated your Password";
                     objHttpSession.setAttribute("message", message);
                 }
@@ -541,6 +552,10 @@ public class SettingsAction extends ActionSupport {
         customerId = Integer.valueOf(objRequest.getParameter("customerID"));
 
         objHttpSession.setAttribute("custID", customerId);
+        //lists all the plans
+        listPlans = objPaymentService.getAllPlansDetails();
+
+        objHttpSession.setAttribute("listPlans", listPlans);
 
         //retrieving the account details for 'customerId'
         account = objCustomerService.getAccountDetails(customerId);
@@ -802,5 +817,13 @@ public class SettingsAction extends ActionSupport {
 
     public void setDelUserId(String delUserId) {
         this.delUserId = delUserId;
+    }
+
+    public PaymentService getObjPaymentService() {
+        return objPaymentService;
+    }
+
+    public void setObjPaymentService(PaymentService objPaymentService) {
+        this.objPaymentService = objPaymentService;
     }
 }

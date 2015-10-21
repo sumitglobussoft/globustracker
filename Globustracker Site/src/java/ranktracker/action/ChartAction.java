@@ -80,6 +80,7 @@ public class ChartAction extends ActionSupport {
 
         //now invoking the getChartData() method of KeywordsServiceImpl
         List<Serpstrackhistory> lstSerpstrackHisory = objKeywordsService.getChartData(keywordId, range);
+        String keywordname = objKeywordsService.getKeywordName(keywordId);
 
         //now invoking the getChartGoalData() method of KeywordsServiceImpl for getting goals associated for each keyword
      //   List<Serpkeywordgoal> lstGoalData = objKeywordsService.getChartGoalData(keywordId);
@@ -91,7 +92,7 @@ public class ChartAction extends ActionSupport {
         StringBuilder sbGoogle = new StringBuilder();
         StringBuilder sbBing = new StringBuilder();
         StringBuilder sbYahoo = new StringBuilder();
-     //   StringBuilder sbGoal = new StringBuilder();
+      //   StringBuilder sbGoal = new StringBuilder();
 
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy,MM - 1,dd");
         for (Serpstrackhistory objSerpstrackhistory : lstSerpstrackHisory) {
@@ -215,6 +216,7 @@ public class ChartAction extends ActionSupport {
 //        sbEvent.append("]");
 
         dataMap.put("title", "Chart Graph");
+        dataMap.put("keyword", keywordname);
       //  dataMap.put("gtEvent", sbEvent.toString());
         dataMap.put("sbData", sbData.toString());
         return SUCCESS;

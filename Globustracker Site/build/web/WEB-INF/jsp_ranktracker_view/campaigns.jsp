@@ -75,50 +75,50 @@
                                             <s:iterator value="rankComparision">
                                                 <div class="col-md-offset-1 col-sm-2">
 
-                                                    <div class="well well-sm bg-color-teal txt-color-white text-center">
+                                                    <div class="well well-sm bg-color-teal txt-color-white text-center" style="min-height: 142px;">
                                                         <h5>Top 5</h5>
                                                         <code><s:property value="keywordsRankBelow5" />/<s:property value="totalkeywords" /></code>
-                                                        <h5>vs: 0 change: +</h5>
+                                                        <h5>vs: <s:property value="previouskeywordsRankBelow5" /> change: <s:property value="currentkeywordsRankBelow5" /></h5>
                                                     </div>
 
                                                 </div>
 
                                                 <div class="col-sm-2">
 
-                                                    <div class="well well-sm bg-color-pinkDark txt-color-white text-center">
+                                                    <div class="well well-sm bg-color-pinkDark txt-color-white text-center" style="min-height: 142px;">
                                                         <h5>Top 10</h5>
                                                         <code><s:property value="keywordsRankBelow10" />/<s:property value="totalkeywords" /></code>
-                                                        <h5>vs: 0 change: +</h5>
+                                                       <h5>vs: <s:property value="previouskeywordsRankBelow10" /> change: <s:property value="currentkeywordsRankBelow10" /></h5>
                                                     </div>
 
                                                 </div>
 
                                                 <div class="col-sm-2">
 
-                                                    <div class="well well-sm text-center">
+                                                    <div class="well well-sm text-center" style="min-height: 142px;">
                                                         <h5>Top 20</h5>
                                                         <code><s:property value="keywordsRankBelow20" />/<s:property value="totalkeywords" /></code>
-                                                        <h5>vs: 0 change: +</h5>
+                                                        <h5>vs: <s:property value="previouskeywordsRankBelow20" /> change: <s:property value="currentkeywordsRankBelow20" /></h5>
                                                     </div>
 
                                                 </div>
 
                                                 <div class="col-sm-2">
 
-                                                    <div class="well well-sm bg-color-pinkDark txt-color-white text-center">
+                                                    <div class="well well-sm bg-color-pinkDark txt-color-white text-center" style="min-height: 142px;">
                                                         <h5>Top 30</h5>
                                                         <code><s:property value="keywordsRankBelow30" />/<s:property value="totalkeywords" /></code>
-                                                        <h5>vs: 0 change: +</h5>
+                                                        <h5>vs: <s:property value="previouskeywordsRankBelow30" /> change: <s:property value="currentkeywordsRankBelow30" /></h5>
                                                     </div>
 
                                                 </div>
 
                                                 <div class="col-sm-2">
 
-                                                    <div class="well well-sm bg-color-teal txt-color-white text-center">
+                                                    <div class="well well-sm bg-color-teal txt-color-white text-center" style="min-height: 142px;">
                                                         <h5>Top 100</h5>
                                                         <code><s:property value="keywordsRankBelow100" />/<s:property value="totalkeywords" /></code>
-                                                        <h5>vs: 0 change: +</h5>
+                                                        <h5>vs: <s:property value="previouskeywordsRankBelow100" /> change: <s:property value="currentkeywordsRankBelow100" /></h5>
                                                     </div>
 
                                                 </div>
@@ -904,8 +904,8 @@
 
                             var alertMes = "";
                             function addSerpsCampaign()
-                            {
-                                var jString = document.addserpform.campaignName.value;
+                            { 
+                               var jString = document.addserpform.campaignName.value;
                                 $.post(
                                         'ajax/addserCampaign.action',
                                         {
@@ -914,23 +914,23 @@
                                 function(jMessage) {
                                     alertMes = jMessage.message;
                                     $('#se1Loader').css({display: 'none'});
-                                    if (alertMes == "Campaign Value required") {
+                                    if (alertMes === "Campaign Value required") {
                                         window.location = "campaigns.action";
                                         document.addserpform.campaignName.focus();
-                                    } else if (alertMes == "Campaign has been created. Please Click on Campaign Name to Add Keywords") {
+                                    } else if (alertMes === "Campaign has been created. Please Click on Campaign Name to Add Keywords") {
                                         window.location = "campaigns.action";
-                                    } else if (alertMes == "Campaign has been Deleted") {
+                                    } else if (alertMes === "Campaign has been Deleted") {
                                         window.location = "campaigns.action";
-                                    } else if (alertMes == "Sorry This Campaign value already exist in Database")
+                                    } else if (alertMes === "Sorry This Campaign value already exist in Database")
                                     {
                                         window.location = "campaigns.action";
                                         document.addserpform.campaignName.focus();
                                     }
-                                    else if (alertMes == "Your Assigned Quota for Number of Campaigns is Full.")
+                                    else if (alertMes === "Your Assigned Quota for Number of Campaigns is Full.")
                                     {
                                         window.location = "campaigns.action";
                                     }
-                                    else if (alertMes == "Campaign Name should be alphanumeric")
+                                    else if (alertMes === "Campaign Name should be alphanumeric")
                                     {
                                         window.location = "campaigns.action";
                                     }

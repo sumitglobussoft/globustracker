@@ -198,9 +198,8 @@ public class ViewKeyAction extends ActionSupport {
 
         try {
 
-          
             if (objRequest.getParameter("key") != null) {
-                  //checking for initial value(It is used for the starting row number)
+                //checking for initial value(It is used for the starting row number)
                 if (objRequest.getParameter("initial") != null) {
                     Object[] objData = objCampaignsService.getViewKeyDetails(objRequest.getParameter("key"));
                     campaignId = ((List<Campaigns>) objData[0]).get(0).getCampaignID();
@@ -249,6 +248,9 @@ public class ViewKeyAction extends ActionSupport {
                                 keyword.put("YahooUpdateDate", updatedKeywords.getYahooUpdateDate());
                                 keyword.put("BingUpdateDate", updatedKeywords.getBingUpdateDate());
                                 keyword.put("Visibility", updatedKeywords.getVisibility());
+                                keyword.put("StartGoogle", updatedKeywords.getStartGoogle());
+                                keyword.put("StartBing", updatedKeywords.getStartBing());
+                                keyword.put("StartYahoo", updatedKeywords.getStartYahoo());
 
                                 //adding this single JSON object to main JSON array of serp keywords
                                 serpkeywordArray.put(keyword);
@@ -275,7 +277,7 @@ public class ViewKeyAction extends ActionSupport {
 
                                 // putting all the attributes in keyword object
                                 keyword.put("SEOKeywordId", seoKeyword.getSEOKeywordId());
-                                    // keyword.put("CampaignID",seoKeyword.getCampaignID());
+                                // keyword.put("CampaignID",seoKeyword.getCampaignID());
                                 // keyword.put("KeywordID", seoKeyword.getKeywordID());
                                 keyword.put("Url", seoKeyword.getUrl());
                                 keyword.put("Keyword", seoKeyword.getKeyword());

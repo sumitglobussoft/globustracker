@@ -30,7 +30,7 @@ public class SendMail {
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("sushantgupta", "PTsu_4091");
+                        return new PasswordAuthentication("xxxxxxx", "xxxxxxxxxx");
                     }
                 });
         try {

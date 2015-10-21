@@ -8,6 +8,7 @@ package globuswoo.controller;
 import globuswoo.crawlers.Crawler;
 import globuswoo.entity.Commonseo;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -44,7 +45,8 @@ public class Reviewsite extends HttpServlet {
             
             Logger.getLogger(Reviewsite.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        response.getWriter().print("success");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

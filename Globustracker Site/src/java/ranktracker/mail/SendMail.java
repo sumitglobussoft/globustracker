@@ -119,11 +119,11 @@ public class SendMail extends ActionSupport {
      * @param objUser
      * @return
      */
-    public String execute(int mailType, Users objUser,String itemName) {
+    public String execute(int mailType, Users objUser, String itemName) {
         this.emailType = mailType;
 
         if (emailType > 0) {
-            setMailContaint(objUser, emailType,itemName);
+            setMailContaint(objUser, emailType, itemName);
         }
         return SUCCESS;
     }
@@ -137,7 +137,7 @@ public class SendMail extends ActionSupport {
      */
     public void setMailContaint(ContactUsForm objContactUsForm) {
         String complete_Email_Tags = "";
-       // complete_Email_Tags = emailBeginTags();
+        // complete_Email_Tags = emailBeginTags();
         complete_Email_Tags = MailContent.getContactUsContent(objContactUsForm);
         try {
             //complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
@@ -158,17 +158,17 @@ public class SendMail extends ActionSupport {
      * @param objUser
      * @param mailType
      */
-    public void setMailContaint(Users objUser, int mailType,String itemName) {
+    public void setMailContaint(Users objUser, int mailType, String itemName) {
         String emailId = objUser.getLoginID();
         String complete_Email_Tags = "";
         if (mailType == 1) {
             //complete_Email_Tags = emailBeginTags();
-            complete_Email_Tags = MailContent.getSignUpMailContent(objUser,itemName);
+            complete_Email_Tags = MailContent.getSignUpMailContent(objUser, itemName);
         } else if (mailType == 2) {
             //complete_Email_Tags = emailBeginTags();
             complete_Email_Tags = MailContent.getForgotPassContent(objUser);
         } else if (mailType == 3) {
-           // complete_Email_Tags = emailBeginTags();
+            // complete_Email_Tags = emailBeginTags();
             complete_Email_Tags = MailContent.getChangePassContent(objUser);
         }
         try {
@@ -340,8 +340,7 @@ public class SendMail extends ActionSupport {
 //            signup_html.append("             </div>");
 //            signup_html.append("             ");
 //            signup_html.append("       <!--content ends-->");
-            
-            
+
 //             signup_html.append("<html lang=3D\"en\">\n"
 //                    + "<head>\n"
 //                    + "</head>\n"
@@ -354,11 +353,9 @@ public class SendMail extends ActionSupport {
 //                    + "</body>\n"
 //                    + "\n"
 //                    + "</html>");
+            Document doc = Jsoup.connect("http://" + getText("email.domain") + "/ReportContent.action").get();
+            signup_html.append(doc.toString());
 
-             Document doc =Jsoup.connect("http://"+getText("email.domain")+"/ReportContent.action").get();
-             signup_html.append(doc.toString());
-           
-            
         } catch (Exception ex) {
             l.error(ex + "  " + ex.getMessage());
         }
@@ -380,14 +377,15 @@ public class SendMail extends ActionSupport {
             final String host = getText("email.host"); //Reading from package.properties file
             final String user = getText("email.user");
             final String pwd = getText("email.pwd");
-            //final String port = getText("email.port");
+            final String port = getText("email.port");
             final String auth = getText("email.auth");
 
             Properties props = new Properties();
             props.setProperty("mail.smtp.protocol", protocol);
             props.setProperty("mail.smtp.host", host);
-            // props.put("mail.smtp.port", port);
+            props.put("mail.smtp.port", port);
             props.put("mail.smtp.auth", auth);
+            props.put("mail.smtp.starttls.enable", "true");
 
             Session mailSession = Session.getDefaultInstance(props,
                     new javax.mail.Authenticator() {
@@ -440,136 +438,145 @@ public class SendMail extends ActionSupport {
      */
     @Scheduled(cron = "* */30 * * * ?")
     public synchronized void sendReport() throws IOException {
-        java.util.Date todayDate = new java.util.Date();
+        try {
+            java.util.Date todayDate = new java.util.Date();
 //        System.out.println("todayDate ========================= " + todayDate);
-        List<Campaigns> emailIds = objCampaignsService.getEmailIdsForReport(todayDate);
-        String mailTo = "";
-        FileOutputStream fileOut = null;
-        for (Campaigns objSite : emailIds) {
-            if (objSite.getReportEmailID().isEmpty()) {
-                continue;
-            }
-            // Users objUser = new Users();
-            String campaignname = objSite.getCampaign();
-            fileName = getShowPage() + "tmp/" + campaignname + ".xls";
-            //fileName = fileName.replace("http", "").replace("/", "");
+            List<Campaigns> emailIds = objCampaignsService.getEmailIdsForReport(todayDate);
+            String mailTo = "";
+            FileOutputStream fileOut = null;
+            for (Campaigns objSite : emailIds) {
+                if (objSite.getReportEmailID().isEmpty()) {
+                    continue;
+                }
+                // Users objUser = new Users();
+                String campaignname = objSite.getCampaign();
+                fileName = getShowPage() + "tmp/" + campaignname + ".xls";
+                //fileName = fileName.replace("http", "").replace("/", "");
 //            File file = new File(fileName);
 //            if (!file.exists()) {
 //                file.createNewFile();
 //            }
-            try {
-                mailTo = objSite.getReportEmailID();
-                if (mailTo.equals("")) {
-                    continue;
-                }
+                try {
+                    mailTo = objSite.getReportEmailID();
+                    if (mailTo.equals("")) {
+                        continue;
+                    }
 //                System.out.println("--------------trycatch1----------------");
-                Customers objcustomer = objSite.getCustomerID();
-                Integer customerID = objcustomer.getCustomerID();
-                Integer campaignID = objSite.getCampaignID();
-                Object[] dataObject = objKeywordsService.getSerpData(campaignID, customerID);
-                lstUpdatedKeywords = (List<Serpkeywords>) dataObject[0];
-                lstsocialsignalupdate = (List<KeywordsLastUpdatedForm>) dataObject[1];
-                lstSeoDetails = (List<Seokeyworddetails>) dataObject[3];
-                String campaigntype = objSite.getCampaignType();
-                if (campaigntype.contains("serp")) {
-                    objWorkbook = objExcelReportAction.serpMailReport(lstUpdatedKeywords, lstSeoDetails, lstsocialsignalupdate, campaignname);
-                } else if (campaigntype.contains("video")) {
-                    Object[] dataObject1 = objKeywordsService.getVideoData(campaignID, customerID);
-                    lstvideokeywords = (List<Videokeywords>) dataObject1[0];
-                    //calling the createVideoExcelWorkBook method to create the <objWorkbook> object
-                    objWorkbook = objExcelReportAction.createVideoExcelWorkBook(true, lstvideokeywords);
-                }
+                    Customers objcustomer = objSite.getCustomerID();
+                    Integer customerID = objcustomer.getCustomerID();
+                    Integer campaignID = objSite.getCampaignID();
+                    Object[] dataObject = objKeywordsService.getSerpData(campaignID, customerID);
+                    lstUpdatedKeywords = (List<Serpkeywords>) dataObject[0];
+                    lstsocialsignalupdate = (List<KeywordsLastUpdatedForm>) dataObject[1];
+                    lstSeoDetails = (List<Seokeyworddetails>) dataObject[3];
+                    String campaigntype = objSite.getCampaignType();
+                    if (campaigntype.contains("serp")) {
+                        objWorkbook = objExcelReportAction.serpMailReport(lstUpdatedKeywords, lstSeoDetails, lstsocialsignalupdate, campaignname);
+                    } else if (campaigntype.contains("video")) {
+                        Object[] dataObject1 = objKeywordsService.getVideoData(campaignID, customerID);
+                        lstvideokeywords = (List<Videokeywords>) dataObject1[0];
+                        //calling the createVideoExcelWorkBook method to create the <objWorkbook> object
+                        objWorkbook = objExcelReportAction.createVideoExcelWorkBook(true, lstvideokeywords);
+                    }
 //                fileOut = new FileOutputStream(fileName);
 //                byte[] contentInBytes = objWorkbook.getBytes();
 //                fileOut.write(contentInBytes);
 //                fileOut.close();
-                fileOut = new FileOutputStream(fileName);
-                objWorkbook.write(fileOut);
-                fileOut.close();
-            } catch (NumberFormatException | IOException e) {
-                l.error(e + "  " + e.getMessage());
-                e.printStackTrace();
-            }
-
-            final String protocol = getText("email.protocol");
-            final String host = getText("email.host"); //Reading from application.peorperties file
-            final String user = getText("email.user");
-            final String pwd = getText("email.pwd");
-            final String auth = getText("email.auth");
-
-            Properties props = new Properties();
-            props.setProperty("mail.smtp.protocol", protocol);
-            props.setProperty("mail.smtp.host", host);
-            props.put("mail.smtp.auth", auth);
-            String complete_Email_Tags = "";
- //           complete_Email_Tags = emailBeginTags();
-            complete_Email_Tags =  showEmailForReport();
-//            complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
-            try {
-                Session mailSession = Session.getInstance(props,
-                        new javax.mail.Authenticator() {
-                            @Override
-                            protected PasswordAuthentication getPasswordAuthentication() {
-                                return new PasswordAuthentication(user, pwd);
-                            }
-                        });
-                MimeMessage message = new MimeMessage(mailSession);
-                message.setFrom(new InternetAddress(user));
-                message.setSender(new InternetAddress(user));
-                String[] mailToBcc = mailTo.split(",");
-                mailTo = mailToBcc[0];
-
-                message.setRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(mailTo));
-                if (mailToBcc.length > 1) {
-                    try {
-                        for (int i = 1; i < mailToBcc.length; i++) {
-                            message.addRecipient(javax.mail.Message.RecipientType.BCC, new InternetAddress(mailToBcc[i].trim()));
-
-                        }
-                    } catch (Exception ex) {
-                        l.error(ex + "  " + ex.getMessage());
-                        ex.printStackTrace();
-                    }
-                }
-                message.setSubject("Scheduled report for the campaign : " + objSite.getCampaign());
-                BodyPart messageBodyPart = new MimeBodyPart();
-                messageBodyPart.setContent(complete_Email_Tags, "text/html");
-                Multipart multipart = new MimeMultipart();
-                multipart.addBodyPart(messageBodyPart);
-                // Part two is attachment
-                messageBodyPart = new MimeBodyPart();
-                DataSource source = new FileDataSource(fileName);
-                messageBodyPart.setDataHandler(new DataHandler(source));
-                messageBodyPart.setFileName(objSite.getCampaign() + "_" + ".xls");
-                multipart.addBodyPart(messageBodyPart);
-                message.setContent(multipart);
-                try {
-                    Transport.send(message);
-                    Mailhistory mailHistory = new Mailhistory();
-                    mailHistory.setEmailId(mailTo);
-                    mailHistory.setMailSentOn(todayDate);
-                    Integer custid = objSite.getCustomerID().getCustomerID();
-                    System.out.println("custid = " + custid);
-                    mailHistory.setCustomerId(new Customers(custid));
-                    objCustomerService.updateMailHistory(mailHistory);
-                } catch (SendFailedException sfe) {
-                    l.error(sfe + "  " + sfe.getMessage());
-                    sfe.printStackTrace();
-                    message.setRecipients(Message.RecipientType.TO, sfe.getValidUnsentAddresses());
-                    Transport.send(message);
-                } catch (Exception e) {
+                    fileOut = new FileOutputStream(fileName);
+                    objWorkbook.write(fileOut);
+                    fileOut.close();
+                } catch (NumberFormatException | IOException e) {
                     l.error(e + "  " + e.getMessage());
                     e.printStackTrace();
                 }
-                File file1 = new File(fileName);
-                file1.delete();
-                objSettingsService.updateNextMailSendDate(objSite);
-            } catch (Exception ex) {
-                l.error(ex + "  " + ex.getMessage());
-                ex.printStackTrace();
+
+                final String protocol = "smtp";
+                final String host = "smtp.zoho.com"; //Reading from application.peorperties file
+                final String user = "support@globustracker.com";
+                final String pwd = "G^%(*4965JHG#@D";
+                final String auth = "true";
+                final String port = "587";
+
+                Properties props = new Properties();
+                props.setProperty("mail.smtp.protocol", protocol);
+                props.setProperty("mail.smtp.host", host);
+                props.put("mail.smtp.port", port);
+                props.put("mail.smtp.auth", auth);
+                props.put("mail.smtp.starttls.enable", "true");
+                String complete_Email_Tags = "";
+                //           complete_Email_Tags = emailBeginTags();
+                complete_Email_Tags = showEmailForReport();
+//            complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
+                try {
+                    Session mailSession = Session.getInstance(props,
+                            new javax.mail.Authenticator() {
+                                @Override
+                                protected PasswordAuthentication getPasswordAuthentication() {
+                                    return new PasswordAuthentication(user, pwd);
+                                }
+                            });
+                    MimeMessage message = new MimeMessage(mailSession);
+                    message.setFrom(new InternetAddress(user));
+                    message.setSender(new InternetAddress(user));
+                    String[] mailToBcc = mailTo.split(",");
+                    mailTo = mailToBcc[0];
+
+                    message.setRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(mailTo));
+                    if (mailToBcc.length > 1) {
+                        try {
+                            for (int i = 1; i < mailToBcc.length; i++) {
+                                message.addRecipient(javax.mail.Message.RecipientType.BCC, new InternetAddress(mailToBcc[i].trim()));
+
+                            }
+                        } catch (Exception ex) {
+                            l.error(ex + "  " + ex.getMessage());
+                            ex.printStackTrace();
+                        }
+                    }
+                    message.setSubject("Scheduled report for the campaign : " + objSite.getCampaign());
+                    BodyPart messageBodyPart = new MimeBodyPart();
+                    messageBodyPart.setContent(complete_Email_Tags, "text/html");
+                    Multipart multipart = new MimeMultipart();
+                    multipart.addBodyPart(messageBodyPart);
+                    // Part two is attachment
+                    messageBodyPart = new MimeBodyPart();
+                    DataSource source = new FileDataSource(fileName);
+                    messageBodyPart.setDataHandler(new DataHandler(source));
+                    messageBodyPart.setFileName(objSite.getCampaign() + "_" + ".xls");
+                    multipart.addBodyPart(messageBodyPart);
+                    message.setContent(multipart);
+                    try {
+                        Transport.send(message);
+                        Mailhistory mailHistory = new Mailhistory();
+                        mailHistory.setEmailId(mailTo);
+                        mailHistory.setMailSentOn(todayDate);
+                        Integer custid = objSite.getCustomerID().getCustomerID();
+                        System.out.println("custid = " + custid);
+                        mailHistory.setCustomerId(new Customers(custid));
+                        objCustomerService.updateMailHistory(mailHistory);
+                    } catch (SendFailedException sfe) {
+                        l.error(sfe + "  " + sfe.getMessage());
+                        sfe.printStackTrace();
+                        message.setRecipients(Message.RecipientType.TO, sfe.getValidUnsentAddresses());
+                        Transport.send(message);
+                    } catch (Exception e) {
+                        l.error(e + "  " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                    File file1 = new File(fileName);
+                    file1.delete();
+                    objSettingsService.updateNextMailSendDate(objSite);
+                } catch (Exception ex) {
+                    l.error(ex + "  " + ex.getMessage());
+                    ex.printStackTrace();
+                }
             }
+            //return SUCCESS;
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        //return SUCCESS;
+
     }
 
     /**
@@ -605,9 +612,9 @@ public class SendMail extends ActionSupport {
         }
 
         String complete_Email_Tags = "";
-      //  complete_Email_Tags = emailBeginTags();
-        complete_Email_Tags =  showEmailForReport();
-       // complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
+        //  complete_Email_Tags = emailBeginTags();
+        complete_Email_Tags = showEmailForReport();
+        // complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
         final String protocol = getText("email.protocol");
         final String host = getText("email.host"); //Reading from application.peorperties file
         final String user = getText("email.user");
@@ -619,7 +626,8 @@ public class SendMail extends ActionSupport {
         props.setProperty("mail.smtp.protocol", protocol);
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.auth", auth);
-        //props.put("mail.smtp.port", port);
+        props.put("mail.smtp.port", port);
+        props.put("mail.smtp.starttls.enable", "true");
 
         Session mailSession = Session.getInstance(props,
                 new javax.mail.Authenticator() {
@@ -698,9 +706,9 @@ public class SendMail extends ActionSupport {
         }
 
         String complete_Email_Tags = "";
-     //   complete_Email_Tags = emailBeginTags();
-        complete_Email_Tags =  showEmailForReport();
-       // complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
+        //   complete_Email_Tags = emailBeginTags();
+        complete_Email_Tags = showEmailForReport();
+        // complete_Email_Tags = complete_Email_Tags + showEmailLogoTags();
         final String protocol = getText("email.protocol");
         final String host = getText("email.host"); //Reading from application.peorperties file
         final String user = getText("email.user");
@@ -711,8 +719,9 @@ public class SendMail extends ActionSupport {
         Properties props = new Properties();
         props.setProperty("mail.smtp.protocol", protocol);
         props.setProperty("mail.smtp.host", host);
-        // props.put("mail.smtp.port", port);
+        props.put("mail.smtp.port", port);
         props.put("mail.smtp.auth", auth);
+        props.put("mail.smtp.starttls.enable", "true");
 
         Session mailSession = Session.getInstance(props,
                 new javax.mail.Authenticator() {

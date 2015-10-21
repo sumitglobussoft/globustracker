@@ -52,5 +52,6 @@ public class XMLSitemap extends Thread {
         }
         objXmldata.setUrl(curl);
         objXmldata.setXmlfiles(xmlfiles);
+
     }
 }

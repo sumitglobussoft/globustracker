@@ -34,4 +34,14 @@ public interface PaymentService {
      * @return List<Plans>
      */
     public List<Plans> getPlans(String planName);
+    
+    public List<Plans> getAllPlansDetails();
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Plans insertPlansDetails(Plans objPlansDetails);
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updatePlansDetails(Plans objPlansDetails);
+
+    public Plans getCustomerPlanID(int customerID);
 }

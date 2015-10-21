@@ -16,6 +16,7 @@ public class IP_Address extends Thread {
     public String Technology2 = "NA";
     public String Technology3 = "NA";
 
+
     public void setTechnologiesDetails() {
 
         InetAddress ip;

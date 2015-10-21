@@ -57,7 +57,7 @@
                                             <div class="well well-sm bg-color-teal txt-color-white text-center">
                                                 <h5>Top 5</h5>
                                                 <code><s:property value="keywordsRankBelow5" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow5" /> change: <s:property value="currentkeywordsRankBelow5" /></h5>
                                             </div>
 
                                         </div>
@@ -67,7 +67,7 @@
                                             <div class="well well-sm bg-color-pinkDark txt-color-white text-center">
                                                 <h5>Top 10</h5>
                                                 <code><s:property value="keywordsRankBelow10" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow10" /> change: <s:property value="currentkeywordsRankBelow10" /></h5>
                                             </div>
 
                                         </div>
@@ -77,7 +77,7 @@
                                             <div class="well well-sm text-center">
                                                 <h5>Top 20</h5>
                                                 <code><s:property value="keywordsRankBelow20" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow20" /> change: <s:property value="currentkeywordsRankBelow20" /></h5>
                                             </div>
 
                                         </div>
@@ -87,7 +87,7 @@
                                             <div class="well well-sm bg-color-pinkDark txt-color-white text-center">
                                                 <h5>Top 30</h5>
                                                 <code><s:property value="keywordsRankBelow30" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow30" /> change: <s:property value="currentkeywordsRankBelow30" /></h5>
                                             </div>
 
                                         </div>
@@ -97,7 +97,7 @@
                                             <div class="well well-sm bg-color-teal txt-color-white text-center">
                                                 <h5>Top 100</h5>
                                                 <code><s:property value="keywordsRankBelow100" />/<s:property value="totalkeywords" /></code>
-                                                <h5>vs: 0 change: +</h5>
+                                                <h5>vs: <s:property value="previouskeywordsRankBelow100" /> change: <s:property value="currentkeywordsRankBelow100" /></h5>
                                             </div>
 
                                         </div>
@@ -167,10 +167,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center;">Keyword</th>
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/youtubeicon.png"  style="border:none;" width="24" height="24" alt="" /></th>
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/dailymotion_24.png" style="border:none;" width="24" height="24" alt=""/></th>
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/vimeo_logo.JPG" style="border:none;" width="24" height="24" alt="" /></th> 
-                                                        <th style="text-align: center;" colspan="2"><img src="https://s3.amazonaws.com/images_ranktracker/metacafe_logo.png" style="border:none;" width="24" height="24" alt="" /></th>
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/youtubeicon.png"  style="border:none;" width="24" height="24" alt="" /></th>
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/dailymotion_24.png" style="border:none;" width="24" height="24" alt=""/></th>
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/vimeo_logo.JPG" style="border:none;" width="24" height="24" alt="" /></th> 
+                                                        <th style="text-align: center;" colspan="2"><img src="../../views/images_ranktracker/metacafe_logo.png" style="border:none;" width="24" height="24" alt="" /></th>
                                                         <th style="text-align: center;">Chart</th>
                                                     </tr>
                                                 </thead>
@@ -229,7 +229,7 @@
     </div>
     <!-- end row -->
 
-      <!--chart Modal -->
+    <!--chart Modal -->
     <div class="modal fade" id="chartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
         <div class="modal-dialog" style="width: 1200px;">
             <div class="modal-content">
@@ -261,11 +261,11 @@
         var jString = "{\"keywordId\":\"" + keywordId + "\" , \"range\":\"" + range + "\"}";
         var chart;
         $.getJSON(
-        'ajax/getVideoChartData.action',
-        {
-            jString: jString
-        },
-        function(jMap) {
+                'ajax/getVideoChartData.action',
+                {
+                    jString: jString
+                },
+        function (jMap) {
             chart = new Highcharts.Chart({
                 chart: {
                     renderTo: 'chartBlock',
@@ -282,12 +282,12 @@
                 },
                 credits: {
                     enabled: false
-                    //                    text: 'globustracker.com',
-                    //                    href: 'http://www.globustracker.com/'
+                            //                    text: 'globustracker.com',
+                            //                    href: 'http://www.globustracker.com/'
                 },
                 xAxis: {
                     categories:
-                        eval(jMap.dataMap.category),
+                            eval(jMap.dataMap.category),
                     //                        ['View Count', 'Like Count' ,  'DisLike Count',  'Comment Count ',  'Daily View Count'  ],
                     labels: {
                         x: 3,
@@ -316,5 +316,5 @@
             });
 
         });
-    }   
+    }
 </script>
